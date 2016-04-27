@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.Iterator;
 
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -17,10 +18,9 @@ import okhttp3.RequestBody;
  * Created by Redouane on 24/03/2016.
  */
 public class PhpAPI {
-    // Setup MIME type
-    public static final MediaType JSON =
-            MediaType.parse("application/json; charset=utf-8");
-    public static String IpBackend = "http://octagen-it.com/comptable/";
+    private static final String PRODUCTION_HOST = "http://octagen-it.com/comptable/";
+    private static final String DEV_HOST = "http://192.168.137.1/comptablephpapi/";
+    public static String IpBackend = DEV_HOST;
     public static final String login = IpBackend + "login.php";
 
     public static final String getProduit = IpBackend + "getProduit.php";
@@ -54,15 +54,32 @@ public class PhpAPI {
     public static Request createHTTPRequest(JSONObject param, String url, Method method) {
         if (param == null)
             param = new JSONObject();
-        Log.d("RETURN POST", "URL: " + url);
 
-        return method == Method.POST ? new Request.Builder()
-                .url(url)
-                .post(RequestBody.create(JSON, param.toString()))
-                .build() :
-                new Request.Builder()
-                        .url(url + buildGETRequestParams(param))
-                        .build();
+        if (method == Method.GET)
+            return new Request.Builder()
+                    .url(url + buildGETRequestParams(param))
+                    .build();
+
+        if (method == Method.POST) {
+            FormBody.Builder builder = new FormBody.Builder();
+            Iterator<String> keys = param.keys();
+            while (keys.hasNext()) {
+                try {
+                    String key = keys.next();
+                    builder.add(key, param.getString(key));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            RequestBody requestBody = builder.build();
+
+            return new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+        }
+
+        return null;
     }
 
     /**

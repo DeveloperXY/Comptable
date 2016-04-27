@@ -48,8 +48,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Valider.setOnClickListener(v -> {
-            String username = nom.getText().toString().trim();
-            String password = motdepass.getText().toString().trim();
+            String username = nom.getText().toString();
+            String password = motdepass.getText().toString();
             User user = validateUserCredentials(username, password);
 
             if (user != null) {
@@ -115,9 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                         final String res = response.body().string();
                         try {
                             JSONObject obj = new JSONObject(res);
-                            Log.d("RETURN", obj.toString());
                             int resp = obj.getInt("success");
-                            Log.d("RETURN RESP", resp + "");
 
                             runOnUiThread(() -> {
                                 if (resp == 1)
