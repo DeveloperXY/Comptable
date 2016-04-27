@@ -1,5 +1,7 @@
 package com.example.ismailamrani.comptable.ServiceWeb;
 
+import android.util.Log;
+
 import com.example.ismailamrani.comptable.utils.Method;
 
 import org.json.JSONException;
@@ -52,6 +54,7 @@ public class PhpAPI {
     public static Request createHTTPRequest(JSONObject param, String url, Method method) {
         if (param == null)
             param = new JSONObject();
+        Log.d("RETURN POST", "URL: " + url);
 
         return method == Method.POST ? new Request.Builder()
                 .url(url)

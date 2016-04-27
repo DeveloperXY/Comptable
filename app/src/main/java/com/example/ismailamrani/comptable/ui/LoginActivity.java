@@ -1,6 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,28 +8,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.annimon.stream.Stream;
+import com.example.ismailamrani.comptable.Models.User;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
 import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
+import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     LinearLayout Valider;
     EditText nom, motdepass;
-    String username, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,85 +48,50 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Valider.setOnClickListener(v -> {
+            String username = nom.getText().toString().trim();
+            String password = motdepass.getText().toString().trim();
+            User user = validateUserCredentials(username, password);
 
+            if (user != null) {
+                // Send the login POST request.
+                try {
+                    postLogin(PhpAPI.login, user.toJSON());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
     /**
-     * Validates the user name & password.
-     *
-     * @param fields to validate
-     * @return true if input is valid, false otherwise.
+     * @param username
+     * @param password
+     * @return a new User object if the username & password are valid, or null otherwise.
      */
-    private boolean isInputValid(String... fields) {
-        return false;
-    }
+    public User validateUserCredentials(String username, String password) {
+        String dialogTitle;
+        String dialogMessage;
 
+        boolean usernameStatus = username.length() != 0;
+        boolean passwordStatus = password.length() != 0;
 
-    private class logintest extends AsyncTask<String, Void, String> {
+        if (usernameStatus && passwordStatus)
+            return new User(username, password);
 
-        @Override
-        protected String doInBackground(String... params) {
-
-            try {
-                URL url = new URL(params[0]);
-                URLConnection conn = url.openConnection();
-                HttpURLConnection httpConn = (HttpURLConnection) conn;
-                httpConn.setAllowUserInteraction(false);
-                httpConn.setInstanceFollowRedirects(true);
-                httpConn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                Map<String, Object> Params = new LinkedHashMap<>();
-                // Params.put("ID", id);
-//                Params.put("Username", userr);
-//                Params.put("Password", mpp);
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(new getQuery().getQuery(Params));
-                writer.flush();
-                writer.close();
-                os.close();
-                httpConn.connect();
-                InputStream is = httpConn.getInputStream();
-
-                return new convertInputStreamToString().convertInputStreamToString(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-
-
+        if (!usernameStatus) {
+            // Invalid user name.
+            dialogTitle = "Invalid user name.";
+            dialogMessage = "You need to specify your user name.";
+        } else {
+            // Invalid password.
+            dialogTitle = "Invalid password.";
+            dialogMessage = "You need to specify your password.";
         }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            System.out.println(s);
+        // Something went wrong: show the error dialog.
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
 
-
-            try {
-                JSONObject j = new JSONObject(s);
-                int resp = j.getInt("success");
-                if (resp == 1) {
-
-
-//                    startActivity(new Intent(context, AccueilActivity.class));
-
-
-                } else if (resp == 0) {
-
-                    //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
-                    //  startActivity(intent);
-                    Toast toast = Toast.makeText(getApplicationContext(), "can you register  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
+        return null;
     }
 
     /**
@@ -162,6 +115,19 @@ public class LoginActivity extends AppCompatActivity {
                         final String res = response.body().string();
                         try {
                             JSONObject obj = new JSONObject(res);
+                            Log.d("RETURN", obj.toString());
+                            int resp = obj.getInt("success");
+                            Log.d("RETURN RESP", resp + "");
+
+                            runOnUiThread(() -> {
+                                if (resp == 1)
+                                    startActivity(new Intent(
+                                            LoginActivity.this, AccueilActivity.class));
+                                else if (resp == 0)
+                                    Toast.makeText(LoginActivity.this,
+                                            "Unregistered user name.",
+                                            Toast.LENGTH_LONG).show();
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
