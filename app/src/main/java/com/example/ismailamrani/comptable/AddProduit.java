@@ -55,6 +55,7 @@ import java.util.Map;
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class AddProduit extends Activity implements OGActionBarInterface {
+    private static final String TAG = AddProduit.class.getSimpleName();
 
     OGActionBar MyActionBar;
     RelativeLayout AddCodeBarre;
@@ -81,6 +82,7 @@ public class AddProduit extends Activity implements OGActionBarInterface {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_produit);
+        Log.d(TAG, TAG);
 
         context = this;
 

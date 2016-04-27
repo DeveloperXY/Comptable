@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import org.json.JSONObject;
  * Created by Brahim on 07/04/2016.
  */
 public class AddLocalFile extends Activity {
+    private static final String TAG = AddLocalFile.class.getSimpleName();
     EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local , email_local
             ,activite_local ;
     String adresse , ville  , pays , tel  , fix , fax , email , activite ;
@@ -23,6 +25,7 @@ public class AddLocalFile extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addlocal);
+        Log.d(TAG, TAG);
         adresse_local = (EditText) findViewById(R.id.adresse_local);
         ville_local= (EditText) findViewById(R.id.ville_local);
         pays_local= (EditText) findViewById(R.id.pays_local);

@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.Adapters.SpinnerAdapter;
@@ -12,12 +13,14 @@ import com.example.ismailamrani.comptable.LocalData.ToDelete.GetSpinnerLocal;
  * Created by Redouane on 07/04/2016.
  */
 public class SpinnerCharge extends Activity {
+    private static final String TAG = SpinnerCharge.class.getSimpleName();
 
     ListView list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.spinner_layout);
+        Log.d(TAG, TAG);
 
 
         DisplayMetrics dm = new DisplayMetrics();

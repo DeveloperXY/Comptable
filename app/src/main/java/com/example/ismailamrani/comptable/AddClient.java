@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,6 +46,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  * Created by Redouane on 23/03/2016.
  */
 public class AddClient extends Activity implements OGActionBarInterface {
+    private static final String TAG = AddClient.class.getSimpleName();
     EditText nomprenom,tel,adresse,email;
     TextView ajouter;
 
@@ -55,6 +57,7 @@ public class AddClient extends Activity implements OGActionBarInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_add);
+        Log.d(TAG, TAG);
         context = this;
        /* MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);

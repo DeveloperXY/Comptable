@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.Adapters.ClientAdapter;
@@ -38,6 +39,7 @@ import java.util.Map;
  * Created by Redouane on 31/03/2016.
  */
 public class ClientList extends Activity implements OGActionBarInterface{
+    private static final String TAG = ClientList.class.getSimpleName();
     OGActionBar myactionbar;
     ListView list;
     Context context;
@@ -45,6 +47,7 @@ public class ClientList extends Activity implements OGActionBarInterface{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, TAG);
 
         new ColorStatutBar().ColorStatutBar(this);
         context = this;

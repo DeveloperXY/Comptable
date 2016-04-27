@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import java.util.Map;
  * Created by Ismail Amrani on 25/03/2016.
  */
 public class Produit_Info extends Activity implements OGActionBarInterface {
+    private static final String TAG = Produit_Info.class.getSimpleName();
 
     OGActionBar MyActionBar;
     ImageView Image;
@@ -45,6 +47,7 @@ public class Produit_Info extends Activity implements OGActionBarInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produit_info);
+        Log.d(TAG, TAG);
 
         new ColorStatutBar().ColorStatutBar(this);
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -37,6 +38,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  * Created by Redouane on 04/04/2016.
  */
 public class Information extends Activity {
+    private static final String TAG = Information.class.getSimpleName();
 
     ImageView imageInformation;
     RelativeLayout fermer,removeClient,editClient;
@@ -46,6 +48,7 @@ public class Information extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, TAG);
 
         setContentView(R.layout.information_client);
 

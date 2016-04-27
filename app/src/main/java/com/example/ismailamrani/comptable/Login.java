@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
+    private static final String TAG = Login.class.getSimpleName();
 
     LinearLayout Valider;
     Context context;
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
+        Log.d(TAG, TAG);
 
         new CalculateScreenSize().CalculateScreenSize(this);
 

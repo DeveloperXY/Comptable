@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.Adapters.ProduitAdapter;
@@ -36,6 +37,7 @@ import java.util.Map;
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class Produis extends Activity implements OGActionBarInterface {
+    private static final String TAG = Produis.class.getSimpleName();
 
     OGActionBar MyActionBar;
     ListView List;
@@ -48,6 +50,7 @@ public class Produis extends Activity implements OGActionBarInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produits);
+        Log.d(TAG, TAG);
 
         context = this;
 

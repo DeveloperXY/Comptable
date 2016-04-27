@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,6 +14,7 @@ import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInt
  * Created by Redouane on 06/04/2016.
  */
 public class NewCharge extends Activity implements OGActionBarInterface {
+    private static final String TAG = NewCharge.class.getSimpleName();
 
     OGActionBar MyActionBar;
     ImageView spinner;
@@ -21,6 +23,7 @@ public class NewCharge extends Activity implements OGActionBarInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charges_add);
+        Log.d(TAG, TAG);
 
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
