@@ -13,8 +13,8 @@ import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInt
 /**
  * Created by Redouane on 06/04/2016.
  */
-public class NewCharge extends Activity implements OGActionBarInterface {
-    private static final String TAG = NewCharge.class.getSimpleName();
+public class NewChargeActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = NewChargeActivity.class.getSimpleName();
 
     OGActionBar MyActionBar;
     ImageView spinner;
@@ -33,7 +33,7 @@ public class NewCharge extends Activity implements OGActionBarInterface {
         spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),SpinnerCharge.class));
+                startActivity(new Intent(getApplicationContext(),SpinnerChargeActivity.class));
             }
         });
 

@@ -34,8 +34,8 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
-public class Produit_Info extends Activity implements OGActionBarInterface {
-    private static final String TAG = Produit_Info.class.getSimpleName();
+public class Produit_InfoActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = Produit_InfoActivity.class.getSimpleName();
 
     OGActionBar MyActionBar;
     ImageView Image;
@@ -168,6 +168,6 @@ public class Produit_Info extends Activity implements OGActionBarInterface {
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddProduit.class));
+        startActivity(new Intent(this, AddProduitActivity.class));
     }
 }

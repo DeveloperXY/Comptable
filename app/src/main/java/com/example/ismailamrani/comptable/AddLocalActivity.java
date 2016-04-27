@@ -33,8 +33,8 @@ import java.util.Map;
 /**
  * Created by Brahim on 24/03/2016.
  */
-public class AddLocal extends Activity {
-    private static final String TAG = AddLocal.class.getSimpleName();
+public class AddLocalActivity extends Activity {
+    private static final String TAG = AddLocalActivity.class.getSimpleName();
 EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local , email_local
         ,activite_local ;
     String adresse , ville  , pays , tel  , fix , fax , email , activite ;

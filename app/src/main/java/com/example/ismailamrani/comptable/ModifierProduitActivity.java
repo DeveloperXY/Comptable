@@ -45,8 +45,8 @@ import java.util.Map;
 /**
  * Created by Redouane on 24/03/2016.
  */
-public class ModifierProduit extends Activity {
-    private static final String TAG = ModifierProduit.class.getSimpleName();
+public class ModifierProduitActivity extends Activity {
+    private static final String TAG = ModifierProduitActivity.class.getSimpleName();
     int id;
     ImageView produitImage;
     EditText nomProduit,PrixHt,PrixTtc;
@@ -267,7 +267,7 @@ public class ModifierProduit extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Modifier", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(getApplicationContext(), Produis.class));
+                    startActivity(new Intent(getApplicationContext(), ProduisActivity.class));
 
 
                 } else if (resp == 0) {

@@ -7,17 +7,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Adapters.ClientAdapter;
-import com.example.ismailamrani.comptable.Adapters.FourniseurAdapter;
+import com.example.ismailamrani.comptable.Adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.ToDelete.GetFournisseur;
 import com.example.ismailamrani.comptable.LocalData.URLs;
-import com.example.ismailamrani.comptable.Models.ClientModel;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
+import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
 
@@ -34,32 +30,38 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Redouane on 08/04/2016.
+ * Created by Ismail Amrani on 23/03/2016.
  */
-public class FournisseurList extends Activity implements OGActionBarInterface {
-    private static final String TAG = FournisseurList.class.getSimpleName();
+public class ProduisActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = ProduisActivity.class.getSimpleName();
 
-    OGActionBar myactionbar;
+    OGActionBar MyActionBar;
+    ListView List;
+
+    ArrayList<ProduitModel> ListProduit = new ArrayList<>();
+
     Context context;
-    ListView list;
-    ArrayList<Fournisseur> ListF = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_produits);
         Log.d(TAG, TAG);
-        new ColorStatutBar().ColorStatutBar(this);
-        context=this;
 
-        setContentView(R.layout.activity_fournisseur);
-        myactionbar = (OGActionBar)findViewById(R.id.MyActionBar);
-        myactionbar.setActionBarListener(this);
-        myactionbar.setTitle("Fournisseur");
-        list =(ListView)findViewById(R.id.Listfournisseur);
-        new GetData().execute(URLs.getFournisseur);
+        context = this;
+
+        new ColorStatutBar().ColorStatutBar(this);
+
+        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        MyActionBar.setActionBarListener(this);
+        MyActionBar.setTitle("Produit");
+
+        List = (ListView) findViewById(R.id.List);
+        new GetData().execute(URLs.getProduit);
+
     }
 
     @Override
@@ -69,9 +71,9 @@ public class FournisseurList extends Activity implements OGActionBarInterface {
 
     @Override
     public void onAddPressed() {
-        finish();
-        startActivity(new Intent(this, AddFournisseur.class));
+        startActivity(new Intent(this, AddProduitActivity.class));
     }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         @Override
@@ -116,35 +118,25 @@ public class FournisseurList extends Activity implements OGActionBarInterface {
 
             try {
                 JSONObject j = new JSONObject(s);
+                JSONArray listproduits = j.getJSONArray("produit");
 
-                int resp = j.getInt("success");
-                if (resp == 1) {
-                    JSONArray listproduits = j.getJSONArray("fournisseur");
+                for (int i = 0; i < listproduits.length(); i++) {
+                    JSONObject usr = listproduits.getJSONObject(i);
+                    ProduitModel itm = new ProduitModel();
+                    itm.setID(Integer.parseInt(usr.getString("idp")));
+                    itm.setLibelle(usr.getString("libelle"));
+                    itm.setPrixTTC(Double.parseDouble(usr.getString("prixTTC")));
+                    itm.setQte(Integer.parseInt(usr.getString("qte")));
+                    itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
 
-                    for (int i = 0; i < listproduits.length(); i++) {
-                        JSONObject usr = listproduits.getJSONObject(i);
-                        Fournisseur f=new Fournisseur();
-                        f.setId(usr.getString("idfournisseur"));
-                        f.setNom(usr.getString("nom"));
-                        f.setTel(usr.getString("tel"));
-                        f.setFax(usr.getString("fax"));
-                        f.setFix(usr.getString("fix"));
-                        f.setAdresse(usr.getString("adresse"));
-                        f.setEmail(usr.getString("email"));
-                        //  m.setImage(URLs.IpBackend + "clients/client.png");
-                        ListF.add(f);
-                    }
-                }else{
-                    Toast toast = Toast.makeText(getApplicationContext(), "No Fournisseur Found  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    ListProduit.add(itm);
                 }
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            FourniseurAdapter fourniseurAdapter = new FourniseurAdapter(context,ListF);
-            list.setAdapter(fourniseurAdapter);
+            ProduitAdapter adapter = new ProduitAdapter(context, ListProduit);
+            List.setAdapter(adapter);
 
 
         }

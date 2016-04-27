@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -27,20 +26,14 @@ import com.example.ismailamrani.comptable.LocalData.URLs;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,8 +47,8 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class AddProduit extends Activity implements OGActionBarInterface {
-    private static final String TAG = AddProduit.class.getSimpleName();
+public class AddProduitActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = AddProduitActivity.class.getSimpleName();
 
     OGActionBar MyActionBar;
     RelativeLayout AddCodeBarre;
@@ -217,7 +210,7 @@ public class AddProduit extends Activity implements OGActionBarInterface {
                     Toast toast = Toast.makeText(getApplicationContext(), "successfully add", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, Produis.class));
+                    startActivity(new Intent(context, ProduisActivity.class));
 
 
                 } else if (resp == 0) {

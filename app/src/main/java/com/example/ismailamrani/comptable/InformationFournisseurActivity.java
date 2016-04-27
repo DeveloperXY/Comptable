@@ -38,8 +38,8 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class InformationFournisseur extends Activity {
-    private static final String TAG = InformationFournisseur.class.getSimpleName();
+public class InformationFournisseurActivity extends Activity {
+    private static final String TAG = InformationFournisseurActivity.class.getSimpleName();
 
     ImageView imageInformation;
     RelativeLayout fermer;
@@ -159,7 +159,7 @@ public class InformationFournisseur extends Activity {
                             editFournisseur.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent i = new Intent(context, EditFournisseur.class);
+                                    Intent i = new Intent(context, EditFournisseurActivity.class);
                                     i.putExtra("id",id);
                                     context.startActivity(i);
                                 }
@@ -248,7 +248,7 @@ public class InformationFournisseur extends Activity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    Intent i = new Intent(context,FournisseurList.class);
+                    Intent i = new Intent(context,FournisseurListActivity.class);
                     context.startActivity(i);
                 }
                 else if (resp == 0){

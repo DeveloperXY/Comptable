@@ -37,8 +37,8 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class EditFournisseur extends Activity {
-    private static final String TAG = EditFournisseur.class.getSimpleName();
+public class EditFournisseurActivity extends Activity {
+    private static final String TAG = EditFournisseurActivity.class.getSimpleName();
 
     EditText nom,tel,fax,gsm,adresse,email;
     ImageView ImageProfil;
@@ -228,7 +228,7 @@ private class getFopurnisseurByID extends AsyncTask<String, Void, String> {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, FournisseurList.class));
+                    startActivity(new Intent(context, FournisseurListActivity.class));
 
                 } else if (resp == 0) {
 

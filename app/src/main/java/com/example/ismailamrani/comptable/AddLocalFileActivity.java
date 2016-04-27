@@ -14,8 +14,8 @@ import org.json.JSONObject;
 /**
  * Created by Brahim on 07/04/2016.
  */
-public class AddLocalFile extends Activity {
-    private static final String TAG = AddLocalFile.class.getSimpleName();
+public class AddLocalFileActivity extends Activity {
+    private static final String TAG = AddLocalFileActivity.class.getSimpleName();
     EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local , email_local
             ,activite_local ;
     String adresse , ville  , pays , tel  , fix , fax , email , activite ;

@@ -10,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.Information;
-import com.example.ismailamrani.comptable.InformationFournisseur;
-import com.example.ismailamrani.comptable.Models.ClientModel;
+import com.example.ismailamrani.comptable.InformationFournisseurActivity;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 
@@ -73,7 +71,7 @@ public class FourniseurAdapter extends BaseAdapter{
         imglay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, InformationFournisseur.class);
+                Intent i = new Intent(context, InformationFournisseurActivity.class);
                 i.putExtra("id",List.get(position).getId());
                 context.startActivity(i);
             }
@@ -81,7 +79,7 @@ public class FourniseurAdapter extends BaseAdapter{
         nomlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, InformationFournisseur.class);
+                Intent i = new Intent(context, InformationFournisseurActivity.class);
                 i.putExtra("id",List.get(position).getId());
                 context.startActivity(i);
             }

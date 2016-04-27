@@ -12,8 +12,8 @@ import com.example.ismailamrani.comptable.LocalData.ToDelete.GetSpinnerLocal;
 /**
  * Created by Redouane on 07/04/2016.
  */
-public class SpinnerCharge extends Activity {
-    private static final String TAG = SpinnerCharge.class.getSimpleName();
+public class SpinnerChargeActivity extends Activity {
+    private static final String TAG = SpinnerChargeActivity.class.getSimpleName();
 
     ListView list;
     @Override

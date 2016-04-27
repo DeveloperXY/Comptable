@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 /**
  * Created by Ismail Amrani on 17/03/2016.
  */
-public class Accueil extends Activity {
-    private static final String TAG = Accueil.class.getSimpleName();
+public class AccueilActivity extends Activity {
+    private static final String TAG = AccueilActivity.class.getSimpleName();
 
     Context context;
 
@@ -36,40 +36,40 @@ public class Accueil extends Activity {
         Produit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, Produis.class));
+                startActivity(new Intent(context, ProduisActivity.class));
             }
         });
 
         client.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context,ClientList.class));
+                startActivity(new Intent(context,ClientListActivity.class));
             }
         });
 
         charge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, NewCharge.class));
+                startActivity(new Intent(context, NewChargeActivity.class));
             }
         });
         fournisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, FournisseurList.class));
+                startActivity(new Intent(context, FournisseurListActivity.class));
             }
         });
         stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(context, AddLocalFile.class));
+                startActivity(new Intent(context, AddLocalFileActivity.class));
             }
         });
         achat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, addSociete.class));
+                startActivity(new Intent(context, addSocieteActivity.class));
 
             }
         });
@@ -77,7 +77,7 @@ public class Accueil extends Activity {
         ventes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, Vente.class));
+                startActivity(new Intent(context, VenteActivity.class));
 
             }
         });

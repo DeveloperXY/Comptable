@@ -41,8 +41,8 @@ import java.util.Map;
 /**
  * Created by Brahim on 24/03/2016.
  */
-public class addSociete  extends Activity{
-    private static final String TAG = addSociete.class.getSimpleName();
+public class addSocieteActivity extends Activity{
+    private static final String TAG = addSocieteActivity.class.getSimpleName();
     EditText nom_scoiete ;
     ImageView photo_societe  ;
     private static int RESULT_LOAD_IMAGE = 1;

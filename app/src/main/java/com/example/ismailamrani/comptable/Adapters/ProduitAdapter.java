@@ -9,16 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Accueil;
 import com.example.ismailamrani.comptable.CustumItems.CustumTextView;
 import com.example.ismailamrani.comptable.LocalData.URLs;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
-import com.example.ismailamrani.comptable.ModifierProduit;
-import com.example.ismailamrani.comptable.Produis;
-import com.example.ismailamrani.comptable.Produit_Info;
+import com.example.ismailamrani.comptable.ModifierProduitActivity;
+import com.example.ismailamrani.comptable.ProduisActivity;
+import com.example.ismailamrani.comptable.Produit_InfoActivity;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -118,7 +116,7 @@ public class ProduitAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context,ModifierProduit.class);
+                Intent i = new Intent(context,ModifierProduitActivity.class);
                 i.putExtra("id",List.get(position).getID());
                 context.startActivity(i);
             }
@@ -128,7 +126,7 @@ public class ProduitAdapter extends BaseAdapter {
         afficher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, Produit_Info.class);
+                Intent i = new Intent(context, Produit_InfoActivity.class);
                 i.putExtra("id",List.get(position).getID());
                 context.startActivity(i);
             }
@@ -191,7 +189,7 @@ public class ProduitAdapter extends BaseAdapter {
 
 
 
-                    Intent i = new Intent(context,Produis.class);
+                    Intent i = new Intent(context,ProduisActivity.class);
                     context.startActivity(i);
 
 

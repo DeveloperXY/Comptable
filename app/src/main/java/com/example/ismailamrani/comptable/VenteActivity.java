@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-public class Vente extends Activity {
-    private static final String TAG = Vente.class.getSimpleName();
+public class VenteActivity extends Activity {
+    private static final String TAG = VenteActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
