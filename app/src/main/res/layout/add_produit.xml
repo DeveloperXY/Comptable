@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:costum="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="246">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20">
+
+        <com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar
+            android:id="@+id/MyActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"></RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="220"
+        android:orientation="horizontal"
+        android:weightSum="144">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"></RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="140"
+            android:background="@mipmap/ic_bg_add"
+            android:orientation="vertical"
+            android:weightSum="220">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="88">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:size="31"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/add_photo">
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:size="29"
+                            android:layout_centerInParent="true">
+
+                            <ImageView
+                                android:id="@+id/Image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/ic_add_photo"/>
+
+                        </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+
+                    </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:Size="11"
+                        costum:Font="cgrb.ttf"
+                        costum:Arabic="منتوج"
+                        costum:Frensh="Ajouter Une Photo"
+                        android:textColor="#464646"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17"
+                android:orientation="horizontal"
+                android:weightSum="140">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"></RelativeLayout>
+
+                <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="130"
+                    costum:Size="12"
+                    costum:Font="cgr.ttf"
+                    costum:Arabic=""
+                    costum:Frensh=""
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:hint="Nom du produit"
+                    android:textColorHint="#464646"
+                    android:textColor="#464646"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/add_edittext"
+                    android:id="@+id/nom_produit"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"></RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17"
+                android:orientation="horizontal"
+                android:weightSum="140">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="64"
+                    android:background="@drawable/add_edittext"
+                    android:orientation="horizontal"
+                    android:weightSum="64">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="48"
+                        costum:Size="12"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic=""
+                        costum:Frensh=""
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:hint="Prix HT"
+                        android:textColorHint="#464646"
+                        android:textColor="#464646"
+                        android:gravity="center_vertical"
+                        android:background="#00ffffff"
+                        android:id="@+id/Prix_HT_produit"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:background="#48627b"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"></RelativeLayout>
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15.5"
+                        costum:Size="12"
+                        costum:Font="cgrb.ttf"
+                        costum:Arabic="منتوج"
+                        costum:Frensh="DH"
+                        android:textColor="#48627b"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="64"
+                    android:background="@drawable/add_edittext"
+                    android:orientation="horizontal"
+                    android:weightSum="64">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="48"
+                        costum:Size="12"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic=""
+                        costum:Frensh=""
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:hint="Prix TTC"
+                        android:textColorHint="#464646"
+                        android:textColor="#464646"
+                        android:gravity="center_vertical"
+                        android:background="#00ffffff"
+                        android:id="@+id/Prix_TTC_produit"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:background="#48627b"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"></RelativeLayout>
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15.5"
+                        costum:Size="12"
+                        costum:Font="cgrb.ttf"
+                        costum:Arabic="منتوج"
+                        costum:Frensh="DH"
+                        android:textColor="#48627b"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"></RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17"
+                android:orientation="horizontal"
+                android:weightSum="140">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"></RelativeLayout>
+
+                <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    android:id="@+id/CodeBarre"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="112"
+                    costum:Size="12"
+                    costum:Font="cgr.ttf"
+                    costum:Arabic="منتوج"
+                    costum:Frensh="Code Barre"
+                    android:background="@drawable/add_textview"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="#464646"/>
+
+                <RelativeLayout
+                    android:id="@+id/AddCodeBarre"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="18"
+                    android:background="#48627b"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/ic_add_cb"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="76">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/add_btn"
+                    android:clickable="true">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:Size="16"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic="منتوج"
+                        costum:Frensh="Enregistrer"
+                        android:gravity="center_vertical"
+                        android:padding="8dp"
+                        android:textColor="#ffffff"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/ajouterProduit"
+                        />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

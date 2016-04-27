@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:costum="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout
+            android:id="@+id/Info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            costum:size="31">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="79">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="75"
+                    android:orientation="horizontal"
+                    android:weightSum="360">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"></RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="350"
+                        android:background="@drawable/item_info"
+                        android:orientation="horizontal"
+                        android:weightSum="350">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="75">
+
+                            <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                costum:size="25"
+                                android:layout_centerInParent="true"
+                                android:background="#3d5469">
+
+                                <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    costum:size="24"
+                                    android:layout_centerInParent="true">
+
+                                    <ImageView
+                                        android:id="@+id/Image"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/iphone"/>
+
+                                </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+
+                            </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="122">
+
+                            <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                                android:id="@+id/Libelle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                costum:Size="15"
+                                costum:Font="cgr.ttf"
+                                costum:Arabic=""
+                                costum:Frensh=""
+                                android:textColor="#444444"
+                                android:layout_centerInParent="true"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="80">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical">
+
+                                <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    costum:Size="15"
+                                    costum:Font="cgrb.ttf"
+                                    costum:Arabic="Stock"
+                                    costum:Frensh="Stock"
+                                    android:textColor="#444444"
+                                    android:gravity="center_horizontal"/>
+
+                                <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                                    android:id="@+id/Qte"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    costum:Size="14"
+                                    costum:Font="cgr.ttf"
+                                    costum:Arabic=""
+                                    costum:Frensh=""
+                                    android:textColor="#444444"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="73">
+
+                            <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                                android:id="@+id/Prix"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/prix_bg"
+                                costum:Size="10"
+                                costum:Font="cgrb.ttf"
+                                costum:Arabic=""
+                                costum:Frensh=""
+                                android:textColor="#ffffff"
+                                android:layout_centerInParent="true"
+                                android:padding="3dp"/>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"></RelativeLayout>
+
+        <com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout
+            android:id="@+id/Actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            costum:size="15">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="360">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="116"
+                    android:background="@drawable/action_show"
+                    android:clickable="true">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:Size="12"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic="Afficher"
+                        costum:Frensh="Afficher"
+                        android:textColor="#ffffff"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/afficher"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="116"
+                    android:background="@drawable/action_update"
+                    android:clickable="true">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:Size="12"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic="Modifier"
+                        costum:Frensh="Modifier"
+                        android:textColor="#ffffff"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/modifier"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="116"
+                    android:background="@drawable/action_delete"
+                    android:clickable="true">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        costum:Size="12"
+                        costum:Font="cgr.ttf"
+                        costum:Arabic="Supprimer"
+                        costum:Frensh="Supprimer"
+                        android:textColor="#ffffff"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/supprimer"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

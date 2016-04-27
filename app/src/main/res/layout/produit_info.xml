@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:costum="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="246">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20">
+
+        <com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar
+            android:id="@+id/MyActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="226">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.ismailamrani.comptable.CustumItems.CustomCarreWidthLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                costum:size="144">
+
+                <ImageView
+                    android:id="@+id/Imageaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
+
+                <com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    costum:size="20"
+                    android:background="#9048627b"
+                    android:layout_alignParentBottom="true">
+
+                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        android:id="@+id/Libelleaff"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        costum:Size="14"
+                        costum:Font="cgrb.ttf"
+                        costum:Arabic=""
+                        costum:Frensh=""
+                        android:textColor="#ffffff"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:shadowColor="#000000"
+                        android:shadowRadius="2"
+                        android:shadowDx="2"
+                        android:shadowDy="2"/>
+
+                </com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout>
+
+            </com.example.ismailamrani.comptable.CustumItems.CustomCarreWidthLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="13"
+                            costum:Font="cgrb.ttf"
+                            costum:Arabic="منتوج"
+                            costum:Frensh="Prix HT : "
+                            android:textColor="#48627b"/>
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:id="@+id/PrixHTaff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="12"
+                            costum:Font="cgr.ttf"
+                            costum:Arabic=""
+                            costum:Frensh=""
+                            android:textColor="#5a5a5a"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="13"
+                            costum:Font="cgrb.ttf"
+                            costum:Arabic="منتوج"
+                            costum:Frensh="Prix TTC : "
+                            android:textColor="#48627b"/>
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:id="@+id/PrixTTCaff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="12"
+                            costum:Font="cgr.ttf"
+                            costum:Arabic=""
+                            costum:Frensh=""
+                            android:textColor="#5a5a5a"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="13"
+                            costum:Font="cgrb.ttf"
+                            costum:Arabic="منتوج"
+                            costum:Frensh="Quantité : "
+                            android:textColor="#48627b"/>
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:id="@+id/Stockaff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="12"
+                            costum:Font="cgr.ttf"
+                            costum:Arabic=""
+                            costum:Frensh=""
+                            android:textColor="#5a5a5a"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="30dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_codebar"
+                            android:paddingRight="10dp"/>
+
+                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                            android:id="@+id/Codeaff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            costum:Size="12"
+                            costum:Font="cgr.ttf"
+                            costum:Arabic=""
+                            costum:Frensh=""
+                            android:textColor="#5a5a5a"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
