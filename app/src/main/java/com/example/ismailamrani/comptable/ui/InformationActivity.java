@@ -13,7 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -70,7 +70,7 @@ public class InformationActivity extends Activity {
         Adresse =(TextView) findViewById(R.id.adresseClient);
         Tel =(TextView) findViewById(R.id.telClient);
         imageInformation = (ImageView)findViewById(R.id.ImageProfilinformation);
-        Picasso.with(this).load(URLs.IpBackend+"clients/client.png").transform(new CropCircleTransformation()).into(imageInformation);
+        Picasso.with(this).load(PhpAPI.IpBackend+"clients/client.png").transform(new CropCircleTransformation()).into(imageInformation);
 
         fermer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class InformationActivity extends Activity {
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : "+id);
-        new getProduitbyId().execute(URLs.getClientById);
+        new getProduitbyId().execute(PhpAPI.getClientById);
 
     }
 
@@ -149,7 +149,7 @@ public class InformationActivity extends Activity {
                                 @Override
                                 public void onClick(View v) {
                                   //  System.out.println(">>>>>>>>>> Remove Client "+idc);
-                                    new supprimer().execute(URLs.removeClient);
+                                    new supprimer().execute(PhpAPI.removeClient);
                                 }
                             });
 

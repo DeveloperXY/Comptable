@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
 
 import org.json.JSONException;
@@ -78,7 +78,7 @@ public class addSocieteActivity extends Activity{
             public void onClick(View v) {
                 noms=nom_scoiete.getText().toString();
                 photo=codeimage;
-                new addsociete().execute(URLs.addSociete);
+                new addsociete().execute(PhpAPI.addSociete);
             }
         });
 

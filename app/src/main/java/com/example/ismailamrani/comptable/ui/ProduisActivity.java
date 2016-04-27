@@ -12,7 +12,7 @@ import com.example.ismailamrani.comptable.Adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -61,7 +61,7 @@ public class ProduisActivity extends Activity implements OGActionBarInterface {
         MyActionBar.setTitle("Produit");
 
         List = (ListView) findViewById(R.id.List);
-        new GetData().execute(URLs.getProduit);
+        new GetData().execute(PhpAPI.getProduit);
 
     }
 
@@ -128,7 +128,7 @@ public class ProduisActivity extends Activity implements OGActionBarInterface {
                     itm.setLibelle(usr.getString("libelle"));
                     itm.setPrixTTC(Double.parseDouble(usr.getString("prixTTC")));
                     itm.setQte(Integer.parseInt(usr.getString("qte")));
-                    itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
+                    itm.setPhoto(PhpAPI.IpBackend + "produits/" + usr.getString("photo"));
 
                     ListProduit.add(itm);
                 }

@@ -13,7 +13,7 @@ import com.example.ismailamrani.comptable.Adapters.FourniseurAdapter;
 import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -56,7 +56,7 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
         myactionbar.setActionBarListener(this);
         myactionbar.setTitle("Fournisseur");
         list =(ListView)findViewById(R.id.Listfournisseur);
-        new GetData().execute(URLs.getFournisseur);
+        new GetData().execute(PhpAPI.getFournisseur);
     }
 
     @Override

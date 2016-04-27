@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -85,7 +85,7 @@ public class InformationFournisseurActivity extends Activity {
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : " + id);
-        new getFopurnisseurByID().execute(URLs.getFournisseurByID);
+        new getFopurnisseurByID().execute(PhpAPI.getFournisseurByID);
 
     }
 
@@ -153,7 +153,7 @@ public class InformationFournisseurActivity extends Activity {
                             removeFournisseur.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    new supprimer().execute(URLs.removeFournisseur);
+                                    new supprimer().execute(PhpAPI.removeFournisseur);
                                 }
                             });
 

@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ChargeItems;
 import com.example.ismailamrani.comptable.R;
 
@@ -54,7 +54,7 @@ public class AddCharge extends Activity {
                 System.out.println(">>>> desc"+ chargeItems.getDesc());
                 chargeItems.setPrix(prix.getText().toString());
                 chargeItems.setLocal(local.getText().toString());
-                chargeItems.setUrl(URLs.addccharge);
+                chargeItems.setUrl(PhpAPI.addccharge);
                 new addcharge().execute(chargeItems);
             }
         });

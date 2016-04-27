@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -80,7 +80,7 @@ public class ModifierProduitActivity extends Activity {
 
 
         id = intent.getExtras().getInt("id");
-        new  getproduitbyid().execute(URLs.getProduitById);
+        new  getproduitbyid().execute(PhpAPI.getProduitById);
 
         produitImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +102,7 @@ public class ModifierProduitActivity extends Activity {
                 produitModel.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
                 produitModel.setPhoto(codeimage);
                 produitModel.setCodeBarre(CodeBarre.getText().toString());
-                produitModel.setUrl(URLs.editproduit);
+                produitModel.setUrl(PhpAPI.editproduit);
                 produitModel.setLocale_ID(1);
                 produitModel.setQte(0);
                 new  editproduit().execute(produitModel);
@@ -176,7 +176,7 @@ public class ModifierProduitActivity extends Activity {
 
                         for (int i = 0; i < listproduits.length(); i++) {
                             JSONObject usr = listproduits.getJSONObject(i);
-                            Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(produitImage);
+                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend+"produits/"+ usr.getString("photo")).into(produitImage);
                             nomProduit.setText(usr.getString("libelle"));
                             PrixHt.setText(usr.getString("prixHT"));
                             PrixTtc.setText(usr.getString("prixTTC"));

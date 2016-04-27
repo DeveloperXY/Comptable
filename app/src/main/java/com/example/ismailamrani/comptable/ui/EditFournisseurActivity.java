@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -56,7 +56,7 @@ public class EditFournisseurActivity extends Activity {
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : " + id);
-        new getFopurnisseurByID().execute(URLs.getFournisseurByID);
+        new getFopurnisseurByID().execute(PhpAPI.getFournisseurByID);
 
         context=this;
         nom=(EditText)findViewById(R.id.nomcomletclient);
@@ -80,7 +80,7 @@ public class EditFournisseurActivity extends Activity {
                 f.setFix(tel.getText().toString());
                 f.setAdresse(adresse.getText().toString());
                 f.setEmail(email.getText().toString());
-                f.setUrl(URLs.editFournisseur);
+                f.setUrl(PhpAPI.editFournisseur);
 
 
                 new addFournisseur().execute(f);

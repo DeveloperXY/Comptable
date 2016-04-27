@@ -22,7 +22,7 @@ import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -143,7 +143,7 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
                 produitModel.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
                 produitModel.setPhoto(codeimage);
                 produitModel.setCodeBarre(CodeBarre.getText().toString());
-                produitModel.setUrl(URLs.addProduit);
+                produitModel.setUrl(PhpAPI.addProduit);
                 produitModel.setLocale_ID(1);
                 produitModel.setQte(0);
 

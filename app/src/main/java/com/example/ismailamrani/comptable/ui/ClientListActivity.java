@@ -12,7 +12,7 @@ import com.example.ismailamrani.comptable.Adapters.ClientAdapter;
 import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -56,7 +56,7 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
         myactionbar.setTitle("Client");
 
         list = (ListView)findViewById(R.id.Listclient);
-        new GetData().execute(URLs.getClient);
+        new GetData().execute(PhpAPI.getClient);
 
     }
 
@@ -123,7 +123,7 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
                     m.setNomPrenom(usr.getString("nom"));
                     m.setTel(usr.getString("tel"));
                     m.setAdresse(usr.getString("adresse"));
-                    m.setImage(URLs.IpBackend + "clients/client.png");
+                    m.setImage(PhpAPI.IpBackend + "clients/client.png");
                     List.add(m);
                 }
             } catch (JSONException e) {

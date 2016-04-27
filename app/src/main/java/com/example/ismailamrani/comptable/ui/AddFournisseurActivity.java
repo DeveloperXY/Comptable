@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -72,7 +72,7 @@ public class AddFournisseurActivity extends Activity {
                 f.setFix(tel.getText().toString());
                 f.setAdresse(adresse.getText().toString());
                 f.setEmail(email.getText().toString());
-                f.setUrl(URLs.addFournisseur);
+                f.setUrl(PhpAPI.addFournisseur);
 
 
                 new addFournisseur().execute(f);

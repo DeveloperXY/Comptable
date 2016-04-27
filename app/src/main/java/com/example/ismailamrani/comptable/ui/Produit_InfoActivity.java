@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -66,7 +66,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
 
         Intent i = getIntent();
         id = i.getExtras().getInt("id");
-        new getProduitbyId().execute(URLs.getProduitById);
+        new getProduitbyId().execute(PhpAPI.getProduitById);
 
     }
 
@@ -125,7 +125,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
 
                         for (int i = 0; i < listproduits.length(); i++) {
                             JSONObject usr = listproduits.getJSONObject(i);
-                            Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
+                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
                             Libelle.setText(usr.getString("libelle"));
                             PrixHT.setText(usr.getString("prixHT"));
                             PrixTTC.setText(usr.getString("prixTTC"));

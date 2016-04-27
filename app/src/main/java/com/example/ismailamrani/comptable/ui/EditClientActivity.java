@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -63,7 +63,7 @@ public class EditClientActivity extends Activity implements OGActionBarInterface
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : "+id);
-        new getClientbyId().execute(URLs.getClientById);
+        new getClientbyId().execute(PhpAPI.getClientById);
         ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
 
         Picasso.with(this).load(R.drawable.sergio).transform(new CropCircleTransformation()).into(ImageProfil);
@@ -82,7 +82,7 @@ public class EditClientActivity extends Activity implements OGActionBarInterface
                 clientItems.setTel(tel.getText().toString());
                 clientItems.setAdresse(adresse.getText().toString());
                clientItems.setEmail(email.getText().toString());
-                clientItems.setUrl(URLs.editClient);
+                clientItems.setUrl(PhpAPI.editClient);
 
                 new addclient().execute(clientItems);
 
@@ -225,7 +225,7 @@ private class getClientbyId extends AsyncTask<String, Void, String> {
 
                     for (int i = 0; i < listproduits.length(); i++) {
                         JSONObject usr = listproduits.getJSONObject(i);
-                         Picasso.with(getApplicationContext()).load(URLs.IpBackend+"clients/client.png").into(ImageProfil);
+                         Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend+"clients/client.png").into(ImageProfil);
 
                         nomprenom.setText(usr.getString("nom"));
                         tel.setText(usr.getString("tel"));

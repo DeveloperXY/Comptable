@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
 
 import org.json.JSONException;
@@ -82,7 +82,7 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
 
 
 
-                new addlocal().execute(URLs.addlocal);
+                new addlocal().execute(PhpAPI.addlocal);
             }
         });
 

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
@@ -77,7 +77,7 @@ public class AddClientActivity extends Activity implements OGActionBarInterface 
                 clientItems.setTel(tel.getText().toString());
                 clientItems.setAdresse(adresse.getText().toString());
                clientItems.setEmail(email.getText().toString());
-                clientItems.setUrl(URLs.addClient);
+                clientItems.setUrl(PhpAPI.addClient);
 
                 new addclient().execute(clientItems);
 

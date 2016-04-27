@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 
@@ -60,7 +60,7 @@ public class AddFournisseurAsync extends Activity {
                 f.setFix(fix.getText().toString());
                 f.setFax(fax.getText().toString());
                 f.setEmail(email.getText().toString());
-                f.setUrl(URLs.addFournisseur);
+                f.setUrl(PhpAPI.addFournisseur);
                 new  addfournisseur().execute(f);
 
             }

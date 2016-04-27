@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.CustumItems.CustumTextView;
-import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProduisActivity;
@@ -108,7 +108,7 @@ public class ProduitAdapter extends BaseAdapter {
               //  System.out.println("<<>>>> Supprimer");
                 id = List.get(position).getID();
                 System.out.println(">>> id :" + id);
-                new supprimer().execute(URLs.removeProduit);
+                new supprimer().execute(PhpAPI.removeProduit);
             }
         });
         modifier = (CustumTextView)Layout.findViewById(R.id.modifier);
