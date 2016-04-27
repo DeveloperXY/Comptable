@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Ismail Amrani on 17/03/2016.

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.InformationActivity;
+import com.example.ismailamrani.comptable.ui.InformationActivity;
 import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
 import com.squareup.picasso.Picasso;

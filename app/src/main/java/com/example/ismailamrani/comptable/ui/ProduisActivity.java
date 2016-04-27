@@ -1,21 +1,24 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.ListView;
 
+import com.example.ismailamrani.comptable.Adapters.ProduitAdapter;
+import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
+import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
-import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,55 +29,53 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
+/**
+ * Created by Ismail Amrani on 23/03/2016.
+ */
+public class ProduisActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = ProduisActivity.class.getSimpleName();
 
-    LinearLayout Valider;
+    OGActionBar MyActionBar;
+    ListView List;
+
+    ArrayList<ProduitModel> ListProduit = new ArrayList<>();
+
     Context context;
-    EditText nom,motdepass;
-    String userr,mpp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
+        setContentView(R.layout.activity_produits);
         Log.d(TAG, TAG);
 
-        new CalculateScreenSize().CalculateScreenSize(this);
+        context = this;
 
-        setContentView(R.layout.activity_splash);
+        new ColorStatutBar().ColorStatutBar(this);
 
-        Valider = (LinearLayout) findViewById(R.id.Valider);
-        nom = (EditText)findViewById(R.id.username);
-        motdepass = (EditText)findViewById(R.id.mp);
+        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        MyActionBar.setActionBarListener(this);
+        MyActionBar.setTitle("Produit");
 
-
-        Valider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userr = nom.getText().toString();
-                mpp = motdepass.getText().toString();
-                if(userr.equals("")){
-                    Toast toast = Toast.makeText(getApplicationContext(), "username is required", Toast.LENGTH_LONG);
-                    toast.show();
-                }else if(mpp.equals("")){
-                    Toast toast = Toast.makeText(getApplicationContext(), "password is required", Toast.LENGTH_LONG);
-                    toast.show();
-                }else{
-                    new logintest().execute(URLs.login);
-                }
-
-            }
-        });
-
-
+        List = (ListView) findViewById(R.id.List);
+        new GetData().execute(URLs.getProduit);
 
     }
 
-    private class logintest extends AsyncTask<String, Void, String> {
+    @Override
+    public void onMenuPressed() {
+
+    }
+
+    @Override
+    public void onAddPressed() {
+        startActivity(new Intent(this, AddProduitActivity.class));
+    }
+
+    private class GetData extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -89,9 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
-                // Params.put("ID", id);
-                Params.put("Username",userr);
-                Params.put("Password",mpp);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -110,34 +108,39 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
+
+
         @Override
         protected void onPostExecute(String s) {
+
             super.onPostExecute(s);
             System.out.println(s);
 
 
             try {
                 JSONObject j = new JSONObject(s);
-                int resp = j.getInt("success");
-                if (resp == 1){
+                JSONArray listproduits = j.getJSONArray("produit");
 
+                for (int i = 0; i < listproduits.length(); i++) {
+                    JSONObject usr = listproduits.getJSONObject(i);
+                    ProduitModel itm = new ProduitModel();
+                    itm.setID(Integer.parseInt(usr.getString("idp")));
+                    itm.setLibelle(usr.getString("libelle"));
+                    itm.setPrixTTC(Double.parseDouble(usr.getString("prixTTC")));
+                    itm.setQte(Integer.parseInt(usr.getString("qte")));
+                    itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
 
-
-                    startActivity(new Intent(context, AccueilActivity.class));
-
-
-                }
-                else if (resp == 0){
-
-                  //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
-                  //  startActivity(intent);
-                    Toast toast = Toast.makeText(getApplicationContext(), "can you register  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    ListProduit.add(itm);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
 
+            ProduitAdapter adapter = new ProduitAdapter(context, ListProduit);
+            List.setAdapter(adapter);
+
+
+        }
     }
+
 }

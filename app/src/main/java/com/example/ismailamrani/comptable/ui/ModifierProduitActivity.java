@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +22,7 @@ import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
 import com.example.ismailamrani.comptable.LocalData.URLs;
 import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
 import com.squareup.picasso.Picasso;

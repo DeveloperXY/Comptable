@@ -1,23 +1,22 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Adapters.ClientAdapter;
-import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.LocalData.URLs;
-import com.example.ismailamrani.comptable.Models.ClientModel;
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,48 +27,55 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by Redouane on 31/03/2016.
- */
-public class ClientListActivity extends Activity implements OGActionBarInterface{
-    private static final String TAG = ClientListActivity.class.getSimpleName();
-    OGActionBar myactionbar;
-    ListView list;
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getSimpleName();
+
+    LinearLayout Valider;
     Context context;
-    ArrayList<ClientModel> List = new ArrayList<>();
+    EditText nom,motdepass;
+    String userr,mpp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         Log.d(TAG, TAG);
 
-        new ColorStatutBar().ColorStatutBar(this);
-        context = this;
+        new CalculateScreenSize().CalculateScreenSize(this);
 
-        setContentView(R.layout.activity_client);
-        myactionbar = (OGActionBar)findViewById(R.id.MyActionBar);
-        myactionbar.setActionBarListener(this);
-        myactionbar.setTitle("Client");
+        setContentView(R.layout.activity_splash);
 
-        list = (ListView)findViewById(R.id.Listclient);
-        new GetData().execute(URLs.getClient);
+        Valider = (LinearLayout) findViewById(R.id.Valider);
+        nom = (EditText)findViewById(R.id.username);
+        motdepass = (EditText)findViewById(R.id.mp);
+
+
+        Valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userr = nom.getText().toString();
+                mpp = motdepass.getText().toString();
+                if(userr.equals("")){
+                    Toast toast = Toast.makeText(getApplicationContext(), "username is required", Toast.LENGTH_LONG);
+                    toast.show();
+                }else if(mpp.equals("")){
+                    Toast toast = Toast.makeText(getApplicationContext(), "password is required", Toast.LENGTH_LONG);
+                    toast.show();
+                }else{
+                    new logintest().execute(URLs.login);
+                }
+
+            }
+        });
+
+
 
     }
 
-    @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
-    public void onAddPressed() {
-        startActivity(new Intent(this, AddClientActivity.class));
-
-    }
-    private class GetData extends AsyncTask<String, Void, String> {
+    private class logintest extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
@@ -84,6 +90,9 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
+                // Params.put("ID", id);
+                Params.put("Username",userr);
+                Params.put("Password",mpp);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -102,38 +111,34 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
 
 
         }
-
-
         @Override
         protected void onPostExecute(String s) {
-
             super.onPostExecute(s);
             System.out.println(s);
 
 
             try {
                 JSONObject j = new JSONObject(s);
-                JSONArray listproduits = j.getJSONArray("client");
+                int resp = j.getInt("success");
+                if (resp == 1){
 
-                for (int i = 0; i < listproduits.length(); i++) {
-                    JSONObject usr = listproduits.getJSONObject(i);
-                    ClientModel m = new ClientModel();
-                    m.setId(usr.getString("idclient"));
-                    m.setNomPrenom(usr.getString("nom"));
-                    m.setTel(usr.getString("tel"));
-                    m.setAdresse(usr.getString("adresse"));
-                    m.setImage(URLs.IpBackend + "clients/client.png");
-                    List.add(m);
+
+
+                    startActivity(new Intent(context, AccueilActivity.class));
+
+
+                }
+                else if (resp == 0){
+
+                  //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
+                  //  startActivity(intent);
+                    Toast toast = Toast.makeText(getApplicationContext(), "can you register  !!!!", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            ClientAdapter adapter = new ClientAdapter(context,List);
-            list.setAdapter(adapter);
-
-
         }
-    }
 
+    }
 }

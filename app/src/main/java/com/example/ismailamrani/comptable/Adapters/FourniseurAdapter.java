@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.InformationFournisseurActivity;
+import com.example.ismailamrani.comptable.ui.InformationFournisseurActivity;
 import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
 

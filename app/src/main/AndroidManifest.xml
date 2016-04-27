@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AccueilActivity"
+            android:name=".ui.AccueilActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.Accueil" />
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ProduisActivity"
+            android:name=".ui.ProduisActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.Produis" />
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClientListActivity"
+            android:name=".ui.ClientListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddProduitActivity"
+            android:name=".ui.AddProduitActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.AddProduit" />
@@ -63,34 +63,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ModifierProduitActivity"
+            android:name=".ui.ModifierProduitActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".AddClientActivity"
+            android:name=".ui.AddClientActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".EditClientActivity"
+            android:name=".ui.EditClientActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".Produit_InfoActivity"
+            android:name=".ui.Produit_InfoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Fournisseur.AddFournisseurAsync" />
         <activity android:name=".Charges.AddCharge" />
-        <activity android:name=".AddLocalActivity" />
-        <activity android:name=".addSocieteActivity" />
+        <activity android:name=".ui.AddLocalActivity" />
+        <activity android:name=".ui.addSocieteActivity" />
         <activity
-            android:name=".InformationActivity"
+            android:name=".ui.InformationActivity"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
-            android:name=".NewChargeActivity"
+            android:name=".ui.NewChargeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
-        <activity android:name=".AddLocalFileActivity" />
+        <activity android:name=".ui.AddLocalFileActivity" />
         <activity
-            android:name=".SpinnerChargeActivity"
+            android:name=".ui.SpinnerChargeActivity"
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
-            android:name=".FournisseurListActivity"
+            android:name=".ui.FournisseurListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,10 +99,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InformationFournisseurActivity"
+            android:name=".ui.InformationFournisseurActivity"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".AddFournisseurActivity" />
-        <activity android:name=".EditFournisseurActivity" />
+        <activity android:name=".ui.AddFournisseurActivity" />
+        <activity android:name=".ui.EditFournisseurActivity" />
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -112,7 +112,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".VenteActivity"
+            android:name=".ui.VenteActivity"
             android:label="@string/title_activity_vente"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ismailamrani.comptable.LocalData.FileProduit;
+import com.example.ismailamrani.comptable.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

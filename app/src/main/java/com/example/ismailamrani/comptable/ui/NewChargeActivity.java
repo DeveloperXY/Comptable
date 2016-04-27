@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Redouane on 06/04/2016.

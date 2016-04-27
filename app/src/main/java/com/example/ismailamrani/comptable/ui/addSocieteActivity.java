@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.example.ismailamrani.comptable.LocalData.URLs;
+import com.example.ismailamrani.comptable.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

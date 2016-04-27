@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.Adapters.SpinnerAdapter;
 import com.example.ismailamrani.comptable.LocalData.ToDelete.GetSpinnerLocal;
+import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Redouane on 07/04/2016.
