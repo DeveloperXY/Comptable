@@ -27,7 +27,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
     private OkHttpClient client = new OkHttpClient();
 
     LinearLayout Valider;
@@ -36,16 +35,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, TAG);
-
         new CalculateScreenSize().CalculateScreenSize(this);
-
         setContentView(R.layout.activity_splash);
 
         Valider = (LinearLayout) findViewById(R.id.Valider);
         nom = (EditText) findViewById(R.id.username);
         motdepass = (EditText) findViewById(R.id.mp);
-
 
         Valider.setOnClickListener(v -> {
             String username = nom.getText().toString();

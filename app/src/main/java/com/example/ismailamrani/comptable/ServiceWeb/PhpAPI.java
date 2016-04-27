@@ -1,7 +1,5 @@
 package com.example.ismailamrani.comptable.ServiceWeb;
 
-import android.util.Log;
-
 import com.example.ismailamrani.comptable.utils.Method;
 
 import org.json.JSONException;
@@ -10,7 +8,6 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 

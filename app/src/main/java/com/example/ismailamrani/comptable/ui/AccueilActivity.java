@@ -79,7 +79,7 @@ public class AccueilActivity extends Activity {
         ventes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, VenteActivity.class));
+                startActivity(new Intent(context, SalesActivity.class));
 
             }
         });
