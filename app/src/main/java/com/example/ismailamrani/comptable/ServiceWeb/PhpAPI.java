@@ -24,6 +24,7 @@ public class PhpAPI {
     public static final String addProduit = IpBackend + "addProduit.php";
     public static final String removeProduit = IpBackend + "removeProduit.php";
     public static final String getProduitById = IpBackend + "getProduitByID.php";
+    public static final String getProduitByBarcode = IpBackend + "getProduitByBarcode.php";
     public static final String editproduit = IpBackend + "editProduit.php";
 
     public static final String addClient = IpBackend + "addClient.php";
