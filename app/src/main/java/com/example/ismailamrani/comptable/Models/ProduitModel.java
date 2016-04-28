@@ -51,6 +51,10 @@ public class ProduitModel {
         this.url = url;
     }
 
+    public ProduitModel() {
+
+    }
+
     public String getUrl() {
         return url;
     }

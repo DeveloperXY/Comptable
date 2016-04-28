@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.Adapters.SoldProductAdapter;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
+import com.example.ismailamrani.comptable.Models.ProduitModel;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -44,6 +45,7 @@ public class SalesActivity extends Activity {
     EditText priceField;
 
     private OkHttpClient client = new OkHttpClient();
+    private ProduitModel mProduitModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +69,11 @@ public class SalesActivity extends Activity {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         if (scanningResult != null) {
-            String scanContent = scanningResult.getContents();
-            barCodeField.setText(scanContent);
+            String scannedBarcode = scanningResult.getContents();
 
             try {
                 JSONObject params = new JSONObject();
-                params.put("barcode", scanContent);
+                params.put("barcode", scannedBarcode);
 
                 postGetProduct(PhpAPI.getProduitByBarcode, params);
 
@@ -116,6 +117,11 @@ public class SalesActivity extends Activity {
                                     try {
                                         JSONArray productList = obj.getJSONArray("produit");
                                         JSONObject product = productList.getJSONObject(0);
+                                        mProduitModel = new ProduitModel(product);
+
+                                        quantityField.setText("1");
+                                        barCodeField.setText(mProduitModel.getCodeBarre());
+                                        priceField.setText(mProduitModel.getPrixTTC() + "");
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
