@@ -1,6 +1,6 @@
 package com.example.ismailamrani.comptable.LocalData.ToDelete;
 
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 
 import java.util.ArrayList;
 
@@ -9,11 +9,11 @@ import java.util.ArrayList;
  */
 public class GetProduit {
 
-    public ArrayList<ProduitModel> GetProduit(){
+    public ArrayList<Product> GetProduit(){
 
-        ArrayList<ProduitModel> List = new ArrayList<>();
+        ArrayList<Product> List = new ArrayList<>();
 
-        ProduitModel m = new ProduitModel();
+        Product m = new Product();
         m.setID(1);
         m.setLibelle("Iphone 6 Plus");
         m.setQte(125);
@@ -22,7 +22,7 @@ public class GetProduit {
 
         List.add(m);
 
-        ProduitModel m2 = new ProduitModel();
+        Product m2 = new Product();
         m2.setID(1);
         m2.setLibelle("Samsung Galaxy S6");
         m2.setQte(85);

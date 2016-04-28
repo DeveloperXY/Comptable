@@ -23,7 +23,7 @@ import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -137,26 +137,26 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
                     Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                ProduitModel produitModel = new ProduitModel();
-                produitModel.setLibelle(nomProduit.getText().toString());
-                produitModel.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
-                produitModel.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
-                produitModel.setPhoto(codeimage);
-                produitModel.setCodeBarre(CodeBarre.getText().toString());
-                produitModel.setUrl(PhpAPI.addProduit);
-                produitModel.setLocale_ID(1);
-                produitModel.setQte(0);
+                Product product = new Product();
+                product.setLibelle(nomProduit.getText().toString());
+                product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
+                product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
+                product.setPhoto(codeimage);
+                product.setCodeBarre(CodeBarre.getText().toString());
+                product.setUrl(PhpAPI.addProduit);
+                product.setLocale_ID(1);
+                product.setQte(0);
 
-                new addproduit().execute(produitModel);
+                new addproduit().execute(product);
             }
         });
     }
     // Post
 
-   private class addproduit extends AsyncTask<ProduitModel, Void, String> {
+   private class addproduit extends AsyncTask<Product, Void, String> {
 
         @Override
-        protected String doInBackground(ProduitModel... params) {
+        protected String doInBackground(Product... params) {
 
             try {
                 URL url = new URL(params[0].getUrl());

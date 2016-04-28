@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -96,16 +96,16 @@ public class ModifierProduitActivity extends Activity {
         enregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProduitModel produitModel = new ProduitModel();
-                produitModel.setLibelle(nomProduit.getText().toString());
-                produitModel.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
-                produitModel.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
-                produitModel.setPhoto(codeimage);
-                produitModel.setCodeBarre(CodeBarre.getText().toString());
-                produitModel.setUrl(PhpAPI.editproduit);
-                produitModel.setLocale_ID(1);
-                produitModel.setQte(0);
-                new  editproduit().execute(produitModel);
+                Product product = new Product();
+                product.setLibelle(nomProduit.getText().toString());
+                product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
+                product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
+                product.setPhoto(codeimage);
+                product.setCodeBarre(CodeBarre.getText().toString());
+                product.setUrl(PhpAPI.editproduit);
+                product.setLocale_ID(1);
+                product.setQte(0);
+                new  editproduit().execute(product);
 
             }
         });
@@ -210,10 +210,10 @@ public class ModifierProduitActivity extends Activity {
     //enregister
 
 
-    private class editproduit extends AsyncTask<ProduitModel, Void, String> {
+    private class editproduit extends AsyncTask<Product, Void, String> {
 
         @Override
-        protected String doInBackground(ProduitModel... params) {
+        protected String doInBackground(Product... params) {
 
             try {
                 URL url = new URL(params[0].getUrl());

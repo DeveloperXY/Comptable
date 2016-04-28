@@ -8,22 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
  */
-public class SoldProductAdapter extends ArrayAdapter<String> {
+public class SoldProductAdapter extends ArrayAdapter<Product> {
 
     private Context context;
-    private List<String> products;
+    private List<Product> products;
 
-    public SoldProductAdapter(Context context, List<String> products) {
+    public SoldProductAdapter(Context context, List<Product> products) {
         super(context, -1, products);
         this.context = context;
-        this.products = products;
+        this.products = new ArrayList<>(products);
     }
 
     @Override
@@ -43,7 +45,10 @@ public class SoldProductAdapter extends ArrayAdapter<String> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.productText.setText(products.get(position));
+        Product product = products.get(position);
+        System.out.println("Product is null: " + (product == null));
+
+        viewHolder.productText.setText(product.getLibelle());
         return convertView;
     }
 

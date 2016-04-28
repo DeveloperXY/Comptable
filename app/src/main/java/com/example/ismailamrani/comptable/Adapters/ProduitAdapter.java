@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.CustumItems.CustumTextView;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProduisActivity;
 import com.example.ismailamrani.comptable.ui.Produit_InfoActivity;
@@ -41,12 +41,12 @@ import java.util.Map;
  */
 public class ProduitAdapter extends BaseAdapter {
 
-    ArrayList<ProduitModel> List = new ArrayList<>();
+    ArrayList<Product> List = new ArrayList<>();
     Context context;
      int id;
 
 
-    public ProduitAdapter(Context context, ArrayList<ProduitModel> List){
+    public ProduitAdapter(Context context, ArrayList<Product> List){
         this.context = context;
         this.List = List;
     }

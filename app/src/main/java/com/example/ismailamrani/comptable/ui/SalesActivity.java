@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -10,7 +11,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.Adapters.SoldProductAdapter;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -20,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -44,8 +45,11 @@ public class SalesActivity extends Activity {
     @Bind(R.id.priceField)
     EditText priceField;
 
+    private Product mProduct;
+    private List<Product> toBeSoldProducts;
+
     private OkHttpClient client = new OkHttpClient();
-    private ProduitModel mProduitModel;
+    private SoldProductAdapter soldProductAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +57,30 @@ public class SalesActivity extends Activity {
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
 
-        List<String> data = Arrays.asList("IPhone 6 Plus", "Samsung Galaxy S7",
-                "Samsung Trend Plus", "IPhone 5S");
-        productsListview.setAdapter(new SoldProductAdapter(this, data));
+        toBeSoldProducts = new ArrayList<>();
+        soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
+        productsListview.setAdapter(soldProductAdapter);
     }
 
-    @OnClick(R.id.addBarCodeBtn)
-    public void onClick() {
-        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        scanIntegrator.initiateScan();
+    @OnClick({R.id.addBarCodeBtn, R.id.nextButton})
+    public void onButtonClick(View view) {
+        switch (view.getId()) {
+            case R.id.addBarCodeBtn:
+                IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+                scanIntegrator.initiateScan();
+                break;
+            case R.id.nextButton:
+                addProductToList();
+                break;
+        }
+    }
+
+    /**
+     * Adds a product to the list of the products to be sold.
+     */
+    private void addProductToList() {
+        toBeSoldProducts.add(mProduct);
+        soldProductAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -117,11 +136,11 @@ public class SalesActivity extends Activity {
                                     try {
                                         JSONArray productList = obj.getJSONArray("produit");
                                         JSONObject product = productList.getJSONObject(0);
-                                        mProduitModel = new ProduitModel(product);
+                                        mProduct = new Product(product);
 
                                         quantityField.setText("1");
-                                        barCodeField.setText(mProduitModel.getCodeBarre());
-                                        priceField.setText(mProduitModel.getPrixTTC() + "");
+                                        barCodeField.setText(mProduct.getCodeBarre());
+                                        priceField.setText(mProduct.getPrixTTC() + "");
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();

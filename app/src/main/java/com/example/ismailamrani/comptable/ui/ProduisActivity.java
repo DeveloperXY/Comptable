@@ -13,7 +13,7 @@ import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
+import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
 import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
@@ -42,7 +42,7 @@ public class ProduisActivity extends Activity implements OGActionBarInterface {
     OGActionBar MyActionBar;
     ListView List;
 
-    ArrayList<ProduitModel> ListProduit = new ArrayList<>();
+    ArrayList<Product> ListProduit = new ArrayList<>();
 
     Context context;
 
@@ -123,7 +123,7 @@ public class ProduisActivity extends Activity implements OGActionBarInterface {
 
                 for (int i = 0; i < listproduits.length(); i++) {
                     JSONObject usr = listproduits.getJSONObject(i);
-                    ProduitModel itm = new ProduitModel();
+                    Product itm = new Product();
                     itm.setID(Integer.parseInt(usr.getString("idp")));
                     itm.setLibelle(usr.getString("libelle"));
                     itm.setPrixTTC(Double.parseDouble(usr.getString("prixTTC")));

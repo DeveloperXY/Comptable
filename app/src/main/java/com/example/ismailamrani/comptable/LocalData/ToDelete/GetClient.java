@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.LocalData.ToDelete;
 
 import com.example.ismailamrani.comptable.Models.ClientModel;
-import com.example.ismailamrani.comptable.Models.ProduitModel;
 
 import java.util.ArrayList;
 

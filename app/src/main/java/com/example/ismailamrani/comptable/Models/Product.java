@@ -6,7 +6,7 @@ import org.json.JSONObject;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class ProduitModel {
+public class Product {
 
     int ID;
     String Libelle;
@@ -24,7 +24,7 @@ public class ProduitModel {
      *
      * @param object to be parsed.
      */
-    public ProduitModel(JSONObject object) throws JSONException {
+    public Product(JSONObject object) throws JSONException {
         this(
                 object.getInt("ID"),
                 object.getString("Libelle"),
@@ -38,8 +38,8 @@ public class ProduitModel {
         );
     }
 
-    public ProduitModel(int ID, String libelle, Double prixHT, Double prixTTC,
-                        String codeBarre, String photo, int qte, int locale_ID, String url) {
+    public Product(int ID, String libelle, Double prixHT, Double prixTTC,
+                   String codeBarre, String photo, int qte, int locale_ID, String url) {
         this.ID = ID;
         Libelle = libelle;
         PrixHT = prixHT;
@@ -51,7 +51,7 @@ public class ProduitModel {
         this.url = url;
     }
 
-    public ProduitModel() {
+    public Product() {
 
     }
 
