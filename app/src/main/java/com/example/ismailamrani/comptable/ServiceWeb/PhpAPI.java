@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
 public class PhpAPI {
     private static final String PRODUCTION_HOST = "http://octagen-it.com/comptable/";
     private static final String DEV_HOST = "http://192.168.137.1/comptablephpapi/";
-    public static String IpBackend = PRODUCTION_HOST;
+    public static String IpBackend = DEV_HOST;
     public static final String login = IpBackend + "login.php";
 
     public static final String getProduit = IpBackend + "getProduit.php";
