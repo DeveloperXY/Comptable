@@ -83,12 +83,13 @@
                             android:layout_weight="1035">
 
                             <EditText
+                                android:id="@+id/barCodeField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
                                 android:hint="Code Barre"
-                                android:paddingLeft="20dp"
-                                android:id="@+id/barCodeField" />
+                                android:inputType="none"
+                                android:paddingLeft="20dp" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -97,11 +98,11 @@
                             android:layout_weight="140">
 
                             <ImageView
+                                android:id="@+id/addBarCodeBtn"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_centerInParent="true"
-                                android:src="@drawable/codebaarre"
-                                android:id="@+id/addBarCodeBtn" />
+                                android:src="@drawable/codebaarre" />
                         </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -137,12 +138,12 @@
                             android:layout_weight="1032">
 
                             <EditText
+                                android:id="@+id/quantityField"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
                                 android:hint="Quantité"
-                                android:paddingLeft="20dp"
-                                android:id="@+id/quantityField" />
+                                android:paddingLeft="20dp" />
                         </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -175,12 +176,12 @@
                         android:weightSum="1174">
 
                         <EditText
+                            android:id="@+id/priceField"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
                             android:hint="Prix"
-                            android:paddingLeft="20dp"
-                            android:id="@+id/priceField" />
+                            android:paddingLeft="20dp" />
                     </LinearLayout>
 
                     <Space

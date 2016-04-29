@@ -70,7 +70,6 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
      */
     private GoogleApiClient client;
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
