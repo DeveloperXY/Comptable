@@ -26,14 +26,14 @@ public class Product {
      */
     public Product(JSONObject object) throws JSONException {
         this(
-                object.getInt("ID"),
-                object.getString("Libelle"),
+                object.getInt("idp"),
+                object.getString("libelle"),
                 object.getDouble("PrixHT"),
                 object.getDouble("PrixTTC"),
-                object.getString("CodeBar"),
-                object.getString("Photo"),
-                object.getInt("Qte"),
-                object.getInt("Locale_ID"),
+                object.getString("codeBar"),
+                object.getString("photo"),
+                object.getInt("qte"),
+                object.getInt("local"),
                 ""
         );
     }

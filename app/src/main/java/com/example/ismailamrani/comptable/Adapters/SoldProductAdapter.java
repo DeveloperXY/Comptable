@@ -25,7 +25,7 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
     public SoldProductAdapter(Context context, List<Product> products) {
         super(context, -1, products);
         this.context = context;
-        this.products = new ArrayList<>(products);
+        this.products = products;
     }
 
     @Override
