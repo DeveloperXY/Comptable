@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -55,6 +57,7 @@ public class SalesActivity extends Activity {
 
     private OkHttpClient client = new OkHttpClient();
     private SoldProductAdapter soldProductAdapter;
+    private TextWatcher priceWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +65,43 @@ public class SalesActivity extends Activity {
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
 
+        attachTextWatchers();
+
         toBeSoldProducts = new ArrayList<>();
         soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
         productsListview.setAdapter(soldProductAdapter);
+    }
+
+    private void attachTextWatchers() {
+        initializeTextWatchers();
+
+        priceField.addTextChangedListener(priceWatcher);
+    }
+
+    private void initializeTextWatchers() {
+        priceWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                String newPrice = s.toString();
+
+                if (newPrice.isEmpty())
+                    priceField.setText("0");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newPrice = s.toString();
+
+                if (newPrice.matches("(\\d+)|(\\d+)([.,]\\d+)"))
+                    Log.i("TEXT", "MATCH: " + newPrice);
+                else
+                    Log.i("TEXT", "NOT A MATCH: " + newPrice);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
     }
 
     @OnClick({R.id.addBarCodeBtn, R.id.nextButton})
@@ -84,7 +121,7 @@ public class SalesActivity extends Activity {
      * Adds a product to the list of the products to be sold.
      */
     private void addProductToList() {
-        if(!allProductInfosArePresent()) {
+        if (!allProductInfosArePresent()) {
             return;
         }
 
