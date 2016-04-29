@@ -16,6 +16,12 @@ import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
+ *
+ * The prices of the products that are handled by this adapter do not reflect
+ * their real prices in the distant database: they are calculated based on the
+ * following formula:
+ *
+ * price = original_price * quantity
  */
 public class SoldProductAdapter extends ArrayAdapter<Product> {
 
