@@ -1,95 +1,73 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Ismail Amrani on 17/03/2016.
  */
 public class HomeActivity extends Activity {
-    Context context;
-    LinearLayout Produit,client,charge,fournisseur,stock,achat,ventes;
 
     private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acceuil);
+        setContentView(R.layout.activity_home);
+        ButterKnife.bind(this);
 
         databaseAdapter = DatabaseAdapter.getInstance(this);
 
-        if(!isUserLoggedIn()) {
+        if (!isUserLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
         }
+    }
 
-        context = this;
+    /**
+     * Starts a new activity based on the clicked-upon layout.
+     * @param view that was clicked.
+     */
+    @OnClick({R.id.produit, R.id.client, R.id.chargee, R.id.stock,
+            R.id.ventes, R.id.achat, R.id.fournis})
+    public void OnClick(View view) {
+        Class<?> targetActivity;
+        switch (view.getId()) {
+            case R.id.produit:
+                targetActivity = ProduisActivity.class;
+                break;
+            case R.id.client:
+                targetActivity = ClientListActivity.class;
+                break;
+            case R.id.chargee:
+                targetActivity = NewChargeActivity.class;
+                break;
+            case R.id.fournis:
+                targetActivity = FournisseurListActivity.class;
+                break;
+            case R.id.stock:
+                targetActivity = AddLocalFileActivity.class;
+                break;
+            case R.id.achat:
+                targetActivity = addSocieteActivity.class;
+                break;
+            case R.id.ventes:
+                targetActivity = SalesActivity.class;
+                break;
+            default:
+                targetActivity = null;
+        }
 
-        Produit = (LinearLayout) findViewById(R.id.Produit);
-        client = (LinearLayout) findViewById(R.id.client);
-        charge = (LinearLayout) findViewById(R.id.chargee);
-        fournisseur = (LinearLayout) findViewById(R.id.fournis);
-        stock = (LinearLayout) findViewById(R.id.stock);
-        achat = (LinearLayout) findViewById(R.id.achat);
-        ventes= (LinearLayout) findViewById(R.id.ventes);
-        Produit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, ProduisActivity.class));
-            }
-        });
-
-        client.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context,ClientListActivity.class));
-            }
-        });
-
-        charge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, NewChargeActivity.class));
-            }
-        });
-        fournisseur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, FournisseurListActivity.class));
-            }
-        });
-        stock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(context, AddLocalFileActivity.class));
-            }
-        });
-        achat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, addSocieteActivity.class));
-
-            }
-        });
-
-        ventes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, SalesActivity.class));
-
-            }
-        });
+        startActivity(new Intent(this, targetActivity));
     }
 
     /**

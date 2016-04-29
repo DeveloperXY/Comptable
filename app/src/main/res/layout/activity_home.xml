@@ -58,7 +58,7 @@
                 android:weightSum="188">
 
                 <LinearLayout
-                    android:id="@+id/Produit"
+                    android:id="@+id/produit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="93"
