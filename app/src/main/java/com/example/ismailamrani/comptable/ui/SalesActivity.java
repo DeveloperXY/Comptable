@@ -57,7 +57,7 @@ public class SalesActivity extends Activity {
 
     private OkHttpClient client = new OkHttpClient();
     private SoldProductAdapter soldProductAdapter;
-    private TextWatcher priceWatcher, quantityWatcher;
+    private TextWatcher quantityWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,31 +75,10 @@ public class SalesActivity extends Activity {
     private void attachTextWatchers() {
         initializeTextWatchers();
 
-        priceField.addTextChangedListener(priceWatcher);
         quantityField.addTextChangedListener(quantityWatcher);
     }
 
     private void initializeTextWatchers() {
-        priceWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String newPrice = s.toString();
-
-                if (newPrice.matches("(\\d+)|(\\d+)([.,]\\d+)"))
-                    Log.i("TEXT", "MATCH: " + newPrice);
-                else
-                    Log.i("TEXT", "NOT A MATCH: " + newPrice);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        };
-
         quantityWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
