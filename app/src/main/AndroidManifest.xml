@@ -21,7 +21,7 @@
             android:name=".ui.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".ui.AccueilActivity"
+            android:name=".ui.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

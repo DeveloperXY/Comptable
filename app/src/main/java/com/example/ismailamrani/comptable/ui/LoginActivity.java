@@ -3,7 +3,6 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -71,7 +70,10 @@ public class LoginActivity extends AppCompatActivity {
         boolean passwordStatus = password.length() != 0;
 
         if (usernameStatus && passwordStatus)
-            return new User(username, password);
+            return new User.Builder()
+                    .username(username)
+                    .password(password)
+                    .createUser();
 
         if (!usernameStatus) {
             // Invalid user name.
@@ -115,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                             runOnUiThread(() -> {
                                 if (resp == 1)
                                     startActivity(new Intent(
-                                            LoginActivity.this, AccueilActivity.class));
+                                            LoginActivity.this, HomeActivity.class));
                                 else if (resp == 0)
                                     Toast.makeText(LoginActivity.this,
                                             "Unregistered user name.",

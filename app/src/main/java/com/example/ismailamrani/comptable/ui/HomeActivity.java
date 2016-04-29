@@ -14,7 +14,7 @@ import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 /**
  * Created by Ismail Amrani on 17/03/2016.
  */
-public class AccueilActivity extends Activity {
+public class HomeActivity extends Activity {
     Context context;
     LinearLayout Produit,client,charge,fournisseur,stock,achat,ventes;
 
