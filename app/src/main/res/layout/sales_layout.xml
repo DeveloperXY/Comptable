@@ -89,7 +89,8 @@
                                 android:background="@android:color/transparent"
                                 android:hint="Code Barre"
                                 android:inputType="none"
-                                android:paddingLeft="20dp" />
+                                android:paddingLeft="20dp"
+                                android:editable="false" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -145,6 +146,8 @@
                                 android:hint="Quantité"
                                 android:paddingLeft="20dp" />
                         </RelativeLayout>
+
+                        <include layout="@layout/dh_layout_include"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -319,6 +322,8 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
+
+                <include layout="@layout/dh_layout_include"/>
             </LinearLayout>
         </LinearLayout>
 
