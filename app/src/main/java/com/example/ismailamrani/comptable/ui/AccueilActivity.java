@@ -9,22 +9,29 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 
 /**
  * Created by Ismail Amrani on 17/03/2016.
  */
 public class AccueilActivity extends Activity {
-    private static final String TAG = AccueilActivity.class.getSimpleName();
-
     Context context;
-
     LinearLayout Produit,client,charge,fournisseur,stock,achat,ventes;
+
+    private DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceuil);
-        Log.d(TAG, TAG);
+
+        databaseAdapter = DatabaseAdapter.getInstance(this);
+
+        if(!isUserLoggedIn()) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+            return;
+        }
 
         context = this;
 
@@ -83,5 +90,12 @@ public class AccueilActivity extends Activity {
 
             }
         });
+    }
+
+    /**
+     * @return true if a user is already logged in, false otherwise.
+     */
+    private boolean isUserLoggedIn() {
+        return databaseAdapter.getLoggedUser() != null;
     }
 }
