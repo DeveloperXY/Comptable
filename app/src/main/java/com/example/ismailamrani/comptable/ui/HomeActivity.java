@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 
 import butterknife.ButterKnife;
@@ -21,6 +22,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new CalculateScreenSize().CalculateScreenSize(this);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 

@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.sqlite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -83,8 +84,7 @@ public class DatabaseAdapter {
                 true,
                 DATABASE_TABLE,
                 new String[]{KEY_ID, KEY_FIRSTNAME, KEY_LASTNAME,
-                        KEY_TYPE, KEY_CREATION_DATE, KEY_EXPIRATION_DATE,
-                        KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID},
+                        KEY_TYPE, KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID},
                 null, null, null, null, null, null);
         return extractUserFromCursor(cursor);
     }
@@ -96,11 +96,32 @@ public class DatabaseAdapter {
                         .firstname(cursor.getString(1))
                         .lastname(cursor.getString(2))
                         .type(cursor.getString(3))
-                        .username(cursor.getString(6))
-                        .password(cursor.getString(7))
-                        .companyID(cursor.getInt(8))
+                        .username(cursor.getString(4))
+                        .password(cursor.getString(5))
+                        .companyID(cursor.getInt(6))
                         .createUser() :
                 null;
+    }
+
+    /**
+     * Saves the passed-in user into the local database.
+     * @param user to be saved.
+     */
+    public void saveLoggedInUser(User user) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, user.getId());
+        values.put(KEY_FIRSTNAME, user.getFirstname());
+        values.put(KEY_LASTNAME, user.getLastname());
+        values.put(KEY_TYPE, user.getType());
+        values.put(KEY_USERNAME, user.getUsername());
+        values.put(KEY_PASSWORD, user.getPassword());
+        values.put(KEY_COMPANY_ID, user.getCompanyID());
+
+        insertUser(values);
+    }
+
+    private long insertUser(ContentValues values) {
+        return db.insert(DATABASE_TABLE, null, values);
     }
 
     public void close() {

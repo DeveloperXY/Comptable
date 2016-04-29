@@ -12,6 +12,7 @@ import com.example.ismailamrani.comptable.Models.User;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 
@@ -28,6 +29,7 @@ import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private OkHttpClient client = new OkHttpClient();
+    private DatabaseAdapter databaseAdapter;
 
     LinearLayout Valider;
     EditText nom, motdepass;
@@ -35,8 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new CalculateScreenSize().CalculateScreenSize(this);
         setContentView(R.layout.activity_splash);
+
+        databaseAdapter = DatabaseAdapter.getInstance(this);
 
         Valider = (LinearLayout) findViewById(R.id.Valider);
         nom = (EditText) findViewById(R.id.username);
@@ -122,9 +125,14 @@ public class LoginActivity extends AppCompatActivity {
                                         // the response
                                         JSONObject loggedInUser = obj.getJSONArray("user")
                                                 .getJSONObject(0);
+                                        // Save user to local disk
                                         saveUserToInternalDatabase(loggedInUser);
-                                        startActivity(new Intent(
-                                                LoginActivity.this, HomeActivity.class));
+                                        // Move to main menu
+                                        Intent intent = new Intent(LoginActivity.this,
+                                                HomeActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -148,6 +156,6 @@ public class LoginActivity extends AppCompatActivity {
      * @param jsonUser to be saved.
      */
     private void saveUserToInternalDatabase(JSONObject jsonUser) {
-
+        databaseAdapter.saveLoggedInUser(new User(jsonUser));
     }
 }
