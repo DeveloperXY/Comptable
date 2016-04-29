@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -80,10 +81,25 @@ public class SalesActivity extends Activity {
      * Adds a product to the list of the products to be sold.
      */
     private void addProductToList() {
+        if(!allProductInfosArePresent()) {
+            return;
+        }
+
         toBeSoldProducts.add(mProduct);
         soldProductAdapter.notifyDataSetChanged();
 
         resetTextFields();
+    }
+
+    /**
+     * @return true if all the informations of the to-be-added product are
+     * present, & false otherwise.
+     */
+    private boolean allProductInfosArePresent() {
+        return Stream.of(barCodeField, quantityField, priceField)
+                .map(EditText::getText)
+                .map(Editable::toString)
+                .noneMatch(String::isEmpty);
     }
 
     private void resetTextFields() {
