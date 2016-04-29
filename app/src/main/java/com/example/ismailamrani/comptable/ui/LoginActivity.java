@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -115,9 +116,20 @@ public class LoginActivity extends AppCompatActivity {
                             int resp = obj.getInt("success");
 
                             runOnUiThread(() -> {
-                                if (resp == 1)
-                                    startActivity(new Intent(
-                                            LoginActivity.this, HomeActivity.class));
+                                if (resp == 1) {
+                                    try {
+                                        // Retrieve the logged in user's infos from
+                                        // the response
+                                        JSONObject loggedInUser = obj.getJSONArray("user")
+                                                .getJSONObject(0);
+                                        saveUserToInternalDatabase(loggedInUser);
+                                        startActivity(new Intent(
+                                                LoginActivity.this, HomeActivity.class));
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                                 else if (resp == 0)
                                     Toast.makeText(LoginActivity.this,
                                             "Unregistered user name.",
@@ -129,5 +141,13 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    /**
+     * Saves the "has just logged in" user into the internal SQLite database.
+     * @param jsonUser to be saved.
+     */
+    private void saveUserToInternalDatabase(JSONObject jsonUser) {
+
     }
 }

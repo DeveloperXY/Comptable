@@ -29,7 +29,6 @@ public class HomeActivity extends Activity {
         if (!isUserLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-            return;
         }
     }
 
