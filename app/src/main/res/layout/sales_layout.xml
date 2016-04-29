@@ -147,8 +147,6 @@
                                 android:hint="Quantité"
                                 android:paddingLeft="20dp" />
                         </RelativeLayout>
-
-                        <include layout="@layout/dh_layout_include" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -181,11 +179,14 @@
 
                         <EditText
                             android:id="@+id/priceField"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1032"
                             android:background="@android:color/transparent"
                             android:hint="Prix"
                             android:paddingLeft="20dp" />
+
+                        <include layout="@layout/dh_layout_include" />
                     </LinearLayout>
 
                     <Space
