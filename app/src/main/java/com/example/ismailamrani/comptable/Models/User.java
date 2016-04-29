@@ -94,6 +94,27 @@ public class User {
         this.companyID = builder.companyID;
     }
 
+    /**
+     * Overloaded constructor.
+     * Builds a new instance whose informations are extracted from the passed-in
+     * JSON object.
+     * @param user parameter
+     */
+    public User(JSONObject user) {
+        try {
+            this.id = user.getInt("iduser");
+            this.firstname = user.getString("prenom");
+            this.lastname = user.getString("nom");
+            this.type = user.getString("type");
+            this.username = user.getString("Username");
+            this.password = user.getString("Password");
+            this.companyID = user.getInt("SocieteID");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getId() {
         return id;
     }
