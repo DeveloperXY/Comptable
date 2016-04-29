@@ -57,7 +57,7 @@ public class SalesActivity extends Activity {
 
     private OkHttpClient client = new OkHttpClient();
     private SoldProductAdapter soldProductAdapter;
-    private TextWatcher priceWatcher;
+    private TextWatcher priceWatcher, quantityWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +76,13 @@ public class SalesActivity extends Activity {
         initializeTextWatchers();
 
         priceField.addTextChangedListener(priceWatcher);
+        quantityField.addTextChangedListener(quantityWatcher);
     }
 
     private void initializeTextWatchers() {
         priceWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                String newPrice = s.toString();
-
-                if (newPrice.isEmpty())
-                    priceField.setText("0");
             }
 
             @Override
@@ -96,6 +93,37 @@ public class SalesActivity extends Activity {
                     Log.i("TEXT", "MATCH: " + newPrice);
                 else
                     Log.i("TEXT", "NOT A MATCH: " + newPrice);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        };
+
+        quantityWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Check if a product has been scanned
+                if (mProduct != null) {
+                    String qte = s.toString();
+                    // Check if there was in deed a new quantity
+                    if(!qte.isEmpty()) {
+                        // Check if the new quantity has a valid format
+                        if (qte.matches("(\\d+)")) {
+                            int newQuantity = Integer.valueOf(qte);
+                            double newPrice = mProduct.getPrixTTC() * newQuantity;
+                            priceField.setText(String.valueOf(newPrice));
+                        }
+                    }
+                    else {
+                        // Show original price
+                        priceField.setText(String.valueOf(mProduct.getPrixTTC()));
+                    }
+                }
             }
 
             @Override
@@ -130,6 +158,7 @@ public class SalesActivity extends Activity {
         calculateTotalPrice();
 
         resetTextFields();
+        mProduct = null;
     }
 
     /**
