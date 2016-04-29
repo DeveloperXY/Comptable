@@ -14,10 +14,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -45,9 +45,10 @@ public class InformationFournisseurActivity extends Activity {
     ImageView imageInformation;
     RelativeLayout fermer;
     String id;
-    TextView nameFournisseur,fournisseurAdresse,fournisseurTel;
-    RelativeLayout editFournisseur,removeFournisseur,callFournisseur;
+    TextView nameFournisseur, fournisseurAdresse, fournisseurTel;
+    RelativeLayout editFournisseur, removeFournisseur, callFournisseur;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,21 +59,21 @@ public class InformationFournisseurActivity extends Activity {
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        context=this;
+        context = this;
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width * .9), (int) (height * .7));
-        fermer = (RelativeLayout)findViewById(R.id.fermerlay);
+        fermer = (RelativeLayout) findViewById(R.id.fermerlay);
 
-        nameFournisseur=(TextView)findViewById(R.id.nameFournisseur);
-        fournisseurAdresse=(TextView)findViewById(R.id.fournisseurAdresse);
-        fournisseurTel=(TextView)findViewById(R.id.fournisseurTel);
-        imageInformation = (ImageView)findViewById(R.id.ImageProfilinformation);
+        nameFournisseur = (TextView) findViewById(R.id.nameFournisseur);
+        fournisseurAdresse = (TextView) findViewById(R.id.fournisseurAdresse);
+        fournisseurTel = (TextView) findViewById(R.id.fournisseurTel);
+        imageInformation = (ImageView) findViewById(R.id.ImageProfilinformation);
 
-        removeFournisseur=(RelativeLayout)findViewById(R.id.removeFournisseur);
-        editFournisseur=(RelativeLayout)findViewById(R.id.editFournisseur);
-        callFournisseur=(RelativeLayout)findViewById(R.id.callFournisseur);
+        removeFournisseur = (RelativeLayout) findViewById(R.id.removeFournisseur);
+        editFournisseur = (RelativeLayout) findViewById(R.id.editFournisseur);
+        callFournisseur = (RelativeLayout) findViewById(R.id.callFournisseur);
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(imageInformation);
 
         fermer.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +125,7 @@ public class InformationFournisseurActivity extends Activity {
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -133,8 +135,7 @@ public class InformationFournisseurActivity extends Activity {
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
-
+                if (resp == 1) {
 
 
                     try {
@@ -148,7 +149,7 @@ public class InformationFournisseurActivity extends Activity {
                             fournisseurTel.setText(usr.getString("tel"));
                             fournisseurAdresse.setText(usr.getString("adresse"));
 
-                            final String call=usr.getString("tel");
+                            final String call = usr.getString("tel");
                             // final String idc=usr.getString("idclient");
                             removeFournisseur.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -161,22 +162,22 @@ public class InformationFournisseurActivity extends Activity {
                                 @Override
                                 public void onClick(View v) {
                                     Intent i = new Intent(context, EditFournisseurActivity.class);
-                                    i.putExtra("id",id);
+                                    i.putExtra("id", id);
                                     context.startActivity(i);
                                 }
                             });
                             callFournisseur.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                   // String n = "tel:5556";
-                                   // Intent intent = new Intent( Intent.ACTION_CALL, Uri.parse( n ) );
+                                    // String n = "tel:5556";
+                                    // Intent intent = new Intent( Intent.ACTION_CALL, Uri.parse( n ) );
                                     Intent callIntent = new Intent(Intent.ACTION_CALL);
                                     callIntent.setData(Uri.parse("tel:" + call));
-                                   try{
-                                       startActivity( callIntent );
-                                   }catch(Exception e){
-                                       System.out.println(" >>>>>>>>>>> "+e.getMessage());
-                                   }
+                                    try {
+                                        startActivity(callIntent);
+                                    } catch (Exception e) {
+                                        System.out.println(" >>>>>>>>>>> " + e.getMessage());
+                                    }
 
                                 }
                             });
@@ -187,8 +188,7 @@ public class InformationFournisseurActivity extends Activity {
                     }
 
 
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
@@ -218,7 +218,7 @@ public class InformationFournisseurActivity extends Activity {
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
                 // Params.put("ID", id);
-                Params.put("ID",id);
+                Params.put("ID", id);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -237,6 +237,7 @@ public class InformationFournisseurActivity extends Activity {
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -244,15 +245,14 @@ public class InformationFournisseurActivity extends Activity {
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
+                if (resp == 1) {
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    Intent i = new Intent(context,FournisseurListActivity.class);
+                    Intent i = new Intent(context, FournisseurListActivity.class);
                     context.startActivity(i);
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur de suppression !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }

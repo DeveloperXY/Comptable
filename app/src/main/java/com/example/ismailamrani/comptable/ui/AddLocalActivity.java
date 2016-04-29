@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,13 +35,9 @@ import java.util.Map;
  */
 public class AddLocalActivity extends Activity {
     private static final String TAG = AddLocalActivity.class.getSimpleName();
-EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local , email_local
-        ,activite_local ;
-    String adresse , ville  , pays , tel  , fix , fax , email , activite ;
-    Button ajouter ;
-
-
-
+    EditText adresse_local, ville_local, pays_local, tel_local, fix_local, fax_local, email_local, activite_local;
+    String adresse, ville, pays, tel, fix, fax, email, activite;
+    Button ajouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +45,8 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addlocal);
         adresse_local = (EditText) findViewById(R.id.adresse_local);
-        ville_local= (EditText) findViewById(R.id.ville_local);
-        pays_local= (EditText) findViewById(R.id.pays_local);
+        ville_local = (EditText) findViewById(R.id.ville_local);
+        pays_local = (EditText) findViewById(R.id.pays_local);
         tel_local = (EditText) findViewById(R.id.tel_local);
         fix_local = (EditText) findViewById(R.id.fix_local);
         fax_local = (EditText) findViewById(R.id.fax_local);
@@ -61,14 +56,14 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               adresse=adresse_local.getText().toString();
-                ville=ville_local.getText().toString();
-                pays=pays_local.getText().toString();
-                tel=tel_local.getText().toString();
-                fix=fix_local.getText().toString();
-                fax=fax_local.getText().toString();
-                email=email_local.getText().toString();
-                activite=activite_local.getText().toString();
+                adresse = adresse_local.getText().toString();
+                ville = ville_local.getText().toString();
+                pays = pays_local.getText().toString();
+                tel = tel_local.getText().toString();
+                fix = fix_local.getText().toString();
+                fax = fax_local.getText().toString();
+                email = email_local.getText().toString();
+                activite = activite_local.getText().toString();
 
               /*  LocalItems localItems = new LocalItems();
                 localItems.setAdresse(adresse_local.getText().toString());
@@ -81,27 +76,20 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
                 localItems.setActivite(activite_local.getText().toString()); */
 
 
-
                 new addlocal().execute(PhpAPI.addlocal);
             }
         });
 
 
-
-
-
-
-
-
-
     }
-    private class addlocal extends AsyncTask<String , Void , String> {
+
+    private class addlocal extends AsyncTask<String, Void, String> {
 
 
         @Override
         protected String doInBackground(String... params) {
             try {
-                URL url =  new URL(params[0]);
+                URL url = new URL(params[0]);
                 URLConnection connection = url.openConnection();
                 HttpURLConnection httpConn = (HttpURLConnection) connection;
                 httpConn.setAllowUserInteraction(false);
@@ -118,8 +106,7 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
                 Params.put("Fax", fax);
                 Params.put("Email", email);
                 Params.put("Activite", activite);
-                Params.put("Societe",1 );
-
+                Params.put("Societe", 1);
 
 
                 OutputStream os = connection.getOutputStream();
@@ -134,9 +121,9 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
                 return new convertInputStreamToString().convertInputStreamToString(is);
 
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
-                return  null ;
+                return null;
             }
 
         }
@@ -146,16 +133,16 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
             super.onPostExecute(s);
             System.out.println(s);
             try {
-                JSONObject j  = new JSONObject(s);
+                JSONObject j = new JSONObject(s);
                 int rep = j.getInt("success");
-                if(rep==1) {
+                if (rep == 1) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
-                }else  if (rep == 0) {
+                } else if (rep == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
@@ -179,6 +166,7 @@ EditText adresse_local,ville_local,pays_local,tel_local, fix_local , fax_local ,
             return result.toString();
         }
     }
+
     public class convertInputStreamToString {
         public String convertInputStreamToString(InputStream inputStream) throws IOException {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));

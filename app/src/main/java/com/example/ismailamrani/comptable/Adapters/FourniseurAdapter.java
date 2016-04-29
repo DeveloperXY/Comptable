@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,25 +10,24 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.ui.InformationFournisseurActivity;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.InformationFournisseurActivity;
 
 import java.util.ArrayList;
 
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class FourniseurAdapter extends BaseAdapter{
+public class FourniseurAdapter extends BaseAdapter {
 
     ArrayList<Fournisseur> List = new ArrayList<>();
     Context context;
 
 
-
-    public FourniseurAdapter(Context context,ArrayList<Fournisseur> List) {
+    public FourniseurAdapter(Context context, ArrayList<Fournisseur> List) {
         this.context = context;
-        this.List=List;
+        this.List = List;
     }
 
     @Override
@@ -53,26 +52,26 @@ public class FourniseurAdapter extends BaseAdapter{
         View Layout = inflater.inflate(R.layout.fournisseur_items, null);
 
 
-        TextView NomPrenom,adresse;
+        TextView NomPrenom, adresse;
         ImageView imageView;
-        RelativeLayout imglay,nomlay;
-        NomPrenom=(TextView)Layout.findViewById(R.id.nomPrenomFournisseur);
-        adresse=(TextView)Layout.findViewById(R.id.adresseFournisseur);
-        imageView=(ImageView)Layout.findViewById(R.id.imageclient);
-        imglay = (RelativeLayout)Layout.findViewById(R.id.imglay);
-        nomlay = (RelativeLayout)Layout.findViewById(R.id.nomlay);
+        RelativeLayout imglay, nomlay;
+        NomPrenom = (TextView) Layout.findViewById(R.id.nomPrenomFournisseur);
+        adresse = (TextView) Layout.findViewById(R.id.adresseFournisseur);
+        imageView = (ImageView) Layout.findViewById(R.id.imageclient);
+        imglay = (RelativeLayout) Layout.findViewById(R.id.imglay);
+        nomlay = (RelativeLayout) Layout.findViewById(R.id.nomlay);
 
 
         NomPrenom.setText(List.get(position).getNom());
         adresse.setText(List.get(position).getAdresse());
-        String img=List.get(position).getImage();
+        String img = List.get(position).getImage();
         imageView.setImageResource(R.drawable.flogo);
 
         imglay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, InformationFournisseurActivity.class);
-                i.putExtra("id",List.get(position).getId());
+                i.putExtra("id", List.get(position).getId());
                 context.startActivity(i);
             }
         });
@@ -80,15 +79,10 @@ public class FourniseurAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, InformationFournisseurActivity.class);
-                i.putExtra("id",List.get(position).getId());
+                i.putExtra("id", List.get(position).getId());
                 context.startActivity(i);
             }
         });
-
-
-
-
-
 
 
         return Layout;

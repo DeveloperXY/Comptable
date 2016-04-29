@@ -8,15 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.example.ismailamrani.comptable.Adapters.ClientAdapter;
-import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.adapters.ClientAdapter;
+import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.models.ClientModel;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,12 +36,13 @@ import java.util.Map;
 /**
  * Created by Redouane on 31/03/2016.
  */
-public class ClientListActivity extends Activity implements OGActionBarInterface{
+public class ClientListActivity extends Activity implements OGActionBarInterface {
     private static final String TAG = ClientListActivity.class.getSimpleName();
     OGActionBar myactionbar;
     ListView list;
     Context context;
     ArrayList<ClientModel> List = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,11 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
         context = this;
 
         setContentView(R.layout.activity_client);
-        myactionbar = (OGActionBar)findViewById(R.id.MyActionBar);
+        myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
         myactionbar.setActionBarListener(this);
         myactionbar.setTitle("Client");
 
-        list = (ListView)findViewById(R.id.Listclient);
+        list = (ListView) findViewById(R.id.Listclient);
         new GetData().execute(PhpAPI.getClient);
 
     }
@@ -70,6 +71,7 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
         startActivity(new Intent(this, AddClientActivity.class));
 
     }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         @Override
@@ -130,7 +132,7 @@ public class ClientListActivity extends Activity implements OGActionBarInterface
                 e.printStackTrace();
             }
 
-            ClientAdapter adapter = new ClientAdapter(context,List);
+            ClientAdapter adapter = new ClientAdapter(context, List);
             list.setAdapter(adapter);
 
 

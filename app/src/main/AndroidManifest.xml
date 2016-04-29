@@ -68,10 +68,10 @@
         <activity
             android:name=".ui.Produit_InfoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Fournisseur.AddFournisseurAsync" />
-        <activity android:name=".Charges.AddCharge" />
+        <activity android:name=".fournisseur.AddFournisseurAsync" />
+        <activity android:name=".charges.AddCharge" />
         <activity android:name=".ui.AddLocalActivity" />
-        <activity android:name=".ui.addSocieteActivity" />
+        <activity android:name=".ui.AddSocieteActivity" />
         <activity
             android:name=".ui.InformationActivity"
             android:theme="@style/AppTheme.CustomTheme" />

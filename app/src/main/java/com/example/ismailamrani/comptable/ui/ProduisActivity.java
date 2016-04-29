@@ -8,15 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.example.ismailamrani.comptable.Adapters.ProduitAdapter;
-import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
+import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;

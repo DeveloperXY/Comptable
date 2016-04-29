@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Models;
+package com.example.ismailamrani.comptable.models;
 
 /**
  * Created by Redouane on 22/03/2016.
@@ -30,7 +30,6 @@ public class Fournisseur {
     public void setId(String id) {
         this.id = id;
     }
-
 
 
     public String getUrl() {

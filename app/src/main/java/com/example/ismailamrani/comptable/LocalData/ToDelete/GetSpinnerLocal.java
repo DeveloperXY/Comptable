@@ -1,7 +1,6 @@
-package com.example.ismailamrani.comptable.LocalData.ToDelete;
+package com.example.ismailamrani.comptable.localdata.ToDelete;
 
-import com.example.ismailamrani.comptable.Models.ClientModel;
-import com.example.ismailamrani.comptable.Models.SpinnerModelCharge;
+import com.example.ismailamrani.comptable.models.SpinnerModelCharge;
 
 import java.util.ArrayList;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
  * Created by Redouane on 07/04/2016.
  */
 public class GetSpinnerLocal {
-    public ArrayList<SpinnerModelCharge> Getlocal(){
+    public ArrayList<SpinnerModelCharge> Getlocal() {
 
         ArrayList<SpinnerModelCharge> List = new ArrayList<>();
 

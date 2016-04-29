@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Models;
+package com.example.ismailamrani.comptable.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;

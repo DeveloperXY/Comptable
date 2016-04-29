@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.Models.Product;
+import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.R;
 
 import java.util.ArrayList;

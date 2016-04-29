@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_weight="277">
 
-            <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+            <com.example.ismailamrani.comptable.customitems.CustumTextView
                 android:id="@+id/Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

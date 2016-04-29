@@ -8,13 +8,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Adapters.SoldProductAdapter;
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
-import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
+import com.example.ismailamrani.comptable.adapters.SoldProductAdapter;
+import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
+import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
+import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;

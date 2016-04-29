@@ -3,18 +3,16 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Models.User;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
+import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -137,8 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                }
-                                else if (resp == 0)
+                                } else if (resp == 0)
                                     Toast.makeText(LoginActivity.this,
                                             "Unregistered user name.",
                                             Toast.LENGTH_LONG).show();
@@ -153,6 +150,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Saves the "has just logged in" user into the internal SQLite database.
+     *
      * @param jsonUser to be saved.
      */
     private void saveUserToInternalDatabase(JSONObject jsonUser) {

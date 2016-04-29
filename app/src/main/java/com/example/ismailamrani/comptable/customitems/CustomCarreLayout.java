@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.CustumItems;
+package com.example.ismailamrani.comptable.customitems;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,8 +6,8 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.ismailamrani.comptable.LocalData.ScreenSize;
-import com.example.ismailamrani.comptable.Models.ScreenSizeModel;
+import com.example.ismailamrani.comptable.localdata.ScreenSize;
+import com.example.ismailamrani.comptable.models.ScreenSizeModel;
 import com.example.ismailamrani.comptable.R;
 
 

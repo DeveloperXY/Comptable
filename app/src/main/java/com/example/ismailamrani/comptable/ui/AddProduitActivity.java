@@ -18,17 +18,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
+import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,7 +62,7 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
     private static int RESULT_LOAD_IMAGE = 1;
     private String selectedImagePath;
 
-    private String codeimage,imageProduit;
+    private String codeimage, imageProduit;
     String Filename = "Produit.txt";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -121,19 +120,19 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
         ajouterProduit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(codeimage.equals("")){
+                if (codeimage.equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "photo is required", Toast.LENGTH_LONG);
                     toast.show();
-                }else if(nomProduit.getText().toString().toString().equals("")){
+                } else if (nomProduit.getText().toString().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "produit name is required", Toast.LENGTH_LONG);
                     toast.show();
-                }else if(PrixHt.getText().toString().equals("")){
+                } else if (PrixHt.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "prix HT is required", Toast.LENGTH_LONG);
                     toast.show();
-                }else if(PrixTtc.getText().toString().equals("")){
+                } else if (PrixTtc.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "prix TTC is required", Toast.LENGTH_LONG);
                     toast.show();
-                }else if(CodeBarre.getText().toString().equals("")){
+                } else if (CodeBarre.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -153,7 +152,7 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
     }
     // Post
 
-   private class addproduit extends AsyncTask<Product, Void, String> {
+    private class addproduit extends AsyncTask<Product, Void, String> {
 
         @Override
         protected String doInBackground(Product... params) {
@@ -171,11 +170,11 @@ public class AddProduitActivity extends Activity implements OGActionBarInterface
                 // Params.put("ID", id);
                 Params.put("Libelle", params[0].getLibelle());
                 Params.put("PrixHT", params[0].getPrixHT());
-                Params.put("PrixTTC",params[0].getPrixTTC());
-                Params.put("CodeBar",params[0].getCodeBarre());
-                Params.put("Qte",params[0].getQte());
+                Params.put("PrixTTC", params[0].getPrixTTC());
+                Params.put("CodeBar", params[0].getCodeBarre());
+                Params.put("Qte", params[0].getQte());
                 Params.put("Photo", params[0].getPhoto());
-                Params.put("Local",params[0].getLocale_ID());
+                Params.put("Local", params[0].getLocale_ID());
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(

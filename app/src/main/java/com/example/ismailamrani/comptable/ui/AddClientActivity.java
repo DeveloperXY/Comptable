@@ -12,15 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ClientModel;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.models.ClientModel;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,12 +41,13 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  */
 public class AddClientActivity extends Activity implements OGActionBarInterface {
     private static final String TAG = AddClientActivity.class.getSimpleName();
-    EditText nomprenom,tel,adresse,email;
+    EditText nomprenom, tel, adresse, email;
     TextView ajouter;
 
     ImageView ImageProfil;
     OGActionBar MyActionBar;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +63,11 @@ public class AddClientActivity extends Activity implements OGActionBarInterface 
 
         Picasso.with(this).load(R.drawable.sergio).transform(new CropCircleTransformation()).into(ImageProfil);
 
-        nomprenom = (EditText)findViewById(R.id.nomcomletclient);
-        tel = (EditText)findViewById(R.id.numtel);
-        adresse = (EditText)findViewById(R.id.adresse);
-        email = (EditText)findViewById(R.id.email);
-        ajouter = (TextView)findViewById(R.id.enregistrerclient);
+        nomprenom = (EditText) findViewById(R.id.nomcomletclient);
+        tel = (EditText) findViewById(R.id.numtel);
+        adresse = (EditText) findViewById(R.id.adresse);
+        email = (EditText) findViewById(R.id.email);
+        ajouter = (TextView) findViewById(R.id.enregistrerclient);
 
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,7 @@ public class AddClientActivity extends Activity implements OGActionBarInterface 
                 clientItems.setNomPrenom(nomprenom.getText().toString());
                 clientItems.setTel(tel.getText().toString());
                 clientItems.setAdresse(adresse.getText().toString());
-               clientItems.setEmail(email.getText().toString());
+                clientItems.setEmail(email.getText().toString());
                 clientItems.setUrl(PhpAPI.addClient);
 
                 new addclient().execute(clientItems);
@@ -111,10 +111,10 @@ public class AddClientActivity extends Activity implements OGActionBarInterface 
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
                 // Params.put("ID", id);
-                Params.put("NomPrenom",params[0].getNomPrenom());
-                Params.put("Tel",params[0].getTel());
-                Params.put("Adresse",params[0].getAdresse());
-                Params.put("Email",params[0].getEmail());
+                Params.put("NomPrenom", params[0].getNomPrenom());
+                Params.put("Tel", params[0].getTel());
+                Params.put("Adresse", params[0].getAdresse());
+                Params.put("Email", params[0].getEmail());
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(

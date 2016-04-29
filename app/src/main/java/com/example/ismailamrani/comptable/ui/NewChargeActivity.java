@@ -7,9 +7,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 
 /**
  * Created by Redouane on 06/04/2016.
@@ -30,11 +30,11 @@ public class NewChargeActivity extends Activity implements OGActionBarInterface 
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Ajouter Une Charge");
         MyActionBar.AddDisable();
-        spinner = (ImageView)findViewById(R.id.spinner);
+        spinner = (ImageView) findViewById(R.id.spinner);
         spinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),SpinnerChargeActivity.class));
+                startActivity(new Intent(getApplicationContext(), SpinnerChargeActivity.class));
             }
         });
 

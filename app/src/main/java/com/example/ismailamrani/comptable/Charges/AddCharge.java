@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Charges;
+package com.example.ismailamrani.comptable.charges;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -8,9 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.ChargeItems;
+import com.example.ismailamrani.comptable.models.ChargeItems;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,23 +35,24 @@ import java.util.Map;
  */
 public class AddCharge extends Activity {
 
-    EditText desc,prix,local;
+    EditText desc, prix, local;
     TextView ajouter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_charge_layout);
-        desc = (EditText)findViewById(R.id.desc_charge);
-        prix = (EditText)findViewById(R.id.prix_charge);
-        local = (EditText)findViewById(R.id.local_charge);
-        ajouter = (TextView)findViewById(R.id.ajoutercharge);
+        desc = (EditText) findViewById(R.id.desc_charge);
+        prix = (EditText) findViewById(R.id.prix_charge);
+        local = (EditText) findViewById(R.id.local_charge);
+        ajouter = (TextView) findViewById(R.id.ajoutercharge);
 
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ChargeItems chargeItems = new ChargeItems();
                 chargeItems.setDesc(desc.getText().toString());
-                System.out.println(">>>> desc"+ chargeItems.getDesc());
+                System.out.println(">>>> desc" + chargeItems.getDesc());
                 chargeItems.setPrix(prix.getText().toString());
                 chargeItems.setLocal(local.getText().toString());
                 chargeItems.setUrl(PhpAPI.addccharge);
@@ -77,10 +78,9 @@ public class AddCharge extends Activity {
                 Map<String, Object> Params = new LinkedHashMap<>();
                 // Params.put("ID", id);
 
-                Params.put("Description",params[0].getDesc());
-                Params.put("Prix",params[0].getPrix());
-                Params.put("Local",params[0].getLocal());
-
+                Params.put("Description", params[0].getDesc());
+                Params.put("Prix", params[0].getPrix());
+                Params.put("Local", params[0].getLocal());
 
 
                 OutputStream os = conn.getOutputStream();

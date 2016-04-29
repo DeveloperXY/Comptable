@@ -1,7 +1,6 @@
-package com.example.ismailamrani.comptable.LocalData;
+package com.example.ismailamrani.comptable.localdata;
 
 import android.content.Context;
-import android.graphics.AvoidXfermode;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.view.Display;
 import android.widget.ImageView;
 
 /**
@@ -57,8 +55,7 @@ public class RoundedImageView extends ImageView {
             Canvas c = new Canvas();
             c.setBitmap(b);
             drawable.draw(c);
-        }
-        else {
+        } else {
             b = ((BitmapDrawable) drawable).getBitmap();
         }
 
@@ -66,13 +63,13 @@ public class RoundedImageView extends ImageView {
 
         int w = getWidth(), h = getHeight();
 
-        Bitmap roundBitmap =  getCroppedBitmap(bitmap, w);
-        canvas.drawBitmap(roundBitmap, 0,0, null);
+        Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
+        canvas.drawBitmap(roundBitmap, 0, 0, null);
     }
 
     public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {
         Bitmap sbmp;
-        if(bmp.getWidth() != radius || bmp.getHeight() != radius)
+        if (bmp.getWidth() != radius || bmp.getHeight() != radius)
             sbmp = Bitmap.createScaledBitmap(bmp, radius, radius, false);
         else
             sbmp = bmp;
@@ -89,8 +86,8 @@ public class RoundedImageView extends ImageView {
         paint.setDither(true);
         canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(Color.parseColor("#BAB399"));
-        canvas.drawCircle(sbmp.getWidth() / 2+0.7f, sbmp.getHeight() / 2+0.7f,
-                sbmp.getWidth() / 2+0.1f, paint);
+        canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f, sbmp.getHeight() / 2 + 0.7f,
+                sbmp.getWidth() / 2 + 0.1f, paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(sbmp, rect, rect, paint);
 

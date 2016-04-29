@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -41,11 +41,12 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class EditFournisseurActivity extends Activity {
     private static final String TAG = EditFournisseurActivity.class.getSimpleName();
 
-    EditText nom,tel,fax,gsm,adresse,email;
+    EditText nom, tel, fax, gsm, adresse, email;
     ImageView ImageProfil;
     LinearLayout addFournisseur;
     Context context;
     String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +59,15 @@ public class EditFournisseurActivity extends Activity {
         System.out.println(">>>>>>>>>>>> ID : " + id);
         new getFopurnisseurByID().execute(PhpAPI.getFournisseurByID);
 
-        context=this;
-        nom=(EditText)findViewById(R.id.nomcomletclient);
-        tel=(EditText)findViewById(R.id.numerofixFour);
-        fax=(EditText)findViewById(R.id.numerofaxfour);
-        gsm=(EditText)findViewById(R.id.numtelfour);
-        adresse=(EditText)findViewById(R.id.adressefour);
-        email=(EditText)findViewById(R.id.emailfour);
-        ImageProfil= (ImageView)findViewById(R.id.ImageProfil);
-        addFournisseur=(LinearLayout)findViewById(R.id.addFournisseur);
+        context = this;
+        nom = (EditText) findViewById(R.id.nomcomletclient);
+        tel = (EditText) findViewById(R.id.numerofixFour);
+        fax = (EditText) findViewById(R.id.numerofaxfour);
+        gsm = (EditText) findViewById(R.id.numtelfour);
+        adresse = (EditText) findViewById(R.id.adressefour);
+        email = (EditText) findViewById(R.id.emailfour);
+        ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
+        addFournisseur = (LinearLayout) findViewById(R.id.addFournisseur);
 
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
 
@@ -90,86 +91,85 @@ public class EditFournisseurActivity extends Activity {
 
     }
 
-//******************************** get Fournisseur by ID **********************
-private class getFopurnisseurByID extends AsyncTask<String, Void, String> {
+    //******************************** get Fournisseur by ID **********************
+    private class getFopurnisseurByID extends AsyncTask<String, Void, String> {
 
-    @Override
-    protected String doInBackground(String... params) {
+        @Override
+        protected String doInBackground(String... params) {
 
-        try {
-            URL url = new URL(params[0]);
-            URLConnection conn = url.openConnection();
-            HttpURLConnection httpConn = (HttpURLConnection) conn;
-            httpConn.setAllowUserInteraction(false);
-            httpConn.setInstanceFollowRedirects(true);
-            httpConn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            Map<String, Object> Params = new LinkedHashMap<>();
-            Params.put("ID", id);
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(new getQuery().getQuery(Params));
-            writer.flush();
-            writer.close();
-            os.close();
-            httpConn.connect();
-            InputStream is = httpConn.getInputStream();
+            try {
+                URL url = new URL(params[0]);
+                URLConnection conn = url.openConnection();
+                HttpURLConnection httpConn = (HttpURLConnection) conn;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                Map<String, Object> Params = new LinkedHashMap<>();
+                Params.put("ID", id);
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(new getQuery().getQuery(Params));
+                writer.flush();
+                writer.close();
+                os.close();
+                httpConn.connect();
+                InputStream is = httpConn.getInputStream();
 
-            return new convertInputStreamToString().convertInputStreamToString(is);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+                return new convertInputStreamToString().convertInputStreamToString(is);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+
         }
 
-
-    }
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        System.out.println(s);
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println(s);
 
 
-        try {
-            JSONObject j = new JSONObject(s);
-            int resp = j.getInt("success");
-            if (resp == 1){
+            try {
+                JSONObject j = new JSONObject(s);
+                int resp = j.getInt("success");
+                if (resp == 1) {
 
 
+                    try {
+                        JSONObject o = new JSONObject(s);
+                        JSONArray listproduits = o.getJSONArray("fournisseur");
 
-                try {
-                    JSONObject o = new JSONObject(s);
-                    JSONArray listproduits = o.getJSONArray("fournisseur");
+                        for (int i = 0; i < listproduits.length(); i++) {
+                            JSONObject usr = listproduits.getJSONObject(i);
+                            // Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
+                            nom.setText(usr.getString("nom"));
+                            gsm.setText(usr.getString("tel"));
+                            adresse.setText(usr.getString("adresse"));
+                            fax.setText(usr.getString("fax"));
+                            tel.setText(usr.getString("fix"));
+                            email.setText(usr.getString("email"));
 
-                    for (int i = 0; i < listproduits.length(); i++) {
-                        JSONObject usr = listproduits.getJSONObject(i);
-                        // Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
-                        nom.setText(usr.getString("nom"));
-                        gsm.setText(usr.getString("tel"));
-                        adresse.setText(usr.getString("adresse"));
-                        fax.setText(usr.getString("fax"));
-                        tel.setText(usr.getString("fix"));
-                        email.setText(usr.getString("email"));
-
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+
+                } else if (resp == 0) {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "Fournisseur Not Found  !!!!", Toast.LENGTH_LONG);
+                    toast.show();
                 }
-
-
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            else if (resp == 0){
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Fournisseur Not Found  !!!!", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }
 
-}
+    }
 
     //*********************** add Fournisseur *****************
     private class addFournisseur extends AsyncTask<Fournisseur, Void, String> {
@@ -188,12 +188,12 @@ private class getFopurnisseurByID extends AsyncTask<String, Void, String> {
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
                 Params.put("ID", id);
-                Params.put("Nom",params[0].getNom());
-                Params.put("Tel",params[0].getTel());
-                Params.put("Adresse",params[0].getAdresse());
-                Params.put("Fix",params[0].getFix());
-                Params.put("Fax",params[0].getFax());
-                Params.put("Email",params[0].getEmail());
+                Params.put("Nom", params[0].getNom());
+                Params.put("Tel", params[0].getTel());
+                Params.put("Adresse", params[0].getAdresse());
+                Params.put("Fix", params[0].getFix());
+                Params.put("Fax", params[0].getFax());
+                Params.put("Email", params[0].getEmail());
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(

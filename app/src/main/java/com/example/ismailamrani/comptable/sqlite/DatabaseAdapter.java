@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.ismailamrani.comptable.Models.User;
+import com.example.ismailamrani.comptable.models.User;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 29/04/2016.
@@ -105,6 +105,7 @@ public class DatabaseAdapter {
 
     /**
      * Saves the passed-in user into the local database.
+     *
      * @param user to be saved.
      */
     public void saveLoggedInUser(User user) {

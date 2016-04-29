@@ -9,13 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -55,13 +55,12 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setTitle("Sumsung Galaxy S6");
         MyActionBar.setActionBarListener(this);
-        Image = (ImageView)findViewById(R.id.Imageaff);
-        PrixHT = (TextView)findViewById(R.id.PrixHTaff);
-        PrixTTC = (TextView)findViewById(R.id.PrixTTCaff);
-        Code =(TextView)findViewById(R.id.Codeaff);
-        Stock =(TextView)findViewById(R.id.Stockaff);
-        Libelle =(TextView)findViewById(R.id.Libelleaff);
-
+        Image = (ImageView) findViewById(R.id.Imageaff);
+        PrixHT = (TextView) findViewById(R.id.PrixHTaff);
+        PrixTTC = (TextView) findViewById(R.id.PrixTTCaff);
+        Code = (TextView) findViewById(R.id.Codeaff);
+        Stock = (TextView) findViewById(R.id.Stockaff);
+        Libelle = (TextView) findViewById(R.id.Libelleaff);
 
 
         Intent i = getIntent();
@@ -106,6 +105,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -115,8 +115,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
-
+                if (resp == 1) {
 
 
                     try {
@@ -125,7 +124,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
 
                         for (int i = 0; i < listproduits.length(); i++) {
                             JSONObject usr = listproduits.getJSONObject(i);
-                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
+                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend + "produits/" + usr.getString("photo")).into(Image);
                             Libelle.setText(usr.getString("libelle"));
                             PrixHT.setText(usr.getString("prixHT"));
                             PrixTTC.setText(usr.getString("prixTTC"));
@@ -136,7 +135,6 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
                             MyActionBar.setTitle(usr.getString("libelle"));
 
 
-
                             //itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
 
                         }
@@ -145,10 +143,7 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
                     }
 
 
-
-
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
 
                     //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
                     //  startActivity(intent);

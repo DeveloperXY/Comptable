@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.CustumItems;
+package com.example.ismailamrani.comptable.customitems;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,20 +6,20 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.ismailamrani.comptable.LocalData.ScreenSize;
-import com.example.ismailamrani.comptable.Models.ScreenSizeModel;
+import com.example.ismailamrani.comptable.localdata.ScreenSize;
+import com.example.ismailamrani.comptable.models.ScreenSizeModel;
 import com.example.ismailamrani.comptable.R;
 
 
 /**
  * Created by Ismail Amrani on 21/02/2016.
  */
-public class CustomHeightLayout extends RelativeLayout {
+public class CustomCarreWidthLayout extends RelativeLayout {
 
-    int height, size;
+    int height, width, size;
     Context context;
 
-    public CustomHeightLayout(Context context, AttributeSet attrs) {
+    public CustomCarreWidthLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         this.context = context;
@@ -27,6 +27,7 @@ public class CustomHeightLayout extends RelativeLayout {
         ScreenSize Size = new ScreenSize(context);
         ScreenSizeModel HW = Size.GetSize(1);
         height = HW.getHEIGHT();
+        width = HW.getWHIDTH();
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
@@ -44,7 +45,8 @@ public class CustomHeightLayout extends RelativeLayout {
     @Override
     public ViewGroup.LayoutParams getLayoutParams() {
         ViewGroup.LayoutParams params = super.getLayoutParams();
-        params.height = height * size / 246;
+        params.width = width * size / 144;
+        params.height = width * size / 144;
         return params;
     }
 

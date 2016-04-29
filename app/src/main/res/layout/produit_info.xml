@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="20">
 
-        <com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar
+        <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
             android:id="@+id/MyActionBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.example.ismailamrani.comptable.CustumItems.CustomCarreWidthLayout
+            <com.example.ismailamrani.comptable.customitems.CustomCarreWidthLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 costum:size="144">
@@ -39,14 +39,14 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"/>
 
-                <com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout
+                <com.example.ismailamrani.comptable.customitems.CustomHeightLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     costum:size="20"
                     android:background="#9048627b"
                     android:layout_alignParentBottom="true">
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustumTextView
                         android:id="@+id/Libelleaff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -63,9 +63,9 @@
                         android:shadowDx="2"
                         android:shadowDy="2"/>
 
-                </com.example.ismailamrani.comptable.CustumItems.CustomHeightLayout>
+                </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
 
-            </com.example.ismailamrani.comptable.CustumItems.CustomCarreWidthLayout>
+            </com.example.ismailamrani.comptable.customitems.CustomCarreWidthLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -93,7 +93,7 @@
                             costum:Frensh="Prix HT : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:id="@+id/PrixHTaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -119,7 +119,7 @@
                             costum:Frensh="Prix TTC : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:id="@+id/PrixTTCaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -145,7 +145,7 @@
                             costum:Frensh="Quantité : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:id="@+id/Stockaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                             android:src="@drawable/ic_codebar"
                             android:paddingRight="10dp"/>
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustumTextView
                             android:id="@+id/Codeaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

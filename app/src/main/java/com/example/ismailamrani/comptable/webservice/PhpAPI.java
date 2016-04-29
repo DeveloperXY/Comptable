@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ServiceWeb;
+package com.example.ismailamrani.comptable.webservice;
 
 import com.example.ismailamrani.comptable.utils.Method;
 

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Models;
+package com.example.ismailamrani.comptable.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +98,7 @@ public class User {
      * Overloaded constructor.
      * Builds a new instance whose informations are extracted from the passed-in
      * JSON object.
+     *
      * @param user parameter
      */
     public User(JSONObject user) {

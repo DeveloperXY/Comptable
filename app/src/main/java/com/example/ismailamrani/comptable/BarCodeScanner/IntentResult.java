@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.BarCodeScanner;
+package com.example.ismailamrani.comptable.barcodescanner;
 
 /**
  * Created by Ismail Amrani on 23/03/2016.
@@ -9,9 +9,11 @@ public final class IntentResult {
     private final byte[] rawBytes;
     private final Integer orientation;
     private final String errorCorrectionLevel;
+
     IntentResult() {
         this(null, null, null, null, null);
     }
+
     IntentResult(String contents,
                  String formatName,
                  byte[] rawBytes,
@@ -23,21 +25,27 @@ public final class IntentResult {
         this.orientation = orientation;
         this.errorCorrectionLevel = errorCorrectionLevel;
     }
+
     public String getContents() {
         return contents;
     }
+
     public String getFormatName() {
         return formatName;
     }
+
     public byte[] getRawBytes() {
         return rawBytes;
     }
+
     public Integer getOrientation() {
         return orientation;
     }
+
     public String getErrorCorrectionLevel() {
         return errorCorrectionLevel;
     }
+
     @Override
     public String toString() {
         StringBuilder dialogText = new StringBuilder(100);

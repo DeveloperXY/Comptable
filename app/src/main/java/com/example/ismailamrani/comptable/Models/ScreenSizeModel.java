@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Models;
+package com.example.ismailamrani.comptable.models;
 
 /**
  * Created by ismai on 15/10/2015.

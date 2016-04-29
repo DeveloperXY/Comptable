@@ -40,7 +40,7 @@
                     android:layout_height="80dp"
                     android:layout_centerInParent="true">
 
-                    <com.example.ismailamrani.comptable.LocalData.RoundedImageView
+                    <com.example.ismailamrani.comptable.localdata.RoundedImageView
                         android:id="@+id/imageclient"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

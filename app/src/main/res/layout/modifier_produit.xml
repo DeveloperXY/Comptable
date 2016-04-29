@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="20">
 
-        <com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar
+        <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
             android:id="@+id/MyActionBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -55,14 +55,14 @@
                     android:orientation="vertical"
                     android:gravity="center">
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                    <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         costum:size="31"
                         android:layout_centerInParent="true"
                         android:background="@drawable/add_photo">
 
-                        <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+                        <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:size="29"
@@ -75,11 +75,11 @@
                                 android:scaleType="fitXY"
                                 android:src="@mipmap/ic_add_photo"/>
 
-                        </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+                        </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
 
-                    </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+                    </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustumTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         costum:Size="11"
@@ -104,7 +104,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"></RelativeLayout>
 
-                <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                <com.example.ismailamrani.comptable.customitems.CustumEditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="130"
@@ -149,7 +149,7 @@
                     android:orientation="horizontal"
                     android:weightSum="64">
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                    <com.example.ismailamrani.comptable.customitems.CustumEditText
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="48"
@@ -175,7 +175,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"></RelativeLayout>
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustumTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="15.5"
@@ -201,7 +201,7 @@
                     android:orientation="horizontal"
                     android:weightSum="64">
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumEditText
+                    <com.example.ismailamrani.comptable.customitems.CustumEditText
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="48"
@@ -227,7 +227,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"></RelativeLayout>
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustumTextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="15.5"
@@ -259,7 +259,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"></RelativeLayout>
 
-                <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                <com.example.ismailamrani.comptable.customitems.CustumTextView
                     android:id="@+id/CodeBarre"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -305,7 +305,7 @@
                     android:background="@drawable/add_btn"
                     android:clickable="true">
 
-                    <com.example.ismailamrani.comptable.CustumItems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustumTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         costum:Size="16"

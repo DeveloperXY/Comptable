@@ -1,7 +1,5 @@
-package com.example.ismailamrani.comptable.LocalData;
+package com.example.ismailamrani.comptable.localdata;
 
-import android.content.ContextWrapper;
-import android.graphics.Bitmap;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -15,25 +13,22 @@ import java.io.IOException;
  */
 public class FileProduit {
     String nomFile;
+
     public FileProduit(String nomfile) {
         this.nomFile = nomfile;
     }
 
-    public Boolean write(String fcontent){
+    public Boolean write(String fcontent) {
         try {
-
             //String encryptedText = encryption.encryptOrNull(fcontent);
 
             String fpath = "/storage/emulated/0/Comptable/" + nomFile;
             java.io.File file = new java.io.File(fpath);
 
-
-
-
             // If file does not exists, then create it
             if (!file.exists()) {
 
-                java.io.File myDir = new java.io.File("/storage/emulated/0/","Comptable");
+                java.io.File myDir = new java.io.File("/storage/emulated/0/", "Comptable");
                 myDir.mkdir();
 
                 file.createNewFile();
@@ -54,7 +49,7 @@ public class FileProduit {
 
     }
 
-    public String read(){
+    public String read() {
 
         System.out.println(nomFile);
         BufferedReader br = null;
@@ -68,7 +63,7 @@ public class FileProduit {
             br = new BufferedReader(new FileReader(fpath));
             String line = "";
             while ((line = br.readLine()) != null) {
-                output.append(line +"\n");
+                output.append(line + "\n");
             }
             response = output.toString();
 
@@ -79,11 +74,6 @@ public class FileProduit {
         }
 
         //String decryptedText = encryption.decryptOrNull(response);
-
         return response;
-
     }
-
-
-
 }

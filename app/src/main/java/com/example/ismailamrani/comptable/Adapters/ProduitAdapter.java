@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,15 +11,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.CustumItems.CustumTextView;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Product;
+import com.example.ismailamrani.comptable.customitems.CustumTextView;
+import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProduisActivity;
 import com.example.ismailamrani.comptable.ui.Produit_InfoActivity;
-import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -43,10 +43,10 @@ public class ProduitAdapter extends BaseAdapter {
 
     ArrayList<Product> List = new ArrayList<>();
     Context context;
-     int id;
+    int id;
 
 
-    public ProduitAdapter(Context context, ArrayList<Product> List){
+    public ProduitAdapter(Context context, ArrayList<Product> List) {
         this.context = context;
         this.List = List;
     }
@@ -70,7 +70,6 @@ public class ProduitAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
 
 
-
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View Layout = inflater.inflate(R.layout.produit_item, null);
 
@@ -87,7 +86,7 @@ public class ProduitAdapter extends BaseAdapter {
         });
 
         ImageView Image;
-        CustumTextView Libelle, Qte, Prix,supprimer,modifier,afficher;
+        CustumTextView Libelle, Qte, Prix, supprimer, modifier, afficher;
 
         Image = (ImageView) Layout.findViewById(R.id.Image);
         Picasso.with(context).load(List.get(position).getPhoto()).into(Image);
@@ -96,38 +95,38 @@ public class ProduitAdapter extends BaseAdapter {
         Libelle.SetText(List.get(position).getLibelle());
 
         Qte = (CustumTextView) Layout.findViewById(R.id.Qte);
-        Qte.SetText(""+List.get(position).getQte());
+        Qte.SetText("" + List.get(position).getQte());
 
         Prix = (CustumTextView) Layout.findViewById(R.id.Prix);
-        Prix.SetText(""+ List.get(position).getPrixTTC() +" DH");
+        Prix.SetText("" + List.get(position).getPrixTTC() + " DH");
 
-        supprimer = (CustumTextView)Layout.findViewById(R.id.supprimer);
+        supprimer = (CustumTextView) Layout.findViewById(R.id.supprimer);
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  System.out.println("<<>>>> Supprimer");
+                //  System.out.println("<<>>>> Supprimer");
                 id = List.get(position).getID();
                 System.out.println(">>> id :" + id);
                 new supprimer().execute(PhpAPI.removeProduit);
             }
         });
-        modifier = (CustumTextView)Layout.findViewById(R.id.modifier);
+        modifier = (CustumTextView) Layout.findViewById(R.id.modifier);
         modifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(context,ModifierProduitActivity.class);
-                i.putExtra("id",List.get(position).getID());
+                Intent i = new Intent(context, ModifierProduitActivity.class);
+                i.putExtra("id", List.get(position).getID());
                 context.startActivity(i);
             }
         });
-        afficher = (CustumTextView)Layout.findViewById(R.id.afficher);
+        afficher = (CustumTextView) Layout.findViewById(R.id.afficher);
 
         afficher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, Produit_InfoActivity.class);
-                i.putExtra("id",List.get(position).getID());
+                i.putExtra("id", List.get(position).getID());
                 context.startActivity(i);
             }
         });
@@ -154,7 +153,7 @@ public class ProduitAdapter extends BaseAdapter {
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
                 // Params.put("ID", id);
-                Params.put("ID",id);
+                Params.put("ID", id);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -173,6 +172,7 @@ public class ProduitAdapter extends BaseAdapter {
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -182,22 +182,17 @@ public class ProduitAdapter extends BaseAdapter {
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
+                if (resp == 1) {
 
                     Toast toast = Toast.makeText(context, "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
 
 
-
-                    Intent i = new Intent(context,ProduisActivity.class);
+                    Intent i = new Intent(context, ProduisActivity.class);
                     context.startActivity(i);
 
 
-
-
-
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
 
                     //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
                     //  startActivity(intent);

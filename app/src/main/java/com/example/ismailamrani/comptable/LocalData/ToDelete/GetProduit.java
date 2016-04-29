@@ -1,6 +1,6 @@
-package com.example.ismailamrani.comptable.LocalData.ToDelete;
+package com.example.ismailamrani.comptable.localdata.ToDelete;
 
-import com.example.ismailamrani.comptable.Models.Product;
+import com.example.ismailamrani.comptable.models.Product;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GetProduit {
 
-    public ArrayList<Product> GetProduit(){
+    public ArrayList<Product> GetProduit() {
 
         ArrayList<Product> List = new ArrayList<>();
 

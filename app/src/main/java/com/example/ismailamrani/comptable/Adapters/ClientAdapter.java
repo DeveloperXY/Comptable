@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.ui.InformationActivity;
-import com.example.ismailamrani.comptable.Models.ClientModel;
+import com.example.ismailamrani.comptable.models.ClientModel;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.InformationActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,10 +26,9 @@ public class ClientAdapter extends BaseAdapter {
     Context context;
 
 
-
-    public ClientAdapter(Context context,ArrayList<ClientModel> List) {
-    this.context = context;
-    this.List=List;
+    public ClientAdapter(Context context, ArrayList<ClientModel> List) {
+        this.context = context;
+        this.List = List;
     }
 
     @Override
@@ -54,26 +53,26 @@ public class ClientAdapter extends BaseAdapter {
         View Layout = inflater.inflate(R.layout.client_items, null);
 
 
-        TextView NomPrenom,adresse;
+        TextView NomPrenom, adresse;
         ImageView imageView;
-        RelativeLayout imglay,nomlay;
-        NomPrenom=(TextView)Layout.findViewById(R.id.nomPrenom);
-        adresse=(TextView)Layout.findViewById(R.id.adresse);
-        imageView=(ImageView)Layout.findViewById(R.id.imageclient);
-        imglay = (RelativeLayout)Layout.findViewById(R.id.imglay);
-        nomlay = (RelativeLayout)Layout.findViewById(R.id.nomlay);
+        RelativeLayout imglay, nomlay;
+        NomPrenom = (TextView) Layout.findViewById(R.id.nomPrenom);
+        adresse = (TextView) Layout.findViewById(R.id.adresse);
+        imageView = (ImageView) Layout.findViewById(R.id.imageclient);
+        imglay = (RelativeLayout) Layout.findViewById(R.id.imglay);
+        nomlay = (RelativeLayout) Layout.findViewById(R.id.nomlay);
 
 
         NomPrenom.setText(List.get(position).getNomPrenom());
         adresse.setText(List.get(position).getAdresse());
-        String img=List.get(position).getImage();
+        String img = List.get(position).getImage();
         imageView.setImageResource(R.drawable.neymar);
         Picasso.with(context).load(List.get(position).getImage()).into(imageView);
         imglay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, InformationActivity.class);
-                i.putExtra("id",List.get(position).getId());
+                i.putExtra("id", List.get(position).getId());
                 context.startActivity(i);
             }
         });
@@ -81,15 +80,10 @@ public class ClientAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, InformationActivity.class);
-                i.putExtra("id",List.get(position).getId());
+                i.putExtra("id", List.get(position).getId());
                 context.startActivity(i);
             }
         });
-
-
-
-
-
 
 
         return Layout;

@@ -42,7 +42,7 @@
 
             >
 
-            <com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout
+            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 custom:size="52"
@@ -55,7 +55,7 @@
 
 
 
-            </com.example.ismailamrani.comptable.CustumItems.CustomCarreLayout>
+            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
 
         </RelativeLayout>
 

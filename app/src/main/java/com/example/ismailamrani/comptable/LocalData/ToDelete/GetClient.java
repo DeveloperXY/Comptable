@@ -1,6 +1,6 @@
-package com.example.ismailamrani.comptable.LocalData.ToDelete;
+package com.example.ismailamrani.comptable.localdata.ToDelete;
 
-import com.example.ismailamrani.comptable.Models.ClientModel;
+import com.example.ismailamrani.comptable.models.ClientModel;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GetClient {
 
-    public ArrayList<ClientModel> GetClient(){
+    public ArrayList<ClientModel> GetClient() {
 
         ArrayList<ClientModel> List = new ArrayList<>();
 
@@ -18,7 +18,6 @@ public class GetClient {
         m.setNomPrenom("redouane azzouzi");
         m.setAdresse("Fes,21AV");
         m.setImage("social");
-
 
 
         List.add(m);

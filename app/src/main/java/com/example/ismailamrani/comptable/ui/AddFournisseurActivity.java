@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -40,32 +40,33 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 public class AddFournisseurActivity extends Activity {
     private static final String TAG = AddFournisseurActivity.class.getSimpleName();
 
-    EditText nom,tel,fax,gsm,adresse,email;
+    EditText nom, tel, fax, gsm, adresse, email;
     ImageView ImageProfil;
     LinearLayout addFournisseur;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fournisseur_add);
         Log.d(TAG, TAG);
 
-        context=this;
-        nom=(EditText)findViewById(R.id.nomcomletclient);
-        tel=(EditText)findViewById(R.id.numerofixFour);
-        fax=(EditText)findViewById(R.id.numerofaxfour);
-        gsm=(EditText)findViewById(R.id.numtelfour);
-        adresse=(EditText)findViewById(R.id.adressefour);
-        email=(EditText)findViewById(R.id.emailfour);
-        ImageProfil= (ImageView)findViewById(R.id.ImageProfil);
-        addFournisseur=(LinearLayout)findViewById(R.id.addFournisseur);
+        context = this;
+        nom = (EditText) findViewById(R.id.nomcomletclient);
+        tel = (EditText) findViewById(R.id.numerofixFour);
+        fax = (EditText) findViewById(R.id.numerofaxfour);
+        gsm = (EditText) findViewById(R.id.numtelfour);
+        adresse = (EditText) findViewById(R.id.adressefour);
+        email = (EditText) findViewById(R.id.emailfour);
+        ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
+        addFournisseur = (LinearLayout) findViewById(R.id.addFournisseur);
 
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
 
         addFournisseur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fournisseur f=new Fournisseur();
+                Fournisseur f = new Fournisseur();
                 f.setNom(nom.getText().toString());
                 f.setTel(gsm.getText().toString());
                 f.setFax(fax.getText().toString());
@@ -99,12 +100,12 @@ public class AddFournisseurActivity extends Activity {
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
                 // Params.put("ID", id);
-                Params.put("Nom",params[0].getNom());
-                Params.put("Tel",params[0].getTel());
-                Params.put("Adresse",params[0].getAdresse());
-                Params.put("Fix",params[0].getFix());
-                Params.put("Fax",params[0].getFax());
-                Params.put("Email",params[0].getEmail());
+                Params.put("Nom", params[0].getNom());
+                Params.put("Tel", params[0].getTel());
+                Params.put("Adresse", params[0].getAdresse());
+                Params.put("Fix", params[0].getFix());
+                Params.put("Fax", params[0].getFax());
+                Params.put("Email", params[0].getEmail());
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(

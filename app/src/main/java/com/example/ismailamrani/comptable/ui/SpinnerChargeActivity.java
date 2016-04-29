@@ -6,9 +6,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ListView;
 
-import com.example.ismailamrani.comptable.Adapters.SpinnerAdapter;
-import com.example.ismailamrani.comptable.LocalData.ToDelete.GetSpinnerLocal;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.SpinnerAdapter;
+import com.example.ismailamrani.comptable.localdata.ToDelete.GetSpinnerLocal;
 
 /**
  * Created by Redouane on 07/04/2016.
@@ -17,6 +17,7 @@ public class SpinnerChargeActivity extends Activity {
     private static final String TAG = SpinnerChargeActivity.class.getSimpleName();
 
     ListView list;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,8 @@ public class SpinnerChargeActivity extends Activity {
 
         getWindow().setLayout((int) (width * .7), (int) (height * .7));
 
-        list = (ListView)findViewById(R.id.Listspinner);
-        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(getApplicationContext(),new GetSpinnerLocal().Getlocal());
+        list = (ListView) findViewById(R.id.Listspinner);
+        SpinnerAdapter spinnerAdapter = new SpinnerAdapter(getApplicationContext(), new GetSpinnerLocal().Getlocal());
         list.setAdapter(spinnerAdapter);
     }
 }

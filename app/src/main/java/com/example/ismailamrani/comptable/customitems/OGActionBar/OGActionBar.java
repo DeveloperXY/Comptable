@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.CustumItems.OGActionBar;
+package com.example.ismailamrani.comptable.customitems.OGActionBar;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,9 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.CustumItems.CustumTextView;
+import com.example.ismailamrani.comptable.customitems.CustumTextView;
 import com.example.ismailamrani.comptable.R;
 
 /**
@@ -37,7 +36,7 @@ public class OGActionBar extends RelativeLayout {
         Menu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Listener != null){
+                if (Listener != null) {
                     getActionBarListener().onMenuPressed();
                 }
             }
@@ -46,7 +45,7 @@ public class OGActionBar extends RelativeLayout {
         Add.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Listener != null){
+                if (Listener != null) {
                     getActionBarListener().onAddPressed();
                 }
             }
@@ -56,7 +55,7 @@ public class OGActionBar extends RelativeLayout {
 
     }
 
-    public void setTitle(String title){
+    public void setTitle(String title) {
         Title.SetText(title);
     }
 
@@ -69,7 +68,7 @@ public class OGActionBar extends RelativeLayout {
         return this.Listener;
     }
 
-    public void AddDisable(){
+    public void AddDisable() {
         Add.setVisibility(INVISIBLE);
     }
 

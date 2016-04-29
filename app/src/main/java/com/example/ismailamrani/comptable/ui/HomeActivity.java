@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.UsedMethodes.CalculateScreenSize;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,6 +36,7 @@ public class HomeActivity extends Activity {
 
     /**
      * Starts a new activity based on the clicked-upon layout.
+     *
      * @param view that was clicked.
      */
     @OnClick({R.id.produit, R.id.client, R.id.chargee, R.id.stock,
@@ -59,7 +60,7 @@ public class HomeActivity extends Activity {
                 targetActivity = AddLocalFileActivity.class;
                 break;
             case R.id.achat:
-                targetActivity = addSocieteActivity.class;
+                targetActivity = AddSocieteActivity.class;
                 break;
             case R.id.ventes:
                 targetActivity = SalesActivity.class;

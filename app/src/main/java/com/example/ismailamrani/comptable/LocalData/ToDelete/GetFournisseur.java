@@ -1,7 +1,6 @@
-package com.example.ismailamrani.comptable.LocalData.ToDelete;
+package com.example.ismailamrani.comptable.localdata.ToDelete;
 
-import com.example.ismailamrani.comptable.Models.ClientModel;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Fournisseur;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  */
 public class GetFournisseur {
 
-    public ArrayList<Fournisseur> GetFournisseur(){
+    public ArrayList<Fournisseur> GetFournisseur() {
 
         ArrayList<Fournisseur> List = new ArrayList<>();
 

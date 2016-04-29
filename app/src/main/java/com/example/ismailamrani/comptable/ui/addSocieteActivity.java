@@ -16,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,18 +41,15 @@ import java.util.Map;
 /**
  * Created by Brahim on 24/03/2016.
  */
-public class addSocieteActivity extends Activity{
-    private static final String TAG = addSocieteActivity.class.getSimpleName();
-    EditText nom_scoiete ;
-    ImageView photo_societe  ;
+public class AddSocieteActivity extends Activity {
+    private static final String TAG = AddSocieteActivity.class.getSimpleName();
+    EditText nom_scoiete;
+    ImageView photo_societe;
     private static int RESULT_LOAD_IMAGE = 1;
     private String selectedImagePath;
     private String codeimage;
-    String noms,photo ;
-    TextView ajouter ;
-
-
-
+    String noms, photo;
+    TextView ajouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +57,7 @@ public class addSocieteActivity extends Activity{
         setContentView(R.layout.add_societe);
         Log.d(TAG, TAG);
         nom_scoiete = (EditText) findViewById(R.id.nom_societe);
-        photo_societe=(ImageView) findViewById(R.id.photo_societe);
+        photo_societe = (ImageView) findViewById(R.id.photo_societe);
         ajouter = (TextView) findViewById(R.id.ajouter);
 
         photo_societe.setOnClickListener(new View.OnClickListener() {
@@ -76,71 +72,71 @@ public class addSocieteActivity extends Activity{
         ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                noms=nom_scoiete.getText().toString();
-                photo=codeimage;
+                noms = nom_scoiete.getText().toString();
+                photo = codeimage;
                 new addsociete().execute(PhpAPI.addSociete);
             }
         });
 
 
-
     }
-private class addsociete extends AsyncTask<String , Void ,String > {
 
-    @Override
-    protected String doInBackground(String... params) {
+    private class addsociete extends AsyncTask<String, Void, String> {
 
-        try {
-            URL url =  new URL(params[0]);
-            URLConnection connection = url.openConnection();
-            HttpURLConnection httpConn = (HttpURLConnection) connection;
-            httpConn.setAllowUserInteraction(false);
-            httpConn.setInstanceFollowRedirects(true);
-            httpConn.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            Map<String, Object> Params = new LinkedHashMap<>();
-            Params.put("Nom", noms);
-            Params.put("Logo", photo);
+        @Override
+        protected String doInBackground(String... params) {
 
-            OutputStream os = connection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(new getQuery().getQuery(Params));
-            writer.flush();
-            writer.close();
-            os.close();
-            httpConn.connect();
-            InputStream is = httpConn.getInputStream();
-            return new convertInputStreamToString().convertInputStreamToString(is);
+            try {
+                URL url = new URL(params[0]);
+                URLConnection connection = url.openConnection();
+                HttpURLConnection httpConn = (HttpURLConnection) connection;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("POST");
+                connection.setDoInput(true);
+                connection.setDoOutput(true);
+                Map<String, Object> Params = new LinkedHashMap<>();
+                Params.put("Nom", noms);
+                Params.put("Logo", photo);
+
+                OutputStream os = connection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(new getQuery().getQuery(Params));
+                writer.flush();
+                writer.close();
+                os.close();
+                httpConn.connect();
+                InputStream is = httpConn.getInputStream();
+                return new convertInputStreamToString().convertInputStreamToString(is);
 
 
-        }catch (Exception e){
-            e.printStackTrace();
-            return  null ;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
         }
 
-    }
-
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        System.out.println(s);
-        try {
-            JSONObject j  = new JSONObject(s);
-            int rep = j.getInt("success");
-            if(rep==1) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
-                toast.show();
-            }else  if (rep == 0) {
-                Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
-                toast.show();
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println(s);
+            try {
+                JSONObject j = new JSONObject(s);
+                int rep = j.getInt("success");
+                if (rep == 1) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (rep == 0) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }catch (JSONException e) {
-            e.printStackTrace();
+        }
     }
-}
-}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -217,5 +213,5 @@ private class addsociete extends AsyncTask<String , Void ,String > {
         }
     }
 
-    }
+}
 

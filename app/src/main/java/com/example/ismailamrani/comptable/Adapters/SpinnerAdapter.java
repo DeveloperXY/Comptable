@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.Adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.Models.SpinnerModelCharge;
+import com.example.ismailamrani.comptable.models.SpinnerModelCharge;
 import com.example.ismailamrani.comptable.R;
 
 import java.util.ArrayList;
@@ -21,10 +21,9 @@ public class SpinnerAdapter extends BaseAdapter {
     Context context;
 
 
-
-    public SpinnerAdapter(Context context,ArrayList<SpinnerModelCharge> List) {
+    public SpinnerAdapter(Context context, ArrayList<SpinnerModelCharge> List) {
         this.context = context;
-        this.List=List;
+        this.List = List;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class SpinnerAdapter extends BaseAdapter {
         View Layout = inflater.inflate(R.layout.spinner_items, null);
 
         TextView spinnername;
-        spinnername=(TextView)Layout.findViewById(R.id.spinnername);
+        spinnername = (TextView) Layout.findViewById(R.id.spinnername);
         spinnername.setText(List.get(position).getName());
 
         return Layout;

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ServiceWeb;
+package com.example.ismailamrani.comptable.webservice;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

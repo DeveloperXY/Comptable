@@ -9,15 +9,15 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.Adapters.FourniseurAdapter;
-import com.example.ismailamrani.comptable.CustumItems.ColorStatutBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.CustumItems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Fournisseur;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
+import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,18 +44,19 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
     Context context;
     ListView list;
     ArrayList<Fournisseur> ListF = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, TAG);
         new ColorStatutBar().ColorStatutBar(this);
-        context=this;
+        context = this;
 
         setContentView(R.layout.activity_fournisseur);
-        myactionbar = (OGActionBar)findViewById(R.id.MyActionBar);
+        myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
         myactionbar.setActionBarListener(this);
         myactionbar.setTitle("Fournisseur");
-        list =(ListView)findViewById(R.id.Listfournisseur);
+        list = (ListView) findViewById(R.id.Listfournisseur);
         new GetData().execute(PhpAPI.getFournisseur);
     }
 
@@ -69,6 +70,7 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
         finish();
         startActivity(new Intent(this, AddFournisseurActivity.class));
     }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         @Override
@@ -120,7 +122,7 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
 
                     for (int i = 0; i < listproduits.length(); i++) {
                         JSONObject usr = listproduits.getJSONObject(i);
-                        Fournisseur f=new Fournisseur();
+                        Fournisseur f = new Fournisseur();
                         f.setId(usr.getString("idfournisseur"));
                         f.setNom(usr.getString("nom"));
                         f.setTel(usr.getString("tel"));
@@ -131,7 +133,7 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
                         //  m.setImage(URLs.IpBackend + "clients/client.png");
                         ListF.add(f);
                     }
-                }else{
+                } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "No Fournisseur Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -140,7 +142,7 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
                 e.printStackTrace();
             }
 
-            FourniseurAdapter fourniseurAdapter = new FourniseurAdapter(context,ListF);
+            FourniseurAdapter fourniseurAdapter = new FourniseurAdapter(context, ListF);
             list.setAdapter(fourniseurAdapter);
 
 

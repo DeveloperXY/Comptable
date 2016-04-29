@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -42,10 +42,11 @@ public class InformationActivity extends Activity {
     private static final String TAG = InformationActivity.class.getSimpleName();
 
     ImageView imageInformation;
-    RelativeLayout fermer,removeClient,editClient;
+    RelativeLayout fermer, removeClient, editClient;
     String id;
-    TextView Nom,Adresse,Tel;
+    TextView Nom, Adresse, Tel;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,20 +58,20 @@ public class InformationActivity extends Activity {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
-        context=this;
+        context = this;
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width * .9), (int) (height * .7));
-        removeClient=(RelativeLayout)findViewById(R.id.removeClient);
-        editClient=(RelativeLayout)findViewById(R.id.editClient);
-        fermer = (RelativeLayout)findViewById(R.id.fermerlay);
+        removeClient = (RelativeLayout) findViewById(R.id.removeClient);
+        editClient = (RelativeLayout) findViewById(R.id.editClient);
+        fermer = (RelativeLayout) findViewById(R.id.fermerlay);
 
-        Nom =(TextView) findViewById(R.id.nameClient);
-        Adresse =(TextView) findViewById(R.id.adresseClient);
-        Tel =(TextView) findViewById(R.id.telClient);
-        imageInformation = (ImageView)findViewById(R.id.ImageProfilinformation);
-        Picasso.with(this).load(PhpAPI.IpBackend+"clients/client.png").transform(new CropCircleTransformation()).into(imageInformation);
+        Nom = (TextView) findViewById(R.id.nameClient);
+        Adresse = (TextView) findViewById(R.id.adresseClient);
+        Tel = (TextView) findViewById(R.id.telClient);
+        imageInformation = (ImageView) findViewById(R.id.ImageProfilinformation);
+        Picasso.with(this).load(PhpAPI.IpBackend + "clients/client.png").transform(new CropCircleTransformation()).into(imageInformation);
 
         fermer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +81,7 @@ public class InformationActivity extends Activity {
         });
         Intent i = getIntent();
         id = i.getExtras().getString("id");
-        System.out.println(">>>>>>>>>>>> ID : "+id);
+        System.out.println(">>>>>>>>>>>> ID : " + id);
         new getProduitbyId().execute(PhpAPI.getClientById);
 
     }
@@ -120,6 +121,7 @@ public class InformationActivity extends Activity {
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -129,8 +131,7 @@ public class InformationActivity extends Activity {
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
-
+                if (resp == 1) {
 
 
                     try {
@@ -139,16 +140,16 @@ public class InformationActivity extends Activity {
 
                         for (int i = 0; i < listproduits.length(); i++) {
                             JSONObject usr = listproduits.getJSONObject(i);
-                           // Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
+                            // Picasso.with(getApplicationContext()).load(URLs.IpBackend+"produits/"+ usr.getString("photo")).into(Image);
                             Nom.setText(usr.getString("nom"));
                             Tel.setText(usr.getString("tel"));
                             Adresse.setText(usr.getString("adresse"));
 
-                           // final String idc=usr.getString("idclient");
+                            // final String idc=usr.getString("idclient");
                             removeClient.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                  //  System.out.println(">>>>>>>>>> Remove Client "+idc);
+                                    //  System.out.println(">>>>>>>>>> Remove Client "+idc);
                                     new supprimer().execute(PhpAPI.removeClient);
                                 }
                             });
@@ -158,7 +159,7 @@ public class InformationActivity extends Activity {
                                 public void onClick(View v) {
                                     //  System.out.println(">>>>>>>>>> Remove Client "+idc);
                                     Intent i = new Intent(context, EditClientActivity.class);
-                                    i.putExtra("id",id);
+                                    i.putExtra("id", id);
                                     context.startActivity(i);
                                 }
                             });
@@ -169,8 +170,7 @@ public class InformationActivity extends Activity {
                     }
 
 
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
@@ -181,66 +181,67 @@ public class InformationActivity extends Activity {
         }
 
     }
-//************************************** remove client ************************
-private class supprimer extends AsyncTask<String, Void, String> {
 
-    @Override
-    protected String doInBackground(String... params) {
+    //************************************** remove client ************************
+    private class supprimer extends AsyncTask<String, Void, String> {
 
-        try {
-            URL url = new URL(params[0]);
-            URLConnection conn = url.openConnection();
-            HttpURLConnection httpConn = (HttpURLConnection) conn;
-            httpConn.setAllowUserInteraction(false);
-            httpConn.setInstanceFollowRedirects(true);
-            httpConn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            Map<String, Object> Params = new LinkedHashMap<>();
-            // Params.put("ID", id);
-            Params.put("ID",id);
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(new getQuery().getQuery(Params));
-            writer.flush();
-            writer.close();
-            os.close();
-            httpConn.connect();
-            InputStream is = httpConn.getInputStream();
+        @Override
+        protected String doInBackground(String... params) {
 
-            return new convertInputStreamToString().convertInputStreamToString(is);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            try {
+                URL url = new URL(params[0]);
+                URLConnection conn = url.openConnection();
+                HttpURLConnection httpConn = (HttpURLConnection) conn;
+                httpConn.setAllowUserInteraction(false);
+                httpConn.setInstanceFollowRedirects(true);
+                httpConn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+                Map<String, Object> Params = new LinkedHashMap<>();
+                // Params.put("ID", id);
+                Params.put("ID", id);
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(new getQuery().getQuery(Params));
+                writer.flush();
+                writer.close();
+                os.close();
+                httpConn.connect();
+                InputStream is = httpConn.getInputStream();
+
+                return new convertInputStreamToString().convertInputStreamToString(is);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+
+
         }
 
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            System.out.println(s);
+            try {
+                JSONObject j = new JSONObject(s);
+                int resp = j.getInt("success");
+                if (resp == 1) {
 
-    }
-    @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-        System.out.println(s);
-        try {
-            JSONObject j = new JSONObject(s);
-            int resp = j.getInt("success");
-            if (resp == 1){
-
-                Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
-                toast.show();
-                finish();
-                Intent i = new Intent(context,ClientListActivity.class);
-                context.startActivity(i);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
+                    toast.show();
+                    finish();
+                    Intent i = new Intent(context, ClientListActivity.class);
+                    context.startActivity(i);
+                } else if (resp == 0) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "erreur de suppression !!!!", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            else if (resp == 0){
-                Toast toast = Toast.makeText(getApplicationContext(), "erreur de suppression !!!!", Toast.LENGTH_LONG);
-                toast.show();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
-    }
 
-}
+    }
 
 }

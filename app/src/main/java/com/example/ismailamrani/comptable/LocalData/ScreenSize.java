@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.LocalData;
+package com.example.ismailamrani.comptable.localdata;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.ismailamrani.comptable.Models.ScreenSizeModel;
+import com.example.ismailamrani.comptable.models.ScreenSizeModel;
 
 
 /**
@@ -53,12 +53,12 @@ public class ScreenSize extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ScreenSizeModel GetSize (int id) {
+    public ScreenSizeModel GetSize(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-                        KEY_WIDTH, KEY_HEIGHT }, KEY_ID + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE, new String[]{KEY_ID,
+                        KEY_WIDTH, KEY_HEIGHT}, KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -79,5 +79,4 @@ public class ScreenSize extends SQLiteOpenHelper {
 
         return count;
     }
-
 }

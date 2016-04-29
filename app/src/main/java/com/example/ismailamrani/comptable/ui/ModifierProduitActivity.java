@@ -18,13 +18,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentIntegrator;
-import com.example.ismailamrani.comptable.BarCodeScanner.IntentResult;
-import com.example.ismailamrani.comptable.ServiceWeb.PhpAPI;
-import com.example.ismailamrani.comptable.Models.Product;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ServiceWeb.convertInputStreamToString;
-import com.example.ismailamrani.comptable.ServiceWeb.getQuery;
+import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
+import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
+import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,8 +50,8 @@ public class ModifierProduitActivity extends Activity {
     private static final String TAG = ModifierProduitActivity.class.getSimpleName();
     int id;
     ImageView produitImage;
-    EditText nomProduit,PrixHt,PrixTtc;
-    TextView enregistrer,CodeBarre;
+    EditText nomProduit, PrixHt, PrixTtc;
+    TextView enregistrer, CodeBarre;
     RelativeLayout AddCodeBarre;
 
     private static int RESULT_LOAD_IMAGE = 1;
@@ -59,6 +59,7 @@ public class ModifierProduitActivity extends Activity {
 
     private String codeimage;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,19 +69,18 @@ public class ModifierProduitActivity extends Activity {
         context = this;
 
 
-        produitImage =(ImageView)findViewById(R.id.ImageModifier);
-        nomProduit = (EditText)findViewById(R.id.nom_produit_modifier);
-        PrixHt = (EditText)findViewById(R.id.Prix_HT_produit_modifier);
-        PrixTtc = (EditText)findViewById(R.id.Prix_TTC_produit_modifier);
-        enregistrer = (TextView)findViewById(R.id.modifierproduit);
+        produitImage = (ImageView) findViewById(R.id.ImageModifier);
+        nomProduit = (EditText) findViewById(R.id.nom_produit_modifier);
+        PrixHt = (EditText) findViewById(R.id.Prix_HT_produit_modifier);
+        PrixTtc = (EditText) findViewById(R.id.Prix_TTC_produit_modifier);
+        enregistrer = (TextView) findViewById(R.id.modifierproduit);
         CodeBarre = (TextView) findViewById(R.id.CodeBarre);
         AddCodeBarre = (RelativeLayout) findViewById(R.id.AddCodeBarre);
         Intent intent = getIntent();
 
 
-
         id = intent.getExtras().getInt("id");
-        new  getproduitbyid().execute(PhpAPI.getProduitById);
+        new getproduitbyid().execute(PhpAPI.getProduitById);
 
         produitImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +105,7 @@ public class ModifierProduitActivity extends Activity {
                 product.setUrl(PhpAPI.editproduit);
                 product.setLocale_ID(1);
                 product.setQte(0);
-                new  editproduit().execute(product);
+                new editproduit().execute(product);
 
             }
         });
@@ -138,7 +138,7 @@ public class ModifierProduitActivity extends Activity {
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 Map<String, Object> Params = new LinkedHashMap<>();
-                 Params.put("ID", id);
+                Params.put("ID", id);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
                         new OutputStreamWriter(os, "UTF-8"));
@@ -157,6 +157,7 @@ public class ModifierProduitActivity extends Activity {
 
 
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -166,8 +167,7 @@ public class ModifierProduitActivity extends Activity {
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
-                if (resp == 1){
-
+                if (resp == 1) {
 
 
                     try {
@@ -176,7 +176,7 @@ public class ModifierProduitActivity extends Activity {
 
                         for (int i = 0; i < listproduits.length(); i++) {
                             JSONObject usr = listproduits.getJSONObject(i);
-                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend+"produits/"+ usr.getString("photo")).into(produitImage);
+                            Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend + "produits/" + usr.getString("photo")).into(produitImage);
                             nomProduit.setText(usr.getString("libelle"));
                             PrixHt.setText(usr.getString("prixHT"));
                             PrixTtc.setText(usr.getString("prixTTC"));
@@ -190,10 +190,7 @@ public class ModifierProduitActivity extends Activity {
                     }
 
 
-
-
-                }
-                else if (resp == 0){
+                } else if (resp == 0) {
 
                     //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
                     //  startActivity(intent);
@@ -228,11 +225,11 @@ public class ModifierProduitActivity extends Activity {
                 Params.put("ID", id);
                 Params.put("Libelle", params[0].getLibelle());
                 Params.put("PrixHT", params[0].getPrixHT());
-                Params.put("PrixTTC",params[0].getPrixTTC());
-                Params.put("CodeBar",params[0].getCodeBarre());
-                Params.put("Qte",params[0].getQte());
+                Params.put("PrixTTC", params[0].getPrixTTC());
+                Params.put("CodeBar", params[0].getCodeBarre());
+                Params.put("Qte", params[0].getQte());
                 Params.put("Photo", params[0].getPhoto());
-                Params.put("Local",params[0].getLocale_ID());
+                Params.put("Local", params[0].getLocale_ID());
 
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(
