@@ -74,6 +74,35 @@ public class DatabaseAdapter {
         return this;
     }
 
+    /**
+     * @return a User object representing the currently logged-in user,
+     * if there was any.
+     */
+    public User getLoggedUser() {
+        Cursor cursor = db.query(
+                true,
+                DATABASE_TABLE,
+                new String[]{KEY_ID, KEY_FIRSTNAME, KEY_LASTNAME,
+                        KEY_TYPE, KEY_CREATION_DATE, KEY_EXPIRATION_DATE,
+                        KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID},
+                null, null, null, null, null, null);
+        return extractUserFromCursor(cursor);
+    }
+
+    private User extractUserFromCursor(Cursor cursor) {
+        return cursor.moveToFirst() ?
+                new User.Builder()
+                        .id(cursor.getInt(0))
+                        .firstname(cursor.getString(1))
+                        .lastname(cursor.getString(2))
+                        .type(cursor.getString(3))
+                        .username(cursor.getString(6))
+                        .password(cursor.getString(7))
+                        .companyID(cursor.getInt(8))
+                        .createUser() :
+                null;
+    }
+
     public void close() {
         dbHelper.close();
     }
