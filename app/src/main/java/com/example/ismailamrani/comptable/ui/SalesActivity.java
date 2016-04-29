@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SoldProductAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
@@ -81,6 +82,13 @@ public class SalesActivity extends Activity {
     private void addProductToList() {
         toBeSoldProducts.add(mProduct);
         soldProductAdapter.notifyDataSetChanged();
+
+        resetTextFields();
+    }
+
+    private void resetTextFields() {
+        Stream.of(barCodeField, quantityField, priceField)
+                .forEach(field -> field.setText(""));
     }
 
     @Override
