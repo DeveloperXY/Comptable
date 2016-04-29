@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.annimon.stream.Stream;
@@ -46,6 +47,8 @@ public class SalesActivity extends Activity {
     EditText quantityField;
     @Bind(R.id.priceField)
     EditText priceField;
+    @Bind(R.id.priceLabel)
+    TextView priceLabel;
 
     private Product mProduct;
     private List<Product> toBeSoldProducts;
@@ -87,8 +90,23 @@ public class SalesActivity extends Activity {
 
         toBeSoldProducts.add(mProduct);
         soldProductAdapter.notifyDataSetChanged();
+        calculateTotalPrice();
 
         resetTextFields();
+    }
+
+    /**
+     * Calculates the total of the TTC price of all to-be-sold products.
+     */
+    private void calculateTotalPrice() {
+        double total = 0d;
+
+        for (Product product : toBeSoldProducts) {
+            total += product.getPrixTTC();
+        }
+
+        priceLabel.setText(String.valueOf(total));
+
     }
 
     /**

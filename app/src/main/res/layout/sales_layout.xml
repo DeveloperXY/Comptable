@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_vente">
@@ -87,10 +88,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
+                                android:editable="false"
                                 android:hint="Code Barre"
                                 android:inputType="none"
-                                android:paddingLeft="20dp"
-                                android:editable="false" />
+                                android:paddingLeft="20dp" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -147,7 +148,7 @@
                                 android:paddingLeft="20dp" />
                         </RelativeLayout>
 
-                        <include layout="@layout/dh_layout_include"/>
+                        <include layout="@layout/dh_layout_include" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -311,7 +312,8 @@
                     android:layout_weight="1032">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/priceSumLabel"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:gravity="center_vertical"
@@ -321,9 +323,20 @@
                         android:textColor="#3d5469"
                         android:textSize="20sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/priceLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/priceSumLabel"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp"
+                        android:text="0"
+                        android:textColor="#ff000000"
+                        tools:text="1500" />
                 </RelativeLayout>
 
-                <include layout="@layout/dh_layout_include"/>
+                <include layout="@layout/dh_layout_include" />
             </LinearLayout>
         </LinearLayout>
 
