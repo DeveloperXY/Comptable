@@ -1,9 +1,12 @@
 package com.example.ismailamrani.comptable.sqlite;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.ismailamrani.comptable.Models.User;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 29/04/2016.
@@ -26,8 +29,8 @@ public class DatabaseAdapter {
     public static final String KEY_COMPANY_ID = "companyID";
 
     private static final String TAG = DatabaseAdapter.class.getSimpleName();
-    private static final String DATABASE_NAME = "contactsDatabase";
-    private static final String DATABASE_TABLE = "contacts";
+    private static final String DATABASE_NAME = "comptableDatabase";
+    private static final String DATABASE_TABLE = "User";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLES_CREATE =
             "CREATE TABLE " + DATABASE_TABLE + " (" +
