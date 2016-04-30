@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.HomeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -106,7 +106,9 @@
 
         <activity
             android:name=".ui.SalesActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_vente"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
     </application>

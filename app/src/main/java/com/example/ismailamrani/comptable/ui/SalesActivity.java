@@ -61,6 +61,7 @@ public class SalesActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("PRODUCT", "1 Product is NULL: " + (mProduct == null));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
@@ -72,13 +73,18 @@ public class SalesActivity extends Activity {
         productsListview.setAdapter(soldProductAdapter);
     }
 
+    /**
+     * Sets TextWatchers on their corresponding text fields.
+     */
     private void attachTextWatchers() {
+        Log.i("PRODUCT", "2 Product is NULL: " + (mProduct == null));
         initializeTextWatchers();
 
         quantityField.addTextChangedListener(quantityWatcher);
     }
 
     private void initializeTextWatchers() {
+        Log.i("PRODUCT", "3 Product is NULL: " + (mProduct == null));
         quantityWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,15 +96,14 @@ public class SalesActivity extends Activity {
                 if (mProduct != null) {
                     String qte = s.toString();
                     // Check if there was in deed a new quantity
-                    if(!qte.isEmpty()) {
+                    if (!qte.isEmpty()) {
                         // Check if the new quantity has a valid format
                         if (qte.matches("(\\d+)")) {
                             int newQuantity = Integer.valueOf(qte);
                             double newPrice = mProduct.getPrixTTC() * newQuantity;
                             priceField.setText(String.valueOf(newPrice));
                         }
-                    }
-                    else {
+                    } else {
                         // Show original price
                         priceField.setText(String.valueOf(mProduct.getPrixTTC()));
                     }
@@ -113,6 +118,7 @@ public class SalesActivity extends Activity {
 
     @OnClick({R.id.addBarCodeBtn, R.id.nextButton})
     public void onButtonClick(View view) {
+        Log.i("PRODUCT", "4 Product is NULL: " + (mProduct == null));
         switch (view.getId()) {
             case R.id.addBarCodeBtn:
                 IntentIntegrator scanIntegrator = new IntentIntegrator(this);
@@ -128,6 +134,7 @@ public class SalesActivity extends Activity {
      * Adds a product to the list of the products to be sold.
      */
     private void addProductToList() {
+        Log.i("PRODUCT", "5 Product is NULL: " + (mProduct == null));
         if (!allProductInfosArePresent()) {
             return;
         }
@@ -146,6 +153,7 @@ public class SalesActivity extends Activity {
      * Calculates the total of the TTC price of all to-be-sold products.
      */
     private void calculateTotalPrice() {
+        Log.i("PRODUCT", "6 Product is NULL: " + (mProduct == null));
         double total = 0d;
 
         for (Product product : toBeSoldProducts) {
@@ -153,7 +161,6 @@ public class SalesActivity extends Activity {
         }
 
         priceLabel.setText(String.valueOf(total));
-
     }
 
     /**
@@ -161,6 +168,7 @@ public class SalesActivity extends Activity {
      * present, & false otherwise.
      */
     private boolean allProductInfosArePresent() {
+        Log.i("PRODUCT", "7 Product is NULL: " + (mProduct == null));
         return Stream.of(barCodeField, quantityField, priceField)
                 .map(EditText::getText)
                 .map(Editable::toString)
@@ -168,12 +176,14 @@ public class SalesActivity extends Activity {
     }
 
     private void resetTextFields() {
+        Log.i("PRODUCT", "8 Product is NULL: " + (mProduct == null));
         Stream.of(barCodeField, quantityField, priceField)
                 .forEach(field -> field.setText(""));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("PRODUCT", "9 Product is NULL: " + (mProduct == null));
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         if (scanningResult != null) {
@@ -199,6 +209,7 @@ public class SalesActivity extends Activity {
      * @throws IOException
      */
     void postGetProduct(String url, JSONObject userCredentials) throws IOException {
+        Log.i("PRODUCT", "10 Product is NULL: " + (mProduct == null));
         Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
 
         client.newCall(request)
