@@ -52,9 +52,9 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
         }
 
         Product product = products.get(position);
-        System.out.println("Product is null: " + (product == null));
 
-        viewHolder.productText.setText(product.getLibelle());
+        viewHolder.productText
+                .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
         return convertView;
     }
 

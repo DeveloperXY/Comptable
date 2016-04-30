@@ -139,8 +139,9 @@ public class SalesActivity extends Activity {
             return;
         }
 
-        mProduct.setPrixTTC(mProduct.getPrixTTC() *
-                Double.valueOf(quantityField.getText().toString()));
+        int quantity = Integer.valueOf(quantityField.getText().toString());
+        mProduct.setPrixTTC(mProduct.getPrixTTC() * quantity);
+        mProduct.setQte(quantity);
         toBeSoldProducts.add(mProduct);
         soldProductAdapter.notifyDataSetChanged();
         calculateTotalPrice();
