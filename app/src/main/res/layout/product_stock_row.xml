@@ -2,15 +2,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     tools:background="#9e9e9e">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/common_plus_signin_btn_icon_dark_pressed"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:src="@drawable/common_plus_signin_btn_icon_dark_pressed" />
+
+    <TextView
+        android:id="@+id/quantityLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:textSize="26sp"
+        tools:text="215"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/productLabel"
@@ -21,4 +32,5 @@
         android:text="New Text"
         android:textColor="#ffffff"
         android:textSize="20sp" />
+
 </RelativeLayout>

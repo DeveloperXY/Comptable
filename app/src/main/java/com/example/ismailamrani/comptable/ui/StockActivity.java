@@ -63,9 +63,9 @@ public class StockActivity extends Activity implements OGActionBarInterface {
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
 
-        Product product1 = new Product(1,"product1",12d, 13d, "123456", "", 0, 0, "");
-        Product product2 = new Product(1,"product2",12d, 13d, "123456", "", 0, 0, "");
-        Product product3 = new Product(1,"product3",12d, 13d, "123456", "", 0, 0, "");
+        Product product1 = new Product(1,"product1",12d, 13d, "123456", "", 215, 0, "");
+        Product product2 = new Product(1,"product2",12d, 13d, "123456", "", 20, 0, "");
+        Product product3 = new Product(1,"product3",12d, 13d, "123456", "", 110, 0, "");
         List<Product> products = Arrays.asList(product1, product2, product3);
 
         stockAdapter = new StockAdapter(this, products);

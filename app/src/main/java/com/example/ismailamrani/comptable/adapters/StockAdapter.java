@@ -48,14 +48,17 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView productLabel;
+        TextView quantityLabel;
 
         ViewHolder(View v) {
             super(v);
             productLabel = (TextView) v.findViewById(R.id.productLabel);
+            quantityLabel = (TextView) v.findViewById(R.id.quantityLabel);
         }
 
         public void bind(Product product) {
             productLabel.setText(product.getLibelle());
+            quantityLabel.setText(String.valueOf(product.getQte()));
         }
     }
 }
