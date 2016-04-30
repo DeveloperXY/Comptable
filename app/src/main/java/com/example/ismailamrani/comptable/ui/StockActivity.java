@@ -47,7 +47,7 @@ public class StockActivity extends Activity implements OGActionBarInterface {
 
     @Override
     public void onMenuPressed() {
-
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
     @Override
