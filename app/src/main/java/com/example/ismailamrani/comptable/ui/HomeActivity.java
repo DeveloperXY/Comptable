@@ -57,7 +57,7 @@ public class HomeActivity extends Activity {
                 targetActivity = FournisseurListActivity.class;
                 break;
             case R.id.stock:
-                targetActivity = AddLocalFileActivity.class;
+                targetActivity = StockActivity.class;
                 break;
             case R.id.achat:
                 targetActivity = AddSocieteActivity.class;

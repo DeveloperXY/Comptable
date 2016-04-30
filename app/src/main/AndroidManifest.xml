@@ -78,7 +78,6 @@
         <activity
             android:name=".ui.NewChargeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ui.AddLocalFileActivity" />
         <activity
             android:name=".ui.SpinnerChargeActivity"
             android:theme="@style/AppTheme.CustomTheme" />
@@ -112,7 +111,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.StockActivity" />
-        <activity android:name=".ui.CustomActionbarActivity"></activity>
     </application>
 
 </manifest>
