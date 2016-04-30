@@ -164,6 +164,6 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddProduitActivity.class));
+        startActivity(new Intent(this, AddProductActivity.class));
     }
 }

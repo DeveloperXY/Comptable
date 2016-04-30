@@ -72,7 +72,7 @@ public class ProduisActivity extends Activity implements OGActionBarInterface {
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddProduitActivity.class));
+        startActivity(new Intent(this, AddProductActivity.class));
     }
 
     private class GetData extends AsyncTask<String, Void, String> {

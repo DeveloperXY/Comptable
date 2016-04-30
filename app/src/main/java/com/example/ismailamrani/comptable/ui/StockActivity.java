@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -51,7 +52,7 @@ public class StockActivity extends Activity implements OGActionBarInterface {
 
     @Override
     public void onAddPressed() {
-
+        startActivity(new Intent(this, AddProductActivity.class));
     }
 
     /**

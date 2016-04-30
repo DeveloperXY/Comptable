@@ -47,8 +47,8 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class AddProduitActivity extends Activity implements OGActionBarInterface {
-    private static final String TAG = AddProduitActivity.class.getSimpleName();
+public class AddProductActivity extends Activity implements OGActionBarInterface {
+    private static final String TAG = AddProductActivity.class.getSimpleName();
 
     OGActionBar MyActionBar;
     RelativeLayout AddCodeBarre;
