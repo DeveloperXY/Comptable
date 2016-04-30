@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#9e9e9e">
+    android:layout_height="100dp"
+    tools:background="#9e9e9e">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/common_ic_googleplayservices" />
+        android:src="@drawable/common_plus_signin_btn_icon_dark_pressed"
+        android:scaleType="fitXY" />
 
     <TextView
+        android:id="@+id/productLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView2"
         android:layout_alignParentBottom="true"
+        android:padding="10dp"
+        android:text="New Text"
         android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:padding="10dp" />
+        android:textSize="20sp" />
 </RelativeLayout>
