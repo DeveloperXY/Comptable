@@ -77,7 +77,7 @@
             android:theme="@style/AppTheme.CustomTheme" />
         <activity
             android:name=".ui.NewChargeActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ui.AddLocalFileActivity" />
         <activity
             android:name=".ui.SpinnerChargeActivity"
@@ -111,6 +111,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.StockActivity"></activity>
     </application>
 
 </manifest>
