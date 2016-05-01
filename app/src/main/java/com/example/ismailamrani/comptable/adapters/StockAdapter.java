@@ -49,6 +49,55 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         return mProducts.size();
     }
 
+    public Product removeItem(int position) {
+        final Product contact = mProducts.remove(position);
+        notifyItemRemoved(position);
+        return contact;
+    }
+
+    public void addItem(int position, Product contact) {
+        mProducts.add(position, contact);
+        notifyItemInserted(position);
+    }
+
+    public void moveItem(int fromPosition, int toPosition) {
+        final Product contact = mProducts.remove(fromPosition);
+        mProducts.add(toPosition, contact);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    public void animateTo(List<Product> contacts) {
+        applyAndAnimateRemovals(contacts);
+        applyAndAnimateAdditions(contacts);
+        applyAndAnimateMovedItems(contacts);
+    }
+
+    private void applyAndAnimateRemovals(List<Product> newContacts) {
+        for (int i = mProducts.size() - 1; i >= 0; i--) {
+            final Product contact = mProducts.get(i);
+            if (!newContacts.contains(contact))
+                removeItem(i);
+        }
+    }
+
+    private void applyAndAnimateAdditions(List<Product> newContacts) {
+        for (int i = 0, count = newContacts.size(); i < count; i++) {
+            final Product contact = newContacts.get(i);
+            if (!mProducts.contains(contact))
+                addItem(i, contact);
+        }
+    }
+
+    private void applyAndAnimateMovedItems(List<Product> newContacts) {
+        for (int toPosition = newContacts.size() - 1; toPosition >= 0; toPosition--) {
+            final Product contact = newContacts.get(toPosition);
+            final int fromPosition = mProducts.indexOf(contact);
+
+            if (fromPosition >= 0 && fromPosition != toPosition)
+                moveItem(fromPosition, toPosition);
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView productLabel;

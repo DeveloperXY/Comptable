@@ -119,6 +119,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
 
     /**
      * Validates the new product's informations before adding it.
+     *
      * @return a Product object representing the new product if everything
      * goes right, or null otherwise.
      */
@@ -141,28 +142,23 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
             return new Product(0, name, Double.parseDouble(ht),
                     Double.parseDouble(ttc), barcode, codeimage,
                     0, 1, PhpAPI.addProduit);
-        }
-        else if(!imageStatus) {
+        } else if (!imageStatus) {
             // No image was selected for the product.
             dialogTitle = "Missing image.";
             dialogMessage = "You need to provide an image for your product.";
-        }
-        else if (!nameStatus) {
+        } else if (!nameStatus) {
             // No name was specified for the product.
             dialogTitle = "Missing product name.";
             dialogMessage = "You need to provide a name for your product.";
-        }
-        else if (!htStatus) {
+        } else if (!htStatus) {
             // No HT price was specified for the product.
             dialogTitle = "Missing HT price.";
             dialogMessage = "You need to specify an HT price for your product.";
-        }
-        else if (!ttcStatus) {
+        } else if (!ttcStatus) {
             // No TTC price was specified for the product.
             dialogTitle = "Missing TTC price.";
             dialogMessage = "You need to specify an TTC price for your product.";
-        }
-        else {
+        } else {
             // No bar code was specified for the product.
             dialogTitle = "Missing bar code.";
             dialogMessage = "You need to specify your product's bar code.";
@@ -192,20 +188,19 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                             JSONObject obj = new JSONObject(res);
                             int resp = obj.getInt("success");
 
-                            runOnUiThread(() -> {
-                                if (resp == 1) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Product successfully added.",
-                                            Toast.LENGTH_LONG).show();
-                                    setResult(ResultCodes.PRODUCT_ADDED);
-                                    finish();
-                                    startActivity(new Intent(
-                                            AddProductActivity.this, StockActivity.class));
-                                } else if (resp == 0) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "erreur  !!!!", Toast.LENGTH_LONG).show();
-                                }
-                            });
+                            if (resp == 1) {
+                                setResult(ResultCodes.PRODUCT_ADDED);
+                                finish();
+
+                                runOnUiThread(() ->
+                                        Toast.makeText(getApplicationContext(),
+                                                "Product successfully added.",
+                                                Toast.LENGTH_LONG).show());
+                            } else if (resp == 0) {
+                                runOnUiThread(() ->
+                                        Toast.makeText(getApplicationContext(),
+                                                "erreur  !!!!", Toast.LENGTH_LONG).show());
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

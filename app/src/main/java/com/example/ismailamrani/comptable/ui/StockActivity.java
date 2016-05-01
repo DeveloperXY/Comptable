@@ -100,7 +100,8 @@ public class StockActivity extends Activity implements OGActionBarInterface {
         switch (requestCode) {
             case REQUEST_ADD_PRODUCT:
                 if (resultCode == ResultCodes.PRODUCT_ADDED) {
-                    // Product successfully added
+                    // A product has been successfully added
+                    fetchStockProducts(PhpAPI.getStock, null);
                 }
                 break;
         }
@@ -115,15 +116,10 @@ public class StockActivity extends Activity implements OGActionBarInterface {
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
 
-        try {
-            fetchStockProducts(PhpAPI.getStock, null);
-        } catch (IOException e) {
-            Toast.makeText(this, "An error occured when fetching stock products.",
-                    Toast.LENGTH_LONG).show();
-        }
+        fetchStockProducts(PhpAPI.getStock, null);
     }
 
-    void fetchStockProducts(String url, JSONObject userCredentials) throws IOException {
+    void fetchStockProducts(String url, JSONObject userCredentials) {
         Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.GET);
 
         client.newCall(request)
@@ -156,8 +152,12 @@ public class StockActivity extends Activity implements OGActionBarInterface {
     }
 
     private void populateRecyclerView() {
-        stockAdapter = new StockAdapter(this, mProducts);
-        stockRecyclerView.setAdapter(stockAdapter);
+        if (stockAdapter == null) {
+            stockAdapter = new StockAdapter(this, mProducts);
+            stockRecyclerView.setAdapter(stockAdapter);
+        }
+        else
+            stockAdapter.animateTo(mProducts);
     }
 
     /**
