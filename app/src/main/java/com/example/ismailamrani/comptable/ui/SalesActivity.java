@@ -15,6 +15,8 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SoldProductAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -37,7 +39,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class SalesActivity extends ColoredStatusBarActivity {
+public class SalesActivity extends ColoredStatusBarActivity implements OGActionBarInterface {
+
+    private OGActionBar mActionBar;
 
     @Bind(R.id.productsListview)
     ListView productsListview;
@@ -63,6 +67,9 @@ public class SalesActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
 
+        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Ventes");
         attachTextWatchers();
 
         toBeSoldProducts = new ArrayList<>();
@@ -242,5 +249,15 @@ public class SalesActivity extends ColoredStatusBarActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onMenuPressed() {
+
+    }
+
+    @Override
+    public void onAddPressed() {
+
     }
 }

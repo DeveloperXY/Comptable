@@ -63,6 +63,7 @@ public class ScreenSize extends SQLiteOpenHelper {
         size.setWIDTH(cursor.getInt(1));
         size.setHEIGHT(cursor.getInt(2));
 
+        cursor.close();
         return size;
     }
 
