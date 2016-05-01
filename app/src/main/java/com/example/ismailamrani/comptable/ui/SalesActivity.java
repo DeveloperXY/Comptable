@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -39,7 +40,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class SalesActivity extends ColoredStatusBarActivity implements OGActionBarInterface {
+public class SalesActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
 
     private OGActionBar mActionBar;
 
@@ -129,6 +131,15 @@ public class SalesActivity extends ColoredStatusBarActivity implements OGActionB
                 addProductToList();
                 break;
         }
+    }
+
+    /**
+     * Invoked when the 'Validate' button is pressed.
+     * @param view
+     */
+    public void onConfirmSale(View view) {
+        JSONArray summary = soldProductAdapter.getSummary();
+        Log.i("SUMMARY", summary.toString());
     }
 
     /**

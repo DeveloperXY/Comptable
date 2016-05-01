@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-public abstract class ColoredStatusBarActivity extends Activity {
+public class ColoredStatusBarActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

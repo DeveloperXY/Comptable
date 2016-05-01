@@ -11,6 +11,10 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -55,6 +59,30 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
         viewHolder.productText
                 .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
         return convertView;
+    }
+
+    /**
+     * @return a JSON array that represents the summary of the current
+     * sale order.
+     */
+    public JSONArray getSummary() {
+        JSONArray data = new JSONArray();
+
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            JSONObject obj = new JSONObject();
+
+            try {
+                obj.put("productID", product.getID());
+                obj.put("quantity", product.getQte());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            data.put(obj);
+        }
+
+        return data;
     }
 
     static class ViewHolder {
