@@ -109,7 +109,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                 // Add product to store
                 Product newProduct = validateProductInfos();
                 if (newProduct != null) {
-                    postAddProduct(PhpAPI.addProduit, null);
+                    postAddProduct(PhpAPI.addProduit, newProduct.toJSON());
                 }
 
                 break;
@@ -190,16 +190,20 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                         try {
                             JSONObject obj = new JSONObject(res);
                             int resp = obj.getInt("success");
-                            if (resp == 1) {
-                                Toast toast = Toast.makeText(getApplicationContext(), "successfully add", Toast.LENGTH_LONG);
-                                toast.show();
-                                finish();
-                                startActivity(new Intent(
-                                        AddProductActivity.this, ProduisActivity.class));
-                            } else if (resp == 0) {
-                                Toast.makeText(getApplicationContext(),
-                                        "erreur  !!!!", Toast.LENGTH_LONG).show();
-                            }
+
+                            runOnUiThread(() -> {
+                                if (resp == 1) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Product successfully added.",
+                                            Toast.LENGTH_LONG).show();
+                                    finish();
+                                    startActivity(new Intent(
+                                            AddProductActivity.this, StockActivity.class));
+                                } else if (resp == 0) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "erreur  !!!!", Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
