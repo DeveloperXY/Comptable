@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -228,7 +227,7 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Modifier", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(getApplicationContext(), ProduisActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ProductsActivity.class));
                 } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "pas  modifier verifier les champs  !!!!", Toast.LENGTH_LONG);
                     toast.show();

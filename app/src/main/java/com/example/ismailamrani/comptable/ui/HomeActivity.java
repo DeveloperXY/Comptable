@@ -44,7 +44,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
         Class<?> targetActivity;
         switch (view.getId()) {
             case R.id.produit:
-                targetActivity = ProduisActivity.class;
+                targetActivity = ProductsActivity.class;
                 break;
             case R.id.client:
                 targetActivity = ClientListActivity.class;

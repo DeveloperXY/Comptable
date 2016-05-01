@@ -15,7 +15,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.CustumTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
-import com.example.ismailamrani.comptable.ui.ProduisActivity;
+import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.Produit_InfoActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
@@ -188,7 +188,7 @@ public class ProduitAdapter extends BaseAdapter {
                     toast.show();
 
 
-                    Intent i = new Intent(context, ProduisActivity.class);
+                    Intent i = new Intent(context, ProductsActivity.class);
                     context.startActivity(i);
 
 

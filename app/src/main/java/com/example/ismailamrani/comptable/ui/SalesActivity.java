@@ -69,14 +69,18 @@ public class SalesActivity extends ColoredStatusBarActivity
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
 
-        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        mActionBar.setActionBarListener(this);
-        mActionBar.setTitle("Ventes");
+        setupActionBar();
         attachTextWatchers();
 
         toBeSoldProducts = new ArrayList<>();
         soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
         productsListview.setAdapter(soldProductAdapter);
+    }
+
+    private void setupActionBar() {
+        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Ventes");
     }
 
     /**

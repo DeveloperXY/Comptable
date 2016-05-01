@@ -37,21 +37,23 @@ public class ClientListActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
     OGActionBar myactionbar;
     ListView list;
-    Context context;
     ArrayList<ClientModel> List = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
 
         setContentView(R.layout.activity_client);
-        myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
-        myactionbar.setActionBarListener(this);
-        myactionbar.setTitle("Client");
+        setupActionBar();
 
         list = (ListView) findViewById(R.id.Listclient);
         new GetData().execute(PhpAPI.getClient);
+    }
+
+    private void setupActionBar() {
+        myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
+        myactionbar.setActionBarListener(this);
+        myactionbar.setTitle("Client");
     }
 
     @Override
@@ -120,7 +122,7 @@ public class ClientListActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
 
-            ClientAdapter adapter = new ClientAdapter(context, List);
+            ClientAdapter adapter = new ClientAdapter(ClientListActivity.this, List);
             list.setAdapter(adapter);
         }
     }

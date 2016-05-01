@@ -23,15 +23,20 @@ public class NewChargeActivity extends ColoredStatusBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charges_add);
 
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Ajouter Une Charge");
+        setupActionBar();
+
         MyActionBar.AddDisable();
         spinner = (ImageView) findViewById(R.id.spinner);
         spinner.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(),
                         SpinnerChargeActivity.class)));
 
+    }
+
+    private void setupActionBar() {
+        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        MyActionBar.setActionBarListener(this);
+        MyActionBar.setTitle("Ajouter Une Charge");
     }
 
     @Override

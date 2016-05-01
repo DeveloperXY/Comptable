@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -33,27 +32,28 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class ProduisActivity extends ColoredStatusBarActivity
+public class ProductsActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
 
     OGActionBar MyActionBar;
     ListView List;
     ArrayList<Product> ListProduit = new ArrayList<>();
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produits);
 
-        context = this;
-
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Produit");
+        setupActionBar();
 
         List = (ListView) findViewById(R.id.List);
         new GetData().execute(PhpAPI.getProduit);
+    }
+
+    private void setupActionBar() {
+        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        MyActionBar.setActionBarListener(this);
+        MyActionBar.setTitle("Produit");
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ProduisActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
 
-            ProduitAdapter adapter = new ProduitAdapter(context, ListProduit);
+            ProduitAdapter adapter = new ProduitAdapter(ProductsActivity.this, ListProduit);
             List.setAdapter(adapter);
         }
     }

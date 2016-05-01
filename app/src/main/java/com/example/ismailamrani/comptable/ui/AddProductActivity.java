@@ -70,6 +70,10 @@ public class AddProductActivity extends ColoredStatusBarActivity
         setContentView(R.layout.add_product);
         ButterKnife.bind(this);
 
+        setupActionBar();
+    }
+
+    private void setupActionBar() {
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Ajouter Un Produit");

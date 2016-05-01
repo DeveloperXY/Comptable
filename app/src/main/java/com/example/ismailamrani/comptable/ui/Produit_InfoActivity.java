@@ -46,9 +46,8 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produit_info);
 
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setTitle("Sumsung Galaxy S6");
-        MyActionBar.setActionBarListener(this);
+        setupActionBar();
+
         Image = (ImageView) findViewById(R.id.Imageaff);
         PrixHT = (TextView) findViewById(R.id.PrixHTaff);
         PrixTTC = (TextView) findViewById(R.id.PrixTTCaff);
@@ -59,6 +58,12 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
         Intent i = getIntent();
         id = i.getExtras().getInt("id");
         new getProduitbyId().execute(PhpAPI.getProduitById);
+    }
+
+    private void setupActionBar() {
+        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        MyActionBar.setActionBarListener(this);
+        MyActionBar.setTitle("Sumsung Galaxy S6");
     }
 
     private class getProduitbyId extends AsyncTask<String, Void, String> {

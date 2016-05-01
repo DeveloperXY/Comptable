@@ -65,16 +65,14 @@ public class StockActivity extends ColoredStatusBarActivity
         setContentView(R.layout.activity_stock);
         ButterKnife.bind(this);
 
-        initializeUI();
+        setupActionBar();
         setupRecyclerView();
     }
 
-    private void initializeUI() {
+    private void setupActionBar() {
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Stock");
-
-        stockProgressbar.setIndeterminate(true);
     }
 
     @Override

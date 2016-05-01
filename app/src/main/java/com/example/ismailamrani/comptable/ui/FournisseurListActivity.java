@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,21 +37,22 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
 
     OGActionBar myactionbar;
-    Context context;
     ListView list;
     ArrayList<Fournisseur> ListF = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = this;
-
         setContentView(R.layout.activity_fournisseur);
+        setupActionBar();
+        list = (ListView) findViewById(R.id.Listfournisseur);
+        new GetData().execute(PhpAPI.getFournisseur);
+    }
+
+    private void setupActionBar() {
         myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
         myactionbar.setActionBarListener(this);
         myactionbar.setTitle("Fournisseur");
-        list = (ListView) findViewById(R.id.Listfournisseur);
-        new GetData().execute(PhpAPI.getFournisseur);
     }
 
     @Override
@@ -132,7 +132,8 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
 
-            FourniseurAdapter fourniseurAdapter = new FourniseurAdapter(context, ListF);
+            FourniseurAdapter fourniseurAdapter =
+                    new FourniseurAdapter(FournisseurListActivity.this, ListF);
             list.setAdapter(fourniseurAdapter);
         }
     }
