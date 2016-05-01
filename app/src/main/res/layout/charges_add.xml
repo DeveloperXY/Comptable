@@ -4,32 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="2460"
-    >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="204">
+    android:weightSum="2460">
 
-        <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
-            android:id="@+id/MyActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+    <include layout="@layout/custom_actionbar_include" />
 
-    </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2256"
         android:background="#3e566a"
         android:weightSum="2256"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="204"
-            ></RelativeLayout>
+            />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -53,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="80"
-            ></RelativeLayout>
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -65,8 +55,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="125"
-                ></RelativeLayout>
+                android:layout_weight="125" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

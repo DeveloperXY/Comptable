@@ -5,22 +5,19 @@
     android:layout_height="match_parent"
     android:background="#e6e6e6"
     android:orientation="vertical"
-    android:weightSum="1608"
-    >
+    android:weightSum="1608">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="183"
         android:weightSum="1000"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="800"
-            >
+            android:layout_weight="800">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -34,8 +31,7 @@
             android:id="@+id/fermerlay"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="199"
-            >
+            android:layout_weight="199">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

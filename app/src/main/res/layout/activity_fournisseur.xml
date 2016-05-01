@@ -4,17 +4,7 @@
     android:layout_height="match_parent"
     android:weightSum="246">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="20">
-
-        <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
-            android:id="@+id/MyActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </RelativeLayout>
+    <include layout="@layout/custom_actionbar_include" />
 
     <ListView
         android:id="@+id/Listfournisseur"

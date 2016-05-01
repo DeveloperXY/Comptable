@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:costum="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -8,32 +7,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="80"
-        >
+        android:weightSum="80">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
-            >
-        </RelativeLayout>
+            android:layout_weight="4"></RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="76"
-            android:weightSum="1434"
             android:orientation="horizontal"
-            >
+            android:weightSum="1434">
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="99"
-                ></RelativeLayout>
+                android:layout_weight="99"></RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/imglay"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="233"
-                >
+                android:layout_weight="233">
 
                 <RelativeLayout
                     android:layout_width="80dp"
@@ -46,50 +43,48 @@
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:foregroundGravity="center"
-                        android:src="@drawable/sergio"/>
+                        android:src="@drawable/sergio" />
 
                 </RelativeLayout>
 
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="172"
-                ></RelativeLayout>
+                android:layout_weight="172"></RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/nomlay"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="565"
-                >
+                android:layout_weight="565">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:weightSum="300"
-                    >
+                    android:weightSum="300">
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="70"
-                        >
+                        android:layout_weight="70">
 
                     </RelativeLayout>
+
                     <TextView
                         android:id="@+id/nomPrenomFournisseur"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="redouane azzouzi"
-                        />
+                        android:text="redouane azzouzi" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="53"
-                        >
+                        android:layout_weight="53">
 
                     </RelativeLayout>
 
@@ -97,35 +92,34 @@
                         android:id="@+id/adresseFournisseur"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fes,15"
-                        />
+                        android:text="Fes,15" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="100"
-                        >
+                        android:layout_weight="100">
 
                     </RelativeLayout>
 
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="147"
-                ></RelativeLayout>
+                android:layout_weight="147"></RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="118"
-                >
+                android:layout_weight="118">
+
                 <ImageView
                     android:id="@+id/call"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/call"
                     android:layout_centerInParent="true"
-                    />
+                    android:src="@drawable/call" />
 
             </RelativeLayout>
 
@@ -133,20 +127,13 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="100"
-                ></RelativeLayout>
-
-
+                android:layout_weight="100"></RelativeLayout>
 
 
         </LinearLayout>
 
 
-
-
     </LinearLayout>
-
-
 
 
 </RelativeLayout>
