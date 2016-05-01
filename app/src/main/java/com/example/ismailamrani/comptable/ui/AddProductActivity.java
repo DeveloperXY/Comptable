@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -41,85 +43,93 @@ import java.net.URLConnection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class AddProductActivity extends Activity implements OGActionBarInterface {
 
     OGActionBar MyActionBar;
-    RelativeLayout AddCodeBarre;
-    Context context;
-    TextView CodeBarre, ajouterProduit;
 
-    ImageView produitImage;
-    EditText nomProduit, PrixHt, PrixTtc;
+    @Bind(R.id.productImage)
+    ImageView productImage;
+    @Bind(R.id.productName)
+    EditText productName;
+    @Bind(R.id.priceHT)
+    EditText priceHT;
+    @Bind(R.id.priceTTC)
+    EditText priceTTC;
+    @Bind(R.id.barCodeLabel)
+    TextView barCodeLabel;
 
     private static int RESULT_LOAD_IMAGE = 1;
     private String selectedImagePath;
 
-    private String codeimage, imageProduit;
+    private String codeimage;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_produit);
-        context = this;
+        setContentView(R.layout.add_product);
+        ButterKnife.bind(this);
 
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Ajouter Un Produit");
         MyActionBar.AddDisable();
+    }
 
-        produitImage = (ImageView) findViewById(R.id.Image);
-        nomProduit = (EditText) findViewById(R.id.nom_produit);
-        PrixHt = (EditText) findViewById(R.id.Prix_HT_produit);
-        PrixTtc = (EditText) findViewById(R.id.Prix_TTC_produit);
-        ajouterProduit = (TextView) findViewById(R.id.ajouterProduit);
+    @OnClick({R.id.productImage, R.id.scanBarcode, R.id.addProductBtn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.productImage:
+                // Add product image
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
+                break;
+            case R.id.scanBarcode:
+                // Scan product bar code
+                IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+                scanIntegrator.initiateScan();
+                break;
+            case R.id.addProductBtn:
+                // Add product to store
+                if (codeimage.equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "photo is required", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (productName.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "produit name is required", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (priceHT.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "prix HT is required", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (priceTTC.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "prix TTC is required", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (barCodeLabel.getText().toString().equals("")) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                Product product = new Product(
+                        0,
+                        productName.getText().toString(),
+                        Double.parseDouble(priceHT.getText().toString()),
+                        Double.parseDouble(priceTTC.getText().toString()),
+                        barCodeLabel.getText().toString(),
+                        codeimage,
+                        0,
+                        1,
+                        PhpAPI.addProduit
+                );
 
-        CodeBarre = (TextView) findViewById(R.id.CodeBarre);
-
-        AddCodeBarre = (RelativeLayout) findViewById(R.id.AddCodeBarre);
-        AddCodeBarre.setOnClickListener(v -> {
-            IntentIntegrator scanIntegrator = new IntentIntegrator((Activity) context);
-            scanIntegrator.initiateScan();
-        });
-
-        produitImage.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
-        });
-
-        ajouterProduit.setOnClickListener(v -> {
-            if (codeimage.equals("")) {
-                Toast toast = Toast.makeText(getApplicationContext(), "photo is required", Toast.LENGTH_LONG);
-                toast.show();
-            } else if (nomProduit.getText().toString().toString().equals("")) {
-                Toast toast = Toast.makeText(getApplicationContext(), "produit name is required", Toast.LENGTH_LONG);
-                toast.show();
-            } else if (PrixHt.getText().toString().equals("")) {
-                Toast toast = Toast.makeText(getApplicationContext(), "prix HT is required", Toast.LENGTH_LONG);
-                toast.show();
-            } else if (PrixTtc.getText().toString().equals("")) {
-                Toast toast = Toast.makeText(getApplicationContext(), "prix TTC is required", Toast.LENGTH_LONG);
-                toast.show();
-            } else if (CodeBarre.getText().toString().equals("")) {
-                Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
-                toast.show();
-            }
-            Product product = new Product();
-            product.setLibelle(nomProduit.getText().toString());
-            product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
-            product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
-            product.setPhoto(codeimage);
-            product.setCodeBarre(CodeBarre.getText().toString());
-            product.setUrl(PhpAPI.addProduit);
-            product.setLocale_ID(1);
-            product.setQte(0);
-
-            new addproduit().execute(product);
-        });
+                new addproduit().execute(product);
+                break;
+        }
     }
 
     private class addproduit extends AsyncTask<Product, Void, String> {
@@ -175,7 +185,8 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                     Toast toast = Toast.makeText(getApplicationContext(), "successfully add", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, ProduisActivity.class));
+                    startActivity(new Intent(
+                            AddProductActivity.this, ProduisActivity.class));
                 } else if (resp == 0) {
                     Toast.makeText(getApplicationContext(),
                             "erreur  !!!!", Toast.LENGTH_LONG).show();
@@ -193,7 +204,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
         if (scanningResult != null) {
             String scanContent = scanningResult.getContents();
 
-            CodeBarre.setText(scanContent);
+            barCodeLabel.setText(scanContent);
         }
 
         // image bitmap
@@ -206,7 +217,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
 
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                    produitImage.setImageBitmap(bitmap);
+                    productImage.setImageBitmap(bitmap);
                     codeimage = BitmapToString(bitmap);
 
                 } catch (IOException e) {

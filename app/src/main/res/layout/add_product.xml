@@ -69,7 +69,7 @@
                             android:layout_centerInParent="true">
 
                             <ImageView
-                                android:id="@+id/Image"
+                                android:id="@+id/productImage"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
@@ -119,7 +119,7 @@
                     android:textColor="#464646"
                     android:gravity="center_vertical"
                     android:background="@drawable/add_edittext"
-                    android:id="@+id/nom_produit"
+                    android:id="@+id/productName"
                     />
 
             </LinearLayout>
@@ -164,7 +164,7 @@
                         android:textColor="#464646"
                         android:gravity="center_vertical"
                         android:background="#00ffffff"
-                        android:id="@+id/Prix_HT_produit"
+                        android:id="@+id/priceHT"
                         />
 
                     <RelativeLayout
@@ -216,7 +216,7 @@
                         android:textColor="#464646"
                         android:gravity="center_vertical"
                         android:background="#00ffffff"
-                        android:id="@+id/Prix_TTC_produit"
+                        android:id="@+id/priceTTC"
                         />
 
                     <RelativeLayout
@@ -260,7 +260,7 @@
                     android:layout_weight="5"></RelativeLayout>
 
                 <com.example.ismailamrani.comptable.customitems.CustumTextView
-                    android:id="@+id/CodeBarre"
+                    android:id="@+id/barCodeLabel"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="112"
@@ -287,7 +287,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:src="@mipmap/ic_add_cb"/>
+                        android:src="@mipmap/ic_add_cb"
+                        android:id="@+id/scanBarcode" />
 
                 </RelativeLayout>
 
@@ -316,7 +317,7 @@
                         android:padding="8dp"
                         android:textColor="#ffffff"
                         android:layout_centerInParent="true"
-                        android:id="@+id/ajouterProduit"
+                        android:id="@+id/addProductBtn"
                         />
 
                 </RelativeLayout>
