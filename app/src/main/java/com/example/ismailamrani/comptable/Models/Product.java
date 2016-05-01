@@ -1,7 +1,11 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ismail Amrani on 23/03/2016.
@@ -51,8 +55,26 @@ public class Product {
         this.url = url;
     }
 
-    public Product() {
+    public Product() {}
 
+    /**
+     * @param array of products in JSON format
+     * @return list of parsed products
+     */
+    public List<Product> parseProducts(JSONArray array) {
+        List<Product> products = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject product = array.getJSONObject(i);
+                products.add(new Product(product));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return products;
     }
 
     public String getUrl() {
