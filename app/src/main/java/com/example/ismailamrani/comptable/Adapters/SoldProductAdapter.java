@@ -75,6 +75,8 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
             try {
                 obj.put("productID", product.getID());
                 obj.put("quantity", product.getQte());
+                obj.put("priceHT", product.getPrixHT());
+                obj.put("priceTTC", product.getPrixTTC());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

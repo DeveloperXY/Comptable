@@ -44,6 +44,8 @@ public class PhpAPI {
     public static final String addlocal = IpBackend + "addLocal.php";
     public static final String addSociete = IpBackend + "addSociete.php";
 
+    public static final String createSaleOrder = IpBackend + "createSaleOrder.php";
+
     /**
      * @param param  the request's body that contains the request's params to the server
      * @param url    target

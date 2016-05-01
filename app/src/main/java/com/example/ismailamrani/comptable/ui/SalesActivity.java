@@ -135,11 +135,52 @@ public class SalesActivity extends ColoredStatusBarActivity
 
     /**
      * Invoked when the 'Validate' button is pressed.
+     *
      * @param view
      */
     public void onConfirmSale(View view) {
         JSONArray summary = soldProductAdapter.getSummary();
-        Log.i("SUMMARY", summary.toString());
+        postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
+    }
+
+    void postCreateSaleOrder(String url, JSONArray orderInfos) {
+        JSONObject data = new JSONObject();
+        try {
+            data.put("data", orderInfos);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        postCreateSaleOrder(url, data);
+    }
+
+    void postCreateSaleOrder(String url, JSONObject userCredentials) {
+        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(final Call call, IOException e) {
+                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        final String res = response.body().string();
+                        try {
+                            JSONObject obj = new JSONObject(res);
+                            int status = obj.getInt("success");
+
+                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                    status == 1 ? "SUCCESS" : "FAILURE",
+                                    Toast.LENGTH_SHORT).show());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
     /**
