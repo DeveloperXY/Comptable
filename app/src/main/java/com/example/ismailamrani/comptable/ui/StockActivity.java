@@ -103,12 +103,19 @@ public class StockActivity extends Activity implements OGActionBarInterface {
                         final String res = response.body().string();
                         try {
                             JSONObject obj = new JSONObject(res);
-                            Log.i("STOCK", obj.toString());
+                            mProducts = Product.parseProducts(
+                                    obj.getJSONArray("products"));
+                            runOnUiThread(() -> populateRecyclerView());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 });
+    }
+
+    private void populateRecyclerView() {
+        stockAdapter = new StockAdapter(this, mProducts);
+        stockRecyclerView.setAdapter(stockAdapter);
     }
 }

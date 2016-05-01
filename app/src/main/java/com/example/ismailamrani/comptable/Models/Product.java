@@ -61,7 +61,7 @@ public class Product {
      * @param array of products in JSON format
      * @return list of parsed products
      */
-    public List<Product> parseProducts(JSONArray array) {
+    public static List<Product> parseProducts(JSONArray array) {
         List<Product> products = new ArrayList<>();
 
         for (int i = 0; i < array.length(); i++) {
