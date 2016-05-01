@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -44,6 +47,16 @@ public class StockActivity extends Activity implements OGActionBarInterface {
      */
     @Bind(R.id.stockRecyclerView)
     RecyclerView stockRecyclerView;
+
+    /**
+     * The view to be displayed in case there were no products in store.
+     */
+    @Bind(R.id.emptyLayout)
+    RelativeLayout emptyView;
+
+    @Bind(R.id.stockProgressbar)
+    ProgressBar stockProgressbar;
+
     OGActionBar mActionBar;
 
     @Override
@@ -53,11 +66,16 @@ public class StockActivity extends Activity implements OGActionBarInterface {
         new ColorStatutBar().ColorStatutBar(this);
         ButterKnife.bind(this);
 
+        initializeUI();
+        setupRecyclerView();
+    }
+
+    private void initializeUI() {
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Stock");
 
-        setupRecyclerView();
+        stockProgressbar.setIndeterminate(true);
     }
 
     @Override
@@ -105,7 +123,12 @@ public class StockActivity extends Activity implements OGActionBarInterface {
                             JSONObject obj = new JSONObject(res);
                             mProducts = Product.parseProducts(
                                     obj.getJSONArray("products"));
-                            runOnUiThread(() -> populateRecyclerView());
+                            runOnUiThread(() -> {
+                                toggleRecyclerviewState();
+                                populateRecyclerView();
+
+                                stockProgressbar.setVisibility(View.INVISIBLE);
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -117,5 +140,15 @@ public class StockActivity extends Activity implements OGActionBarInterface {
     private void populateRecyclerView() {
         stockAdapter = new StockAdapter(this, mProducts);
         stockRecyclerView.setAdapter(stockAdapter);
+    }
+
+    /**
+     * Toggles the visibility of the RecyclerView & the empty view associated with it.
+     */
+    private void toggleRecyclerviewState() {
+        /* Set the visibility of the empty view & the stockRecyclerView
+        based on the number of products in store.*/
+        emptyView.setVisibility(mProducts.size() == 0 ? View.VISIBLE : View.INVISIBLE);
+        stockRecyclerView.setVisibility(mProducts.size() == 0 ? View.INVISIBLE : View.VISIBLE);
     }
 }
