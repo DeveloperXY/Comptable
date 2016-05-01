@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,8 +45,7 @@ import java.util.Map;
 /**
  * Created by Redouane on 24/03/2016.
  */
-public class ModifierProduitActivity extends Activity {
-    private static final String TAG = ModifierProduitActivity.class.getSimpleName();
+public class ModifierProduitActivity extends ColoredStatusBarActivity {
     int id;
     ImageView produitImage;
     EditText nomProduit, PrixHt, PrixTtc;
@@ -64,10 +62,8 @@ public class ModifierProduitActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modifier_produit);
-        Log.d(TAG, TAG);
 
         context = this;
-
 
         produitImage = (ImageView) findViewById(R.id.ImageModifier);
         nomProduit = (EditText) findViewById(R.id.nom_produit_modifier);

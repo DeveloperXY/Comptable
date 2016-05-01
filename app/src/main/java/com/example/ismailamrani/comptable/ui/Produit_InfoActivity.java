@@ -1,16 +1,13 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -35,8 +32,8 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
-public class Produit_InfoActivity extends Activity implements OGActionBarInterface {
-    private static final String TAG = Produit_InfoActivity.class.getSimpleName();
+public class Produit_InfoActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
 
     OGActionBar MyActionBar;
     ImageView Image;
@@ -48,9 +45,6 @@ public class Produit_InfoActivity extends Activity implements OGActionBarInterfa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produit_info);
-        Log.d(TAG, TAG);
-
-        new ColorStatutBar().ColorStatutBar(this);
 
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setTitle("Sumsung Galaxy S6");

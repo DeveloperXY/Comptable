@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,8 +40,7 @@ import java.util.Map;
 /**
  * Created by Brahim on 24/03/2016.
  */
-public class AddSocieteActivity extends Activity {
-    private static final String TAG = AddSocieteActivity.class.getSimpleName();
+public class AddSocieteActivity extends ColoredStatusBarActivity {
     EditText nom_scoiete;
     ImageView photo_societe;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -55,7 +53,6 @@ public class AddSocieteActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_societe);
-        Log.d(TAG, TAG);
         nom_scoiete = (EditText) findViewById(R.id.nom_societe);
         photo_societe = (ImageView) findViewById(R.id.photo_societe);
         ajouter = (TextView) findViewById(R.id.ajouter);

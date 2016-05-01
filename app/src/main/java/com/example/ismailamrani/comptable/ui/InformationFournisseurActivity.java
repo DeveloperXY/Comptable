@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -39,8 +38,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class InformationFournisseurActivity extends Activity {
-    private static final String TAG = InformationFournisseurActivity.class.getSimpleName();
+public class InformationFournisseurActivity extends ColoredStatusBarActivity {
 
     ImageView imageInformation;
     RelativeLayout fermer;
@@ -52,10 +50,7 @@ public class InformationFournisseurActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, TAG);
-
         setContentView(R.layout.information_fournisseur);
-
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

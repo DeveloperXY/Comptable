@@ -3,7 +3,6 @@ package com.example.ismailamrani.comptable.ui;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,15 +32,13 @@ import java.util.Map;
 /**
  * Created by Brahim on 24/03/2016.
  */
-public class AddLocalActivity extends Activity {
-    private static final String TAG = AddLocalActivity.class.getSimpleName();
+public class AddLocalActivity extends ColoredStatusBarActivity {
     EditText adresse_local, ville_local, pays_local, tel_local, fix_local, fax_local, email_local, activite_local;
     String adresse, ville, pays, tel, fix, fax, email, activite;
     Button ajouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, TAG);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addlocal);
         adresse_local = (EditText) findViewById(R.id.adresse_local);

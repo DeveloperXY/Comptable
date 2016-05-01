@@ -1,17 +1,14 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
-import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Fournisseur;
@@ -37,8 +34,8 @@ import java.util.Map;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class FournisseurListActivity extends Activity implements OGActionBarInterface {
-    private static final String TAG = FournisseurListActivity.class.getSimpleName();
+public class FournisseurListActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
 
     OGActionBar myactionbar;
     Context context;
@@ -48,8 +45,6 @@ public class FournisseurListActivity extends Activity implements OGActionBarInte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, TAG);
-        new ColorStatutBar().ColorStatutBar(this);
         context = this;
 
         setContentView(R.layout.activity_fournisseur);

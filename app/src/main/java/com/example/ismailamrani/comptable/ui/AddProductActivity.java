@@ -1,20 +1,16 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,23 +24,12 @@ import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
-import com.example.ismailamrani.comptable.webservice.getQuery;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,7 +43,8 @@ import okhttp3.Response;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class AddProductActivity extends Activity implements OGActionBarInterface {
+public class AddProductActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
     private static int RESULT_LOAD_IMAGE = 1;
 
     private OkHttpClient client = new OkHttpClient();

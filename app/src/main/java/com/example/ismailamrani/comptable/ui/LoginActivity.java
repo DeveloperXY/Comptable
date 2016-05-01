@@ -25,7 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends ColoredStatusBarActivity {
     private OkHttpClient client = new OkHttpClient();
     private DatabaseAdapter databaseAdapter;
 

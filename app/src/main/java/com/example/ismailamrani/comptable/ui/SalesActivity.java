@@ -38,7 +38,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class SalesActivity extends Activity {
+public class SalesActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.productsListview)
     ListView productsListview;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.ClientModel;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -40,13 +38,12 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 23/03/2016.
  */
-public class EditClientActivity extends Activity implements OGActionBarInterface {
-    private static final String TAG = EditClientActivity.class.getSimpleName();
+public class EditClientActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
     EditText nomprenom, tel, adresse, email;
     TextView ajouter;
 
     ImageView ImageProfil;
-    OGActionBar MyActionBar;
     Context context;
     String id;
 
@@ -54,12 +51,7 @@ public class EditClientActivity extends Activity implements OGActionBarInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_add);
-        Log.d(TAG, TAG);
         context = this;
-       /* MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Ajouter Un client");
-        MyActionBar.AddDisable();*/
 
         Intent i = getIntent();
         id = i.getExtras().getString("id");

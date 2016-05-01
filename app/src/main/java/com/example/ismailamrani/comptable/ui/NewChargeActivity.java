@@ -3,7 +3,6 @@ package com.example.ismailamrani.comptable.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,8 +13,8 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 /**
  * Created by Redouane on 06/04/2016.
  */
-public class NewChargeActivity extends Activity implements OGActionBarInterface {
-    private static final String TAG = NewChargeActivity.class.getSimpleName();
+public class NewChargeActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
 
     OGActionBar MyActionBar;
     ImageView spinner;
@@ -24,7 +23,6 @@ public class NewChargeActivity extends Activity implements OGActionBarInterface 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charges_add);
-        Log.d(TAG, TAG);
 
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);

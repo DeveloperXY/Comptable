@@ -15,7 +15,7 @@ import butterknife.OnClick;
 /**
  * Created by Ismail Amrani on 17/03/2016.
  */
-public class HomeActivity extends Activity {
+public class HomeActivity extends ColoredStatusBarActivity {
 
     private DatabaseAdapter databaseAdapter;
 

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,8 +36,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class AddFournisseurActivity extends Activity {
-    private static final String TAG = AddFournisseurActivity.class.getSimpleName();
+public class AddFournisseurActivity extends ColoredStatusBarActivity {
 
     EditText nom, tel, fax, gsm, adresse, email;
     ImageView ImageProfil;
@@ -49,7 +47,6 @@ public class AddFournisseurActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fournisseur_add);
-        Log.d(TAG, TAG);
 
         context = this;
         nom = (EditText) findViewById(R.id.nomcomletclient);

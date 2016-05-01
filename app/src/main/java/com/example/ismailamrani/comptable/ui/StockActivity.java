@@ -1,11 +1,9 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -13,7 +11,6 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
-import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
@@ -25,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -36,7 +32,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class StockActivity extends Activity implements OGActionBarInterface {
+public class StockActivity extends ColoredStatusBarActivity
+        implements OGActionBarInterface {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
 
@@ -66,7 +63,6 @@ public class StockActivity extends Activity implements OGActionBarInterface {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
-        new ColorStatutBar().ColorStatutBar(this);
         ButterKnife.bind(this);
 
         initializeUI();
@@ -155,8 +151,7 @@ public class StockActivity extends Activity implements OGActionBarInterface {
         if (stockAdapter == null) {
             stockAdapter = new StockAdapter(this, mProducts);
             stockRecyclerView.setAdapter(stockAdapter);
-        }
-        else
+        } else
             stockAdapter.animateTo(mProducts);
     }
 
