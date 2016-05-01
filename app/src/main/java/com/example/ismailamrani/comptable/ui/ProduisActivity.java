@@ -54,7 +54,6 @@ public class ProduisActivity extends ColoredStatusBarActivity
 
         List = (ListView) findViewById(R.id.List);
         new GetData().execute(PhpAPI.getProduit);
-
     }
 
     @Override
@@ -97,17 +96,13 @@ public class ProduisActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
 
         @Override
         protected void onPostExecute(String s) {
-
             super.onPostExecute(s);
             System.out.println(s);
-
 
             try {
                 JSONObject j = new JSONObject(s);
@@ -130,9 +125,6 @@ public class ProduisActivity extends ColoredStatusBarActivity
 
             ProduitAdapter adapter = new ProduitAdapter(context, ListProduit);
             List.setAdapter(adapter);
-
-
         }
     }
-
 }

@@ -52,7 +52,6 @@ public class ClientListActivity extends ColoredStatusBarActivity
 
         list = (ListView) findViewById(R.id.Listclient);
         new GetData().execute(PhpAPI.getClient);
-
     }
 
     @Override
@@ -96,17 +95,12 @@ public class ClientListActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
-
 
         @Override
         protected void onPostExecute(String s) {
-
             super.onPostExecute(s);
             System.out.println(s);
-
 
             try {
                 JSONObject j = new JSONObject(s);
@@ -128,9 +122,6 @@ public class ClientListActivity extends ColoredStatusBarActivity
 
             ClientAdapter adapter = new ClientAdapter(context, List);
             list.setAdapter(adapter);
-
-
         }
     }
-
 }

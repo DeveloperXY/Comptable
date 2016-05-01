@@ -58,7 +58,10 @@ public class EditClientActivity extends ColoredStatusBarActivity
         new getClientbyId().execute(PhpAPI.getClientById);
         ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
 
-        Picasso.with(this).load(R.drawable.sergio).transform(new CropCircleTransformation()).into(ImageProfil);
+        Picasso.with(this).
+                load(R.drawable.sergio)
+                .transform(new CropCircleTransformation())
+                .into(ImageProfil);
 
         nomprenom = (EditText) findViewById(R.id.nomcomletclient);
         tel = (EditText) findViewById(R.id.numtel);
@@ -66,19 +69,15 @@ public class EditClientActivity extends ColoredStatusBarActivity
         email = (EditText) findViewById(R.id.email);
         ajouter = (TextView) findViewById(R.id.enregistrerclient);
 
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClientModel clientItems = new ClientModel();
-                clientItems.setNomPrenom(nomprenom.getText().toString());
-                clientItems.setTel(tel.getText().toString());
-                clientItems.setAdresse(adresse.getText().toString());
-                clientItems.setEmail(email.getText().toString());
-                clientItems.setUrl(PhpAPI.editClient);
+        ajouter.setOnClickListener(v -> {
+            ClientModel clientItems = new ClientModel();
+            clientItems.setNomPrenom(nomprenom.getText().toString());
+            clientItems.setTel(tel.getText().toString());
+            clientItems.setAdresse(adresse.getText().toString());
+            clientItems.setEmail(email.getText().toString());
+            clientItems.setUrl(PhpAPI.editClient);
 
-                new addclient().execute(clientItems);
-
-            }
+            new addclient().execute(clientItems);
         });
     }
 
@@ -128,8 +127,6 @@ public class EditClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -137,21 +134,16 @@ public class EditClientActivity extends ColoredStatusBarActivity
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Modifier", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                     startActivity(new Intent(context, ClientListActivity.class));
 
                 } else if (resp == 0) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -159,8 +151,6 @@ public class EditClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
         }
-
-
     }
 
     //***************************** get client by ID ****************************
@@ -195,8 +185,6 @@ public class EditClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -204,13 +192,10 @@ public class EditClientActivity extends ColoredStatusBarActivity
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("client");
@@ -223,16 +208,12 @@ public class EditClientActivity extends ColoredStatusBarActivity
                             tel.setText(usr.getString("tel"));
                             adresse.setText(usr.getString("adresse"));
                             email.setText(usr.getString("email"));
-
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                 } else if (resp == 0) {
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -240,6 +221,5 @@ public class EditClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
         }
-
     }
 }

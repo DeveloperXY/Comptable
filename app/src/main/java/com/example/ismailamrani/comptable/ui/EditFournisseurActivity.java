@@ -66,24 +66,18 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
 
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
 
-        addFournisseur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fournisseur f = new Fournisseur();
-                f.setNom(nom.getText().toString());
-                f.setTel(gsm.getText().toString());
-                f.setFax(fax.getText().toString());
-                f.setFix(tel.getText().toString());
-                f.setAdresse(adresse.getText().toString());
-                f.setEmail(email.getText().toString());
-                f.setUrl(PhpAPI.editFournisseur);
+        addFournisseur.setOnClickListener(v -> {
+            Fournisseur f = new Fournisseur();
+            f.setNom(nom.getText().toString());
+            f.setTel(gsm.getText().toString());
+            f.setFax(fax.getText().toString());
+            f.setFix(tel.getText().toString());
+            f.setAdresse(adresse.getText().toString());
+            f.setEmail(email.getText().toString());
+            f.setUrl(PhpAPI.editFournisseur);
 
-
-                new addFournisseur().execute(f);
-
-            }
+            new addFournisseur().execute(f);
         });
-
     }
 
     //******************************** get Fournisseur by ID **********************
@@ -118,8 +112,6 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -127,13 +119,10 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("fournisseur");
@@ -147,13 +136,10 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                             fax.setText(usr.getString("fax"));
                             tel.setText(usr.getString("fix"));
                             email.setText(usr.getString("email"));
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 } else if (resp == 0) {
 
                     Toast toast = Toast.makeText(getApplicationContext(), "Fournisseur Not Found  !!!!", Toast.LENGTH_LONG);
@@ -163,7 +149,6 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
     //*********************** add Fournisseur *****************
@@ -205,8 +190,6 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -214,21 +197,16 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                     startActivity(new Intent(context, FournisseurListActivity.class));
 
                 } else if (resp == 0) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -236,9 +214,5 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
-
     }
-
-
 }

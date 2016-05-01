@@ -28,12 +28,9 @@ public class NewChargeActivity extends ColoredStatusBarActivity
         MyActionBar.setTitle("Ajouter Une Charge");
         MyActionBar.AddDisable();
         spinner = (ImageView) findViewById(R.id.spinner);
-        spinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SpinnerChargeActivity.class));
-            }
-        });
+        spinner.setOnClickListener(v ->
+                startActivity(new Intent(getApplicationContext(),
+                        SpinnerChargeActivity.class)));
 
     }
 

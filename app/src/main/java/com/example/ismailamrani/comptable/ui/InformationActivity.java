@@ -67,20 +67,13 @@ public class InformationActivity extends ColoredStatusBarActivity {
         imageInformation = (ImageView) findViewById(R.id.ImageProfilinformation);
         Picasso.with(this).load(PhpAPI.IpBackend + "clients/client.png").transform(new CropCircleTransformation()).into(imageInformation);
 
-        fermer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        fermer.setOnClickListener(v -> finish());
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : " + id);
         new getProduitbyId().execute(PhpAPI.getClientById);
-
     }
 
-    //
     private class getProduitbyId extends AsyncTask<String, Void, String> {
 
         @Override
@@ -112,8 +105,6 @@ public class InformationActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -121,13 +112,10 @@ public class InformationActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("client");
@@ -140,32 +128,22 @@ public class InformationActivity extends ColoredStatusBarActivity {
                             Adresse.setText(usr.getString("adresse"));
 
                             // final String idc=usr.getString("idclient");
-                            removeClient.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //  System.out.println(">>>>>>>>>> Remove Client "+idc);
-                                    new supprimer().execute(PhpAPI.removeClient);
-                                }
+                            removeClient.setOnClickListener(v -> {
+                                new supprimer().execute(PhpAPI.removeClient);
                             });
 
-                            editClient.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //  System.out.println(">>>>>>>>>> Remove Client "+idc);
-                                    Intent i = new Intent(context, EditClientActivity.class);
-                                    i.putExtra("id", id);
-                                    context.startActivity(i);
-                                }
+                            editClient.setOnClickListener(v -> {
+                                //  System.out.println(">>>>>>>>>> Remove Client "+idc);
+                                Intent i1 = new Intent(context, EditClientActivity.class);
+                                i1.putExtra("id", id);
+                                context.startActivity(i1);
                             });
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                 } else if (resp == 0) {
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -173,7 +151,6 @@ public class InformationActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
     //************************************** remove client ************************
@@ -209,8 +186,6 @@ public class InformationActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -221,7 +196,6 @@ public class InformationActivity extends ColoredStatusBarActivity {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
@@ -235,7 +209,5 @@ public class InformationActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

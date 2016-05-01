@@ -60,19 +60,15 @@ public class AddClientActivity extends ColoredStatusBarActivity
         email = (EditText) findViewById(R.id.email);
         ajouter = (TextView) findViewById(R.id.enregistrerclient);
 
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ClientModel clientItems = new ClientModel();
-                clientItems.setNomPrenom(nomprenom.getText().toString());
-                clientItems.setTel(tel.getText().toString());
-                clientItems.setAdresse(adresse.getText().toString());
-                clientItems.setEmail(email.getText().toString());
-                clientItems.setUrl(PhpAPI.addClient);
+        ajouter.setOnClickListener(v -> {
+            ClientModel clientItems = new ClientModel();
+            clientItems.setNomPrenom(nomprenom.getText().toString());
+            clientItems.setTel(tel.getText().toString());
+            clientItems.setAdresse(adresse.getText().toString());
+            clientItems.setEmail(email.getText().toString());
+            clientItems.setUrl(PhpAPI.addClient);
 
-                new addclient().execute(clientItems);
-
-            }
+            new addclient().execute(clientItems);
         });
     }
 
@@ -122,8 +118,6 @@ public class AddClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -131,21 +125,16 @@ public class AddClientActivity extends ColoredStatusBarActivity
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                     startActivity(new Intent(context, ClientListActivity.class));
 
                 } else if (resp == 0) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -153,9 +142,5 @@ public class AddClientActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
         }
-
-
     }
-
-
 }

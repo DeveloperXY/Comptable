@@ -70,18 +70,12 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
         callFournisseur = (RelativeLayout) findViewById(R.id.callFournisseur);
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(imageInformation);
 
-        fermer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        fermer.setOnClickListener(v -> finish());
 
         Intent i = getIntent();
         id = i.getExtras().getString("id");
         System.out.println(">>>>>>>>>>>> ID : " + id);
         new getFopurnisseurByID().execute(PhpAPI.getFournisseurByID);
-
     }
 
 
@@ -116,8 +110,6 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -125,13 +117,10 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("fournisseur");
@@ -145,45 +134,30 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
 
                             final String call = usr.getString("tel");
                             // final String idc=usr.getString("idclient");
-                            removeFournisseur.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    new supprimer().execute(PhpAPI.removeFournisseur);
+                            removeFournisseur.setOnClickListener(v -> new supprimer().execute(PhpAPI.removeFournisseur));
+
+                            editFournisseur.setOnClickListener(v -> {
+                                Intent i1 = new Intent(context, EditFournisseurActivity.class);
+                                i1.putExtra("id", id);
+                                context.startActivity(i1);
+                            });
+                            callFournisseur.setOnClickListener(v -> {
+                                // String n = "tel:5556";
+                                // Intent intent = new Intent( Intent.ACTION_CALL, Uri.parse( n ) );
+                                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                                callIntent.setData(Uri.parse("tel:" + call));
+                                try {
+                                    startActivity(callIntent);
+                                } catch (Exception e) {
+                                    System.out.println(" >>>>>>>>>>> " + e.getMessage());
                                 }
                             });
-
-                            editFournisseur.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent i = new Intent(context, EditFournisseurActivity.class);
-                                    i.putExtra("id", id);
-                                    context.startActivity(i);
-                                }
-                            });
-                            callFournisseur.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    // String n = "tel:5556";
-                                    // Intent intent = new Intent( Intent.ACTION_CALL, Uri.parse( n ) );
-                                    Intent callIntent = new Intent(Intent.ACTION_CALL);
-                                    callIntent.setData(Uri.parse("tel:" + call));
-                                    try {
-                                        startActivity(callIntent);
-                                    } catch (Exception e) {
-                                        System.out.println(" >>>>>>>>>>> " + e.getMessage());
-                                    }
-
-                                }
-                            });
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                 } else if (resp == 0) {
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -191,7 +165,6 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
 
@@ -228,8 +201,6 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -240,7 +211,6 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
@@ -254,7 +224,5 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

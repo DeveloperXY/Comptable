@@ -59,22 +59,17 @@ public class AddFournisseurActivity extends ColoredStatusBarActivity {
 
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
 
-        addFournisseur.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fournisseur f = new Fournisseur();
-                f.setNom(nom.getText().toString());
-                f.setTel(gsm.getText().toString());
-                f.setFax(fax.getText().toString());
-                f.setFix(tel.getText().toString());
-                f.setAdresse(adresse.getText().toString());
-                f.setEmail(email.getText().toString());
-                f.setUrl(PhpAPI.addFournisseur);
+        addFournisseur.setOnClickListener(v -> {
+            Fournisseur f = new Fournisseur();
+            f.setNom(nom.getText().toString());
+            f.setTel(gsm.getText().toString());
+            f.setFax(fax.getText().toString());
+            f.setFix(tel.getText().toString());
+            f.setAdresse(adresse.getText().toString());
+            f.setEmail(email.getText().toString());
+            f.setUrl(PhpAPI.addFournisseur);
 
-
-                new addFournisseur().execute(f);
-
-            }
+            new addFournisseur().execute(f);
         });
     }
 
@@ -118,8 +113,6 @@ public class AddFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -127,21 +120,16 @@ public class AddFournisseurActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                     startActivity(new Intent(context, FournisseurListActivity.class));
 
                 } else if (resp == 0) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -149,9 +137,5 @@ public class AddFournisseurActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
-
     }
-
-
 }

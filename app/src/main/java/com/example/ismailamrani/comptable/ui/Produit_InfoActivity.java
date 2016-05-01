@@ -56,15 +56,11 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
         Stock = (TextView) findViewById(R.id.Stockaff);
         Libelle = (TextView) findViewById(R.id.Libelleaff);
 
-
         Intent i = getIntent();
         id = i.getExtras().getInt("id");
         new getProduitbyId().execute(PhpAPI.getProduitById);
-
     }
 
-
-    //
     private class getProduitbyId extends AsyncTask<String, Void, String> {
 
         @Override
@@ -96,8 +92,6 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -105,13 +99,10 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("produit");
@@ -125,20 +116,14 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
                             Code.setText(usr.getString("codeBar"));
                             Stock.setText(usr.getString("qte"));
 
-
                             MyActionBar.setTitle(usr.getString("libelle"));
-
-
                             //itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                 } else if (resp == 0) {
-
                     //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
                     //  startActivity(intent);
                     Toast toast = Toast.makeText(getApplicationContext(), "Produit Not Found  !!!!", Toast.LENGTH_LONG);
@@ -148,7 +133,6 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override

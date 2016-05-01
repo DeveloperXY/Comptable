@@ -96,17 +96,12 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
                 return null;
             }
-
-
         }
-
 
         @Override
         protected void onPostExecute(String s) {
-
             super.onPostExecute(s);
             System.out.println(s);
-
 
             try {
                 JSONObject j = new JSONObject(s);
@@ -139,9 +134,6 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
 
             FourniseurAdapter fourniseurAdapter = new FourniseurAdapter(context, ListF);
             list.setAdapter(fourniseurAdapter);
-
-
         }
     }
-
 }

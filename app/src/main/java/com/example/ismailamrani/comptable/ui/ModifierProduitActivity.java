@@ -74,49 +74,33 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
         AddCodeBarre = (RelativeLayout) findViewById(R.id.AddCodeBarre);
         Intent intent = getIntent();
 
-
         id = intent.getExtras().getInt("id");
         new getproduitbyid().execute(PhpAPI.getProduitById);
 
-        produitImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
-            }
+        produitImage.setOnClickListener(v -> {
+            Intent intent1 = new Intent();
+            intent1.setType("image/*");
+            intent1.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent1, "Select Picture"), RESULT_LOAD_IMAGE);
         });
 
-
-        enregistrer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Product product = new Product();
-                product.setLibelle(nomProduit.getText().toString());
-                product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
-                product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
-                product.setPhoto(codeimage);
-                product.setCodeBarre(CodeBarre.getText().toString());
-                product.setUrl(PhpAPI.editproduit);
-                product.setLocale_ID(1);
-                product.setQte(0);
-                new editproduit().execute(product);
-
-            }
+        enregistrer.setOnClickListener(v -> {
+            Product product = new Product();
+            product.setLibelle(nomProduit.getText().toString());
+            product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
+            product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
+            product.setPhoto(codeimage);
+            product.setCodeBarre(CodeBarre.getText().toString());
+            product.setUrl(PhpAPI.editproduit);
+            product.setLocale_ID(1);
+            product.setQte(0);
+            new editproduit().execute(product);
         });
 
-        AddCodeBarre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                IntentIntegrator scanIntegrator = new IntentIntegrator((Activity) context);
-                scanIntegrator.initiateScan();
-
-            }
+        AddCodeBarre.setOnClickListener(v -> {
+            IntentIntegrator scanIntegrator = new IntentIntegrator((Activity) context);
+            scanIntegrator.initiateScan();
         });
-
-
     }
 
     private class getproduitbyid extends AsyncTask<String, Void, String> {
@@ -150,8 +134,6 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -159,13 +141,10 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     try {
                         JSONObject o = new JSONObject(s);
                         JSONArray listproduits = o.getJSONArray("produit");
@@ -177,17 +156,13 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                             PrixHt.setText(usr.getString("prixHT"));
                             PrixTtc.setText(usr.getString("prixTTC"));
                             CodeBarre.setText(usr.getString("codeBar"));
-
                             //itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-
                 } else if (resp == 0) {
-
                     //  Intent intent = new Intent(getApplicationContext(),ContactUs.class);
                     //  startActivity(intent);
                     Toast toast = Toast.makeText(getApplicationContext(), "Produit Not Found  !!!!", Toast.LENGTH_LONG);
@@ -197,12 +172,9 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
     //enregister
-
-
     private class editproduit extends AsyncTask<Product, Void, String> {
 
         @Override
@@ -242,8 +214,6 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
                 return null;
             }
-
-
         }
 
         @Override
@@ -251,22 +221,15 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
             super.onPostExecute(s);
             System.out.println(s);
 
-
             try {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Modifier", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
                     startActivity(new Intent(getApplicationContext(), ProduisActivity.class));
-
-
                 } else if (resp == 0) {
-
-
                     Toast toast = Toast.makeText(getApplicationContext(), "pas  modifier verifier les champs  !!!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -274,23 +237,18 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanningResult != null) {
             String scanContent = scanningResult.getContents();
 
             CodeBarre.setText(scanContent);
-
         }
 
         // image bitmap
-
         if (resultCode == RESULT_OK) {
             if (requestCode == RESULT_LOAD_IMAGE) {
                 Uri selectedImageUri = data.getData();

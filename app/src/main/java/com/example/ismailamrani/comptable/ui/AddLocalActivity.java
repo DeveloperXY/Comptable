@@ -49,38 +49,21 @@ public class AddLocalActivity extends ColoredStatusBarActivity {
         email_local = (EditText) findViewById(R.id.email_local);
         activite_local = (EditText) findViewById(R.id.activite_local);
         ajouter = (Button) findViewById(R.id.ajouterl);
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adresse = adresse_local.getText().toString();
-                ville = ville_local.getText().toString();
-                pays = pays_local.getText().toString();
-                tel = tel_local.getText().toString();
-                fix = fix_local.getText().toString();
-                fax = fax_local.getText().toString();
-                email = email_local.getText().toString();
-                activite = activite_local.getText().toString();
+        ajouter.setOnClickListener(v -> {
+            adresse = adresse_local.getText().toString();
+            ville = ville_local.getText().toString();
+            pays = pays_local.getText().toString();
+            tel = tel_local.getText().toString();
+            fix = fix_local.getText().toString();
+            fax = fax_local.getText().toString();
+            email = email_local.getText().toString();
+            activite = activite_local.getText().toString();
 
-              /*  LocalItems localItems = new LocalItems();
-                localItems.setAdresse(adresse_local.getText().toString());
-                localItems.setVille(ville_local.getText().toString());
-                localItems.setPays(pays_local.getText().toString());
-                localItems.setTel(tel_local.getText().toString());
-                localItems.setFix(fix_local.getText().toString());
-                localItems.setFax(fax_local.getText().toString());
-                localItems.setEmail(email_local.getText().toString());
-                localItems.setActivite(activite_local.getText().toString()); */
-
-
-                new addlocal().execute(PhpAPI.addlocal);
-            }
+            new addlocal().execute(PhpAPI.addlocal);
         });
-
-
     }
 
     private class addlocal extends AsyncTask<String, Void, String> {
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -116,12 +99,10 @@ public class AddLocalActivity extends ColoredStatusBarActivity {
                 InputStream is = httpConn.getInputStream();
                 return new convertInputStreamToString().convertInputStreamToString(is);
 
-
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
-
         }
 
         @Override
@@ -142,9 +123,7 @@ public class AddLocalActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
-
     }
-
 
     public class getQuery {
         public String getQuery(Map<String, Object> params) throws UnsupportedEncodingException {

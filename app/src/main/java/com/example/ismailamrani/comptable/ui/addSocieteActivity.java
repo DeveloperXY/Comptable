@@ -56,25 +56,18 @@ public class AddSocieteActivity extends ColoredStatusBarActivity {
         photo_societe = (ImageView) findViewById(R.id.photo_societe);
         ajouter = (TextView) findViewById(R.id.ajouter);
 
-        photo_societe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
-            }
-        });
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                noms = nom_scoiete.getText().toString();
-                photo = codeimage;
-                new addsociete().execute(PhpAPI.addSociete);
-            }
+        photo_societe.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
         });
 
-
+        ajouter.setOnClickListener(v -> {
+            noms = nom_scoiete.getText().toString();
+            photo = codeimage;
+            new addsociete().execute(PhpAPI.addSociete);
+        });
     }
 
     private class addsociete extends AsyncTask<String, Void, String> {
@@ -106,12 +99,10 @@ public class AddSocieteActivity extends ColoredStatusBarActivity {
                 InputStream is = httpConn.getInputStream();
                 return new convertInputStreamToString().convertInputStreamToString(is);
 
-
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
-
         }
 
         @Override
@@ -136,9 +127,7 @@ public class AddSocieteActivity extends ColoredStatusBarActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (resultCode == RESULT_OK) {
             if (requestCode == RESULT_LOAD_IMAGE) {
@@ -159,7 +148,6 @@ public class AddSocieteActivity extends ColoredStatusBarActivity {
                 //image.setImageURI(selectedImageUri);
             }
         }
-
     }
 
     public String getPath(Uri uri) {
@@ -208,6 +196,5 @@ public class AddSocieteActivity extends ColoredStatusBarActivity {
             return result.toString();
         }
     }
-
 }
 
