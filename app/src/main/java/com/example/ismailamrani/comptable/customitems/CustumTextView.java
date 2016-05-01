@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.TextView;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
-import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Ismail Amrani on 25/11/2015.

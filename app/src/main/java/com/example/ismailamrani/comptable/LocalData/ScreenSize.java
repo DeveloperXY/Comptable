@@ -27,12 +27,10 @@ public class ScreenSize extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_WIDTH + " INTEGER,"
                 + KEY_HEIGHT + " INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
-
     }
 
     @Override
@@ -49,7 +47,6 @@ public class ScreenSize extends SQLiteOpenHelper {
         values.put(KEY_HEIGHT, HEIGHT);
 
         db.insert(TABLE, null, values);
-
         db.close();
     }
 
@@ -63,7 +60,7 @@ public class ScreenSize extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         ScreenSizeModel size = new ScreenSizeModel();
-        size.setWHIDTH(cursor.getInt(1));
+        size.setWIDTH(cursor.getInt(1));
         size.setHEIGHT(cursor.getInt(2));
 
         return size;

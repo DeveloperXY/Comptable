@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.models.SpinnerModelCharge;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.SpinnerModelCharge;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,6 @@ public class SpinnerAdapter extends BaseAdapter {
 
     ArrayList<SpinnerModelCharge> List = new ArrayList<>();
     Context context;
-
 
     public SpinnerAdapter(Context context, ArrayList<SpinnerModelCharge> List) {
         this.context = context;

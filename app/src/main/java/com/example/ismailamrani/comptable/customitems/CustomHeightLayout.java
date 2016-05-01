@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
-import com.example.ismailamrani.comptable.R;
 
 
 /**
@@ -21,7 +21,6 @@ public class CustomHeightLayout extends RelativeLayout {
 
     public CustomHeightLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         this.context = context;
 
         ScreenSize Size = new ScreenSize(context);
@@ -38,7 +37,6 @@ public class CustomHeightLayout extends RelativeLayout {
         } finally {
             a.recycle();
         }
-
     }
 
     @Override

@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
-import com.example.ismailamrani.comptable.R;
 
 
 /**

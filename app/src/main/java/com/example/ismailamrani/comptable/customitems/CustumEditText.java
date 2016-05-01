@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.EditText;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
-import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Ismail Amrani on 25/11/2015.
@@ -21,7 +21,6 @@ public class CustumEditText extends EditText {
 
     public CustumEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
@@ -37,7 +36,6 @@ public class CustumEditText extends EditText {
             a.recycle();
         }
 
-
         ScreenSize Size = new ScreenSize(context);
         ScreenSizeModel HW = Size.GetSize(1);
         height = HW.getHEIGHT();
@@ -46,9 +44,7 @@ public class CustumEditText extends EditText {
         setTypeface(typeFace);
 
         setTextSize(TypedValue.COMPLEX_UNIT_PX, (size * height) / 492);
-
         setText(Frensh);
-
     }
 
     public void SetText(String Text) {

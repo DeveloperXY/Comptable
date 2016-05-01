@@ -55,7 +55,8 @@ public class Product {
         this.url = url;
     }
 
-    public Product() {}
+    public Product() {
+    }
 
     /**
      * @param array of products in JSON format

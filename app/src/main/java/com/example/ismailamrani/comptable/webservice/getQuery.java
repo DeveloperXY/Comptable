@@ -8,7 +8,6 @@ import java.util.Map;
  * Created by Redouane on 24/03/2016.
  */
 public class getQuery {
-
     public String getQuery(Map<String, Object> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;

@@ -25,7 +25,6 @@ public class CalculateScreenSize {
     }
 
     public int getStatutBarSize(int height, int widht) {
-
         if (height <= 320) {
             return 20;
         } else if (320 < height && height <= 480) {

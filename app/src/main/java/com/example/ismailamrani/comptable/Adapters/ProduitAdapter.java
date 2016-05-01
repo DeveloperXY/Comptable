@@ -11,15 +11,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.CustumTextView;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
-import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProduisActivity;
 import com.example.ismailamrani.comptable.ui.Produit_InfoActivity;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
+import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;

@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.ListView;

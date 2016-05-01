@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
-import com.example.ismailamrani.comptable.R;
 
 
 /**
@@ -27,7 +27,7 @@ public class CustomCarreWidthLayout extends RelativeLayout {
         ScreenSize Size = new ScreenSize(context);
         ScreenSizeModel HW = Size.GetSize(1);
         height = HW.getHEIGHT();
-        width = HW.getWHIDTH();
+        width = HW.getWIDTH();
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,

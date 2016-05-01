@@ -50,23 +50,18 @@ public class AddFournisseurAsync extends Activity {
         email = (EditText) findViewById(R.id.email_fournisseur);
         ajouter = (TextView) findViewById(R.id.ajouterfournisseur);
 
-        ajouter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fournisseur f = new Fournisseur();
-                f.setNom(nom.getText().toString());
-                f.setTel(tel.getText().toString());
-                f.setAdresse(adresse.getText().toString());
-                f.setFix(fix.getText().toString());
-                f.setFax(fax.getText().toString());
-                f.setEmail(email.getText().toString());
-                f.setUrl(PhpAPI.addFournisseur);
-                new addfournisseur().execute(f);
+        ajouter.setOnClickListener(v -> {
+            Fournisseur f = new Fournisseur();
+            f.setNom(nom.getText().toString());
+            f.setTel(tel.getText().toString());
+            f.setAdresse(adresse.getText().toString());
+            f.setFix(fix.getText().toString());
+            f.setFax(fax.getText().toString());
+            f.setEmail(email.getText().toString());
+            f.setUrl(PhpAPI.addFournisseur);
+            new addfournisseur().execute(f);
 
-            }
         });
-
-
     }
 
 

@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;

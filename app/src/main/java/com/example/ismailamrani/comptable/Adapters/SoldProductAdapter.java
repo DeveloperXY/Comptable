@@ -8,19 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
- *
+ * <p>
  * The prices of the products that are handled by this adapter do not reflect
  * their real prices in the distant database: they are calculated based on the
  * following formula:
- *
+ * <p>
  * price = original_price * quantity
  */
 public class SoldProductAdapter extends ArrayAdapter<Product> {

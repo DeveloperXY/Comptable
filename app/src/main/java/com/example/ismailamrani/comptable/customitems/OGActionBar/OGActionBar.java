@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.example.ismailamrani.comptable.customitems.CustumTextView;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.customitems.CustumTextView;
 
 /**
  * Created by Ismail Amrani on 23/03/2016.
@@ -33,26 +33,19 @@ public class OGActionBar extends RelativeLayout {
         Add = (RelativeLayout) Layout.findViewById(R.id.Add);
         Title = (CustumTextView) Layout.findViewById(R.id.Title);
 
-        Menu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Listener != null) {
-                    getActionBarListener().onMenuPressed();
-                }
+        Menu.setOnClickListener(v -> {
+            if (Listener != null) {
+                getActionBarListener().onMenuPressed();
             }
         });
 
-        Add.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Listener != null) {
-                    getActionBarListener().onAddPressed();
-                }
+        Add.setOnClickListener(v -> {
+            if (Listener != null) {
+                getActionBarListener().onAddPressed();
             }
         });
 
         addView(Layout);
-
     }
 
     public void setTitle(String title) {

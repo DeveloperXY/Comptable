@@ -46,11 +46,9 @@ public class FileProduit {
             e.printStackTrace();
             return false;
         }
-
     }
 
     public String read() {
-
         System.out.println(nomFile);
         BufferedReader br = null;
         String response = null;

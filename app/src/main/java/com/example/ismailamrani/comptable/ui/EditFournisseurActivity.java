@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;

@@ -5,15 +5,15 @@ package com.example.ismailamrani.comptable.models;
  */
 public class ScreenSizeModel {
 
-    int WHIDTH;
+    int WIDTH;
     int HEIGHT;
 
-    public int getWHIDTH() {
-        return WHIDTH;
+    public int getWIDTH() {
+        return WIDTH;
     }
 
-    public void setWHIDTH(int WHIDTH) {
-        this.WHIDTH = WHIDTH;
+    public void setWIDTH(int WHIDTH) {
+        this.WIDTH = WHIDTH;
     }
 
     public int getHEIGHT() {

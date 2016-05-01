@@ -12,7 +12,6 @@ public class Fournisseur {
     String fax;
     String email;
 
-
     public String getImage() {
         return image;
     }
@@ -30,7 +29,6 @@ public class Fournisseur {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getUrl() {
         return url;

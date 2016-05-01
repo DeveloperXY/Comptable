@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;

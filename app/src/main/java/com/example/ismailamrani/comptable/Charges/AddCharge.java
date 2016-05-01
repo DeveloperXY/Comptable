@@ -8,8 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.models.ChargeItems;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.ChargeItems;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;

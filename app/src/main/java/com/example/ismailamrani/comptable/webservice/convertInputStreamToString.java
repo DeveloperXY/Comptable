@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
  * Created by Redouane on 24/03/2016.
  */
 public class convertInputStreamToString {
-
     public String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
         String line = "";
