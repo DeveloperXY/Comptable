@@ -24,6 +24,7 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -68,7 +69,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
     private static int RESULT_LOAD_IMAGE = 1;
     private String selectedImagePath;
 
-    private String codeimage;
+    private String codeimage = "";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -115,21 +116,66 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                     Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                Product product = new Product(
-                        0,
-                        productName.getText().toString(),
-                        Double.parseDouble(priceHT.getText().toString()),
-                        Double.parseDouble(priceTTC.getText().toString()),
-                        barCodeLabel.getText().toString(),
-                        codeimage,
-                        0,
-                        1,
-                        PhpAPI.addProduit
-                );
 
-                new addproduit().execute(product);
                 break;
         }
+    }
+
+    /**
+     * Validates the new product's informations before adding it.
+     * @return a Product object representing the new product if everything
+     * goes right, or null otherwise.
+     */
+    private Product validateProductInfos() {
+        String dialogTitle;
+        String dialogMessage;
+
+        String name = productName.getText().toString();
+        String ht = priceHT.getText().toString();
+        String ttc = priceTTC.getText().toString();
+        String barcode = barCodeLabel.getText().toString();
+
+        boolean imageStatus = codeimage.length() != 0;
+        boolean nameStatus = name.length() != 0;
+        boolean htStatus = ht.length() != 0;
+        boolean ttcStatus = ttc.length() != 0;
+        boolean barcodeStatus = barcode.length() != 0;
+
+        if (imageStatus && nameStatus && htStatus && ttcStatus && barcodeStatus) {
+            return new Product(0, name, Double.parseDouble(ht),
+                    Double.parseDouble(ttc), barcode, codeimage,
+                    0, 1, PhpAPI.addProduit);
+        }
+        else if(!imageStatus) {
+            // No image was selected for the product.
+            dialogTitle = "Missing image.";
+            dialogMessage = "You need to provide an image for your product.";
+        }
+        else if (!nameStatus) {
+            // No name was specified for the product.
+            dialogTitle = "Missing product name.";
+            dialogMessage = "You need to provide a name for your product.";
+        }
+        else if (!htStatus) {
+            // No HT price was specified for the product.
+            dialogTitle = "Missing HT price.";
+            dialogMessage = "You need to specify an HT price for your product.";
+        }
+        else if (!ttcStatus) {
+            // No TTC price was specified for the product.
+            dialogTitle = "Missing TTC price.";
+            dialogMessage = "You need to specify an TTC price for your product.";
+        }
+        else {
+            // No bar code was specified for the product.
+            dialogTitle = "Missing bar code.";
+            dialogMessage = "You need to specify your product's bar code.";
+        }
+
+        // Something went wrong: show the error dialog.
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
+
+        return null;
     }
 
     private class addproduit extends AsyncTask<Product, Void, String> {
