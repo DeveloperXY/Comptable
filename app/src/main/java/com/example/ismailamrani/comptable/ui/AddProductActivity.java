@@ -25,6 +25,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
+import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -47,13 +48,22 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class AddProductActivity extends Activity implements OGActionBarInterface {
+    private static int RESULT_LOAD_IMAGE = 1;
 
-    OGActionBar MyActionBar;
+    private OkHttpClient client = new OkHttpClient();
+
+    private String selectedImagePath;
+    private String codeimage = "";
 
     @Bind(R.id.productImage)
     ImageView productImage;
@@ -66,10 +76,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
     @Bind(R.id.barCodeLabel)
     TextView barCodeLabel;
 
-    private static int RESULT_LOAD_IMAGE = 1;
-    private String selectedImagePath;
-
-    private String codeimage = "";
+    OGActionBar MyActionBar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -100,21 +107,9 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                 break;
             case R.id.addProductBtn:
                 // Add product to store
-                if (codeimage.equals("")) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "photo is required", Toast.LENGTH_LONG);
-                    toast.show();
-                } else if (productName.getText().toString().equals("")) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "produit name is required", Toast.LENGTH_LONG);
-                    toast.show();
-                } else if (priceHT.getText().toString().equals("")) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "prix HT is required", Toast.LENGTH_LONG);
-                    toast.show();
-                } else if (priceTTC.getText().toString().equals("")) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "prix TTC is required", Toast.LENGTH_LONG);
-                    toast.show();
-                } else if (barCodeLabel.getText().toString().equals("")) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "codeBarre is required", Toast.LENGTH_LONG);
-                    toast.show();
+                Product newProduct = validateProductInfos();
+                if (newProduct != null) {
+                    postAddProduct(PhpAPI.addProduit, null);
                 }
 
                 break;
@@ -178,69 +173,39 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
         return null;
     }
 
-    private class addproduit extends AsyncTask<Product, Void, String> {
+    void postAddProduct(String url, JSONObject userCredentials) {
+        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
 
-        @Override
-        protected String doInBackground(Product... params) {
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(final Call call, IOException e) {
+                        runOnUiThread(() -> Toast.makeText(AddProductActivity.this,
+                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    }
 
-            try {
-                URL url = new URL(params[0].getUrl());
-                URLConnection conn = url.openConnection();
-                HttpURLConnection httpConn = (HttpURLConnection) conn;
-                httpConn.setAllowUserInteraction(false);
-                httpConn.setInstanceFollowRedirects(true);
-                httpConn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                Map<String, Object> Params = new LinkedHashMap<>();
-                // Params.put("ID", id);
-                Params.put("Libelle", params[0].getLibelle());
-                Params.put("PrixHT", params[0].getPrixHT());
-                Params.put("PrixTTC", params[0].getPrixTTC());
-                Params.put("CodeBar", params[0].getCodeBarre());
-                Params.put("Qte", params[0].getQte());
-                Params.put("Photo", params[0].getPhoto());
-                Params.put("Local", params[0].getLocale_ID());
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        final String res = response.body().string();
+                        try {
+                            JSONObject obj = new JSONObject(res);
+                            int resp = obj.getInt("success");
+                            if (resp == 1) {
+                                Toast toast = Toast.makeText(getApplicationContext(), "successfully add", Toast.LENGTH_LONG);
+                                toast.show();
+                                finish();
+                                startActivity(new Intent(
+                                        AddProductActivity.this, ProduisActivity.class));
+                            } else if (resp == 0) {
+                                Toast.makeText(getApplicationContext(),
+                                        "erreur  !!!!", Toast.LENGTH_LONG).show();
+                            }
 
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(new getQuery().getQuery(Params));
-                writer.flush();
-                writer.close();
-                os.close();
-                httpConn.connect();
-                InputStream is = httpConn.getInputStream();
-
-                return new convertInputStreamToString().convertInputStreamToString(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            System.out.println(s);
-
-            try {
-                JSONObject j = new JSONObject(s);
-                int resp = j.getInt("success");
-                if (resp == 1) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "successfully add", Toast.LENGTH_LONG);
-                    toast.show();
-                    finish();
-                    startActivity(new Intent(
-                            AddProductActivity.this, ProduisActivity.class));
-                } else if (resp == 0) {
-                    Toast.makeText(getApplicationContext(),
-                            "erreur  !!!!", Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
     @Override
