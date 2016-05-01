@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
@@ -12,17 +14,30 @@ import com.example.ismailamrani.comptable.customitems.ColorStatutBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class StockActivity extends Activity implements OGActionBarInterface {
 
     private List<Product> mProducts;
     private StockAdapter stockAdapter;
+
+    private OkHttpClient client = new OkHttpClient();
 
     /**
      * The stock's products list.
@@ -64,12 +79,36 @@ public class StockActivity extends Activity implements OGActionBarInterface {
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
 
-        Product product1 = new Product(1,"product1",12d, 13d, "123456", "", 215, 0, "");
-        Product product2 = new Product(1,"product2",12d, 13d, "123456", "", 20, 0, "");
-        Product product3 = new Product(1,"product3",12d, 13d, "123456", "", 110, 0, "");
-        List<Product> products = Arrays.asList(product1, product2, product3);
+        try {
+            fetchStockProducts(PhpAPI.getStock, null);
+        } catch (IOException e) {
+            Toast.makeText(this, "An error occured when fetching stock products.",
+                    Toast.LENGTH_LONG).show();
+        }
+    }
 
-        stockAdapter = new StockAdapter(this, products);
-        stockRecyclerView.setAdapter(stockAdapter);
+    void fetchStockProducts(String url, JSONObject userCredentials) throws IOException {
+        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.GET);
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(final Call call, IOException e) {
+                        runOnUiThread(() -> Toast.makeText(StockActivity.this,
+                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        final String res = response.body().string();
+                        try {
+                            JSONObject obj = new JSONObject(res);
+                            Log.i("STOCK", obj.toString());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

@@ -20,6 +20,7 @@ public class PhpAPI {
     public static String IpBackend = DEV_HOST;
     public static final String login = IpBackend + "login.php";
 
+    public static final String getStock = IpBackend + "getStock.php";
     public static final String getProduit = IpBackend + "getProduit.php";
     public static final String addProduit = IpBackend + "addProduit.php";
     public static final String removeProduit = IpBackend + "removeProduit.php";
