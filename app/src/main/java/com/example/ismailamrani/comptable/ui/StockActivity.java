@@ -18,6 +18,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -36,6 +37,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class StockActivity extends Activity implements OGActionBarInterface {
+
+    private static final int REQUEST_ADD_PRODUCT = 100;
 
     private List<Product> mProducts;
     private StockAdapter stockAdapter;
@@ -88,7 +91,19 @@ public class StockActivity extends Activity implements OGActionBarInterface {
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddProductActivity.class));
+        startActivityForResult(new Intent(this, AddProductActivity.class),
+                REQUEST_ADD_PRODUCT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADD_PRODUCT:
+                if (resultCode == ResultCodes.PRODUCT_ADDED) {
+                    // Product successfully added
+                }
+                break;
+        }
     }
 
     /**

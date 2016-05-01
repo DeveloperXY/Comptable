@@ -26,6 +26,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -196,6 +197,7 @@ public class AddProductActivity extends Activity implements OGActionBarInterface
                                     Toast.makeText(getApplicationContext(),
                                             "Product successfully added.",
                                             Toast.LENGTH_LONG).show();
+                                    setResult(ResultCodes.PRODUCT_ADDED);
                                     finish();
                                     startActivity(new Intent(
                                             AddProductActivity.this, StockActivity.class));
