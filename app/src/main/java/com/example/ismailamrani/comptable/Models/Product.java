@@ -12,15 +12,15 @@ import java.util.List;
  */
 public class Product {
 
-    int ID;
-    String Libelle;
-    Double PrixHT;
-    Double PrixTTC;
-    String CodeBarre;
-    String Photo;
-    int Qte;
-    int Locale_ID;
-    String url;
+    private int ID;
+    private String Libelle;
+    private Double PrixHT;
+    private Double PrixTTC;
+    private String CodeBarre;
+    private String Photo;
+    private int Qte;
+    private int Locale_ID;
+    private String url;
 
     /**
      * Overloaded constructor.
@@ -75,6 +75,28 @@ public class Product {
         }
 
         return products;
+    }
+
+
+    /**
+     * @return a JSON object representing this Product object.
+     */
+    public JSONObject toJSON() {
+        JSONObject object = new JSONObject();
+        try {
+            object.put("Libelle", Libelle);
+            object.put("PrixHT", PrixHT);
+            object.put("PrixTTC", PrixTTC);
+            object.put("CodeBar", CodeBarre);
+            object.put("Qte", Qte);
+            object.put("Photo", Photo);
+            object.put("Local", Locale_ID);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return object;
     }
 
     public String getUrl() {
