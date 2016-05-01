@@ -49,6 +49,8 @@
         </activity>
         <activity
             android:name=".ui.AddProductActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.AddProduit" />
