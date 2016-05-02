@@ -116,7 +116,6 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
             quantityLabel.setText(String.valueOf(product.getQte()));
             Picasso.with(itemView.getContext())
                     .load(R.drawable.iphone)
-                    .transform(new BlurTransformation(itemView.getContext()))
                     .into(productImage);
         }
     }

@@ -14,6 +14,31 @@
         android:src="@drawable/iphone" />
 
     <TextView
+        android:id="@+id/colorFilterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="false"
+        android:background="@mipmap/ic_bg_ab"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:layout_above="@+id/productLabel"
+        android:autoText="false"
+        android:alpha="0.6" />
+
+    <TextView
+        android:id="@+id/productLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/ic_bg_ab"
+        android:gravity="left|bottom"
+        android:padding="10dp"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        tools:text="Samsung Galaxy S7"
+        android:alpha="0.8" />
+
+    <TextView
         android:id="@+id/quantityLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,16 +48,5 @@
         android:textSize="26sp"
         android:textStyle="bold"
         tools:text="215" />
-
-    <TextView
-        android:id="@+id/productLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#889e9e9e"
-        android:padding="10dp"
-        android:text="New Text"
-        android:textColor="#ffffff"
-        android:textSize="12sp" />
 
 </RelativeLayout>
