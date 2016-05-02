@@ -15,8 +15,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.wasabeef.picasso.transformations.BlurTransformation;
-
 /**
  * Created by Mohammed Aouf ZOUAG on 30/04/2016.
  */

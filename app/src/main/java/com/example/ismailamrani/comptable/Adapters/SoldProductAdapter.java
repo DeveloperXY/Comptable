@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -30,11 +31,14 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
 
     private Context context;
     private List<Product> products;
+    private int lastPosition;
 
     public SoldProductAdapter(Context context, List<Product> products) {
         super(context, -1, products);
         this.context = context;
         this.products = products;
+
+        lastPosition = -1;
     }
 
     @Override
@@ -48,6 +52,7 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
             // Setup the ViewHolder
             viewHolder = new ViewHolder();
             viewHolder.productText = (TextView) convertView.findViewById(R.id.productText);
+            viewHolder.deleteIcon = (ImageView) convertView.findViewById(R.id.deleteIcon);
             // store the holder with the view.
             convertView.setTag(viewHolder);
         } else {
@@ -55,9 +60,20 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
         }
 
         Product product = products.get(position);
-
         viewHolder.productText
                 .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
+
+        convertView.setOnClickListener(v -> {
+            viewHolder.deleteIcon.setVisibility(View.VISIBLE);
+            if (lastPosition != -1) {
+                ((ViewHolder) parent.getChildAt(lastPosition)
+                        .getTag())
+                        .deleteIcon.setVisibility(View.INVISIBLE);
+            }
+
+            lastPosition = position;
+        });
+
         return convertView;
     }
 
@@ -89,5 +105,6 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
 
     static class ViewHolder {
         TextView productText;
+        ImageView deleteIcon;
     }
 }
