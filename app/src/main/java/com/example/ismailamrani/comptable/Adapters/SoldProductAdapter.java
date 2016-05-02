@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
@@ -58,6 +59,12 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        viewHolder.deleteIcon
+                .setOnClickListener(v -> {
+                    products.remove(position);
+                    notifyDataSetChanged();
+                });
 
         Product product = products.get(position);
         viewHolder.productText
