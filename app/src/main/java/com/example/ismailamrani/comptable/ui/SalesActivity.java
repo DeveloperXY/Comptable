@@ -6,6 +6,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,6 +57,8 @@ public class SalesActivity extends ColoredStatusBarActivity
     EditText priceField;
     @Bind(R.id.priceLabel)
     TextView priceLabel;
+    @Bind(R.id.allowEditCheckbox)
+    CheckBox allowEditCheckbox;
 
     private Product mProduct;
     private List<Product> toBeSoldProducts;
@@ -69,13 +73,20 @@ public class SalesActivity extends ColoredStatusBarActivity
         setContentView(R.layout.sales_layout);
         ButterKnife.bind(this);
 
-        setupActionBar();
+        initializeUI();
         attachTextWatchers();
 
         toBeSoldProducts = new ArrayList<>();
         soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
         soldProductAdapter.setListener(this::calculateTotalPrice);
         productsListview.setAdapter(soldProductAdapter);
+    }
+
+    private void initializeUI() {
+        setupActionBar();
+
+        allowEditCheckbox.setOnCheckedChangeListener(
+                (buttonView, isChecked) -> priceField.setEnabled(isChecked));
     }
 
     private void setupActionBar() {
