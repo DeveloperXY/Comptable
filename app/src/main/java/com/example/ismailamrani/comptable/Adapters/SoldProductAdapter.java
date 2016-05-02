@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -31,6 +32,7 @@ import java.util.List;
 public class SoldProductAdapter extends ArrayAdapter<Product> {
 
     private Context context;
+    private SaleProductListener listener;
     private List<Product> products;
     private int lastPosition;
 
@@ -62,23 +64,30 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
 
         viewHolder.deleteIcon
                 .setOnClickListener(v -> {
+                    lastPosition = -1;
+
                     products.remove(position);
                     notifyDataSetChanged();
+                    listener.onProductRemoved();
                 });
 
         Product product = products.get(position);
         viewHolder.productText
                 .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
 
-        convertView.setOnClickListener(v -> {
-            viewHolder.deleteIcon.setVisibility(View.VISIBLE);
-            if (lastPosition != -1) {
-                ((ViewHolder) parent.getChildAt(lastPosition)
-                        .getTag())
-                        .deleteIcon.setVisibility(View.INVISIBLE);
+        convertView.setOnTouchListener((v, event) -> {
+            if (viewHolder.deleteIcon.getVisibility() == View.INVISIBLE) {
+                viewHolder.deleteIcon.setVisibility(View.VISIBLE);
+                if (lastPosition != -1) {
+                    ((ViewHolder) parent.getChildAt(lastPosition)
+                            .getTag())
+                            .deleteIcon.setVisibility(View.INVISIBLE);
+                }
+
+                lastPosition = position;
             }
 
-            lastPosition = position;
+            return false;
         });
 
         return convertView;
@@ -113,5 +122,13 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
     static class ViewHolder {
         TextView productText;
         ImageView deleteIcon;
+    }
+
+    public void setListener(SaleProductListener listener) {
+        this.listener = listener;
+    }
+
+    public interface SaleProductListener {
+        void onProductRemoved();
     }
 }

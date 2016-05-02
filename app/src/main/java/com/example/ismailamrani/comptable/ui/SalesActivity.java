@@ -74,6 +74,7 @@ public class SalesActivity extends ColoredStatusBarActivity
 
         toBeSoldProducts = new ArrayList<>();
         soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
+        soldProductAdapter.setListener(this::calculateTotalPrice);
         productsListview.setAdapter(soldProductAdapter);
     }
 
