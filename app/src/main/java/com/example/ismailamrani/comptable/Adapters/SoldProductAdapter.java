@@ -86,6 +86,8 @@ public class SoldProductAdapter extends ArrayAdapter<Product> {
 
                 lastPosition = position;
             }
+            else
+                viewHolder.deleteIcon.setVisibility(View.INVISIBLE);
 
             return false;
         });
