@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,8 +62,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
                 // A product has been selected
                 selectedProduct = ((Product) item);
                 productField.setText(selectedProduct.getLibelle());
-            }
-            else {
+            } else {
                 // A supplier has been selected
                 selectedSupplier = ((Supplier) item);
                 supplierField.setText(selectedSupplier.getNom());
@@ -77,7 +75,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
     protected void onPause() {
         super.onPause();
 
-        if(bottomSheetDialog != null)
+        if (bottomSheetDialog != null)
             bottomSheetDialog.dismiss();
     }
 

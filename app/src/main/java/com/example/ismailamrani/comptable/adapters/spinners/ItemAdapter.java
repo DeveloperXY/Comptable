@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.adapters.spinners;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -45,14 +46,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         return mItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnTouchListener {
 
         public TextView textView;
         public Item item;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            itemView.setOnTouchListener(this);
             textView = (TextView) itemView.findViewById(R.id.textView);
         }
 
@@ -62,10 +63,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         @Override
-        public void onClick(View v) {
-            if (mListener != null) {
-                mListener.onItemClick(item);
-            }
+        public boolean onTouch(View v, MotionEvent event) {
+            mListener.onItemClick(item);
+            return false;
         }
     }
 
