@@ -17,7 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PurchasesActivity extends AppCompatActivity
+public class PurchasesActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
 
     private Product selectedProduct;
