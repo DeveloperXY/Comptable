@@ -10,8 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.spinners.ItemAdapter;
+import com.example.ismailamrani.comptable.models.Item;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -35,6 +38,8 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
 
     private OkHttpClient client = new OkHttpClient();
 
+    private RecyclerView recyclerView;
+    private ItemAdapter itemAdapter;
     private Context context;
     private int spinnerID;
 
@@ -57,10 +62,9 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
     }
 
     private void setupRecyclerView() {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.spinnerRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.spinnerRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
-        recyclerView.setAdapter(new ItemAdapter(createItems(), item -> dismiss()));
     }
 
     void getFetch(String url, JSONObject data) {
@@ -85,18 +89,18 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                 if (resp == 0) {
                                     Toast.makeText(context, "Error",
                                             Toast.LENGTH_SHORT).show();
-                                }
-                                else {
+                                } else {
                                     if (spinnerID == R.id.productSpinner) {
                                         try {
                                             List<Product> products = Product.parseProducts(
                                                     obj.getJSONArray("produit"));
-                                            Log.i("RESULT", products.toString());
+                                            populateRecyclerView(Stream.of(products)
+                                                    .map(p -> ((Item) p))
+                                                    .collect(Collectors.toList()));
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         Log.i("RESULT", "Fournisseurs: " + res);
                                     }
                                 }
@@ -107,5 +111,13 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                         }
                     }
                 });
+    }
+
+    private void populateRecyclerView(List<Item> items) {
+        if (itemAdapter == null) {
+            itemAdapter = new ItemAdapter(items, item -> dismiss());
+            recyclerView.setAdapter(itemAdapter);
+        } else
+            itemAdapter.refill(items);
     }
 }

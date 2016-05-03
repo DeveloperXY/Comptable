@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private ItemListener mListener;
 
     public ItemAdapter(List<Item> items, ItemListener listener) {
-        mItems = items;
+        mItems = new ArrayList<>(items);
         mListener = listener;
     }
 
@@ -57,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public void setData(Item item) {
             this.item = item;
-            textView.setText(item.getTitle());
+            textView.setText(item.getName());
         }
 
         @Override
@@ -66,6 +67,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 mListener.onItemClick(item);
             }
         }
+    }
+
+    public void refill(List<Item> items) {
+        mItems.clear();
+        mItems.addAll(items);
+        notifyDataSetChanged();
     }
 
     public interface ItemListener {
