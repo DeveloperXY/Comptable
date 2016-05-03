@@ -1,5 +1,12 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Redouane on 22/03/2016.
  */
@@ -88,9 +95,28 @@ public class Supplier implements Item {
         this.email = email;
     }
 
-
     @Override
     public String getLabel() {
         return nom;
+    }
+
+    /**
+     * @param array of products in JSON format
+     * @return list of parsed suppliers
+     */
+    public static List<Supplier> parseSuppliers(JSONArray array) {
+        List<Supplier> suppliers = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject supplier = array.getJSONObject(i);
+                suppliers.add(new Supplier(supplier));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return suppliers;
     }
 }

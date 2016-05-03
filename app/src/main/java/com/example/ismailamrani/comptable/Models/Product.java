@@ -33,7 +33,7 @@ public class Product implements Item {
                 object.getInt("idp"),
                 object.getString("libelle"),
                 object.getDouble("prixHT"),
-                object.getDouble("PrixTTC"),
+                object.getDouble("prixTTC"),
                 object.getString("codeBar"),
                 object.getString("photo"),
                 object.getInt("qte"),
@@ -77,7 +77,6 @@ public class Product implements Item {
 
         return products;
     }
-
 
     /**
      * @return a JSON object representing this Product object.

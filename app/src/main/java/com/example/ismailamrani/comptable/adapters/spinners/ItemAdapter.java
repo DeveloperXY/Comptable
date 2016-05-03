@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public void setData(Item item) {
             this.item = item;
-            textView.setText(item.getName());
+            textView.setText(item.getLabel());
         }
 
         @Override
