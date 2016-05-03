@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textView"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginStart="16dp"
-    android:gravity="center"
-    android:textColor="#787878"
-    android:textSize="22sp"
-    tools:text="Hello World" />
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left|center_vertical"
+        android:textSize="22sp"
+        tools:text="Hello World"
+        android:paddingLeft="16dp"
+        android:textColor="#FF000000" />
+</RelativeLayout>
+

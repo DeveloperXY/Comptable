@@ -10,9 +10,10 @@ import java.util.List;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class Product extends Item {
+public class Product implements Item {
 
     private int ID;
+    private String Libelle;
     private Double PrixHT;
     private Double PrixTTC;
     private String CodeBarre;
@@ -32,7 +33,7 @@ public class Product extends Item {
                 object.getInt("idp"),
                 object.getString("libelle"),
                 object.getDouble("prixHT"),
-                object.getDouble("prixTTC"),
+                object.getDouble("PrixTTC"),
                 object.getString("codeBar"),
                 object.getString("photo"),
                 object.getInt("qte"),
@@ -43,8 +44,8 @@ public class Product extends Item {
 
     public Product(int ID, String libelle, Double prixHT, Double prixTTC,
                    String codeBarre, String photo, int qte, int locale_ID, String url) {
-        super(libelle);
         this.ID = ID;
+        Libelle = libelle;
         PrixHT = prixHT;
         PrixTTC = prixTTC;
         CodeBarre = codeBarre;
@@ -55,7 +56,6 @@ public class Product extends Item {
     }
 
     public Product() {
-        super("");
     }
 
     /**
@@ -85,7 +85,7 @@ public class Product extends Item {
     public JSONObject toJSON() {
         JSONObject object = new JSONObject();
         try {
-            object.put("Libelle", nom);
+            object.put("Libelle", Libelle);
             object.put("PrixHT", PrixHT);
             object.put("PrixTTC", PrixTTC);
             object.put("CodeBar", CodeBarre);
@@ -117,11 +117,11 @@ public class Product extends Item {
     }
 
     public String getLibelle() {
-        return nom;
+        return Libelle;
     }
 
     public void setLibelle(String libelle) {
-        nom = libelle;
+        Libelle = libelle;
     }
 
     public Double getPrixHT() {
@@ -170,5 +170,10 @@ public class Product extends Item {
 
     public void setLocale_ID(int locale_ID) {
         Locale_ID = locale_ID;
+    }
+
+    @Override
+    public String getLabel() {
+        return Libelle;
     }
 }
