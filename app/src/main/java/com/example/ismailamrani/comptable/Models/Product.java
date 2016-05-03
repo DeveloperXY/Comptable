@@ -32,8 +32,8 @@ public class Product {
         this(
                 object.getInt("idp"),
                 object.getString("libelle"),
-                object.getDouble("PrixHT"),
-                object.getDouble("PrixTTC"),
+                object.getDouble("prixHT"),
+                object.getDouble("prixTTC"),
                 object.getString("codeBar"),
                 object.getString("photo"),
                 object.getInt("qte"),

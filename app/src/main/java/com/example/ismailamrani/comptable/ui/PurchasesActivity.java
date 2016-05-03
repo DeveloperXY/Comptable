@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -19,9 +18,7 @@ public class PurchasesActivity extends AppCompatActivity
         implements OGActionBarInterface {
 
     private OGActionBar mActionBar;
-    BottomSheetBehavior behavior;
     private SpinnerBottomSheet bottomSheetDialog;
-    private ItemAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,19 +38,19 @@ public class PurchasesActivity extends AppCompatActivity
 
     @OnClick({R.id.supplierSpinner, R.id.productSpinner})
     public void onSpinnerClick(View view) {
-        switch (view.getId()) {
-            case R.id.supplierSpinner:
-                showBottomSheetDialog();
-                break;
-            case R.id.productSpinner:
-
-                break;
-        }
+        showBottomSheetDialog(view.getId());
     }
 
-    private void showBottomSheetDialog() {
-        bottomSheetDialog = new SpinnerBottomSheet(this);
+    private void showBottomSheetDialog(int spinnerID) {
+        bottomSheetDialog = new SpinnerBottomSheet(this, spinnerID);
         bottomSheetDialog.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        bottomSheetDialog.dismiss();
     }
 
     @Override
