@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.SpinnerAdapter;
+import com.example.ismailamrani.comptable.adapters.spinners.SpinnerAdapter;
 import com.example.ismailamrani.comptable.localdata.ToDelete.GetSpinnerLocal;
 
 /**
