@@ -72,7 +72,8 @@ public class PurchasesActivity extends AppCompatActivity
     protected void onPause() {
         super.onPause();
 
-        bottomSheetDialog.dismiss();
+        if(bottomSheetDialog != null)
+            bottomSheetDialog.dismiss();
     }
 
     @Override

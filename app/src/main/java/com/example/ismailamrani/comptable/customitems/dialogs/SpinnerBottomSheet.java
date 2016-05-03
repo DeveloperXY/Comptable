@@ -14,6 +14,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.spinners.ItemAdapter;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Item;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
@@ -39,10 +40,13 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
 
     private OkHttpClient client = new OkHttpClient();
 
-    private RecyclerView recyclerView;
-    private ItemAdapter itemAdapter;
     private Context context;
+    private RecyclerView recyclerView;
+    private OGActionBar mActionBar;
+
+    private ItemAdapter itemAdapter;
     private OnItemSelectedListener listener;
+
     private int spinnerID;
 
     public SpinnerBottomSheet(@NonNull Context context, int spinnerID) {
@@ -54,8 +58,15 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
         setContentView(view);
         setOnDismissListener(dialog -> this.context = null);
 
+        setupActionBar();
         setupRecyclerView();
         fetchAppropriateData();
+    }
+
+    private void setupActionBar() {
+        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
+        mActionBar.setTitle("Loading...");
+        mActionBar.AddDisable();
     }
 
     private void fetchAppropriateData() {
@@ -93,6 +104,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     if (spinnerID == R.id.productSpinner) {
+                                        mActionBar.setTitle("Available products");
                                         try {
                                             List<Product> products = Product.parseProducts(
                                                     obj.getJSONArray("produit"));
@@ -103,6 +115,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                             e.printStackTrace();
                                         }
                                     } else {
+                                        mActionBar.setTitle("Available suppliers");
                                         try {
                                             List<Supplier> suppliers = Supplier.parseSuppliers(
                                                     obj.getJSONArray("fournisseur"));
