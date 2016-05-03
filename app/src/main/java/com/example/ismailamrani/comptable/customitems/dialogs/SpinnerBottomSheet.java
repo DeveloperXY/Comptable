@@ -42,6 +42,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
     private RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
     private Context context;
+    private OnItemSelectedListener listener;
     private int spinnerID;
 
     public SpinnerBottomSheet(@NonNull Context context, int spinnerID) {
@@ -124,9 +125,20 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
 
     private void populateRecyclerView(List<Item> items) {
         if (itemAdapter == null) {
-            itemAdapter = new ItemAdapter(items, item -> dismiss());
+            itemAdapter = new ItemAdapter(items, item -> {
+                listener.onItemSelected(item);
+                dismiss();
+            });
             recyclerView.setAdapter(itemAdapter);
         } else
             itemAdapter.refill(items);
+    }
+
+    public void setListener(OnItemSelectedListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(Item item);
     }
 }
