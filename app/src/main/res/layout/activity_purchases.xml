@@ -366,24 +366,4 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottom_sheet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_behavior="@string/bottom_sheet_behavior">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/spinnerRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:background="#fff" />
-
-    </LinearLayout>
-
 </android.support.design.widget.CoordinatorLayout>
