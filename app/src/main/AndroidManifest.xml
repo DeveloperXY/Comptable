@@ -114,8 +114,9 @@
         <activity
             android:name=".ui.ColoredStatusBarActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.PurchasesActivity" />
-        <activity android:name=".ui.ProductSpinnerActivity"></activity>
+        <activity
+            android:name=".ui.PurchasesActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

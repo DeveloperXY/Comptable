@@ -1,150 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back_vente"
-    android:orientation="vertical"
-    android:weightSum="246">
-
-    <include layout="@layout/custom_actionbar_include" />
+    android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="226"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_vente"
         android:orientation="vertical"
-        android:weightSum="2264">
+        android:weightSum="246">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="300">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:src="@drawable/vente" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="33" />
+        <include layout="@layout/custom_actionbar_include" />
 
         <LinearLayout
-            android:id="@+id/layoutForm"
+            android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1000"
-            android:orientation="horizontal"
-            android:weightSum="1390">
+            android:layout_weight="226"
+            android:orientation="vertical"
+            android:weightSum="2264">
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="300">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/vente" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="33" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1250"
-                android:orientation="vertical"
-                android:weightSum="1260">
+                android:id="@+id/layoutForm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1000"
+                android:orientation="horizontal"
+                android:weightSum="1390">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="60" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70" />
 
                 <LinearLayout
-                    android:id="@+id/layoutFournisseur"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="200"
-                    android:background="@drawable/vente_style"
-                    android:orientation="horizontal"
-                    android:weightSum="1196">
-
-                    <EditText
-                        android:id="@+id/supplierField"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1000"
-                        android:background="@android:color/transparent"
-                        android:hint="Fournisseur"
-                        android:paddingLeft="20dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1250"
+                    android:orientation="vertical"
+                    android:weightSum="1260">
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="196">
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60" />
 
-                        <ImageView
-                            android:id="@+id/supplierSpinner"
-                            android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/layoutFournisseur"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="200"
+                        android:background="@drawable/vente_style"
+                        android:orientation="horizontal"
+                        android:weightSum="1196">
+
+                        <EditText
+                            android:id="@+id/supplierField"
+                            android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
-                            android:scaleType="fitEnd"
-                            android:src="@drawable/spinner" />
-                    </RelativeLayout>
+                            android:layout_weight="1000"
+                            android:background="@android:color/transparent"
+                            android:hint="Fournisseur"
+                            android:paddingLeft="20dp" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="196">
+
+                            <ImageView
+                                android:id="@+id/supplierSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:scaleType="fitEnd"
+                                android:src="@drawable/spinner" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutProduit"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="200"
+                        android:background="@drawable/vente_style"
+                        android:orientation="horizontal"
+                        android:weightSum="1196">
+
+                        <EditText
+                            android:id="@+id/productField"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1000"
+                            android:background="@android:color/transparent"
+                            android:hint="Produit"
+                            android:paddingLeft="20dp" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="196">
+
+                            <ImageView
+                                android:id="@+id/productSpinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="5dp"
+                                android:scaleType="fitEnd"
+                                android:src="@drawable/spinner" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutQte"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="200"
+                        android:background="@drawable/vente_style"
+                        android:orientation="horizontal"
+                        android:weightSum="1174">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1032">
+
+                            <EditText
+                                android:id="@+id/quantityField"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:hint="Quantité"
+                                android:paddingLeft="20dp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="200"
+                        android:background="@drawable/vente_style"
+                        android:orientation="horizontal"
+                        android:weightSum="1174">
+
+                        <EditText
+                            android:id="@+id/priceField"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1026"
+                            android:background="@android:color/transparent"
+                            android:hint="Prix unitaire"
+                            android:paddingLeft="20dp" />
+
+                        <include layout="@layout/dh_layout_include" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="200"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:weightSum="1260">
+
+                        <Button
+                            android:id="@+id/nextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:layout_weight="200"
+                            android:background="@drawable/add_btn"
+                            android:text="Suivant >>"
+                            android:textColor="#ffffffff" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="right"
+                            android:layout_weight="37" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40" />
+
                 </LinearLayout>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="40" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70" />
+            </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/layoutProduit"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="200"
-                    android:background="@drawable/vente_style"
-                    android:orientation="horizontal"
-                    android:weightSum="1196">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30" />
 
-                    <EditText
-                        android:id="@+id/productField"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1000"
-                        android:background="@android:color/transparent"
-                        android:hint="Produit"
-                        android:paddingLeft="20dp" />
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="196">
-
-                        <ImageView
-                            android:id="@+id/productSpinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="5dp"
-                            android:scaleType="fitEnd"
-                            android:src="@drawable/spinner" />
-                    </RelativeLayout>
-                </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutProductList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="460"
+                android:orientation="horizontal"
+                android:weightSum="1390">
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="40" />
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70" />
+
+                <ListView
+                    android:id="@+id/productsListview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1250"
+                    android:background="@drawable/vente_style"
+                    android:divider="@null" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30" />
+
+            <LinearLayout
+                android:id="@+id/layoutTotalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="150"
+                android:orientation="horizontal"
+                android:weightSum="1390">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70" />
 
                 <LinearLayout
-                    android:id="@+id/layoutQte"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="200"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1250"
                     android:background="@drawable/vente_style"
                     android:orientation="horizontal"
                     android:weightSum="1174">
@@ -154,207 +303,87 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1032">
 
-                        <EditText
-                            android:id="@+id/quantityField"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/priceSumLabel"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:background="@android:color/transparent"
-                            android:hint="Quantité"
-                            android:paddingLeft="20dp" />
+                            android:gravity="center_vertical"
+                            android:hint="Quantity"
+                            android:paddingLeft="20dp"
+                            android:text="Total à payer:"
+                            android:textColor="#3d5469"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/priceLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@+id/priceSumLabel"
+                            android:gravity="center_vertical|right"
+                            android:paddingRight="10dp"
+                            android:text="0"
+                            android:textColor="#ff000000"
+                            tools:text="1500" />
                     </RelativeLayout>
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="40" />
-
-                <LinearLayout
-                    android:id="@+id/layoutPrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="200"
-                    android:background="@drawable/vente_style"
-                    android:orientation="horizontal"
-                    android:weightSum="1174">
-
-                    <EditText
-                        android:id="@+id/priceField"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1026"
-                        android:background="@android:color/transparent"
-                        android:hint="Prix unitaire"
-                        android:paddingLeft="20dp" />
 
                     <include layout="@layout/dh_layout_include" />
                 </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="40" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="200"
-                    android:gravity="right"
-                    android:orientation="horizontal"
-                    android:weightSum="1260">
-
-                    <Button
-                        android:id="@+id/nextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_weight="200"
-                        android:background="@drawable/add_btn"
-                        android:text="Suivant >>"
-                        android:textColor="#ffffffff" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="right"
-                        android:layout_weight="37" />
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="40" />
-
             </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
-
-        <LinearLayout
-            android:id="@+id/layoutProductList"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="460"
-            android:orientation="horizontal"
-            android:weightSum="1390">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-
-            <ListView
-                android:id="@+id/productsListview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1250"
-                android:background="@drawable/vente_style"
-                android:divider="@null" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
-
-        <LinearLayout
-            android:id="@+id/layoutTotalPrice"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="150"
-            android:orientation="horizontal"
-            android:weightSum="1390">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30" />
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1250"
-                android:background="@drawable/vente_style"
+                android:id="@+id/layoutValidateButton"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="150"
                 android:orientation="horizontal"
-                android:weightSum="1174">
+                android:weightSum="1390">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1032">
+                    android:layout_weight="70" />
 
-                    <TextView
-                        android:id="@+id/priceSumLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:gravity="center_vertical"
-                        android:hint="Quantity"
-                        android:paddingLeft="20dp"
-                        android:text="Total à payer:"
-                        android:textColor="#3d5469"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                <Button
+                    android:id="@+id/confirmSaleButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1250"
+                    android:background="@drawable/enregistrer_clint_btn"
+                    android:onClick="onConfirmSale"
+                    android:text="Valider"
+                    android:textColor="#ffffffff" />
 
-                    <TextView
-                        android:id="@+id/priceLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_toRightOf="@+id/priceSumLabel"
-                        android:gravity="center_vertical|right"
-                        android:paddingRight="10dp"
-                        android:text="0"
-                        android:textColor="#ff000000"
-                        tools:text="1500" />
-                </RelativeLayout>
-
-                <include layout="@layout/dh_layout_include" />
             </LinearLayout>
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
-
-        <LinearLayout
-            android:id="@+id/layoutValidateButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="150"
-            android:orientation="horizontal"
-            android:weightSum="1390">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-
-            <Button
-                android:id="@+id/confirmSaleButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1250"
-                android:background="@drawable/enregistrer_clint_btn"
-                android:onClick="onConfirmSale"
-                android:text="Valider"
-                android:textColor="#ffffffff" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/spinnerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#fff" />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

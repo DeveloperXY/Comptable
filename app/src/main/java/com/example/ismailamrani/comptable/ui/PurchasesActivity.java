@@ -1,7 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.ismailamrani.comptable.R;
@@ -11,7 +11,8 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PurchasesActivity extends Activity implements OGActionBarInterface {
+public class PurchasesActivity extends AppCompatActivity
+        implements OGActionBarInterface {
 
     private OGActionBar mActionBar;
 
