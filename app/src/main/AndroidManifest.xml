@@ -112,8 +112,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.StockActivity" />
-        <activity android:name=".ui.ColoredStatusBarActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ui.ColoredStatusBarActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.PurchasesActivity"></activity>
     </application>
 
 </manifest>
