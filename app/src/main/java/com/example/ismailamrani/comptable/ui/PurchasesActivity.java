@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ismailamrani.comptable.R;
@@ -29,12 +30,16 @@ public class PurchasesActivity extends AppCompatActivity
     EditText productField;
     @Bind(R.id.supplierField)
     EditText supplierField;
+    @Bind(R.id.nextButton)
+    Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchases);
         ButterKnife.bind(this);
+
+        nextButton.requestFocus();
 
         setupActionBar();
     }

@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -40,7 +41,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class SalesActivity extends ColoredStatusBarActivity
+public class SalesActivity extends AppCompatActivity
         implements OGActionBarInterface {
 
     private OGActionBar mActionBar;

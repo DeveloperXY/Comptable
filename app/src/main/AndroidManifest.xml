@@ -109,14 +109,16 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_vente"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.StockActivity" />
-        <activity
-            android:name=".ui.ColoredStatusBarActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.StockActivity" />
+        <activity android:name=".ui.ColoredStatusBarActivity" />
         <activity
             android:name=".ui.PurchasesActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
