@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.SoldProductAdapter;
+import com.example.ismailamrani.comptable.adapters.ProductAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -62,7 +62,7 @@ public class SalesActivity extends ColoredStatusBarActivity
     private List<Product> toBeSoldProducts;
 
     private OkHttpClient client = new OkHttpClient();
-    private SoldProductAdapter soldProductAdapter;
+    private ProductAdapter productAdapter;
     private TextWatcher quantityWatcher;
 
     @Override
@@ -75,9 +75,9 @@ public class SalesActivity extends ColoredStatusBarActivity
         attachTextWatchers();
 
         toBeSoldProducts = new ArrayList<>();
-        soldProductAdapter = new SoldProductAdapter(this, toBeSoldProducts);
-        soldProductAdapter.setListener(this::calculateTotalPrice);
-        productsListview.setAdapter(soldProductAdapter);
+        productAdapter = new ProductAdapter(this, toBeSoldProducts);
+        productAdapter.setListener(this::calculateTotalPrice);
+        productsListview.setAdapter(productAdapter);
     }
 
     private void initializeUI() {
@@ -153,7 +153,7 @@ public class SalesActivity extends ColoredStatusBarActivity
      * @param view
      */
     public void onConfirmSale(View view) {
-        JSONArray summary = soldProductAdapter.getSummary();
+        JSONArray summary = productAdapter.getSummary();
         postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
     }
 
@@ -209,7 +209,7 @@ public class SalesActivity extends ColoredStatusBarActivity
         mProduct.setPrixTTC(mProduct.getPrixTTC() * quantity);
         mProduct.setQte(quantity);
         toBeSoldProducts.add(mProduct);
-        soldProductAdapter.notifyDataSetChanged();
+        productAdapter.notifyDataSetChanged();
         calculateTotalPrice();
 
         resetTextFields();

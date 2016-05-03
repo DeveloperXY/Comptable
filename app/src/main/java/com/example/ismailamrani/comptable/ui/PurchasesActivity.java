@@ -1,16 +1,25 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.ProductAdapter;
+import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.customitems.dialogs.SpinnerBottomSheet;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,8 +38,19 @@ public class PurchasesActivity extends ColoredStatusBarActivity
     EditText productField;
     @Bind(R.id.supplierField)
     EditText supplierField;
-    @Bind(R.id.nextButton)
-    Button nextButton;
+    @Bind(R.id.quantityField)
+    EditText quantityField;
+    @Bind(R.id.priceField)
+    EditText priceField;
+    @Bind(R.id.productsListview)
+    ListView productsListview;
+    @Bind(R.id.priceLabel)
+    TextView priceLabel;
+
+    private Product mProduct;
+    private List<Product> toBeBoughtProducts;
+
+    private ProductAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +58,12 @@ public class PurchasesActivity extends ColoredStatusBarActivity
         setContentView(R.layout.activity_purchases);
         ButterKnife.bind(this);
 
-        nextButton.requestFocus();
-
         setupActionBar();
+
+        toBeBoughtProducts = new ArrayList<>();
+        productAdapter = new ProductAdapter(this, toBeBoughtProducts);
+        productAdapter.setListener(this::calculateTotalPrice);
+        productsListview.setAdapter(productAdapter);
     }
 
     private void setupActionBar() {
@@ -87,5 +110,61 @@ public class PurchasesActivity extends ColoredStatusBarActivity
     @Override
     public void onAddPressed() {
 
+    }
+
+    @OnClick(R.id.nextButton)
+    public void onClick(View view) {
+        addProductToList();
+    }
+
+    /**
+     * Adds a product to the list of the products to be bought.
+     */
+    private void addProductToList() {
+        if (!allProductInfosArePresent()) {
+            return;
+        }
+
+        mProduct = new Product();
+
+        int quantity = Integer.valueOf(quantityField.getText().toString());
+        mProduct.setLibelle(productField.getText().toString());
+        mProduct.setPrixTTC(Double.valueOf(priceField.getText().toString()) * quantity);
+        mProduct.setQte(quantity);
+        toBeBoughtProducts.add(mProduct);
+        productAdapter.notifyDataSetChanged();
+        calculateTotalPrice();
+
+        resetTextFields();
+        mProduct = null;
+    }
+
+    /**
+     * Calculates the total of the TTC price of all to-be-bought products.
+     */
+    private void calculateTotalPrice() {
+        double total = 0d;
+
+        for (Product product : toBeBoughtProducts) {
+            total += product.getPrixTTC();
+        }
+
+        priceLabel.setText(String.valueOf(total));
+    }
+
+    /**
+     * @return true if all the informations of the to-be-bought product are
+     * present, & false otherwise.
+     */
+    private boolean allProductInfosArePresent() {
+        return Stream.of(supplierField, productField, quantityField, priceField)
+                .map(EditText::getText)
+                .map(Editable::toString)
+                .noneMatch(String::isEmpty);
+    }
+
+    private void resetTextFields() {
+        Stream.of(supplierField, productField, quantityField, priceField)
+                .forEach(field -> field.setText(""));
     }
 }
