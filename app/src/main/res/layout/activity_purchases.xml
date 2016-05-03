@@ -74,6 +74,7 @@
                     android:weightSum="1196">
 
                     <EditText
+                        android:id="@+id/supplierField"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1000"
@@ -87,7 +88,7 @@
                         android:layout_weight="196">
 
                         <ImageView
-                            android:id="@+id/imageView"
+                            android:id="@+id/supplierSpinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
@@ -111,6 +112,7 @@
                     android:weightSum="1196">
 
                     <EditText
+                        android:id="@+id/productField"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1000"
@@ -124,7 +126,7 @@
                         android:layout_weight="196">
 
                         <ImageView
-                            android:id="@+id/imageView2"
+                            android:id="@+id/productSpinner"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="5dp"
