@@ -14,12 +14,12 @@ import com.example.ismailamrani.comptable.models.ScreenSizeModel;
 /**
  * Created by Ismail Amrani on 25/11/2015.
  */
-public class CustumTextView extends TextView {
+public class CustomTextView extends TextView {
 
     int height, size;
     String Font, Arabic, Frensh;
 
-    public CustumTextView(Context context, AttributeSet attrs) {
+    public CustomTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(

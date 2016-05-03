@@ -23,6 +23,7 @@ public class PurchasesActivity extends Activity implements OGActionBarInterface 
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Achats");
+        mActionBar.AddDisable();
     }
 
     @Override

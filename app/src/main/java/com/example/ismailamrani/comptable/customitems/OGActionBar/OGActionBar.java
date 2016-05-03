@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.CustumTextView;
+import com.example.ismailamrani.comptable.customitems.CustomTextView;
 
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class OGActionBar extends RelativeLayout {
 
-    RelativeLayout Menu, Add;
-    CustumTextView Title;
+    RelativeLayout menu, add;
+    CustomTextView title;
 
-    OGActionBarInterface Listener;
+    OGActionBarInterface listener;
 
     public OGActionBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -27,42 +27,40 @@ public class OGActionBar extends RelativeLayout {
                 , ViewGroup.LayoutParams.MATCH_PARENT));
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View Layout = inflater.inflate(R.layout.action_bar, null);
+        View layout = inflater.inflate(R.layout.action_bar, null);
 
-        Menu = (RelativeLayout) Layout.findViewById(R.id.Menu);
-        Add = (RelativeLayout) Layout.findViewById(R.id.Add);
-        Title = (CustumTextView) Layout.findViewById(R.id.Title);
+        menu = (RelativeLayout) layout.findViewById(R.id.Menu);
+        add = (RelativeLayout) layout.findViewById(R.id.Add);
+        title = (CustomTextView) layout.findViewById(R.id.Title);
 
-        Menu.setOnClickListener(v -> {
-            if (Listener != null) {
+        menu.setOnClickListener(v -> {
+            if (listener != null)
                 getActionBarListener().onMenuPressed();
-            }
         });
 
-        Add.setOnClickListener(v -> {
-            if (Listener != null) {
+        add.setOnClickListener(v -> {
+            if (listener != null)
                 getActionBarListener().onAddPressed();
-            }
         });
 
-        addView(Layout);
+        addView(layout);
     }
 
     public void setTitle(String title) {
-        Title.SetText(title);
+        this.title.SetText(title);
     }
 
-    public OGActionBar setActionBarListener(OGActionBarInterface Listener) {
-        this.Listener = Listener;
+    public OGActionBar setActionBarListener(OGActionBarInterface listener) {
+        this.listener = listener;
         return this;
     }
 
     public OGActionBarInterface getActionBarListener() {
-        return this.Listener;
+        return this.listener;
     }
 
     public void AddDisable() {
-        Add.setVisibility(INVISIBLE);
+        add.setVisibility(INVISIBLE);
     }
 
 }

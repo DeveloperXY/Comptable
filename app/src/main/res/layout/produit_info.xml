@@ -36,7 +36,7 @@
                     android:background="#9048627b"
                     android:layout_alignParentBottom="true">
 
-                    <com.example.ismailamrani.comptable.customitems.CustumTextView
+                    <com.example.ismailamrani.comptable.customitems.CustomTextView
                         android:id="@+id/Libelleaff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -83,7 +83,7 @@
                             costum:Frensh="Prix HT : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/PrixHTaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -109,7 +109,7 @@
                             costum:Frensh="Prix TTC : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/PrixTTCaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="13"
@@ -135,7 +135,7 @@
                             costum:Frensh="Quantité : "
                             android:textColor="#48627b"/>
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/Stockaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                             android:src="@drawable/ic_codebar"
                             android:paddingRight="10dp"/>
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/Codeaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

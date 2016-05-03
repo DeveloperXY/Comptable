@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.CustumTextView;
+import com.example.ismailamrani.comptable.customitems.CustomTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
@@ -86,21 +86,21 @@ public class ProduitAdapter extends BaseAdapter {
         });
 
         ImageView Image;
-        CustumTextView Libelle, Qte, Prix, supprimer, modifier, afficher;
+        CustomTextView Libelle, Qte, Prix, supprimer, modifier, afficher;
 
         Image = (ImageView) Layout.findViewById(R.id.Image);
         Picasso.with(context).load(List.get(position).getPhoto()).into(Image);
 
-        Libelle = (CustumTextView) Layout.findViewById(R.id.Libelle);
+        Libelle = (CustomTextView) Layout.findViewById(R.id.Libelle);
         Libelle.SetText(List.get(position).getLibelle());
 
-        Qte = (CustumTextView) Layout.findViewById(R.id.Qte);
+        Qte = (CustomTextView) Layout.findViewById(R.id.Qte);
         Qte.SetText("" + List.get(position).getQte());
 
-        Prix = (CustumTextView) Layout.findViewById(R.id.Prix);
+        Prix = (CustomTextView) Layout.findViewById(R.id.Prix);
         Prix.SetText("" + List.get(position).getPrixTTC() + " DH");
 
-        supprimer = (CustumTextView) Layout.findViewById(R.id.supprimer);
+        supprimer = (CustomTextView) Layout.findViewById(R.id.supprimer);
         supprimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +110,7 @@ public class ProduitAdapter extends BaseAdapter {
                 new supprimer().execute(PhpAPI.removeProduit);
             }
         });
-        modifier = (CustumTextView) Layout.findViewById(R.id.modifier);
+        modifier = (CustomTextView) Layout.findViewById(R.id.modifier);
         modifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +120,7 @@ public class ProduitAdapter extends BaseAdapter {
                 context.startActivity(i);
             }
         });
-        afficher = (CustumTextView) Layout.findViewById(R.id.afficher);
+        afficher = (CustomTextView) Layout.findViewById(R.id.afficher);
 
         afficher.setOnClickListener(new View.OnClickListener() {
             @Override

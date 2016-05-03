@@ -88,7 +88,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -154,7 +154,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -234,7 +234,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -300,7 +300,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -379,7 +379,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -445,7 +445,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -525,7 +525,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
@@ -591,7 +591,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumTextView
+                        <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             costum:Size="15"
