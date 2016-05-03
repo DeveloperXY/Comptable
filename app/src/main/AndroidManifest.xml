@@ -73,7 +73,6 @@
         <activity android:name=".fournisseur.AddFournisseurAsync" />
         <activity android:name=".charges.AddCharge" />
         <activity android:name=".ui.AddLocalActivity" />
-        <activity android:name=".ui.AddSocieteActivity" />
         <activity
             android:name=".ui.InformationActivity"
             android:theme="@style/AppTheme.CustomTheme" />

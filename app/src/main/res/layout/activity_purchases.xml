@@ -1,12 +1,358 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.ismailamrani.comptable.ui.PurchasesActivity">
+    android:background="@drawable/back_vente"
+    android:orientation="vertical"
+    android:weightSum="246">
 
-</RelativeLayout>
+    <include layout="@layout/custom_actionbar_include" />
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="226"
+        android:orientation="vertical"
+        android:weightSum="2264">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="300">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:src="@drawable/vente" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="33" />
+
+        <LinearLayout
+            android:id="@+id/layoutForm"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1000"
+            android:orientation="horizontal"
+            android:weightSum="1390">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1250"
+                android:orientation="vertical"
+                android:weightSum="1260">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="60" />
+
+                <LinearLayout
+                    android:id="@+id/layoutFournisseur"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="200"
+                    android:background="@drawable/vente_style"
+                    android:orientation="horizontal"
+                    android:weightSum="1196">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1000"
+                        android:background="@android:color/transparent"
+                        android:hint="Fournisseur"
+                        android:paddingLeft="20dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="196">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/spinner" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40" />
+
+                <LinearLayout
+                    android:id="@+id/layoutProduit"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="200"
+                    android:background="@drawable/vente_style"
+                    android:orientation="horizontal"
+                    android:weightSum="1196">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1000"
+                        android:background="@android:color/transparent"
+                        android:hint="Produit"
+                        android:paddingLeft="20dp" />
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="196">
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="5dp"
+                            android:scaleType="fitEnd"
+                            android:src="@drawable/spinner" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40" />
+
+                <LinearLayout
+                    android:id="@+id/layoutQte"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="200"
+                    android:background="@drawable/vente_style"
+                    android:orientation="horizontal"
+                    android:weightSum="1174">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1032">
+
+                        <EditText
+                            android:id="@+id/quantityField"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:hint="Quantité"
+                            android:paddingLeft="20dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40" />
+
+                <LinearLayout
+                    android:id="@+id/layoutPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="200"
+                    android:background="@drawable/vente_style"
+                    android:orientation="horizontal"
+                    android:weightSum="1174">
+
+                    <EditText
+                        android:id="@+id/priceField"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1026"
+                        android:background="@android:color/transparent"
+                        android:hint="Prix unitaire"
+                        android:paddingLeft="20dp" />
+
+                    <include layout="@layout/dh_layout_include" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="200"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:weightSum="1260">
+
+                    <Button
+                        android:id="@+id/nextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_weight="200"
+                        android:background="@drawable/add_btn"
+                        android:text="Suivant >>"
+                        android:textColor="#ffffffff" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_weight="37" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="40" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30" />
+
+        <LinearLayout
+            android:id="@+id/layoutProductList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="460"
+            android:orientation="horizontal"
+            android:weightSum="1390">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+
+            <ListView
+                android:id="@+id/productsListview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1250"
+                android:background="@drawable/vente_style"
+                android:divider="@null" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30" />
+
+        <LinearLayout
+            android:id="@+id/layoutTotalPrice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="150"
+            android:orientation="horizontal"
+            android:weightSum="1390">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1250"
+                android:background="@drawable/vente_style"
+                android:orientation="horizontal"
+                android:weightSum="1174">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1032">
+
+                    <TextView
+                        android:id="@+id/priceSumLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="Quantity"
+                        android:paddingLeft="20dp"
+                        android:text="Total à payer:"
+                        android:textColor="#3d5469"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/priceLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/priceSumLabel"
+                        android:gravity="center_vertical|right"
+                        android:paddingRight="10dp"
+                        android:text="0"
+                        android:textColor="#ff000000"
+                        tools:text="1500" />
+                </RelativeLayout>
+
+                <include layout="@layout/dh_layout_include" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30" />
+
+        <LinearLayout
+            android:id="@+id/layoutValidateButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="150"
+            android:orientation="horizontal"
+            android:weightSum="1390">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70" />
+
+            <Button
+                android:id="@+id/confirmSaleButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1250"
+                android:background="@drawable/enregistrer_clint_btn"
+                android:onClick="onConfirmSale"
+                android:text="Valider"
+                android:textColor="#ffffffff" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
