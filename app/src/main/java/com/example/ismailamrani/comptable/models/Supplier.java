@@ -3,14 +3,21 @@ package com.example.ismailamrani.comptable.models;
 /**
  * Created by Redouane on 22/03/2016.
  */
-public class Fournisseur {
+public class Supplier extends Item {
     String id;
-    String nom;
     String tel;
     String adresse;
     String fix;
     String fax;
     String email;
+
+    public Supplier() {
+        this("");
+    }
+
+    public Supplier(String nom) {
+        super(nom);
+    }
 
     public String getImage() {
         return image;

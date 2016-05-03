@@ -3,13 +3,12 @@ package com.example.ismailamrani.comptable.fournisseur;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -51,7 +50,7 @@ public class AddFournisseurAsync extends Activity {
         ajouter = (TextView) findViewById(R.id.ajouterfournisseur);
 
         ajouter.setOnClickListener(v -> {
-            Fournisseur f = new Fournisseur();
+            Supplier f = new Supplier();
             f.setNom(nom.getText().toString());
             f.setTel(tel.getText().toString());
             f.setAdresse(adresse.getText().toString());
@@ -65,10 +64,10 @@ public class AddFournisseurAsync extends Activity {
     }
 
 
-    private class addfournisseur extends AsyncTask<Fournisseur, Void, String> {
+    private class addfournisseur extends AsyncTask<Supplier, Void, String> {
 
         @Override
-        protected String doInBackground(Fournisseur... params) {
+        protected String doInBackground(Supplier... params) {
 
             try {
                 URL url = new URL(params[0].getUrl());

@@ -10,10 +10,9 @@ import java.util.List;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class Product {
+public class Product extends Item {
 
     private int ID;
-    private String Libelle;
     private Double PrixHT;
     private Double PrixTTC;
     private String CodeBarre;
@@ -44,8 +43,8 @@ public class Product {
 
     public Product(int ID, String libelle, Double prixHT, Double prixTTC,
                    String codeBarre, String photo, int qte, int locale_ID, String url) {
+        super(libelle);
         this.ID = ID;
-        Libelle = libelle;
         PrixHT = prixHT;
         PrixTTC = prixTTC;
         CodeBarre = codeBarre;
@@ -56,6 +55,7 @@ public class Product {
     }
 
     public Product() {
+        super("");
     }
 
     /**
@@ -85,7 +85,7 @@ public class Product {
     public JSONObject toJSON() {
         JSONObject object = new JSONObject();
         try {
-            object.put("Libelle", Libelle);
+            object.put("Libelle", nom);
             object.put("PrixHT", PrixHT);
             object.put("PrixTTC", PrixTTC);
             object.put("CodeBar", CodeBarre);
@@ -117,11 +117,11 @@ public class Product {
     }
 
     public String getLibelle() {
-        return Libelle;
+        return nom;
     }
 
     public void setLibelle(String libelle) {
-        Libelle = libelle;
+        nom = libelle;
     }
 
     public Double getPrixHT() {

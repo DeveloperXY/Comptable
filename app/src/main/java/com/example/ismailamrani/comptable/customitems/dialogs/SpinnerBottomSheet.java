@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.spinners.Item;
 import com.example.ismailamrani.comptable.adapters.spinners.ItemAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -21,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -63,17 +61,6 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.context));
         recyclerView.setAdapter(new ItemAdapter(createItems(), item -> dismiss()));
-    }
-
-    public List<Item> createItems() {
-
-        ArrayList<Item> items = new ArrayList<>();
-        items.add(new Item(R.mipmap.ic_launcher, "Item 1"));
-        items.add(new Item(R.mipmap.ic_launcher, "Item 2"));
-        items.add(new Item(R.mipmap.ic_launcher, "Item 3"));
-        items.add(new Item(R.mipmap.ic_launcher, "Item 4"));
-
-        return items;
     }
 
     void getFetch(String url, JSONObject data) {

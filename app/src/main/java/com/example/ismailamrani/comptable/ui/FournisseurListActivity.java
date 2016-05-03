@@ -10,7 +10,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
-import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -38,7 +38,7 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
 
     OGActionBar myactionbar;
     ListView list;
-    ArrayList<Fournisseur> ListF = new ArrayList<>();
+    ArrayList<Supplier> ListF = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
 
                     for (int i = 0; i < listproduits.length(); i++) {
                         JSONObject usr = listproduits.getJSONObject(i);
-                        Fournisseur f = new Fournisseur();
+                        Supplier f = new Supplier();
                         f.setId(usr.getString("idfournisseur"));
                         f.setNom(usr.getString("nom"));
                         f.setTel(usr.getString("tel"));

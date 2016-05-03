@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.InformationFournisseurActivity;
 
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
  */
 public class FourniseurAdapter extends BaseAdapter {
 
-    ArrayList<Fournisseur> List = new ArrayList<>();
+    ArrayList<Supplier> List = new ArrayList<>();
     Context context;
 
 
-    public FourniseurAdapter(Context context, ArrayList<Fournisseur> List) {
+    public FourniseurAdapter(Context context, ArrayList<Supplier> List) {
         this.context = context;
         this.List = List;
     }

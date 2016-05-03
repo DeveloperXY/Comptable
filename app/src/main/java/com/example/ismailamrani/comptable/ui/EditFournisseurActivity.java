@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Fournisseur;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -67,7 +66,7 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
         Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
-            Fournisseur f = new Fournisseur();
+            Supplier f = new Supplier();
             f.setNom(nom.getText().toString());
             f.setTel(gsm.getText().toString());
             f.setFax(fax.getText().toString());
@@ -152,10 +151,10 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
     }
 
     //*********************** add Fournisseur *****************
-    private class addFournisseur extends AsyncTask<Fournisseur, Void, String> {
+    private class addFournisseur extends AsyncTask<Supplier, Void, String> {
 
         @Override
-        protected String doInBackground(Fournisseur... params) {
+        protected String doInBackground(Supplier... params) {
 
             try {
                 URL url = new URL(params[0].getUrl());
