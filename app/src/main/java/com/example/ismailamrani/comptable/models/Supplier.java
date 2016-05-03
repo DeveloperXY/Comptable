@@ -19,6 +19,9 @@ public class Supplier implements Item {
     String fax;
     String email;
 
+    public Supplier() {
+    }
+
     public Supplier(JSONObject object) throws JSONException {
         this.id = object.getString("idfournisseur");
         this.nom = object.getString("nom");

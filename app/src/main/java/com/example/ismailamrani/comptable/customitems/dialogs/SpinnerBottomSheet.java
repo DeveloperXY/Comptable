@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.spinners.ItemAdapter;
 import com.example.ismailamrani.comptable.models.Item;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -101,7 +102,15 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                             e.printStackTrace();
                                         }
                                     } else {
-                                        Log.i("RESULT", "Fournisseurs: " + res);
+                                        try {
+                                            List<Supplier> suppliers = Supplier.parseSuppliers(
+                                                    obj.getJSONArray("fournisseur"));
+                                            populateRecyclerView(Stream.of(suppliers)
+                                                    .map(s -> ((Item) s))
+                                                    .collect(Collectors.toList()));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
                             });
