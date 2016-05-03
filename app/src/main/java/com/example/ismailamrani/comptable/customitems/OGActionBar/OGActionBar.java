@@ -59,8 +59,11 @@ public class OGActionBar extends RelativeLayout {
         return this.listener;
     }
 
-    public void AddDisable() {
+    public void disableAddButton() {
         add.setVisibility(INVISIBLE);
     }
 
+    public void disableMenu() {
+        menu.setVisibility(INVISIBLE);
+    }
 }

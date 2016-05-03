@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.ismailamrani.comptable.R;
@@ -25,7 +24,7 @@ public class NewChargeActivity extends ColoredStatusBarActivity
 
         setupActionBar();
 
-        MyActionBar.AddDisable();
+        MyActionBar.disableAddButton();
         spinner = (ImageView) findViewById(R.id.spinner);
         spinner.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(),

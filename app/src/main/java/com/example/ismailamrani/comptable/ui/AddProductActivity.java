@@ -77,7 +77,7 @@ public class AddProductActivity extends ColoredStatusBarActivity
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Ajouter Un Produit");
-        MyActionBar.AddDisable();
+        MyActionBar.disableAddButton();
     }
 
     @OnClick({R.id.productImage, R.id.scanBarcode, R.id.addProductBtn})

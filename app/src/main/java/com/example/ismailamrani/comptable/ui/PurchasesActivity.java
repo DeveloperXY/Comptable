@@ -43,7 +43,7 @@ public class PurchasesActivity extends AppCompatActivity
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Achats");
-        mActionBar.AddDisable();
+        mActionBar.disableAddButton();
     }
 
     @OnClick({R.id.supplierSpinner, R.id.productSpinner})

@@ -6,7 +6,6 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -66,7 +65,8 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
     private void setupActionBar() {
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setTitle("Loading...");
-        mActionBar.AddDisable();
+        mActionBar.disableAddButton();
+        mActionBar.disableMenu();
     }
 
     private void fetchAppropriateData() {
