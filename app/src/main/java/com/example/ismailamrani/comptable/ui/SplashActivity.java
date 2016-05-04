@@ -1,0 +1,19 @@
+package com.example.ismailamrani.comptable.ui;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+/**
+ * Created by Mohammed Aouf ZOUAG on 04/05/2016.
+ */
+public class SplashActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+}
