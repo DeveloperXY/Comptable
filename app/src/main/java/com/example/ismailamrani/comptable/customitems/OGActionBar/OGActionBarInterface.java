@@ -4,7 +4,7 @@ package com.example.ismailamrani.comptable.customitems.OGActionBar;
  * Created by Ismail Amrani on 23/03/2016.
  */
 public interface OGActionBarInterface {
-    public void onMenuPressed();
+    void onMenuPressed();
 
-    public void onAddPressed();
+    void onAddPressed();
 }

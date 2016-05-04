@@ -56,7 +56,7 @@ public class OGActionBar extends RelativeLayout {
     }
 
     public OGActionBarInterface getActionBarListener() {
-        return this.listener;
+        return listener;
     }
 
     public void disableAddButton() {

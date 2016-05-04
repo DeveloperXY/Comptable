@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -105,6 +106,7 @@ public class StockActivity extends ColoredStatusBarActivity
      * Initial setup of the stock's RecyclerView.
      */
     private void setupRecyclerView() {
+        mProducts = new ArrayList<>();
         stockRecyclerView.setHasFixedSize(true);
         stockRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
