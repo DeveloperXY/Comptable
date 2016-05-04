@@ -87,8 +87,11 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, IOException e) {
-                        getOwnerActivity().runOnUiThread(() -> Toast.makeText(context,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                        ((AppCompatActivity) context).runOnUiThread(() -> {
+                            mActionBar.setTitle("Waiting for network...");
+                            Toast.makeText(context, "No internet connection.",
+                                    Toast.LENGTH_LONG).show();
+                        });
                     }
 
                     @Override
