@@ -2,6 +2,8 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -40,7 +42,9 @@ public class StockActivity extends ColoredStatusBarActivity
     private static final int REQUEST_ADD_PRODUCT = 100;
 
     private List<Product> mProducts;
+
     private StockAdapter stockAdapter;
+    private BottomSheetBehavior behavior;
 
     private OkHttpClient client = new OkHttpClient();
 
@@ -65,6 +69,9 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.stockProgressbar)
     ProgressBar stockProgressbar;
 
+    @Bind(R.id.bottom_sheet)
+    View bottomSheet;
+
     OGActionBar mActionBar;
 
     @Override
@@ -75,6 +82,7 @@ public class StockActivity extends ColoredStatusBarActivity
 
         setupActionBar();
         setupRecyclerView();
+        setupBottomSheetBehavior();
     }
 
     private void setupActionBar() {
@@ -83,6 +91,35 @@ public class StockActivity extends ColoredStatusBarActivity
         mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");
         mActionBar.isSearchable(true);
+    }
+
+    /**
+     * Initial setup of the stock's RecyclerView.
+     */
+    private void setupRecyclerView() {
+        mProducts = new ArrayList<>();
+        stockRecyclerView.setHasFixedSize(true);
+        stockRecyclerView.setLayoutManager(
+                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        );
+
+        fetchStockProducts(PhpAPI.getStock, null);
+    }
+
+    private void setupBottomSheetBehavior() {
+        behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    mActionBar.isSearchable(true);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
     }
 
     @Override
@@ -109,19 +146,6 @@ public class StockActivity extends ColoredStatusBarActivity
                 }
                 break;
         }
-    }
-
-    /**
-     * Initial setup of the stock's RecyclerView.
-     */
-    private void setupRecyclerView() {
-        mProducts = new ArrayList<>();
-        stockRecyclerView.setHasFixedSize(true);
-        stockRecyclerView.setLayoutManager(
-                new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
-        );
-
-        fetchStockProducts(PhpAPI.getStock, null);
     }
 
     void fetchStockProducts(String url, JSONObject userCredentials) {
@@ -182,6 +206,7 @@ public class StockActivity extends ColoredStatusBarActivity
      */
     @Override
     public void onSearchPressed() {
-        Toast.makeText(StockActivity.this, "Booya !", Toast.LENGTH_SHORT).show();
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        mActionBar.isSearchable(false);
     }
 }
