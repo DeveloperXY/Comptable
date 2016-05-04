@@ -78,12 +78,7 @@ public class ProduitAdapter extends BaseAdapter {
         Actions = (RelativeLayout) Layout.findViewById(R.id.Actions);
 
         Actions.setVisibility(View.GONE);
-        Info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Actions.setVisibility(View.VISIBLE);
-            }
-        });
+        Info.setOnClickListener(v -> Actions.setVisibility(View.VISIBLE));
 
         ImageView Image;
         CustomTextView Libelle, Qte, Prix, supprimer, modifier, afficher;
@@ -101,34 +96,25 @@ public class ProduitAdapter extends BaseAdapter {
         Prix.SetText("" + List.get(position).getPrixTTC() + " DH");
 
         supprimer = (CustomTextView) Layout.findViewById(R.id.supprimer);
-        supprimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //  System.out.println("<<>>>> Supprimer");
-                id = List.get(position).getID();
-                System.out.println(">>> id :" + id);
-                new supprimer().execute(PhpAPI.removeProduit);
-            }
+        supprimer.setOnClickListener(v -> {
+            //  System.out.println("<<>>>> Supprimer");
+            id = List.get(position).getID();
+            System.out.println(">>> id :" + id);
+            new supprimer().execute(PhpAPI.removeProduit);
         });
         modifier = (CustomTextView) Layout.findViewById(R.id.modifier);
-        modifier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        modifier.setOnClickListener(v -> {
 
-                Intent i = new Intent(context, ModifierProduitActivity.class);
-                i.putExtra("id", List.get(position).getID());
-                context.startActivity(i);
-            }
+            Intent i = new Intent(context, ModifierProduitActivity.class);
+            i.putExtra("id", List.get(position).getID());
+            context.startActivity(i);
         });
         afficher = (CustomTextView) Layout.findViewById(R.id.afficher);
 
-        afficher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, Produit_InfoActivity.class);
-                i.putExtra("id", List.get(position).getID());
-                context.startActivity(i);
-            }
+        afficher.setOnClickListener(v -> {
+            Intent i = new Intent(context, Produit_InfoActivity.class);
+            i.putExtra("id", List.get(position).getID());
+            context.startActivity(i);
         });
 
 

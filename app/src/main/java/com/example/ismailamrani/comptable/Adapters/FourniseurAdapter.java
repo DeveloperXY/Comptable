@@ -67,21 +67,15 @@ public class FourniseurAdapter extends BaseAdapter {
         String img = List.get(position).getImage();
         imageView.setImageResource(R.drawable.flogo);
 
-        imglay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, InformationFournisseurActivity.class);
-                i.putExtra("id", List.get(position).getId());
-                context.startActivity(i);
-            }
+        imglay.setOnClickListener(v -> {
+            Intent i = new Intent(context, InformationFournisseurActivity.class);
+            i.putExtra("id", List.get(position).getId());
+            context.startActivity(i);
         });
-        nomlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, InformationFournisseurActivity.class);
-                i.putExtra("id", List.get(position).getId());
-                context.startActivity(i);
-            }
+        nomlay.setOnClickListener(v -> {
+            Intent i = new Intent(context, InformationFournisseurActivity.class);
+            i.putExtra("id", List.get(position).getId());
+            context.startActivity(i);
         });
 
 

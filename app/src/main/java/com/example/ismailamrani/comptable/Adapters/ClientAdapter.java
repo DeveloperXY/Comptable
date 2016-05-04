@@ -68,21 +68,15 @@ public class ClientAdapter extends BaseAdapter {
         String img = List.get(position).getImage();
         imageView.setImageResource(R.drawable.neymar);
         Picasso.with(context).load(List.get(position).getImage()).into(imageView);
-        imglay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, InformationActivity.class);
-                i.putExtra("id", List.get(position).getId());
-                context.startActivity(i);
-            }
+        imglay.setOnClickListener(v -> {
+            Intent i = new Intent(context, InformationActivity.class);
+            i.putExtra("id", List.get(position).getId());
+            context.startActivity(i);
         });
-        nomlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, InformationActivity.class);
-                i.putExtra("id", List.get(position).getId());
-                context.startActivity(i);
-            }
+        nomlay.setOnClickListener(v -> {
+            Intent i = new Intent(context, InformationActivity.class);
+            i.putExtra("id", List.get(position).getId());
+            context.startActivity(i);
         });
 
 

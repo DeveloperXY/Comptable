@@ -15,10 +15,11 @@ import com.example.ismailamrani.comptable.customitems.CustomTextView;
  */
 public class OGActionBar extends RelativeLayout {
 
-    RelativeLayout menu, add;
+    RelativeLayout menu, add, search;
     CustomTextView title;
 
     OGActionBarInterface listener;
+    SearchListener searchListener;
 
     public OGActionBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -31,6 +32,7 @@ public class OGActionBar extends RelativeLayout {
 
         menu = (RelativeLayout) layout.findViewById(R.id.Menu);
         add = (RelativeLayout) layout.findViewById(R.id.Add);
+        search = (RelativeLayout) layout.findViewById(R.id.Search);
         title = (CustomTextView) layout.findViewById(R.id.Title);
 
         menu.setOnClickListener(v -> {
@@ -41,6 +43,11 @@ public class OGActionBar extends RelativeLayout {
         add.setOnClickListener(v -> {
             if (listener != null)
                 getActionBarListener().onAddPressed();
+        });
+
+        search.setOnClickListener(v -> {
+            if (searchListener != null)
+                searchListener.onSearchPressed();
         });
 
         addView(layout);
@@ -57,6 +64,10 @@ public class OGActionBar extends RelativeLayout {
 
     public OGActionBarInterface getActionBarListener() {
         return listener;
+    }
+
+    public void setSearchListener(SearchListener listener) {
+        searchListener = listener;
     }
 
     public void disableAddButton() {
