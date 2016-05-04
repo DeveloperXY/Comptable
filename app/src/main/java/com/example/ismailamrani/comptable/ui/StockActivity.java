@@ -55,6 +55,12 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.emptyLayout)
     RelativeLayout emptyView;
 
+    /**
+     * The view to be displayed in case a network error occur.
+     */
+    @Bind(R.id.errorLayout)
+    RelativeLayout errorLayout;
+
     @Bind(R.id.stockProgressbar)
     ProgressBar stockProgressbar;
 
@@ -122,8 +128,10 @@ public class StockActivity extends ColoredStatusBarActivity
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(StockActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                        runOnUiThread(() -> {
+                            errorLayout.setVisibility(View.VISIBLE);
+                            stockProgressbar.setVisibility(View.INVISIBLE);
+                        });
                     }
 
                     @Override
@@ -163,5 +171,6 @@ public class StockActivity extends ColoredStatusBarActivity
         based on the number of products in store.*/
         emptyView.setVisibility(mProducts.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         stockRecyclerView.setVisibility(mProducts.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
     }
 }
