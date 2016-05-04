@@ -21,6 +21,11 @@ public class Product implements Item {
     private int Qte;
     private int Locale_ID;
     private String url;
+    private int supplier;
+
+    public Product() {
+        this(-1, "", 0d, 0d, "", "", 0, 0, "");
+    }
 
     /**
      * Overloaded constructor.
@@ -38,12 +43,18 @@ public class Product implements Item {
                 object.getString("photo"),
                 object.getInt("qte"),
                 object.getInt("local"),
-                ""
+                "",
+                -1
         );
     }
 
-    public Product(int ID, String libelle, Double prixHT, Double prixTTC,
-                   String codeBarre, String photo, int qte, int locale_ID, String url) {
+    public Product(int ID, String libelle, Double prixHT, Double prixTTC, String codeBarre,
+                   String photo, int qte, int locale_ID, String url) {
+        this(ID, libelle, prixHT, prixTTC, codeBarre, photo, qte, locale_ID, url, -1);
+    }
+
+    public Product(int ID, String libelle, Double prixHT, Double prixTTC, String codeBarre,
+                   String photo, int qte, int locale_ID, String url, int supplier) {
         this.ID = ID;
         Libelle = libelle;
         PrixHT = prixHT;
@@ -53,9 +64,7 @@ public class Product implements Item {
         Qte = qte;
         Locale_ID = locale_ID;
         this.url = url;
-    }
-
-    public Product() {
+        this.supplier = supplier;
     }
 
     /**
@@ -91,6 +100,7 @@ public class Product implements Item {
             object.put("Qte", Qte);
             object.put("Photo", Photo);
             object.put("Local", Locale_ID);
+            object.put("Supplier", supplier);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -169,6 +179,14 @@ public class Product implements Item {
 
     public void setLocale_ID(int locale_ID) {
         Locale_ID = locale_ID;
+    }
+
+    public int getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(int supplier) {
+        this.supplier = supplier;
     }
 
     @Override

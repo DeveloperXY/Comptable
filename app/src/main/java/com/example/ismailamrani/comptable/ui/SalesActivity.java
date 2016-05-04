@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -170,10 +171,10 @@ public class SalesActivity extends ColoredStatusBarActivity
     /**
      * Overloaded method.
      * @param url
-     * @param userCredentials
+     * @param orderInfos
      */
-    void postCreateSaleOrder(String url, JSONObject userCredentials) {
-        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
+    void postCreateSaleOrder(String url, JSONObject orderInfos) {
+        Request request = PhpAPI.createHTTPRequest(orderInfos, url, Method.POST);
 
         client.newCall(request)
                 .enqueue(new Callback() {
