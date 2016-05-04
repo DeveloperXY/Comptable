@@ -77,4 +77,8 @@ public class OGActionBar extends RelativeLayout {
     public void disableMenu() {
         menu.setVisibility(INVISIBLE);
     }
+
+    public void isSearchable(boolean state) {
+        search.setVisibility(state ? VISIBLE : GONE);
+    }
 }

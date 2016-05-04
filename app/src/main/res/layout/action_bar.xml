@@ -36,7 +36,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="254">
+            android:layout_weight="241">
 
             <com.example.ismailamrani.comptable.customitems.CustomTextView
                 android:id="@+id/Title"
@@ -55,21 +55,23 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="68"
+            android:gravity="right"
             android:orientation="horizontal"
-            android:weightSum="68"
-            android:gravity="right">
+            android:weightSum="68">
 
             <RelativeLayout
                 android:id="@+id/Search"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="34">
+                android:layout_weight="34"
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/abc_ic_search_api_mtrl_alpha" />
+                    android:src="@android:drawable/ic_menu_search" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -86,6 +88,11 @@
 
             </RelativeLayout>
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="13" />
 
     </LinearLayout>
 

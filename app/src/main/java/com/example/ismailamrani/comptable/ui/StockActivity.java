@@ -7,11 +7,13 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
@@ -33,7 +35,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class StockActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+        implements OGActionBarInterface, SearchListener {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
 
@@ -78,7 +80,9 @@ public class StockActivity extends ColoredStatusBarActivity
     private void setupActionBar() {
         mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
+        mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");
+        mActionBar.isSearchable(true);
     }
 
     @Override
@@ -171,5 +175,13 @@ public class StockActivity extends ColoredStatusBarActivity
         emptyView.setVisibility(mProducts.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         stockRecyclerView.setVisibility(mProducts.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
+    }
+
+    /**
+     * Invoked when the 'Search' menu item of the custom action bar is clicked.
+     */
+    @Override
+    public void onSearchPressed() {
+        Toast.makeText(StockActivity.this, "Booya !", Toast.LENGTH_SHORT).show();
     }
 }
