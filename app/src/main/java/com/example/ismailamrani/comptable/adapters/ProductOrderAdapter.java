@@ -29,14 +29,14 @@ import java.util.List;
  * <p>
  * price = original_price * quantity
  */
-public class ProductAdapter extends ArrayAdapter<Product> {
+public class ProductOrderAdapter extends ArrayAdapter<Product> {
 
     private Context context;
     private SaleProductListener listener;
     private List<Product> products;
     private int lastPosition;
 
-    public ProductAdapter(Context context, List<Product> products) {
+    public ProductOrderAdapter(Context context, List<Product> products) {
         super(context, -1, products);
         this.context = context;
         this.products = products;
@@ -113,6 +113,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
                 obj.put("quantity", product.getQte());
                 obj.put("priceHT", product.getPrixHT());
                 obj.put("priceTTC", product.getPrixTTC());
+                obj.put("supplier", product.getSupplier());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

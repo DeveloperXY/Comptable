@@ -3,15 +3,13 @@ package com.example.ismailamrani.comptable.ui;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.ProductAdapter;
-import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
+import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.customitems.dialogs.SpinnerBottomSheet;
@@ -50,7 +48,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
     private Product mProduct;
     private List<Product> toBeBoughtProducts;
 
-    private ProductAdapter productAdapter;
+    private ProductOrderAdapter productAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
         setupActionBar();
 
         toBeBoughtProducts = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, toBeBoughtProducts);
+        productAdapter = new ProductOrderAdapter(this, toBeBoughtProducts);
         productAdapter.setListener(this::calculateTotalPrice);
         productsListview.setAdapter(productAdapter);
     }
@@ -131,6 +129,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
         mProduct.setLibelle(productField.getText().toString());
         mProduct.setPrixTTC(Double.valueOf(priceField.getText().toString()) * quantity);
         mProduct.setQte(quantity);
+        mProduct.setSupplier(Integer.valueOf(selectedSupplier.getId()));
         toBeBoughtProducts.add(mProduct);
         productAdapter.notifyDataSetChanged();
         calculateTotalPrice();

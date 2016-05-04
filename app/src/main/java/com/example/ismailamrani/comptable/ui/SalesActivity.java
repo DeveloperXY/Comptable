@@ -13,12 +13,13 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.ProductAdapter;
+import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -62,7 +63,7 @@ public class SalesActivity extends ColoredStatusBarActivity
     private List<Product> toBeSoldProducts;
 
     private OkHttpClient client = new OkHttpClient();
-    private ProductAdapter productAdapter;
+    private ProductOrderAdapter productAdapter;
     private TextWatcher quantityWatcher;
 
     @Override
@@ -75,7 +76,7 @@ public class SalesActivity extends ColoredStatusBarActivity
         attachTextWatchers();
 
         toBeSoldProducts = new ArrayList<>();
-        productAdapter = new ProductAdapter(this, toBeSoldProducts);
+        productAdapter = new ProductOrderAdapter(this, toBeSoldProducts);
         productAdapter.setListener(this::calculateTotalPrice);
         productsListview.setAdapter(productAdapter);
     }
@@ -135,7 +136,7 @@ public class SalesActivity extends ColoredStatusBarActivity
     }
 
     @OnClick({R.id.addBarCodeBtn, R.id.nextButton})
-    public void onButtonClick(View view) {
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addBarCodeBtn:
                 IntentIntegrator scanIntegrator = new IntentIntegrator(this);
@@ -157,17 +158,20 @@ public class SalesActivity extends ColoredStatusBarActivity
         postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
     }
 
+    /**
+     * Overloaded method.
+     * @param url
+     * @param orderInfos
+     */
     void postCreateSaleOrder(String url, JSONArray orderInfos) {
-        JSONObject data = new JSONObject();
-        try {
-            data.put("data", orderInfos);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        postCreateSaleOrder(url, data);
+        postCreateSaleOrder(url, JSONUtils.bundleWithTag(orderInfos, "data"));
     }
 
+    /**
+     * Overloaded method.
+     * @param url
+     * @param userCredentials
+     */
     void postCreateSaleOrder(String url, JSONObject userCredentials) {
         Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
 
