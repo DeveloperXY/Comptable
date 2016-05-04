@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -158,8 +157,8 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                     }
 
                 } else if (resp == 0) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Client Not Found  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "Client Not Found  !!!!",
+                            Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -211,14 +210,13 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                 JSONObject j = new JSONObject(s);
                 int resp = j.getInt("success");
                 if (resp == 1) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "Bien Supprimer",
+                            Toast.LENGTH_LONG).show();
                     finish();
-                    Intent i = new Intent(context, FournisseurListActivity.class);
-                    context.startActivity(i);
+                    context.startActivity(new Intent(context, FournisseurListActivity.class));
                 } else if (resp == 0) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "erreur de suppression !!!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    Toast.makeText(getApplicationContext(), "erreur de suppression !!!!",
+                            Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

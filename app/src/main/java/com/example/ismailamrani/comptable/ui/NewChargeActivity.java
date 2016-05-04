@@ -29,7 +29,6 @@ public class NewChargeActivity extends ColoredStatusBarActivity
         spinner.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(),
                         SpinnerChargeActivity.class)));
-
     }
 
     private void setupActionBar() {

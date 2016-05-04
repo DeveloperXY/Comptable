@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -167,6 +166,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
 
     /**
      * Overloaded method.
+     *
      * @param url
      * @param orderInfos
      */
@@ -176,6 +176,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
 
     /**
      * Overloaded method.
+     *
      * @param url
      * @param orderInfos
      */

@@ -278,7 +278,6 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
         return cursor.getString(column_index);
     }
 
-
     public String BitmapToString(Bitmap Image) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Image.compress(Bitmap.CompressFormat.PNG, 100, stream);
