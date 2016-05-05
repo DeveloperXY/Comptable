@@ -59,7 +59,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 targetActivity = StockActivity.class;
                 break;
             case R.id.achat:
-                targetActivity = PurchasesActivity.class;
+                targetActivity = PurchaseOrdersActivity.class;
                 break;
             case R.id.ventes:
                 targetActivity = SaleOrdersActivity.class;

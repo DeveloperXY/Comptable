@@ -8,4 +8,5 @@ package com.example.ismailamrani.comptable.utils;
 public class ResultCodes {
     public static final int PRODUCT_ADDED = 100;
     public static final int SALE_ORDER_CREATED = 101;
+    public static final int PURCHASE_ORDER_CREATED = 102;
 }

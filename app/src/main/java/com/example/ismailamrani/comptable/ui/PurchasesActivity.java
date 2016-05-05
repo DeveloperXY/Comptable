@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -117,7 +119,10 @@ public class PurchasesActivity extends ColoredStatusBarActivity
 
     @Override
     public void onMenuPressed() {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     @Override
@@ -198,9 +203,17 @@ public class PurchasesActivity extends ColoredStatusBarActivity
                             JSONObject obj = new JSONObject(res);
                             int status = obj.getInt("success");
 
-                            runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                    status == 1 ? "SUCCESS" : "FAILURE",
-                                    Toast.LENGTH_SHORT).show());
+                            runOnUiThread(() -> {
+                                if (status == 1) {
+                                    setResult(ResultCodes.PURCHASE_ORDER_CREATED);
+                                    finish();
+                                }
+                                else {
+                                    runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
+                                            "An error occured while registering your order. " + "Please try again.", Toast.LENGTH_SHORT)
+                                            .show());
+                                }
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();

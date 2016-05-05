@@ -1,9 +1,9 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -37,9 +37,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SaleOrdersActivity extends AppCompatActivity implements OGActionBarInterface {
+public class PurchaseOrdersActivity extends AppCompatActivity implements OGActionBarInterface {
 
-    private static final int REQUEST_ADD_SALE_ORDER = 100;
+    private static final int REQUEST_ADD_PURCHASE_ORDER = 100;
 
     private List<Order> mOrders;
     private SaleOrdersAdapter ordersAdapter;
@@ -51,8 +51,8 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     /**
      * The orders' list.
      */
-    @Bind(R.id.saleOrdersRecyclerView)
-    RecyclerView saleOrdersRecyclerView;
+    @Bind(R.id.purchaseOrdersRecyclerView)
+    RecyclerView purchaseOrdersRecyclerView;
 
     @Bind(R.id.emptyMessageLabel)
     TextView emptyMessageLabel;
@@ -67,7 +67,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     RelativeLayout errorLayout;
 
     /**
-     * The view to be displayed in case there were no sale orders to show.
+     * The view to be displayed in case there were no purchase orders to show.
      */
     @Bind(R.id.emptyLayout)
     RelativeLayout emptyView;
@@ -75,7 +75,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sale_orders_activity);
+        setContentView(R.layout.activity_purchase_orders_activity);
         ButterKnife.bind(this);
 
         setupActionBar();
@@ -84,7 +84,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
 
     private void setupActionBar() {
         mActionBar.setActionBarListener(this);
-        mActionBar.setTitle("Commandes ventes");
+        mActionBar.setTitle("Commandes achats");
     }
 
     /**
@@ -92,13 +92,13 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
      */
     private void setupRecyclerView() {
         mOrders = new ArrayList<>();
-        saleOrdersRecyclerView.setHasFixedSize(true);
-        saleOrdersRecyclerView.setLayoutManager(
+        purchaseOrdersRecyclerView.setHasFixedSize(true);
+        purchaseOrdersRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        saleOrdersRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+        purchaseOrdersRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
 
         // Specify the message of the empty view
-        emptyMessageLabel.setText("There are no sale orders to show.");
+        emptyMessageLabel.setText("There are no purchase orders to show.");
 
         refresh();
     }
@@ -113,16 +113,16 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
 
     @Override
     public void onAddPressed() {
-        startActivityForResult(new Intent(this, SalesActivity.class),
-                REQUEST_ADD_SALE_ORDER);
+        startActivityForResult(new Intent(this, PurchasesActivity.class),
+                REQUEST_ADD_PURCHASE_ORDER);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case REQUEST_ADD_SALE_ORDER:
-                if (resultCode == ResultCodes.SALE_ORDER_CREATED) {
-                    // A sale order was created
+            case REQUEST_ADD_PURCHASE_ORDER:
+                if (resultCode == ResultCodes.PURCHASE_ORDER_CREATED) {
+                    // A purchase order was created
                     Snackbar.make(getWindow().getDecorView(),
                             "Commande créée avec succès.", Snackbar.LENGTH_LONG)
                             .show();
@@ -133,13 +133,13 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     }
 
     public void refresh() {
-        fetchSaleOrders(PhpAPI.getSaleOrder, null);
+        fetchSaleOrders(PhpAPI.getPurchaseOrder, null);
     }
 
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new SaleOrdersAdapter(this, mOrders);
-            saleOrdersRecyclerView.setAdapter(ordersAdapter);
+            purchaseOrdersRecyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
     }
@@ -149,7 +149,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
      */
     private void toggleRecyclerviewState() {
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
-        saleOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        purchaseOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
@@ -184,8 +184,8 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
                                 });
                             }
                             else
-                                runOnUiThread(() -> Toast.makeText(SaleOrdersActivity.this,
-                                        "Error while retrieving sale orders",
+                                runOnUiThread(() -> Toast.makeText(PurchaseOrdersActivity.this,
+                                        "Error while retrieving purchase orders",
                                         Toast.LENGTH_LONG).show());
 
                         } catch (JSONException e) {
