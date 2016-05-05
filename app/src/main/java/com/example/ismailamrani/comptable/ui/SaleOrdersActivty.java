@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
+import com.example.ismailamrani.comptable.adapters.orders.SaleOrdersAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
@@ -26,7 +27,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     private static final int REQUEST_ADD_SALE_ORDER = 100;
 
     private List<Order> mOrders;
-    private StockAdapter ordersAdapter;
+    private SaleOrdersAdapter ordersAdapter;
 
     @Bind(R.id.MyActionBar)
     OGActionBar mActionBar;
@@ -74,5 +75,13 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     public void onAddPressed() {
         startActivityForResult(new Intent(this, SalesActivity.class),
                 REQUEST_ADD_SALE_ORDER);
+    }
+
+    private void populateRecyclerView() {
+        if (ordersAdapter == null) {
+            ordersAdapter = new SaleOrdersAdapter(this, mOrders);
+            saleOrdersRecyclerView.setAdapter(ordersAdapter);
+        } else
+            ordersAdapter.animateTo(mOrders);
     }
 }
