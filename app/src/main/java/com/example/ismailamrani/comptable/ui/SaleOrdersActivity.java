@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -122,6 +123,9 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
             case REQUEST_ADD_SALE_ORDER:
                 if (resultCode == ResultCodes.SALE_ORDER_CREATED) {
                     // A sale order was created
+                    Snackbar.make(getWindow().getDecorView(),
+                            "Commande créée avec succès.", Snackbar.LENGTH_LONG)
+                            .show();
                     refresh();
                 }
                 break;
