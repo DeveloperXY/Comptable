@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -148,7 +149,8 @@ public class StockActivity extends ColoredStatusBarActivity
      */
     @Override
     public void onSearchPressed() {
-        toggleSearchViewVisibility(View.VISIBLE);
+        if (mProducts.size() != 0)
+            toggleSearchViewVisibility(View.VISIBLE);
     }
 
     @Override
@@ -216,6 +218,17 @@ public class StockActivity extends ColoredStatusBarActivity
             stockRecyclerView.setAdapter(stockAdapter);
         } else
             stockAdapter.animateTo(mProducts);
+
+        checkIfStockIsEmpty();
+    }
+
+    private void checkIfStockIsEmpty() {
+        if (mProducts.size() == 0) {
+            Snackbar.make(getWindow().getDecorView(), "Your stock is empty.",
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("Add a product", v -> startActivity(
+                            new Intent(this, AddProductActivity.class))).show();
+        }
     }
 
     /**

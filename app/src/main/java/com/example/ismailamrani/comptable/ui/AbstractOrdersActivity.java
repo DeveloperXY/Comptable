@@ -119,9 +119,8 @@ public abstract class AbstractOrdersActivity extends AppCompatActivity
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
-    public void onEmptyViewPressed(View view) {
+    public void onErrorViewPressed(View view) {
         refresh();
-        Log.i("REFRESH", "ON");
     }
 
     @Override
@@ -187,7 +186,9 @@ public abstract class AbstractOrdersActivity extends AppCompatActivity
     }
 
     protected void refresh() {
-        swipeRefreshLayout.setRefreshing(true);
+        if (!swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(true);
+
         Stream.of(emptyView, recyclerView, errorLayout)
                 .forEach(v -> v.setVisibility(View.INVISIBLE));
     }

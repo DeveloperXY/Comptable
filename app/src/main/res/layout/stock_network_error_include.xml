@@ -8,7 +8,7 @@
     android:visibility="invisible"
     tools:showIn="@layout/activity_stock"
     tools:visibility="visible"
-    android:onClick="onEmptyViewPressed">
+    android:onClick="onErrorViewPressed">
 
     <TextView
         android:id="@+id/errorMessageLabel"
