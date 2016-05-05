@@ -61,6 +61,12 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     ProgressBar ordersProgressbar;
 
     /**
+     * The view to be displayed in case a network error occur.
+     */
+    @Bind(R.id.errorLayout)
+    RelativeLayout errorLayout;
+
+    /**
      * The view to be displayed in case there were no sale orders to show.
      */
     @Bind(R.id.emptyLayout)
@@ -74,8 +80,6 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
         setupActionBar();
         setupRecyclerView();
-        toggleRecyclerviewState();
-        populateRecyclerView();
     }
 
     private void setupActionBar() {
@@ -126,6 +130,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     private void toggleRecyclerviewState() {
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         saleOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
     }
 
     void fetchSaleOrders(String url, JSONObject data) {
@@ -136,6 +141,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
                     @Override
                     public void onFailure(final Call call, IOException e) {
                         runOnUiThread(() -> {
+                            errorLayout.setVisibility(View.VISIBLE);
                             ordersProgressbar.setVisibility(View.INVISIBLE);
                         });
                     }
