@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -17,6 +18,12 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
     @Bind(R.id.MyActionBar)
     OGActionBar mActionBar;
+
+    /**
+     * The orders' list.
+     */
+    @Bind(R.id.saleOrdersRecyclerView)
+    RecyclerView saleOrdersRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

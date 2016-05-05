@@ -11,6 +11,12 @@
 
         <include layout="@layout/custom_actionbar_include" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/saleOrdersRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="226" />
+
     </LinearLayout>
 
 </RelativeLayout>
