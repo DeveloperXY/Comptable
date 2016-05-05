@@ -3,7 +3,6 @@ package com.example.ismailamrani.comptable.adapters.orders;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +35,6 @@ public class OrdersViewHolder extends RecyclerView.ViewHolder {
     public void bind(Order order) {
         orderIDLabel.setText(order.getFactureID());
         statusColorLayout.setBackgroundColor(
-                Color.parseColor(order.getFacture() == 1 ? "#00FF00" : "#FF0000"));
+                Color.parseColor(order.getFacture() == 1 ? "#2E7D32" : "#D50000"));
     }
 }
