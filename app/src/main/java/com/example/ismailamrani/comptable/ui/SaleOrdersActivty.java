@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,9 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
     @Bind(R.id.emptyMessageLabel)
     TextView emptyMessageLabel;
+
+    @Bind(R.id.progressBar)
+    ProgressBar ordersProgressbar;
 
     /**
      * The view to be displayed in case there were no sale orders to show.
@@ -132,6 +136,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
                     @Override
                     public void onFailure(final Call call, IOException e) {
                         runOnUiThread(() -> {
+                            ordersProgressbar.setVisibility(View.INVISIBLE);
                         });
                     }
 
@@ -148,6 +153,8 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
                                 runOnUiThread(() -> {
                                     toggleRecyclerviewState();
                                     populateRecyclerView();
+
+                                    ordersProgressbar.setVisibility(View.INVISIBLE);
                                 });
                             }
                             else
