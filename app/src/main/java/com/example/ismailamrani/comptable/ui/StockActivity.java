@@ -43,9 +43,7 @@ public class StockActivity extends ColoredStatusBarActivity
     private static final int REQUEST_ADD_PRODUCT = 100;
 
     private List<Product> mProducts;
-
     private StockAdapter stockAdapter;
-
     private OkHttpClient client = new OkHttpClient();
 
     /**

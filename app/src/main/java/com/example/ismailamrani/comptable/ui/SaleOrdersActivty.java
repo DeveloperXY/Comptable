@@ -9,6 +9,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
@@ -17,13 +18,23 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarInterface {
 
@@ -31,6 +42,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
     private List<Order> mOrders;
     private SaleOrdersAdapter ordersAdapter;
+    private OkHttpClient client = new OkHttpClient();
 
     @Bind(R.id.MyActionBar)
     OGActionBar mActionBar;
@@ -78,6 +90,8 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
         // Specify the message of the empty view
         emptyMessageLabel.setText("There are no sale orders to show.");
+
+        fetchSaleOrders(PhpAPI.getSaleOrder, null);
     }
 
     @Override
@@ -108,5 +122,43 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     private void toggleRecyclerviewState() {
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         saleOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    void fetchSaleOrders(String url, JSONObject data) {
+        Request request = PhpAPI.createHTTPRequest(data, url, Method.GET);
+
+        client.newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(final Call call, IOException e) {
+                        runOnUiThread(() -> {
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        final String res = response.body().string();
+                        try {
+                            JSONObject obj = new JSONObject(res);
+                            int status = obj.getInt("success");
+
+                            if (status == 1) {
+                                mOrders = Order.parseOrders(
+                                        obj.getJSONArray("orders"));
+                                runOnUiThread(() -> {
+                                    toggleRecyclerviewState();
+                                    populateRecyclerView();
+                                });
+                            }
+                            else
+                                runOnUiThread(() -> Toast.makeText(SaleOrdersActivty.this,
+                                        "Error while retrieving sale orders",
+                                        Toast.LENGTH_LONG).show());
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 }

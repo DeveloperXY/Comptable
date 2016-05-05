@@ -1,5 +1,12 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.
  *
@@ -18,6 +25,16 @@ public class Order {
         this.facture = facture;
         this.factureID = factureID;
         this.totalPrice = totalPrice;
+    }
+
+    public Order(JSONObject object) throws JSONException {
+        this(
+                object.getInt("id"),
+                object.getString("date"),
+                object.getInt("facture"),
+                object.getString("facture"),
+                object.getDouble("total")
+        );
     }
 
     public int getId() {
@@ -58,5 +75,21 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public static List<Order> parseOrders(JSONArray array) {
+        List<Order> orders = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject product = array.getJSONObject(i);
+                orders.add(new Order(product));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return orders;
     }
 }
