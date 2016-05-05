@@ -99,11 +99,17 @@ public class SaleOrdersAdapter extends RecyclerView.Adapter<SaleOrdersAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView orderIDLabel;
+        TextView plusSignLabel;
+
         ViewHolder(View v) {
             super(v);
+            orderIDLabel = (TextView) v.findViewById(R.id.orderIDLabel);
+            plusSignLabel = (TextView) v.findViewById(R.id.plusSignLabel);
         }
 
         public void bind(Order order) {
+            orderIDLabel.setText(order.getFactureID());
         }
     }
 }
