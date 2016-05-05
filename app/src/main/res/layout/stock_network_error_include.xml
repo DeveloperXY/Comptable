@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:onClick="onEmptyViewClicked"
     android:visibility="invisible"
+    tools:showIn="@layout/activity_stock"
     tools:visibility="visible"
-    tools:showIn="@layout/activity_stock">
+    android:onClick="onEmptyViewPressed">
 
     <TextView
         android:id="@+id/errorMessageLabel"
@@ -17,8 +17,8 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="We were unable to fetch stock data. Please make sure that you have a working internet connection &amp; try again."
+        android:padding="16dp"
         android:textColor="@color/colorBlue"
         android:textStyle="bold"
-        android:padding="16dp" />
+        android:text="@string/cannot_connect_message"/>
 </RelativeLayout>

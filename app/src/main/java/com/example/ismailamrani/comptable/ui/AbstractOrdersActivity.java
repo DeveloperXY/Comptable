@@ -5,12 +5,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.orders.OrdersAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -91,8 +93,6 @@ public abstract class AbstractOrdersActivity extends AppCompatActivity
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new SpacesItemDecoration(4));
-
-        refresh();
     }
 
     protected void setupSwipeRefresh() {
@@ -117,6 +117,11 @@ public abstract class AbstractOrdersActivity extends AppCompatActivity
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         recyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public void onEmptyViewPressed(View view) {
+        refresh();
+        Log.i("REFRESH", "ON");
     }
 
     @Override
@@ -181,5 +186,9 @@ public abstract class AbstractOrdersActivity extends AppCompatActivity
             ordersAdapter.animateTo(mOrders);
     }
 
-    protected abstract void refresh();
+    protected void refresh() {
+        swipeRefreshLayout.setRefreshing(true);
+        Stream.of(emptyView, recyclerView, errorLayout)
+                .forEach(v -> v.setVisibility(View.INVISIBLE));
+    }
 }

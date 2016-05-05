@@ -21,6 +21,7 @@ public class SaleOrdersActivity extends AbstractOrdersActivity {
         ButterKnife.bind(this);
 
         setupUI();
+        refresh();
     }
 
     @Override
@@ -55,6 +56,7 @@ public class SaleOrdersActivity extends AbstractOrdersActivity {
 
     @Override
     protected void refresh() {
+        super.refresh();
         fetchOrders(PhpAPI.getSaleOrder, null);
     }
 }
