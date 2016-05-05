@@ -149,7 +149,6 @@ public class StockActivity extends ColoredStatusBarActivity
     @Override
     public void onSearchPressed() {
         toggleSearchViewVisibility(View.VISIBLE);
-        searchView.requestFocus();
     }
 
     @Override

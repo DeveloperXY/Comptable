@@ -32,7 +32,7 @@ public class Order {
                 object.getInt("id"),
                 object.getString("date"),
                 object.getInt("facture"),
-                object.getString("facture"),
+                object.getString("factureID"),
                 object.getDouble("total")
         );
     }

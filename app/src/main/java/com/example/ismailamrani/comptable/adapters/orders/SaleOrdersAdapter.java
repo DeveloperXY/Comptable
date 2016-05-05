@@ -32,7 +32,7 @@ public class SaleOrdersAdapter extends RecyclerView.Adapter<SaleOrdersAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.product_stock_row, viewGroup, false);
+                .inflate(R.layout.sale_order_row, viewGroup, false);
 
         return new ViewHolder(v);
     }

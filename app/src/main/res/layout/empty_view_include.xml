@@ -4,7 +4,6 @@
     android:id="@+id/emptyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="onEmptyViewClicked"
     android:visibility="invisible"
     tools:visibility="visible"
     tools:showIn="@layout/activity_stock"
