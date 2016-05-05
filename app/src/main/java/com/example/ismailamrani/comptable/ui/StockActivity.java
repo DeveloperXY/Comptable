@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -73,8 +72,8 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.searchView)
     SearchView searchView;
 
-    @Bind(R.id.searchCardView)
-    CardView searchCardView;
+    @Bind(R.id.searchLayoutView)
+    RelativeLayout searchLayoutView;
 
     @Bind(R.id.actionBarContainer)
     RelativeLayout actionBarContainer;
@@ -126,7 +125,7 @@ public class StockActivity extends ColoredStatusBarActivity
 
     @Override
     public void onBackPressed() {
-        if (searchCardView.getVisibility() == View.VISIBLE)
+        if (searchLayoutView.getVisibility() == View.VISIBLE)
             toggleSearchViewVisibility(View.GONE);
         else
             super.onBackPressed();
@@ -229,9 +228,9 @@ public class StockActivity extends ColoredStatusBarActivity
         int actionBarVisibility = visibility == View.VISIBLE ? View.GONE : View.VISIBLE;
 
         actionBarContainer.setVisibility(actionBarVisibility);
-        searchCardView.setVisibility(visibility);
+        searchLayoutView.setVisibility(visibility);
 
-        if(visibility == View.GONE) {
+        if (visibility == View.GONE) {
             // Empty the content of the search view if dismissed
             searchView.setQuery("", false);
         }
