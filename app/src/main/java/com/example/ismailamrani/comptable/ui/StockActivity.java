@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
@@ -18,6 +19,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.Products;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -37,7 +39,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class StockActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface, SearchListener {
+        implements OGActionBarInterface, SearchListener,
+        SearchView.OnQueryTextListener {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
 
@@ -72,6 +75,16 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.bottom_sheet)
     View bottomSheet;
 
+    @Bind(R.id.searchView)
+    SearchView searchView;
+
+    @Bind(R.id.searchCardView)
+    CardView searchCardView;
+
+    @Bind(R.id.actionBarContainer)
+    RelativeLayout actionBarContainer;
+
+    @Bind(R.id.MyActionBar)
     OGActionBar mActionBar;
 
     @Override
@@ -82,11 +95,10 @@ public class StockActivity extends ColoredStatusBarActivity
 
         setupActionBar();
         setupRecyclerView();
-        setupBottomSheetBehavior();
+        setupSearchView();
     }
 
     private void setupActionBar() {
-        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");
@@ -106,20 +118,12 @@ public class StockActivity extends ColoredStatusBarActivity
         fetchStockProducts(PhpAPI.getStock, null);
     }
 
-    private void setupBottomSheetBehavior() {
-        behavior = BottomSheetBehavior.from(bottomSheet);
-        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED)
-                    mActionBar.isSearchable(true);
-            }
+    private void setupSearchView() {
+        searchView.setOnQueryTextListener(this);
+    }
 
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-            }
-        });
+    public void onSearchDismiss(View view) {
+        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
@@ -206,7 +210,20 @@ public class StockActivity extends ColoredStatusBarActivity
      */
     @Override
     public void onSearchPressed() {
-        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        mActionBar.isSearchable(false);
+        actionBarContainer.setVisibility(View.GONE);
+        searchCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final List<Product> filteredContacts = Products.filter(mProducts, newText);
+        stockAdapter.animateTo(filteredContacts);
+        stockRecyclerView.scrollToPosition(0);
+        return true;
     }
 }
