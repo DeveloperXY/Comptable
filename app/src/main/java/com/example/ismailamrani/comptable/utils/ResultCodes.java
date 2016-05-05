@@ -6,8 +6,6 @@ package com.example.ismailamrani.comptable.utils;
  * Holds a variety of custom activity result codes.
  */
 public class ResultCodes {
-    /**
-     * A product was successfully added.
-     */
     public static final int PRODUCT_ADDED = 100;
+    public static final int SALE_ORDER_CREATED = 101;
 }

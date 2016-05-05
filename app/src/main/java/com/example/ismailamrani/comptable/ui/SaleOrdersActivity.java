@@ -17,6 +17,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -98,7 +99,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
         // Specify the message of the empty view
         emptyMessageLabel.setText("There are no sale orders to show.");
 
-        fetchSaleOrders(PhpAPI.getSaleOrder, null);
+        refresh();
     }
 
     @Override
@@ -113,6 +114,22 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     public void onAddPressed() {
         startActivityForResult(new Intent(this, SalesActivity.class),
                 REQUEST_ADD_SALE_ORDER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADD_SALE_ORDER:
+                if (resultCode == ResultCodes.SALE_ORDER_CREATED) {
+                    // A sale order was created
+                    refresh();
+                }
+                break;
+        }
+    }
+
+    public void refresh() {
+        fetchSaleOrders(PhpAPI.getSaleOrder, null);
     }
 
     private void populateRecyclerView() {

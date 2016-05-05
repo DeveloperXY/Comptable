@@ -21,6 +21,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -192,9 +193,17 @@ public class SalesActivity extends ColoredStatusBarActivity
                             JSONObject obj = new JSONObject(res);
                             int status = obj.getInt("success");
 
-                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                    status == 1 ? "SUCCESS" : "FAILURE",
-                                    Toast.LENGTH_SHORT).show());
+                            runOnUiThread(() -> {
+                                if (status == 1) {
+                                    setResult(ResultCodes.SALE_ORDER_CREATED);
+                                    finish();
+                                }
+                                else {
+                                    runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                            "An error occured while registering your order. " + "Please try again.", Toast.LENGTH_SHORT)
+                                            .show());
+                                }
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
