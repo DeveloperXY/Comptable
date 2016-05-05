@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.orders.SaleOrdersAdapter;
+import com.example.ismailamrani.comptable.adapters.orders.OrdersAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
@@ -42,7 +42,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
     private static final int REQUEST_ADD_PURCHASE_ORDER = 100;
 
     private List<Order> mOrders;
-    private SaleOrdersAdapter ordersAdapter;
+    private OrdersAdapter ordersAdapter;
     private OkHttpClient client = new OkHttpClient();
 
     @Bind(R.id.MyActionBar)
@@ -138,7 +138,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
 
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
-            ordersAdapter = new SaleOrdersAdapter(this, mOrders);
+            ordersAdapter = new OrdersAdapter(this, mOrders);
             purchaseOrdersRecyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);

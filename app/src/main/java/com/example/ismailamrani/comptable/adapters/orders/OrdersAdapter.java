@@ -5,13 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.models.Product;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,28 +15,28 @@ import java.util.List;
 /**
  * Created by Mohammed Aouf ZOUAG on 30/04/2016.
  */
-public class SaleOrdersAdapter extends RecyclerView.Adapter<SaleOrdersAdapter.ViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersViewHolder> {
 
     private Context mContext;
     private List<Order> mOrders;
 
-    public SaleOrdersAdapter(Context context, List<Order> orders) {
+    public OrdersAdapter(Context context, List<Order> orders) {
         mContext = context;
         mOrders = new ArrayList<>(orders);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public OrdersViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.sale_order_row, viewGroup, false);
+                .inflate(R.layout.order_row, viewGroup, false);
 
-        return new ViewHolder(v);
+        return new OrdersViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(OrdersViewHolder holder, int position) {
         Order order = mOrders.get(position);
-        viewHolder.bind(order);
+        holder.bind(order);
     }
 
     @Override
@@ -94,22 +90,6 @@ public class SaleOrdersAdapter extends RecyclerView.Adapter<SaleOrdersAdapter.Vi
 
             if (fromPosition >= 0 && fromPosition != toPosition)
                 moveItem(fromPosition, toPosition);
-        }
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView orderIDLabel;
-        TextView plusSignLabel;
-
-        ViewHolder(View v) {
-            super(v);
-            orderIDLabel = (TextView) v.findViewById(R.id.orderIDLabel);
-            plusSignLabel = (TextView) v.findViewById(R.id.plusSignLabel);
-        }
-
-        public void bind(Order order) {
-            orderIDLabel.setText(order.getFactureID());
         }
     }
 }
