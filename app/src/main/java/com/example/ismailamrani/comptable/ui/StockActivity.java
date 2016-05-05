@@ -2,8 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -47,7 +45,6 @@ public class StockActivity extends ColoredStatusBarActivity
     private List<Product> mProducts;
 
     private StockAdapter stockAdapter;
-    private BottomSheetBehavior behavior;
 
     private OkHttpClient client = new OkHttpClient();
 
@@ -71,9 +68,6 @@ public class StockActivity extends ColoredStatusBarActivity
 
     @Bind(R.id.stockProgressbar)
     ProgressBar stockProgressbar;
-
-    @Bind(R.id.bottom_sheet)
-    View bottomSheet;
 
     @Bind(R.id.searchView)
     SearchView searchView;
@@ -123,7 +117,21 @@ public class StockActivity extends ColoredStatusBarActivity
     }
 
     public void onSearchDismiss(View view) {
-        behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        toggleSearchViewVisibility(View.GONE); // Hide search view
+    }
+
+    /**
+     * @param visibility of the Search view
+     */
+    public void toggleSearchViewVisibility(int visibility) {
+        int actionBarVisibility;
+        if (visibility == View.VISIBLE)
+            actionBarVisibility = View.GONE;
+        else
+            actionBarVisibility = View.VISIBLE;
+
+        actionBarContainer.setVisibility(actionBarVisibility);
+        searchCardView.setVisibility(visibility);
     }
 
     @Override
