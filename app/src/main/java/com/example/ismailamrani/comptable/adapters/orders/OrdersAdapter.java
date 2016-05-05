@@ -30,7 +30,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersViewHolder> {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.order_row, viewGroup, false);
 
-        return new OrdersViewHolder(v);
+        return new OrdersViewHolder(mContext, v);
     }
 
     @Override
