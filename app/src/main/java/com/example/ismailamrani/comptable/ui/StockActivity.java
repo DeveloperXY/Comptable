@@ -2,8 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -118,22 +116,6 @@ public class StockActivity extends ColoredStatusBarActivity
         searchView.setOnQueryTextListener(this);
     }
 
-    public void onSearchDismiss(View view) {
-        toggleSearchViewVisibility(View.GONE); // Hide search view
-
-        stockAdapter.animateTo(mProducts);
-    }
-
-    /**
-     * @param visibility of the Search view
-     */
-    public void toggleSearchViewVisibility(int visibility) {
-        int actionBarVisibility = visibility == View.VISIBLE ? View.GONE : View.VISIBLE;
-
-        actionBarContainer.setVisibility(actionBarVisibility);
-        searchCardView.setVisibility(visibility);
-    }
-
     @Override
     public void onBackPressed() {
         if (searchCardView.getVisibility() == View.VISIBLE)
@@ -154,6 +136,34 @@ public class StockActivity extends ColoredStatusBarActivity
     public void onAddPressed() {
         startActivityForResult(new Intent(this, AddProductActivity.class),
                 REQUEST_ADD_PRODUCT);
+    }
+
+    public void onSearchDismiss(View view) {
+        toggleSearchViewVisibility(View.GONE); // Hide search view
+
+        stockAdapter.animateTo(mProducts);
+    }
+
+    /**
+     * Invoked when the 'Search' menu item of the custom action bar is clicked.
+     */
+    @Override
+    public void onSearchPressed() {
+        actionBarContainer.setVisibility(View.GONE);
+        searchCardView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final List<Product> filteredContacts = Products.filter(mProducts, newText);
+        stockAdapter.animateTo(filteredContacts);
+        stockRecyclerView.scrollToPosition(0);
+        return true;
     }
 
     @Override
@@ -211,6 +221,16 @@ public class StockActivity extends ColoredStatusBarActivity
     }
 
     /**
+     * @param visibility of the Search view
+     */
+    public void toggleSearchViewVisibility(int visibility) {
+        int actionBarVisibility = visibility == View.VISIBLE ? View.GONE : View.VISIBLE;
+
+        actionBarContainer.setVisibility(actionBarVisibility);
+        searchCardView.setVisibility(visibility);
+    }
+
+    /**
      * Toggles the visibility of the RecyclerView & the empty view associated with it.
      */
     private void toggleRecyclerviewState() {
@@ -219,27 +239,5 @@ public class StockActivity extends ColoredStatusBarActivity
         emptyView.setVisibility(mProducts.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         stockRecyclerView.setVisibility(mProducts.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
-    }
-
-    /**
-     * Invoked when the 'Search' menu item of the custom action bar is clicked.
-     */
-    @Override
-    public void onSearchPressed() {
-        actionBarContainer.setVisibility(View.GONE);
-        searchCardView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        final List<Product> filteredContacts = Products.filter(mProducts, newText);
-        stockAdapter.animateTo(filteredContacts);
-        stockRecyclerView.scrollToPosition(0);
-        return true;
     }
 }
