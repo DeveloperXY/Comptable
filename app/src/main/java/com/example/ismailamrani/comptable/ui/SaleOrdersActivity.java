@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.orders.OrdersAdapter;
-import com.example.ismailamrani.comptable.adapters.orders.OrdersViewHolder;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
@@ -38,40 +38,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SaleOrdersActivity extends AppCompatActivity implements OGActionBarInterface {
+public class SaleOrdersActivity extends AbstractOrdersActivity
+        implements OGActionBarInterface {
 
     private static final int REQUEST_ADD_SALE_ORDER = 100;
 
     private List<Order> mOrders;
     private OrdersAdapter ordersAdapter;
     private OkHttpClient client = new OkHttpClient();
-
-    @Bind(R.id.MyActionBar)
-    OGActionBar mActionBar;
-
-    /**
-     * The orders' list.
-     */
-    @Bind(R.id.saleOrdersRecyclerView)
-    RecyclerView saleOrdersRecyclerView;
-
-    @Bind(R.id.emptyMessageLabel)
-    TextView emptyMessageLabel;
-
-    @Bind(R.id.progressBar)
-    ProgressBar ordersProgressbar;
-
-    /**
-     * The view to be displayed in case a network error occur.
-     */
-    @Bind(R.id.errorLayout)
-    RelativeLayout errorLayout;
-
-    /**
-     * The view to be displayed in case there were no sale orders to show.
-     */
-    @Bind(R.id.emptyLayout)
-    RelativeLayout emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +55,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
 
         setupActionBar();
         setupRecyclerView();
+        setupSwipeRefresh();
     }
 
     private void setupActionBar() {
@@ -93,15 +68,25 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
      */
     private void setupRecyclerView() {
         mOrders = new ArrayList<>();
-        saleOrdersRecyclerView.setHasFixedSize(true);
-        saleOrdersRecyclerView.setLayoutManager(
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        saleOrdersRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(4));
 
         // Specify the message of the empty view
         emptyMessageLabel.setText("There are no sale orders to show.");
 
         refresh();
+    }
+
+    private void setupSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.swipeRefresh1,
+                R.color.swipeRefresh2,
+                R.color.swipeRefresh3,
+                R.color.swipeRefresh4
+        );
     }
 
     @Override
@@ -140,7 +125,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new OrdersAdapter(this, mOrders);
-            saleOrdersRecyclerView.setAdapter(ordersAdapter);
+            recyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
     }
@@ -150,7 +135,7 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
      */
     private void toggleRecyclerviewState() {
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
-        saleOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        recyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
@@ -163,7 +148,8 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
                     public void onFailure(final Call call, IOException e) {
                         runOnUiThread(() -> {
                             errorLayout.setVisibility(View.VISIBLE);
-                            ordersProgressbar.setVisibility(View.INVISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
+                            stopSwipeRefresh();
                         });
                     }
 
@@ -181,7 +167,8 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
                                     toggleRecyclerviewState();
                                     populateRecyclerView();
 
-                                    ordersProgressbar.setVisibility(View.INVISIBLE);
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    stopSwipeRefresh();
                                 });
                             }
                             else
@@ -194,5 +181,10 @@ public class SaleOrdersActivity extends AppCompatActivity implements OGActionBar
                         }
                     }
                 });
+    }
+
+    public void stopSwipeRefresh() {
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
     }
 }

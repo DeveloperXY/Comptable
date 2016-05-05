@@ -37,40 +37,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PurchaseOrdersActivity extends AppCompatActivity implements OGActionBarInterface {
+public class PurchaseOrdersActivity extends AbstractOrdersActivity
+        implements OGActionBarInterface {
 
     private static final int REQUEST_ADD_PURCHASE_ORDER = 100;
 
     private List<Order> mOrders;
     private OrdersAdapter ordersAdapter;
     private OkHttpClient client = new OkHttpClient();
-
-    @Bind(R.id.MyActionBar)
-    OGActionBar mActionBar;
-
-    /**
-     * The orders' list.
-     */
-    @Bind(R.id.purchaseOrdersRecyclerView)
-    RecyclerView purchaseOrdersRecyclerView;
-
-    @Bind(R.id.emptyMessageLabel)
-    TextView emptyMessageLabel;
-
-    @Bind(R.id.progressBar)
-    ProgressBar ordersProgressbar;
-
-    /**
-     * The view to be displayed in case a network error occur.
-     */
-    @Bind(R.id.errorLayout)
-    RelativeLayout errorLayout;
-
-    /**
-     * The view to be displayed in case there were no purchase orders to show.
-     */
-    @Bind(R.id.emptyLayout)
-    RelativeLayout emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +66,10 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
      */
     private void setupRecyclerView() {
         mOrders = new ArrayList<>();
-        purchaseOrdersRecyclerView.setHasFixedSize(true);
-        purchaseOrdersRecyclerView.setLayoutManager(
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        purchaseOrdersRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+        recyclerView.addItemDecoration(new SpacesItemDecoration(4));
 
         // Specify the message of the empty view
         emptyMessageLabel.setText("There are no purchase orders to show.");
@@ -139,7 +113,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new OrdersAdapter(this, mOrders);
-            purchaseOrdersRecyclerView.setAdapter(ordersAdapter);
+            recyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
     }
@@ -149,7 +123,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
      */
     private void toggleRecyclerviewState() {
         emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
-        purchaseOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        recyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
@@ -162,7 +136,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
                     public void onFailure(final Call call, IOException e) {
                         runOnUiThread(() -> {
                             errorLayout.setVisibility(View.VISIBLE);
-                            ordersProgressbar.setVisibility(View.INVISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
                         });
                     }
 
@@ -180,7 +154,7 @@ public class PurchaseOrdersActivity extends AppCompatActivity implements OGActio
                                     toggleRecyclerviewState();
                                     populateRecyclerView();
 
-                                    ordersProgressbar.setVisibility(View.INVISIBLE);
+                                    progressBar.setVisibility(View.INVISIBLE);
                                 });
                             }
                             else
