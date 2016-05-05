@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
@@ -38,6 +41,15 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
     @Bind(R.id.saleOrdersRecyclerView)
     RecyclerView saleOrdersRecyclerView;
 
+    @Bind(R.id.emptyMessageLabel)
+    TextView emptyMessageLabel;
+
+    /**
+     * The view to be displayed in case there were no sale orders to show.
+     */
+    @Bind(R.id.emptyLayout)
+    RelativeLayout emptyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +58,8 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
 
         setupActionBar();
         setupRecyclerView();
+        toggleRecyclerviewState();
+        populateRecyclerView();
     }
 
     private void setupActionBar() {
@@ -61,6 +75,9 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
         saleOrdersRecyclerView.setHasFixedSize(true);
         saleOrdersRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        // Specify the message of the empty view
+        emptyMessageLabel.setText("There are no sale orders to show.");
     }
 
     @Override
@@ -83,5 +100,13 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
             saleOrdersRecyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
+    }
+
+    /**
+     * Toggles the visibility of the RecyclerView & the empty view associated with it.
+     */
+    private void toggleRecyclerviewState() {
+        emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
+        saleOrdersRecyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
     }
 }
