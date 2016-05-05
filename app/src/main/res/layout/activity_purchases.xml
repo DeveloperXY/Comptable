@@ -313,7 +313,7 @@
                             android:hint="Quantity"
                             android:paddingLeft="20dp"
                             android:text="Total à payer:"
-                            android:textColor="#3d5469"
+                            android:textColor="@color/colorBlue"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
