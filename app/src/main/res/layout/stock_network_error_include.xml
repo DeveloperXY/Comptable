@@ -4,21 +4,21 @@
     android:id="@+id/emptyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_bg_ab"
+    android:background="#ffffff"
     android:onClick="onEmptyViewClicked"
     android:visibility="invisible"
     tools:visibility="visible"
     tools:showIn="@layout/activity_stock">
 
     <TextView
-        android:id="@+id/importingTextview"
+        android:id="@+id/errorMessageLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="We were unable to fetch stock data. Please make sure that you have a working internet connection &amp; try again."
-        android:textColor="#ffffffff"
+        android:textColor="@color/colorBlue"
         android:textStyle="bold"
         android:padding="16dp" />
 </RelativeLayout>

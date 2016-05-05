@@ -4,11 +4,11 @@
     android:id="@+id/emptyLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_bg_ab"
     android:onClick="onEmptyViewClicked"
     android:visibility="invisible"
     tools:visibility="visible"
-    tools:showIn="@layout/activity_stock">
+    tools:showIn="@layout/activity_stock"
+    android:background="#ffffff">
 
     <TextView
         android:id="@+id/emptyMessageLabel"
@@ -18,6 +18,6 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="There are no products to show."
-        android:textColor="#ffffffff"
+        android:textColor="@color/colorBlue"
         android:textStyle="bold" />
 </RelativeLayout>
