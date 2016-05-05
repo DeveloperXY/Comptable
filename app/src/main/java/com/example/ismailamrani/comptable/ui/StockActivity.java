@@ -120,17 +120,15 @@ public class StockActivity extends ColoredStatusBarActivity
 
     public void onSearchDismiss(View view) {
         toggleSearchViewVisibility(View.GONE); // Hide search view
+
+        stockAdapter.animateTo(mProducts);
     }
 
     /**
      * @param visibility of the Search view
      */
     public void toggleSearchViewVisibility(int visibility) {
-        int actionBarVisibility;
-        if (visibility == View.VISIBLE)
-            actionBarVisibility = View.GONE;
-        else
-            actionBarVisibility = View.VISIBLE;
+        int actionBarVisibility = visibility == View.VISIBLE ? View.GONE : View.VISIBLE;
 
         actionBarContainer.setVisibility(actionBarVisibility);
         searchCardView.setVisibility(visibility);
