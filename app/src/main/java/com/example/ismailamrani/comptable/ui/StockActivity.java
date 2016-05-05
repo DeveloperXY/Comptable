@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
@@ -113,7 +114,14 @@ public class StockActivity extends ColoredStatusBarActivity
     }
 
     private void setupSearchView() {
+        searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
+
+        ImageView closeButton = (ImageView) searchView.findViewById(R.id.search_close_btn);
+        closeButton.setOnClickListener(v -> {
+            toggleSearchViewVisibility(View.GONE); // Hide search view
+            stockAdapter.animateTo(mProducts);
+        });
     }
 
     @Override
@@ -138,19 +146,13 @@ public class StockActivity extends ColoredStatusBarActivity
                 REQUEST_ADD_PRODUCT);
     }
 
-    public void onSearchDismiss(View view) {
-        toggleSearchViewVisibility(View.GONE); // Hide search view
-
-        stockAdapter.animateTo(mProducts);
-    }
-
     /**
      * Invoked when the 'Search' menu item of the custom action bar is clicked.
      */
     @Override
     public void onSearchPressed() {
-        actionBarContainer.setVisibility(View.GONE);
-        searchCardView.setVisibility(View.VISIBLE);
+        toggleSearchViewVisibility(View.VISIBLE);
+        searchView.requestFocus();
     }
 
     @Override
@@ -178,8 +180,8 @@ public class StockActivity extends ColoredStatusBarActivity
         }
     }
 
-    void fetchStockProducts(String url, JSONObject userCredentials) {
-        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.GET);
+    void fetchStockProducts(String url, JSONObject data) {
+        Request request = PhpAPI.createHTTPRequest(data, url, Method.GET);
 
         client.newCall(request)
                 .enqueue(new Callback() {
@@ -228,6 +230,11 @@ public class StockActivity extends ColoredStatusBarActivity
 
         actionBarContainer.setVisibility(actionBarVisibility);
         searchCardView.setVisibility(visibility);
+
+        if(visibility == View.GONE) {
+            // Empty the content of the search view if dismissed
+            searchView.setQuery("", false);
+        }
     }
 
     /**
