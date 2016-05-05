@@ -98,7 +98,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SaleOrdersActivty"></activity>
+        <activity android:name=".ui.SaleOrdersActivity"></activity>
     </application>
 
 </manifest>

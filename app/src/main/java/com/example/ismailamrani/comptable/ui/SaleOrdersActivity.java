@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -14,13 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.adapters.orders.SaleOrdersAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -38,7 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarInterface {
+public class SaleOrdersActivity extends AppCompatActivity implements OGActionBarInterface {
 
     private static final int REQUEST_ADD_SALE_ORDER = 100;
 
@@ -96,6 +93,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
         saleOrdersRecyclerView.setHasFixedSize(true);
         saleOrdersRecyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        saleOrdersRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
 
         // Specify the message of the empty view
         emptyMessageLabel.setText("There are no sale orders to show.");
@@ -165,7 +163,7 @@ public class SaleOrdersActivty extends AppCompatActivity implements OGActionBarI
                                 });
                             }
                             else
-                                runOnUiThread(() -> Toast.makeText(SaleOrdersActivty.this,
+                                runOnUiThread(() -> Toast.makeText(SaleOrdersActivity.this,
                                         "Error while retrieving sale orders",
                                         Toast.LENGTH_LONG).show());
 

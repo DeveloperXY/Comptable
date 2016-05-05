@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:layout_width="10dp"
+            android:layout_width="8dp"
             android:layout_height="match_parent"
             android:background="#ff0000"
             android:id="@+id/statusColorLayout" />
