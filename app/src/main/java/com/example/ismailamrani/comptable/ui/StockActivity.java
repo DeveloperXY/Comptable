@@ -64,7 +64,7 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.errorLayout)
     RelativeLayout errorLayout;
 
-    @Bind(R.id.stockProgressbar)
+    @Bind(R.id.progressBar)
     ProgressBar stockProgressbar;
 
     @Bind(R.id.searchView)

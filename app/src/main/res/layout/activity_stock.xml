@@ -29,18 +29,6 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/progressbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:id="@+id/stockProgressbar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="false"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
+    <include layout="@layout/progressbar_layout_include" />
 
 </RelativeLayout>
