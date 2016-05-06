@@ -145,7 +145,11 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
      */
     public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
-        postCreatePurchaseOrder(PhpAPI.createPurchaseOrder, summary);
+
+        if (summary.length() == 0)
+            Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
+        else
+            postCreatePurchaseOrder(PhpAPI.createPurchaseOrder, summary);
     }
 
     /**
@@ -182,8 +186,8 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        Toast.makeText(PurchasesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }

@@ -155,7 +155,11 @@ public class SalesActivity extends ColoredStatusBarActivity {
      */
     public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
-        postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
+
+        if (summary.length() == 0)
+            Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
+        else
+            postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
     }
 
     /**
@@ -192,8 +196,8 @@ public class SalesActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        Toast.makeText(SalesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }
@@ -274,18 +278,20 @@ public class SalesActivity extends ColoredStatusBarActivity {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 0)
-                            Toast.makeText(SalesActivity.this,
+                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
                                     "Unregistered product.",
-                                    Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_LONG).show());
                         else {
                             try {
                                 JSONArray productList = response.getJSONArray("produit");
                                 JSONObject product = productList.getJSONObject(0);
                                 mProduct = new Product(product);
 
-                                quantityField.setText("1");
-                                barCodeField.setText(mProduct.getCodeBarre());
-                                priceField.setText(mProduct.getPrixTTC() + "");
+                                runOnUiThread(() -> {
+                                    quantityField.setText("1");
+                                    barCodeField.setText(mProduct.getCodeBarre());
+                                    priceField.setText(mProduct.getPrixTTC() + "");
+                                });
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -295,8 +301,8 @@ public class SalesActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        Toast.makeText(SalesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }
