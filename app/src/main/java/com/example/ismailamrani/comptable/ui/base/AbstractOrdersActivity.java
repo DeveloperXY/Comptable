@@ -142,9 +142,12 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        errorLayout.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.INVISIBLE);
-                        stopSwipeRefresh();
+                        runOnUiThread(() -> {
+                            errorLayout.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.INVISIBLE);
+                            recyclerView.setVisibility(View.INVISIBLE);
+                            stopSwipeRefresh();
+                        });
                     }
                 });
     }
@@ -161,7 +164,7 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
         if (!swipeRefreshLayout.isRefreshing())
             swipeRefreshLayout.setRefreshing(true);
 
-        Stream.of(emptyView, recyclerView, errorLayout)
+        Stream.of(emptyView, errorLayout)
                 .forEach(v -> v.setVisibility(View.INVISIBLE));
     }
 }
