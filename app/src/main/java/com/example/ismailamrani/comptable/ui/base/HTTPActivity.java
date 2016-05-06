@@ -21,20 +21,22 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "success";
 
+    private OkHttpClient client;
+
     /**
-     * @param client OkHttpClient
      * @param url target destination
      * @param data request's parameters
      * @param method GET/POST
      * @param listener on the outgoing HTTP request
      */
-    protected void sendHTTPRequest(OkHttpClient client,
-                                   String url,
+    protected void sendHTTPRequest(String url,
                                    JSONObject data,
                                    Method method,
                                    RequestListener listener) {
-        Request request = PhpAPI.createHTTPRequest(data, url, method);
+        if (client == null)
+            client = new OkHttpClient();
 
+        Request request = PhpAPI.createHTTPRequest(data, url, method);
         client.newCall(request)
                 .enqueue(new Callback() {
                     @Override

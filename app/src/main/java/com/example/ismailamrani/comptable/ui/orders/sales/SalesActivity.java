@@ -63,7 +63,6 @@ public class SalesActivity extends ColoredStatusBarActivity {
     private Product mProduct;
     private List<Product> toBeSoldProducts;
 
-    private OkHttpClient client = new OkHttpClient();
     private ProductOrderAdapter productAdapter;
     private TextWatcher quantityWatcher;
 
@@ -154,7 +153,7 @@ public class SalesActivity extends ColoredStatusBarActivity {
      *
      * @param view
      */
-    public void onConfirmSale(View view) {
+    public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
         postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
     }
@@ -176,38 +175,25 @@ public class SalesActivity extends ColoredStatusBarActivity {
      * @param orderInfos
      */
     void postCreateSaleOrder(String url, JSONObject orderInfos) {
-        Request request = PhpAPI.createHTTPRequest(orderInfos, url, Method.POST);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+        sendHTTPRequest(url, orderInfos, Method.POST,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1) {
+                            setResult(ResultCodes.SALE_ORDER_CREATED);
+                            finish();
+                        } else {
+                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
+                                    "An error occured while registering your order. " +
+                                            "Please try again.", Toast.LENGTH_SHORT)
+                                    .show());
+                        }
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int status = obj.getInt("success");
-
-                            runOnUiThread(() -> {
-                                if (status == 1) {
-                                    setResult(ResultCodes.SALE_ORDER_CREATED);
-                                    finish();
-                                }
-                                else {
-                                    runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                            "An error occured while registering your order. " + "Please try again.", Toast.LENGTH_SHORT)
-                                            .show());
-                                }
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        Toast.makeText(SalesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -283,7 +269,7 @@ public class SalesActivity extends ColoredStatusBarActivity {
      * Retrieves the scanned product's informations based on its bar code.
      */
     void postGetProduct(String url, JSONObject data) throws IOException {
-        sendHTTPRequest(client, url, data, Method.POST,
+        sendHTTPRequest(url, data, Method.POST,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {

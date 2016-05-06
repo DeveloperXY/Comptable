@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import okhttp3.OkHttpClient;
 
 public class LoginActivity extends ColoredStatusBarActivity {
-    private OkHttpClient client = new OkHttpClient();
     private DatabaseAdapter databaseAdapter;
 
     LinearLayout Valider;
@@ -45,10 +44,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
 
             if (user != null) {
                 // Send the login POST request.
-                sendHTTPRequest(client,
-                        PhpAPI.login,
-                        user.toJSON(),
-                        Method.POST,
+                sendHTTPRequest(PhpAPI.login, user.toJSON(), Method.POST,
                         new RequestListener() {
                             @Override
                             public void onRequestSucceeded(JSONObject response, int status) {

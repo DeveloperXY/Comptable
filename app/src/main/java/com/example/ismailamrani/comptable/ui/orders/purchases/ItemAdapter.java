@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders.adapters;
+package com.example.ismailamrani.comptable.ui.orders.purchases;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

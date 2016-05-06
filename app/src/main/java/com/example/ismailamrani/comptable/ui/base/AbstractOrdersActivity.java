@@ -35,7 +35,6 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
 
     protected List<Order> mOrders;
     protected OrdersAdapter ordersAdapter;
-    protected OkHttpClient client = new OkHttpClient();
 
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
@@ -123,7 +122,7 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
     }
 
     protected void fetchOrders(String url, JSONObject data) {
-        sendHTTPRequest(client, url, data, Method.GET,
+        sendHTTPRequest(url, data, Method.GET,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {

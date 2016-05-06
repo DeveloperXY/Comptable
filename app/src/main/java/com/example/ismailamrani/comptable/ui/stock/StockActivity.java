@@ -40,7 +40,6 @@ public class StockActivity extends ColoredStatusBarActivity
 
     private List<Product> mProducts;
     private StockAdapter stockAdapter;
-    private OkHttpClient client = new OkHttpClient();
 
     /**
      * The stock's products list.
@@ -166,7 +165,7 @@ public class StockActivity extends ColoredStatusBarActivity
     }
 
     void fetchStockProducts(String url, JSONObject data) {
-        sendHTTPRequest(client, url, data, Method.GET,
+        sendHTTPRequest(url, data, Method.GET,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {

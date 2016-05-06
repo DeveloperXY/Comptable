@@ -40,7 +40,6 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
 
     private OGActionBar mActionBar;
     private SpinnerBottomSheet bottomSheetDialog;
-    private OkHttpClient client = new OkHttpClient();
 
     @Bind(R.id.productField)
     EditText productField;
@@ -166,7 +165,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
      * @param orderInfos
      */
     void postCreatePurchaseOrder(String url, JSONObject orderInfos) {
-        sendHTTPRequest(client, url, orderInfos, Method.POST,
+        sendHTTPRequest(url, orderInfos, Method.POST,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
