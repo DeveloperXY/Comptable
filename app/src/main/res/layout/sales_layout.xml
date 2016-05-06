@@ -23,7 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="400">
+            android:layout_weight="403">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -32,31 +32,19 @@
                 android:src="@drawable/vente" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="33" />
+        <include layout="@layout/small_vertical_separator" />
 
         <include layout="@layout/sale_form_layout" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
+        <include layout="@layout/small_vertical_separator" />
 
         <include layout="@layout/order_products_list_include" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
+        <include layout="@layout/small_vertical_separator" />
 
         <include layout="@layout/total_price_layout_include" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30" />
+        <include layout="@layout/small_vertical_separator" />
 
         <include layout="@layout/validate_button_layout_include" />
 
