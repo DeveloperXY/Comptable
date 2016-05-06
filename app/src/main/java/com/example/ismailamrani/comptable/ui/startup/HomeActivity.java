@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,14 @@ import android.view.View;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.ClientListActivity;
+import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
+import com.example.ismailamrani.comptable.ui.NewChargeActivity;
+import com.example.ismailamrani.comptable.ui.ProductsActivity;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.orders.purchases.PurchaseOrdersActivity;
+import com.example.ismailamrani.comptable.ui.orders.sales.SaleOrdersActivity;
+import com.example.ismailamrani.comptable.ui.stock.StockActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 
 import butterknife.ButterKnife;

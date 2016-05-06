@@ -5,8 +5,9 @@ import android.util.DisplayMetrics;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.spinners.SpinnerAdapter;
+import com.example.ismailamrani.comptable.adapters.SpinnerAdapter;
 import com.example.ismailamrani.comptable.localdata.ToDelete.GetSpinnerLocal;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 
 /**
  * Created by Redouane on 07/04/2016.

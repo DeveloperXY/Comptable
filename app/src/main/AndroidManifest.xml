@@ -17,8 +17,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.HomeActivity" />
+        <activity android:name=".ui.startup.LoginActivity" />
+        <activity android:name=".ui.startup.HomeActivity" />
         <activity android:name=".ui.ProductsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.Produis" />
@@ -78,18 +78,18 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ui.SalesActivity"
+            android:name=".ui.orders.sales.SalesActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_vente"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.StockActivity" />
-        <activity android:name=".ui.ColoredStatusBarActivity" />
+        <activity android:name=".ui.stock.StockActivity" />
+        <activity android:name=".ui.base.ColoredStatusBarActivity" />
         <activity
-            android:name=".ui.PurchasesActivity"
+            android:name=".ui.orders.purchases.PurchasesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui.startup.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,9 +97,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SaleOrdersActivity" />
-        <activity android:name=".ui.PurchaseOrdersActivity" />
-        <activity android:name=".ui.HTTPActivity"></activity>
+        <activity android:name=".ui.orders.sales.SaleOrdersActivity" />
+        <activity android:name=".ui.orders.purchases.PurchaseOrdersActivity" />
+        <activity android:name=".ui.base.HTTPActivity"></activity>
     </application>
 
 </manifest>

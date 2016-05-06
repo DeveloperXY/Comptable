@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.adapters;
+package com.example.ismailamrani.comptable.ui.stock;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

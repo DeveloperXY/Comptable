@@ -1,14 +1,14 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.base;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 
-public class ColoredStatusBarActivity extends HTTPActivity
+public abstract class ColoredStatusBarActivity extends HTTPActivity
         implements OGActionBarInterface {
 
     @Override

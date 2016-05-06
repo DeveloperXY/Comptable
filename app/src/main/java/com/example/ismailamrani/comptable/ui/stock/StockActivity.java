@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.stock;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.ui.AddProductActivity;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.Products;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -26,21 +26,15 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class StockActivity extends ColoredStatusBarActivity
-        implements SearchListener,
-        SearchView.OnQueryTextListener {
+        implements SearchListener, SearchView.OnQueryTextListener {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
 

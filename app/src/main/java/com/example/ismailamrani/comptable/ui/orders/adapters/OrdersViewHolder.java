@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.adapters.orders;
+package com.example.ismailamrani.comptable.ui.orders.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.ui.SaleOrdersActivity;
+import com.example.ismailamrani.comptable.ui.orders.sales.SaleOrdersActivity;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.

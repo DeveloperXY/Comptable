@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;

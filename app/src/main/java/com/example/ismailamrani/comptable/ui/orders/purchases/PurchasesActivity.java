@@ -1,6 +1,5 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.orders.purchases;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -11,12 +10,12 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
+import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.customitems.dialogs.SpinnerBottomSheet;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -24,21 +23,15 @@ import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class PurchasesActivity extends ColoredStatusBarActivity {
 

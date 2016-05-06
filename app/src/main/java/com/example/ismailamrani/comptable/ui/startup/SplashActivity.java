@@ -1,8 +1,9 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 04/05/2016.

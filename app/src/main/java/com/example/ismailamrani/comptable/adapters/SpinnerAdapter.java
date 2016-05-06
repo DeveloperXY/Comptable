@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.adapters.spinners;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

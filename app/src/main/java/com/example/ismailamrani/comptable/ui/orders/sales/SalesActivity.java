@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.orders.sales;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,12 +13,12 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
+import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;

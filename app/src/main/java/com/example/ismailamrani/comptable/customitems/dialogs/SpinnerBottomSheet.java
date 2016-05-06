@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.spinners.ItemAdapter;
+import com.example.ismailamrani.comptable.ui.orders.adapters.ItemAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Item;
 import com.example.ismailamrani.comptable.models.Product;

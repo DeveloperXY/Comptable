@@ -20,6 +20,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;

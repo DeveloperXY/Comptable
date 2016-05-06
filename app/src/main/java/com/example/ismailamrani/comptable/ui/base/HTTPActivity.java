@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -17,13 +18,7 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class LoginActivity extends ColoredStatusBarActivity {
     private OkHttpClient client = new OkHttpClient();

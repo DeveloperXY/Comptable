@@ -1,10 +1,11 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.orders.sales;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.base.AbstractOrdersActivity;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
