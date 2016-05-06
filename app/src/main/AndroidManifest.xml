@@ -47,7 +47,7 @@
         <activity android:name=".ui.ModifierProduitActivity" />
         <activity android:name=".ui.AddClientActivity" />
         <activity android:name=".ui.EditClientActivity" />
-        <activity android:name=".ui.Produit_InfoActivity" />
+        <activity android:name=".ui.ProductDetailsActivity" />
         <activity android:name=".fournisseur.AddFournisseurAsync" />
         <activity android:name=".charges.AddCharge" />
         <activity android:name=".ui.AddLocalActivity" />

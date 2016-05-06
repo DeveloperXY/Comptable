@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
-public class Produit_InfoActivity extends ColoredStatusBarActivity {
+public class ProductDetailsActivity extends ColoredStatusBarActivity {
 
     OGActionBar MyActionBar;
     ImageView Image;
@@ -62,7 +62,6 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity {
     private void setupActionBar() {
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Sumsung Galaxy S6");
     }
 
     private class getProduitbyId extends AsyncTask<String, Void, String> {

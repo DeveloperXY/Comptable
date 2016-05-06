@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui.stock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -107,6 +109,12 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
             productLabel = (TextView) v.findViewById(R.id.productLabel);
             quantityLabel = (TextView) v.findViewById(R.id.quantityLabel);
             productImage = (ImageView) v.findViewById(R.id.productImage);
+
+            v.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, ProductDetailsActivity.class);
+                intent.putExtra("id", mProducts.get(getLayoutPosition()).getID());
+                mContext.startActivity(intent);
+            });
         }
 
         public void bind(Product product) {

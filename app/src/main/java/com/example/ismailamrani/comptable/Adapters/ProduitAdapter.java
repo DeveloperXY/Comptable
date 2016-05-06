@@ -16,7 +16,7 @@ import com.example.ismailamrani.comptable.customitems.CustomTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
-import com.example.ismailamrani.comptable.ui.Produit_InfoActivity;
+import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -112,7 +112,7 @@ public class ProduitAdapter extends BaseAdapter {
         afficher = (CustomTextView) Layout.findViewById(R.id.afficher);
 
         afficher.setOnClickListener(v -> {
-            Intent i = new Intent(context, Produit_InfoActivity.class);
+            Intent i = new Intent(context, ProductDetailsActivity.class);
             i.putExtra("id", List.get(position).getID());
             context.startActivity(i);
         });
