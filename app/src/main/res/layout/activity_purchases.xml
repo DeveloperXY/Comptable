@@ -49,7 +49,7 @@
                 android:id="@+id/layoutForm"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1000"
+                android:layout_weight="952"
                 android:orientation="horizontal"
                 android:weightSum="1390">
 
@@ -255,60 +255,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="30" />
 
-            <LinearLayout
-                android:id="@+id/layoutTotalPrice"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="150"
-                android:orientation="horizontal"
-                android:weightSum="1390">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="70" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1250"
-                    android:background="@drawable/vente_style"
-                    android:orientation="horizontal"
-                    android:weightSum="1174">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1032">
-
-                        <TextView
-                            android:id="@+id/priceSumLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:gravity="center_vertical"
-                            android:hint="Quantity"
-                            android:paddingLeft="20dp"
-                            android:text="Total à payer:"
-                            android:textColor="@color/colorBlue"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/priceLabel"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toRightOf="@+id/priceSumLabel"
-                            android:gravity="center_vertical|right"
-                            android:paddingRight="10dp"
-                            android:text="0"
-                            android:textColor="#ff000000"
-                            tools:text="1500" />
-                    </RelativeLayout>
-
-                    <include layout="@layout/dh_layout_include" />
-                </LinearLayout>
-            </LinearLayout>
+            <include layout="@layout/total_price_layout_include" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
