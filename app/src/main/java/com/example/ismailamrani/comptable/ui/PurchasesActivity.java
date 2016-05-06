@@ -164,7 +164,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity
      *
      * @param view
      */
-    public void onConfirmPurchase(View view) {
+    public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
         postCreatePurchaseOrder(PhpAPI.createPurchaseOrder, summary);
     }
