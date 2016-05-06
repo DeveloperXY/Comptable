@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.annimon.stream.Collectors;
@@ -41,7 +42,8 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
 
     private Context context;
     private RecyclerView recyclerView;
-    private OGActionBar mActionBar;
+    private TextView titleBar;
+    private TextView emptyView;
 
     private ItemAdapter itemAdapter;
     private OnItemSelectedListener listener;
@@ -57,16 +59,15 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
         setContentView(view);
         setOnDismissListener(dialog -> this.context = null);
 
-        setupActionBar();
-        setupRecyclerView();
+        setupUI();
         fetchAppropriateData();
     }
 
-    private void setupActionBar() {
-        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        mActionBar.setTitle("Loading...");
-        mActionBar.disableAddButton();
-        mActionBar.disableMenu();
+    private void setupUI() {
+        setupRecyclerView();
+
+        emptyView = (TextView) findViewById(R.id.emptyTextView);
+        titleBar = (TextView) findViewById(R.id.titleBar);
     }
 
     private void fetchAppropriateData() {
@@ -88,7 +89,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                     @Override
                     public void onFailure(final Call call, IOException e) {
                         ((AppCompatActivity) context).runOnUiThread(() -> {
-                            mActionBar.setTitle("Waiting for network...");
+                            titleBar.setText("Waiting for network...");
                             Toast.makeText(context, "No internet connection.",
                                     Toast.LENGTH_LONG).show();
                         });
@@ -107,7 +108,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     if (spinnerID == R.id.productSpinner) {
-                                        mActionBar.setTitle("Available products");
+                                        titleBar.setText("Available products");
                                         try {
                                             List<Product> products = Product.parseProducts(
                                                     obj.getJSONArray("produit"));
@@ -118,7 +119,7 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
                                             e.printStackTrace();
                                         }
                                     } else {
-                                        mActionBar.setTitle("Available suppliers");
+                                        titleBar.setText("Available suppliers");
                                         try {
                                             List<Supplier> suppliers = Supplier.parseSuppliers(
                                                     obj.getJSONArray("fournisseur"));
@@ -140,6 +141,24 @@ public class SpinnerBottomSheet extends BottomSheetDialog {
     }
 
     private void populateRecyclerView(List<Item> items) {
+        if (items.size() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+
+            if (spinnerID == R.id.productSpinner) {
+                titleBar.setText("Your stock is empty.");
+                emptyView.setText("You need to add products to your stock first.");
+            }
+            else {
+                titleBar.setText("You have no registered suppliers.");
+                emptyView.setText("");
+            }
+        }
+        else {
+            emptyView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
         if (itemAdapter == null) {
             itemAdapter = new ItemAdapter(items, item -> {
                 listener.onItemSelected(item);
