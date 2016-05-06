@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.ismailamrani.comptable.app.OGApplication;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -34,7 +35,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
                                    Method method,
                                    RequestListener listener) {
         if (client == null)
-            client = new OkHttpClient();
+            client = ((OGApplication) getApplication()).getOkHttpInstance();
 
         Request request = PhpAPI.createHTTPRequest(data, url, method);
         client.newCall(request)
