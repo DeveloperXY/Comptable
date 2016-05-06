@@ -48,48 +48,48 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
     }
 
     public Product removeItem(int position) {
-        final Product contact = mProducts.remove(position);
+        final Product product = mProducts.remove(position);
         notifyItemRemoved(position);
-        return contact;
+        return product;
     }
 
-    public void addItem(int position, Product contact) {
-        mProducts.add(position, contact);
+    public void addItem(int position, Product product) {
+        mProducts.add(position, product);
         notifyItemInserted(position);
     }
 
     public void moveItem(int fromPosition, int toPosition) {
-        final Product contact = mProducts.remove(fromPosition);
-        mProducts.add(toPosition, contact);
+        final Product product = mProducts.remove(fromPosition);
+        mProducts.add(toPosition, product);
         notifyItemMoved(fromPosition, toPosition);
     }
 
-    public void animateTo(List<Product> contacts) {
-        applyAndAnimateRemovals(contacts);
-        applyAndAnimateAdditions(contacts);
-        applyAndAnimateMovedItems(contacts);
+    public void animateTo(List<Product> products) {
+        applyAndAnimateRemovals(products);
+        applyAndAnimateAdditions(products);
+        applyAndAnimateMovedItems(products);
     }
 
-    private void applyAndAnimateRemovals(List<Product> newContacts) {
+    private void applyAndAnimateRemovals(List<Product> newProducts) {
         for (int i = mProducts.size() - 1; i >= 0; i--) {
-            final Product contact = mProducts.get(i);
-            if (!newContacts.contains(contact))
+            final Product product = mProducts.get(i);
+            if (!newProducts.contains(product))
                 removeItem(i);
         }
     }
 
-    private void applyAndAnimateAdditions(List<Product> newContacts) {
-        for (int i = 0, count = newContacts.size(); i < count; i++) {
-            final Product contact = newContacts.get(i);
-            if (!mProducts.contains(contact))
-                addItem(i, contact);
+    private void applyAndAnimateAdditions(List<Product> newProducts) {
+        for (int i = 0, count = newProducts.size(); i < count; i++) {
+            final Product product = newProducts.get(i);
+            if (!mProducts.contains(product))
+                addItem(i, product);
         }
     }
 
-    private void applyAndAnimateMovedItems(List<Product> newContacts) {
-        for (int toPosition = newContacts.size() - 1; toPosition >= 0; toPosition--) {
-            final Product contact = newContacts.get(toPosition);
-            final int fromPosition = mProducts.indexOf(contact);
+    private void applyAndAnimateMovedItems(List<Product> newProducts) {
+        for (int toPosition = newProducts.size() - 1; toPosition >= 0; toPosition--) {
+            final Product product = newProducts.get(toPosition);
+            final int fromPosition = mProducts.indexOf(product);
 
             if (fromPosition >= 0 && fromPosition != toPosition)
                 moveItem(fromPosition, toPosition);

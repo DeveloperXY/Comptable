@@ -245,14 +245,4 @@ public class AddProductActivity extends ColoredStatusBarActivity
         String imageCode = Base64.encodeToString(byteArray, Base64.DEFAULT);
         return imageCode;
     }
-
-    @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
-    public void onAddPressed() {
-
-    }
 }

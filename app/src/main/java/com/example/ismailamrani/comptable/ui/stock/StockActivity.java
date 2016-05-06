@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -146,9 +147,8 @@ public class StockActivity extends ColoredStatusBarActivity
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final List<Product> filteredContacts = Products.filter(mProducts, newText);
-        stockAdapter.animateTo(filteredContacts);
-        stockRecyclerView.scrollToPosition(0);
+        final List<Product> filteredProducts = Products.filter(mProducts, newText);
+        stockAdapter.animateTo(filteredProducts);
         return true;
     }
 
@@ -205,8 +205,7 @@ public class StockActivity extends ColoredStatusBarActivity
         if (mProducts.size() == 0) {
             Snackbar.make(getWindow().getDecorView(), "Your stock is empty.",
                     Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Add a product", v -> startActivity(
-                            new Intent(this, AddProductActivity.class))).show();
+                    .setAction("Add a product", v -> onAddPressed()).show();
         }
     }
 
