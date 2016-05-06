@@ -21,6 +21,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -280,53 +281,36 @@ public class SalesActivity extends ColoredStatusBarActivity {
 
     /**
      * Retrieves the scanned product's informations based on its bar code.
-     *
-     * @param url             destination URL
-     * @param userCredentials the user's informations
-     * @throws IOException
      */
-    void postGetProduct(String url, JSONObject userCredentials) throws IOException {
-        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+    void postGetProduct(String url, JSONObject data) throws IOException {
+        sendHTTPRequest(client, url, data, Method.POST,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 0)
+                            Toast.makeText(SalesActivity.this,
+                                    "Unregistered product.",
+                                    Toast.LENGTH_LONG).show();
+                        else {
+                            try {
+                                JSONArray productList = response.getJSONArray("produit");
+                                JSONObject product = productList.getJSONObject(0);
+                                mProduct = new Product(product);
+
+                                quantityField.setText("1");
+                                barCodeField.setText(mProduct.getCodeBarre());
+                                priceField.setText(mProduct.getPrixTTC() + "");
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int resp = obj.getInt("success");
-
-                            runOnUiThread(() -> {
-                                if (resp == 0)
-                                    Toast.makeText(SalesActivity.this,
-                                            "Unregistered product.",
-                                            Toast.LENGTH_LONG).show();
-                                else {
-                                    try {
-                                        JSONArray productList = obj.getJSONArray("produit");
-                                        JSONObject product = productList.getJSONObject(0);
-                                        mProduct = new Product(product);
-
-                                        quantityField.setText("1");
-                                        barCodeField.setText(mProduct.getCodeBarre());
-                                        priceField.setText(mProduct.getPrixTTC() + "");
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        Toast.makeText(SalesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show();
                     }
                 });
     }

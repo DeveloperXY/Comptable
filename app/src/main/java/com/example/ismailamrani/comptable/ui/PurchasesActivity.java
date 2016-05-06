@@ -19,6 +19,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -172,38 +173,25 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
      * @param orderInfos
      */
     void postCreatePurchaseOrder(String url, JSONObject orderInfos) {
-        Request request = PhpAPI.createHTTPRequest(orderInfos, url, Method.POST);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+        sendHTTPRequest(client, url, orderInfos, Method.POST,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1) {
+                            setResult(ResultCodes.PURCHASE_ORDER_CREATED);
+                            finish();
+                        } else {
+                            runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
+                                    "An error occured while registering your order. " +
+                                            "Please try again.", Toast.LENGTH_SHORT)
+                                    .show());
+                        }
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int status = obj.getInt("success");
-
-                            runOnUiThread(() -> {
-                                if (status == 1) {
-                                    setResult(ResultCodes.PURCHASE_ORDER_CREATED);
-                                    finish();
-                                }
-                                else {
-                                    runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                            "An error occured while registering your order. " + "Please try again.", Toast.LENGTH_SHORT)
-                                            .show());
-                                }
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        Toast.makeText(PurchasesActivity.this,
+                                "Unknown error", Toast.LENGTH_LONG).show();
                     }
                 });
     }

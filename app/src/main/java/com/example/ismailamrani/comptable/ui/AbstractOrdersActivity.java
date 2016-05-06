@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -128,39 +129,29 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
     }
 
     protected void fetchOrders(String url, JSONObject data) {
-        Request request = PhpAPI.createHTTPRequest(data, url, Method.GET);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+        sendHTTPRequest(client, url, data, Method.GET,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> {
-                            errorLayout.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.INVISIBLE);
-                            stopSwipeRefresh();
-                        });
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1) {
+                            try {
+                                mOrders = Order.parseOrders(
+                                        response.getJSONArray("orders"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            onDataChanged();
+                        } else
+                            Toast.makeText(AbstractOrdersActivity.this,
+                                    "Error while retrieving purchase orders",
+                                    Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int status = obj.getInt("success");
-
-                            if (status == 1) {
-                                mOrders = Order.parseOrders(
-                                        obj.getJSONArray("orders"));
-                                runOnUiThread(() -> onDataChanged());
-                            } else
-                                runOnUiThread(() -> Toast.makeText(
-                                        AbstractOrdersActivity.this,
-                                        "Error while retrieving purchase orders",
-                                        Toast.LENGTH_LONG).show());
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        errorLayout.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
+                        stopSwipeRefresh();
                     }
                 });
     }

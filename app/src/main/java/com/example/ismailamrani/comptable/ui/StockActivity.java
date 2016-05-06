@@ -19,6 +19,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.Products;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -171,35 +172,28 @@ public class StockActivity extends ColoredStatusBarActivity
     }
 
     void fetchStockProducts(String url, JSONObject data) {
-        Request request = PhpAPI.createHTTPRequest(data, url, Method.GET);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+        sendHTTPRequest(client, url, data, Method.GET,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        try {
+                            mProducts = Product.parseProducts(
+                                    response.getJSONArray("products"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         runOnUiThread(() -> {
-                            errorLayout.setVisibility(View.VISIBLE);
+                            toggleRecyclerviewState();
+                            populateRecyclerView();
+
                             stockProgressbar.setVisibility(View.INVISIBLE);
                         });
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            mProducts = Product.parseProducts(
-                                    obj.getJSONArray("products"));
-                            runOnUiThread(() -> {
-                                toggleRecyclerviewState();
-                                populateRecyclerView();
-
-                                stockProgressbar.setVisibility(View.INVISIBLE);
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        errorLayout.setVisibility(View.VISIBLE);
+                        stockProgressbar.setVisibility(View.INVISIBLE);
                     }
                 });
     }

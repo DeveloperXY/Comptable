@@ -8,7 +8,7 @@ import android.view.WindowManager;
 
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 
-public class ColoredStatusBarActivity extends AppCompatActivity
+public class ColoredStatusBarActivity extends HTTPActivity
         implements OGActionBarInterface {
 
     @Override

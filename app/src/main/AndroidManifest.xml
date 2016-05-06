@@ -87,7 +87,7 @@
         <activity
             android:name=".ui.PurchasesActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -97,8 +97,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SaleOrdersActivity"/>
-        <activity android:name=".ui.PurchaseOrdersActivity"/>
+        <activity android:name=".ui.SaleOrdersActivity" />
+        <activity android:name=".ui.PurchaseOrdersActivity" />
+        <activity android:name=".ui.HTTPActivity"></activity>
     </application>
 
 </manifest>

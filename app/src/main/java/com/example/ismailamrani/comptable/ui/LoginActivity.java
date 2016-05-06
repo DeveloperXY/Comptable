@@ -11,6 +11,7 @@ import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -49,11 +50,43 @@ public class LoginActivity extends ColoredStatusBarActivity {
 
             if (user != null) {
                 // Send the login POST request.
-                try {
-                    postLogin(PhpAPI.login, user.toJSON());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                sendHTTPRequest(client,
+                        PhpAPI.login,
+                        user.toJSON(),
+                        Method.POST,
+                        new RequestListener() {
+                            @Override
+                            public void onRequestSucceeded(JSONObject response, int status) {
+                                if (status == 1) {
+                                    try {
+                                        // Retrieve the logged in user's infos from
+                                        // the response
+                                        JSONObject loggedInUser = response.getJSONArray("user")
+                                                .getJSONObject(0);
+                                        // Save user to local disk
+                                        saveUserToInternalDatabase(loggedInUser);
+                                        // Move to main menu
+                                        Intent intent = new Intent(LoginActivity.this,
+                                                HomeActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else if (status == 0)
+                                    Toast.makeText(LoginActivity.this,
+                                            "Unregistered user name.",
+                                            Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onRequestFailed() {
+                                Toast.makeText(LoginActivity.this,
+                                        "Error while logging in.", Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
     }
@@ -90,61 +123,6 @@ public class LoginActivity extends ColoredStatusBarActivity {
         DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
 
         return null;
-    }
-
-    /**
-     * @param url             destination URL
-     * @param userCredentials the user's informations
-     * @throws IOException
-     */
-    void postLogin(String url, JSONObject userCredentials) throws IOException {
-        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
-                    @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int resp = obj.getInt("success");
-
-                            runOnUiThread(() -> {
-                                if (resp == 1) {
-                                    try {
-                                        // Retrieve the logged in user's infos from
-                                        // the response
-                                        JSONObject loggedInUser = obj.getJSONArray("user")
-                                                .getJSONObject(0);
-                                        // Save user to local disk
-                                        saveUserToInternalDatabase(loggedInUser);
-                                        // Move to main menu
-                                        Intent intent = new Intent(LoginActivity.this,
-                                                HomeActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent);
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                } else if (resp == 0)
-                                    Toast.makeText(LoginActivity.this,
-                                            "Unregistered user name.",
-                                            Toast.LENGTH_LONG).show();
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
     }
 
     /**
