@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutForm"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="952"
+    android:orientation="horizontal"
+    android:weightSum="1390"
+    tools:showIn="@layout/activity_purchases">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="70" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1250"
+        android:orientation="vertical"
+        android:weightSum="1260">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60" />
+
+        <LinearLayout
+            android:id="@+id/layoutFournisseur"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="200"
+            android:background="@drawable/vente_style"
+            android:orientation="horizontal"
+            android:weightSum="1196">
+
+            <EditText
+                android:id="@+id/supplierField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1000"
+                android:background="@android:color/transparent"
+                android:enabled="false"
+                android:hint="Fournisseur"
+                android:paddingLeft="20dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="196">
+
+                <ImageView
+                    android:id="@+id/supplierSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/spinner" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include layout="@layout/medium_vertical_separator" />
+
+        <LinearLayout
+            android:id="@+id/layoutProduit"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="200"
+            android:background="@drawable/vente_style"
+            android:orientation="horizontal"
+            android:weightSum="1196">
+
+            <EditText
+                android:id="@+id/productField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1000"
+                android:background="@android:color/transparent"
+                android:enabled="false"
+                android:hint="Produit"
+                android:paddingLeft="20dp" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="196">
+
+                <ImageView
+                    android:id="@+id/productSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:scaleType="fitEnd"
+                    android:src="@drawable/spinner" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include layout="@layout/medium_vertical_separator" />
+
+        <LinearLayout
+            android:id="@+id/layoutQte"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="200"
+            android:background="@drawable/vente_style"
+            android:orientation="horizontal"
+            android:weightSum="1174">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1032">
+
+                <EditText
+                    android:id="@+id/quantityField"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:hint="Quantité"
+                    android:inputType="number"
+                    android:paddingLeft="20dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <include layout="@layout/medium_vertical_separator" />
+
+        <LinearLayout
+            android:id="@+id/layoutPrice"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="200"
+            android:background="@drawable/vente_style"
+            android:orientation="horizontal"
+            android:weightSum="1174">
+
+            <EditText
+                android:id="@+id/priceField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1026"
+                android:background="@android:color/transparent"
+                android:hint="Prix unitaire"
+                android:inputType="numberDecimal"
+                android:paddingLeft="20dp" />
+
+            <include layout="@layout/dh_layout_include" />
+        </LinearLayout>
+
+        <include layout="@layout/medium_vertical_separator" />
+
+        <include layout="@layout/next_button_layout_include" />
+
+        <include layout="@layout/medium_vertical_separator" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="70" />
+</LinearLayout>
