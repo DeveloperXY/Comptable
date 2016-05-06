@@ -261,33 +261,7 @@
             android:layout_height="0dp"
             android:layout_weight="30" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="510"
-            android:orientation="horizontal"
-            android:weightSum="1390">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-
-            <ListView
-                android:id="@+id/productsListview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1250"
-                android:background="@drawable/vente_style"
-                android:divider="@null"
-                android:drawSelectorOnTop="false"
-                android:listSelector="@android:color/darker_gray" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="70" />
-        </LinearLayout>
+        <include layout="@layout/order_products_list_include" />
 
         <RelativeLayout
             android:layout_width="match_parent"
