@@ -279,7 +279,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1250"
                 android:background="@drawable/vente_style"
-                android:divider="@null" />
+                android:divider="@null"
+                android:drawSelectorOnTop="false"
+                android:listSelector="@android:color/darker_gray" />
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -369,9 +371,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1250"
                 android:background="@drawable/enregistrer_clint_btn"
+                android:onClick="onConfirmSale"
                 android:text="Valider"
-                android:textColor="#ffffffff"
-                android:onClick="onConfirmSale" />
+                android:textColor="#ffffffff" />
 
         </LinearLayout>
 

@@ -75,7 +75,7 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
         viewHolder.productText
                 .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
 
-        convertView.setOnTouchListener((v, event) -> {
+        convertView.setOnClickListener(v -> {
             if (viewHolder.deleteIcon.getVisibility() == View.INVISIBLE) {
                 viewHolder.deleteIcon.setVisibility(View.VISIBLE);
                 if (lastPosition != -1) {
@@ -90,8 +90,6 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
                 viewHolder.deleteIcon.setVisibility(View.INVISIBLE);
                 lastPosition = -1;
             }
-
-            return false;
         });
 
         return convertView;

@@ -85,9 +85,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1000"
                             android:background="@android:color/transparent"
+                            android:enabled="false"
                             android:hint="Fournisseur"
-                            android:paddingLeft="20dp"
-                            android:enabled="false" />
+                            android:paddingLeft="20dp" />
 
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -124,9 +124,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1000"
                             android:background="@android:color/transparent"
+                            android:enabled="false"
                             android:hint="Produit"
-                            android:paddingLeft="20dp"
-                            android:enabled="false" />
+                            android:paddingLeft="20dp" />
 
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -168,6 +168,7 @@
                                 android:layout_height="match_parent"
                                 android:background="@android:color/transparent"
                                 android:hint="Quantité"
+                                android:inputType="number"
                                 android:paddingLeft="20dp" />
                         </RelativeLayout>
                     </LinearLayout>
@@ -193,6 +194,7 @@
                             android:layout_weight="1026"
                             android:background="@android:color/transparent"
                             android:hint="Prix unitaire"
+                            android:inputType="numberDecimal"
                             android:paddingLeft="20dp" />
 
                         <include layout="@layout/dh_layout_include" />
@@ -265,7 +267,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1250"
                     android:background="@drawable/vente_style"
-                    android:divider="@null" />
+                    android:divider="@null"
+                    android:drawSelectorOnTop="false"
+                    android:listSelector="@android:color/darker_gray" />
 
                 <RelativeLayout
                     android:layout_width="0dp"

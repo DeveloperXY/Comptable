@@ -39,7 +39,7 @@ import okhttp3.Response;
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.
  */
-public abstract class AbstractOrdersActivity extends AppCompatActivity
+public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
 
     protected List<Order> mOrders;
