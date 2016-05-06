@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Created by Mohammed Aouf ZOUAG on 04/05/2016.
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends ColoredStatusBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

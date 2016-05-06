@@ -36,8 +36,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 /**
  * Created by Redouane on 23/03/2016.
  */
-public class EditClientActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class EditClientActivity extends ColoredStatusBarActivity {
     EditText nomprenom, tel, adresse, email;
     TextView ajouter;
 
@@ -78,16 +77,6 @@ public class EditClientActivity extends ColoredStatusBarActivity
 
             new addclient().execute(clientItems);
         });
-    }
-
-    @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
-    public void onAddPressed() {
-
     }
 
     private class addclient extends AsyncTask<ClientModel, Void, String> {

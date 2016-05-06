@@ -32,8 +32,7 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
-public class Produit_InfoActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class Produit_InfoActivity extends ColoredStatusBarActivity {
 
     OGActionBar MyActionBar;
     ImageView Image;
@@ -138,11 +137,6 @@ public class Produit_InfoActivity extends ColoredStatusBarActivity
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void onMenuPressed() {
-
     }
 
     @Override

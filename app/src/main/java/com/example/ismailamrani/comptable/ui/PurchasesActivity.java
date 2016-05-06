@@ -39,8 +39,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PurchasesActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class PurchasesActivity extends ColoredStatusBarActivity {
 
     private Product selectedProduct;
     private Supplier selectedSupplier;
@@ -115,19 +114,6 @@ public class PurchasesActivity extends ColoredStatusBarActivity
 
         if (bottomSheetDialog != null)
             bottomSheetDialog.dismiss();
-    }
-
-    @Override
-    public void onMenuPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onAddPressed() {
-
     }
 
     @OnClick(R.id.nextButton)

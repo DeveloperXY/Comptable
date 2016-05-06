@@ -32,8 +32,7 @@ import java.util.Map;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class ProductsActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class ProductsActivity extends ColoredStatusBarActivity {
 
     OGActionBar MyActionBar;
     ListView List;
@@ -54,11 +53,6 @@ public class ProductsActivity extends ColoredStatusBarActivity
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Produit");
-    }
-
-    @Override
-    public void onMenuPressed() {
-
     }
 
     @Override

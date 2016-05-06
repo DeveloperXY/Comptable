@@ -42,8 +42,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class SalesActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class SalesActivity extends ColoredStatusBarActivity {
 
     private OGActionBar mActionBar;
 
@@ -330,15 +329,5 @@ public class SalesActivity extends ColoredStatusBarActivity
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
-    public void onAddPressed() {
-
     }
 }

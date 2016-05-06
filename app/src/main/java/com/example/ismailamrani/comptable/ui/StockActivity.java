@@ -38,7 +38,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class StockActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface, SearchListener,
+        implements SearchListener,
         SearchView.OnQueryTextListener {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
@@ -128,14 +128,6 @@ public class StockActivity extends ColoredStatusBarActivity
             toggleSearchViewVisibility(View.GONE);
         else
             super.onBackPressed();
-    }
-
-    @Override
-    public void onMenuPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     @Override

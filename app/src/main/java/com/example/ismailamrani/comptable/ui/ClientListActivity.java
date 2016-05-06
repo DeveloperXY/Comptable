@@ -32,8 +32,7 @@ import java.util.Map;
 /**
  * Created by Redouane on 31/03/2016.
  */
-public class ClientListActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class ClientListActivity extends ColoredStatusBarActivity {
     OGActionBar myactionbar;
     ListView list;
     ArrayList<ClientModel> List = new ArrayList<>();
@@ -56,14 +55,8 @@ public class ClientListActivity extends ColoredStatusBarActivity
     }
 
     @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
     public void onAddPressed() {
         startActivity(new Intent(this, AddClientActivity.class));
-
     }
 
     private class GetData extends AsyncTask<String, Void, String> {

@@ -1,11 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -39,8 +36,7 @@ import okhttp3.Response;
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.
  */
-public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity {
 
     protected List<Order> mOrders;
     protected OrdersAdapter ordersAdapter;
@@ -121,14 +117,6 @@ public abstract class AbstractOrdersActivity extends ColoredStatusBarActivity
 
     public void onErrorViewPressed(View view) {
         refresh();
-    }
-
-    @Override
-    public void onMenuPressed() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     protected void onDataChanged() {

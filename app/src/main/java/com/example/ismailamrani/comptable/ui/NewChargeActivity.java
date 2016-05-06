@@ -11,8 +11,7 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInt
 /**
  * Created by Redouane on 06/04/2016.
  */
-public class NewChargeActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class NewChargeActivity extends ColoredStatusBarActivity {
 
     OGActionBar MyActionBar;
     ImageView spinner;
@@ -35,15 +34,5 @@ public class NewChargeActivity extends ColoredStatusBarActivity
         MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         MyActionBar.setActionBarListener(this);
         MyActionBar.setTitle("Ajouter Une Charge");
-    }
-
-    @Override
-    public void onMenuPressed() {
-
-    }
-
-    @Override
-    public void onAddPressed() {
-
     }
 }

@@ -33,8 +33,7 @@ import java.util.Map;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class FournisseurListActivity extends ColoredStatusBarActivity
-        implements OGActionBarInterface {
+public class FournisseurListActivity extends ColoredStatusBarActivity {
 
     OGActionBar myactionbar;
     ListView list;
@@ -53,11 +52,6 @@ public class FournisseurListActivity extends ColoredStatusBarActivity
         myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
         myactionbar.setActionBarListener(this);
         myactionbar.setTitle("Fournisseur");
-    }
-
-    @Override
-    public void onMenuPressed() {
-
     }
 
     @Override
