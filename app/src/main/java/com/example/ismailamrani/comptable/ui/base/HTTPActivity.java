@@ -18,6 +18,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 06/05/2016.
+ *
+ * An abstract activity class which is able to send HTTP requests.
+ */
 public abstract class HTTPActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "success";

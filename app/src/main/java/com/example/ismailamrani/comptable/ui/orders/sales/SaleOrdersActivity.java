@@ -31,7 +31,7 @@ public class SaleOrdersActivity extends AbstractOrdersActivity {
 
         setupActionBar(this, "Commandes ventes");
         // Specify the message of the empty view
-        emptyMessageLabel.setText("There are no sale orders to show.");
+        emptyMessageLabel.setText("There are no sale orders to show.\nClick to refresh.");
     }
 
     @Override

@@ -31,7 +31,7 @@ public class PurchaseOrdersActivity extends AbstractOrdersActivity {
 
         setupActionBar(this, "Commandes achats");
         // Specify the message of the empty view
-        emptyMessageLabel.setText("There are no purchase orders to show.");
+        emptyMessageLabel.setText("There are no purchase orders to show.\nClick to refresh.");
     }
 
     @Override
