@@ -122,13 +122,9 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         }
 
         public void bind(Product product) {
-            if (product.getQte() == 0)
-                Stream.of(productLabel, colorFilterLayout)
-                        .forEach(view -> view.setBackgroundColor(Color.parseColor("#000000")));
-            else
-                Stream.of(productLabel, colorFilterLayout)
-                        .forEach(view -> view.setBackgroundColor(
-                                mContext.getResources().getColor(R.color.colorBlue)));
+            quantityLabel.setTextColor(
+                    mContext.getResources().getColor(product.getQte() == 0 ?
+                            R.color.colorAccent : R.color.colorWhite));
 
             productLabel.setText(product.getLibelle());
             quantityLabel.setText(String.valueOf(product.getQte()));
