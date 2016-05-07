@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.stock;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
@@ -102,12 +104,14 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
 
         TextView productLabel;
         TextView quantityLabel;
+        TextView colorFilterLayout;
         ImageView productImage;
 
         ViewHolder(View v) {
             super(v);
             productLabel = (TextView) v.findViewById(R.id.productLabel);
             quantityLabel = (TextView) v.findViewById(R.id.quantityLabel);
+            colorFilterLayout = (TextView) v.findViewById(R.id.colorFilterLayout);
             productImage = (ImageView) v.findViewById(R.id.productImage);
 
             v.setOnClickListener(view -> {
@@ -118,6 +122,14 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         }
 
         public void bind(Product product) {
+            if (product.getQte() == 0)
+                Stream.of(productLabel, colorFilterLayout)
+                        .forEach(view -> view.setBackgroundColor(Color.parseColor("#000000")));
+            else
+                Stream.of(productLabel, colorFilterLayout)
+                        .forEach(view -> view.setBackgroundColor(
+                                mContext.getResources().getColor(R.color.colorBlue)));
+
             productLabel.setText(product.getLibelle());
             quantityLabel.setText(String.valueOf(product.getQte()));
             Picasso.with(itemView.getContext())
