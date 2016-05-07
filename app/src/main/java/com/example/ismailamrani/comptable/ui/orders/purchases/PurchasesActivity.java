@@ -40,6 +40,9 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     private Product selectedProduct;
     private Supplier selectedSupplier;
 
+    private List<Product> products;
+    private List<Supplier> suppliers;
+
     private OGActionBar mActionBar;
 
     @Bind(R.id.productField)
@@ -69,6 +72,9 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         setupActionBar();
 
         toBeBoughtProducts = new ArrayList<>();
+        products = new ArrayList<>();
+        suppliers = new ArrayList<>();
+
         productAdapter = new ProductOrderAdapter(this, toBeBoughtProducts);
         productAdapter.setListener(this::calculateTotalPrice);
         productsListview.setAdapter(productAdapter);
@@ -83,26 +89,12 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
 
     @OnClick({R.id.supplierSpinner, R.id.productSpinner})
     public void onSpinnerClick(View view) {
-        prepareChooserDialog(view.getId());
-    }
+        int spinnerID = view.getId();
 
-    private void prepareChooserDialog(int spinnerID) {
         fetchDialogItems(
                 spinnerID == R.id.productSpinner ?
                         PhpAPI.getProduit :
                         PhpAPI.getFournisseur, null, spinnerID);
-
-        /*bottomSheetDialog.setListener(item -> {
-            if (item instanceof Product) {
-                // A product has been selected
-                selectedProduct = ((Product) item);
-                productField.setText(selectedProduct.getLibelle());
-            } else {
-                // A supplier has been selected
-                selectedSupplier = ((Supplier) item);
-                supplierField.setText(selectedSupplier.getNom());
-            }
-        });*/
     }
 
     void fetchDialogItems(String url, JSONObject data, int spinnerID) {
@@ -134,8 +126,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         if (spinnerID == R.id.productSpinner) {
             title = "Available products";
             try {
-                List<Product> products = Product.parseProducts(
-                        response.getJSONArray("produit"));
+                products = Product.parseProducts(response.getJSONArray("produit"));
                 items = Stream.of(products)
                         .map(Product::getLibelle)
                         .collect(Collectors.toList());
@@ -145,8 +136,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         } else {
             title = "Available suppliers";
             try {
-                List<Supplier> suppliers = Supplier.parseSuppliers(
-                        response.getJSONArray("fournisseur"));
+                suppliers = Supplier.parseSuppliers(response.getJSONArray("fournisseur"));
                 items = Stream.of(suppliers)
                         .map(Supplier::getNom)
                         .collect(Collectors.toList());
@@ -163,9 +153,18 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
                 .title(title)
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, itemView, which, text) -> {
-                    Log.i("SELECTED", items.get(which));
+                    if (spinnerID == R.id.productSpinner) {
+                        // A product has been selected
+                        selectedProduct = products.get(which);
+                        productField.setText(selectedProduct.getLibelle());
+                    }
+                    else {
+                        // A supplier has been selected
+                        selectedSupplier = suppliers.get(which);
+                        supplierField.setText(selectedSupplier.getNom());
+                    }
 
-                    return false;
+                    return true;
                 })
                 .show();
     }
