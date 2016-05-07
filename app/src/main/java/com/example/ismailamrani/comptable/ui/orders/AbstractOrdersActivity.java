@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.base;
+package com.example.ismailamrani.comptable.ui.orders;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.orders.adapters.OrdersAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.

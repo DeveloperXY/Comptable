@@ -2,17 +2,19 @@ package com.example.ismailamrani.comptable.ui.orders.purchases;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
-import com.example.ismailamrani.comptable.customitems.dialogs.SpinnerBottomSheet;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
@@ -23,6 +25,7 @@ import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -31,7 +34,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.OkHttpClient;
 
 public class PurchasesActivity extends ColoredStatusBarActivity {
 
@@ -39,7 +41,6 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     private Supplier selectedSupplier;
 
     private OGActionBar mActionBar;
-    private SpinnerBottomSheet bottomSheetDialog;
 
     @Bind(R.id.productField)
     EditText productField;
@@ -82,12 +83,16 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
 
     @OnClick({R.id.supplierSpinner, R.id.productSpinner})
     public void onSpinnerClick(View view) {
-        showBottomSheetDialog(view.getId());
+        prepareChooserDialog(view.getId());
     }
 
-    private void showBottomSheetDialog(int spinnerID) {
-        bottomSheetDialog = new SpinnerBottomSheet(this, spinnerID);
-        bottomSheetDialog.setListener(item -> {
+    private void prepareChooserDialog(int spinnerID) {
+        fetchDialogItems(
+                spinnerID == R.id.productSpinner ?
+                        PhpAPI.getProduit :
+                        PhpAPI.getFournisseur, null, spinnerID);
+
+        /*bottomSheetDialog.setListener(item -> {
             if (item instanceof Product) {
                 // A product has been selected
                 selectedProduct = ((Product) item);
@@ -97,16 +102,72 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
                 selectedSupplier = ((Supplier) item);
                 supplierField.setText(selectedSupplier.getNom());
             }
-        });
-        bottomSheetDialog.show();
+        });*/
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
+    void fetchDialogItems(String url, JSONObject data, int spinnerID) {
+        sendHTTPRequest(url, data, Method.GET,
+                new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 0) {
+                            Toast.makeText(PurchasesActivity.this, "Error",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            runOnUiThread(() -> prepareDialogData(response, spinnerID));
+                        }
+                    }
 
-        if (bottomSheetDialog != null)
-            bottomSheetDialog.dismiss();
+                    @Override
+                    public void onRequestFailed() {
+                        runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
+                                "No internet connection.",
+                                Toast.LENGTH_LONG).show());
+                    }
+                });
+    }
+
+    private void prepareDialogData(JSONObject response, int spinnerID) {
+        String title;
+        List<String> items = new ArrayList<>();
+
+        if (spinnerID == R.id.productSpinner) {
+            title = "Available products";
+            try {
+                List<Product> products = Product.parseProducts(
+                        response.getJSONArray("produit"));
+                items = Stream.of(products)
+                        .map(Product::getLibelle)
+                        .collect(Collectors.toList());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            title = "Available suppliers";
+            try {
+                List<Supplier> suppliers = Supplier.parseSuppliers(
+                        response.getJSONArray("fournisseur"));
+                items = Stream.of(suppliers)
+                        .map(Supplier::getNom)
+                        .collect(Collectors.toList());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        showChooserDialog(title, items, spinnerID);
+    }
+
+    private void showChooserDialog(String title, List<String> items, int spinnerID) {
+        new MaterialDialog.Builder(this)
+                .title(title)
+                .items(items)
+                .itemsCallbackSingleChoice(-1, (dialog, itemView, which, text) -> {
+                    Log.i("SELECTED", items.get(which));
+
+                    return false;
+                })
+                .show();
     }
 
     @OnClick(R.id.nextButton)
