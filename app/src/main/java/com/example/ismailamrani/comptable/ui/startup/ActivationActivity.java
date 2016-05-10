@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Activation;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -24,6 +27,8 @@ import butterknife.ButterKnife;
 
 public class ActivationActivity extends ColoredStatusBarActivity {
 
+    private DatabaseAdapter databaseAdapter;
+
     @Bind(R.id.activationField)
     EditText activationField;
 
@@ -33,6 +38,7 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_activation);
         ButterKnife.bind(this);
 
+        databaseAdapter = DatabaseAdapter.getInstance(this);
         activationField.addTextChangedListener(new SerialWatcher());
     }
 
@@ -71,15 +77,19 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                 String message = response.getString("message");
 
                 runOnUiThread(() -> {
+                    Toast.makeText(ActivationActivity.this,
+                            message, Toast.LENGTH_SHORT).show();
                     if (status == 1) {
-                        Toast.makeText(ActivationActivity.this,
-                                message, Toast.LENGTH_SHORT).show();
-                    } else if (status == -1) {
-                        Toast.makeText(ActivationActivity.this,
-                                message, Toast.LENGTH_SHORT).show();
-                    } else if (status == 0) {
-                        Toast.makeText(ActivationActivity.this,
-                                message, Toast.LENGTH_SHORT).show();
+                        try {
+                            Activation activation = new Activation(
+                                    response.getJSONArray("activation").getJSONObject(0));
+                            databaseAdapter.activateApplication(activation);
+                            startActivity(new Intent(ActivationActivity.this, LoginActivity.class));
+                            finish();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             } catch (JSONException e) {

@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
@@ -20,10 +21,14 @@ public class SplashActivity extends ColoredStatusBarActivity {
 
         databaseAdapter = DatabaseAdapter.getInstance(this);
         Activation activation = databaseAdapter.getCurrentActivation();
+        Log.i("ACTIVATION", "Activation IS NULL: " + (activation == null));
         Class<?> target;
 
-        if (activation == null || !activation.isActivated())
+        if (activation == null || !activation.isActivated()) {
+            if (activation != null)
+                Log.i("ACTIVATION", activation.toString());
             target = ActivationActivity.class;
+        }
         else {
             if (isUserLoggedIn())
                 target = HomeActivity.class;

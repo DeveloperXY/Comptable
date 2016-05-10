@@ -1,5 +1,8 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Mohammed Aouf ZOUAG on 10/05/2016.
  */
@@ -14,6 +17,17 @@ public class Activation {
         this.code = code;
         this.activated = activated;
         this.companyID = companyID;
+    }
+
+    public Activation(JSONObject data) {
+        try {
+            this.id = data.getInt("id");
+            this.code = data.getString("code");
+            this.activated = true;
+            this.companyID = data.getInt("companyID");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getId() {
@@ -46,5 +60,15 @@ public class Activation {
 
     public void setCompanyID(int companyID) {
         this.companyID = companyID;
+    }
+
+    @Override
+    public String toString() {
+        return "Activation{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", activated=" + activated +
+                ", companyID=" + companyID +
+                '}';
     }
 }

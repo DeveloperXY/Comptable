@@ -138,22 +138,20 @@ public class DatabaseAdapter {
     }
 
     public void activateApplication(Activation activation) {
-        if (getCurrentActivation() != null) {
-            ContentValues values = new ContentValues();
-            values.put(KEY_ID, activation.getId());
-            values.put(KEY_CODE, activation.getCode());
-            values.put(KEY_COMPANY_ID, activation.getCompanyID());
-            values.put(KEY_IS_ACTIVATED, activation.isActivated());
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, activation.getId());
+        values.put(KEY_CODE, activation.getCode());
+        values.put(KEY_COMPANY_ID, activation.getCompanyID());
+        values.put(KEY_IS_ACTIVATED, activation.isActivated() ? 1 : 0);
 
-            db.insert(ACTIVATION_TABLE, null, values);
-        }
+        db.insert(ACTIVATION_TABLE, null, values);
     }
 
     public Activation getCurrentActivation() {
         Cursor cursor = db.query(
                 true,
                 ACTIVATION_TABLE,
-                new String[]{KEY_ID, KEY_CODE, KEY_COMPANY_ID, KEY_IS_ACTIVATED},
+                new String[]{KEY_ID, KEY_CODE, KEY_IS_ACTIVATED, KEY_COMPANY_ID},
                 null, null, null, null, null, null);
         return extractActivationFromCursor(cursor);
     }
