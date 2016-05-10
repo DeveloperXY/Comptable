@@ -155,11 +155,10 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
-        Dialog dialog = new PurchaseChooserDialog(this)
+        Dialog dialog = new PurchaseChooserDialog(this, spinnerID)
                 .whoseItemsAre(items)
                 .whoseSearchHintIs(searchHint)
                 .runWhenItemSelected(position -> {
-                    Log.i("LISTENER", "STATE1");
                     if (spinnerID == R.id.productSpinner) {
                         // A product has been selected
                         selectedProduct = products.get(position);

@@ -2,17 +2,21 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
+import com.example.ismailamrani.comptable.ui.AddFournisseurActivity;
+import com.example.ismailamrani.comptable.ui.AddProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +37,19 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
     SearchView dialogSearchView;
     @Bind(R.id.dialogRecyclerView)
     RecyclerView dialogRecyclerView;
-    @Bind(R.id.cancelButton)
-    Button cancelButton;
+    @Bind(R.id.actionButton)
+    Button actionButton;
+    @Bind(R.id.emptyView)
+    TextView emptyView;
 
     private List<String> items;
     private String hint;
+    private int sourceSpinnerID;
 
-    public PurchaseChooserDialog(Context context) {
+    public PurchaseChooserDialog(Context context, int sourceSpinnerID) {
         super(context);
         this.context = context;
+        this.sourceSpinnerID = sourceSpinnerID;
     }
 
     @Override
@@ -51,7 +59,20 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         setContentView(R.layout.purchase_dialog);
         ButterKnife.bind(this);
 
-        cancelButton.setOnClickListener(v -> dismiss());
+        actionButton.setOnClickListener(v -> {
+            if (items.size() == 0) {
+                /* The dialog's RecyclerView has no items.
+                Decide the destination activity to be launched based on the
+                ID of the spinner who started the dialog */
+                Class<?> targetActivity = sourceSpinnerID == R.id.productSpinner ?
+                        AddProductActivity.class : AddFournisseurActivity.class;
+                context.startActivity(new Intent(context, targetActivity));
+            }
+            else {
+                // The dialog does have some items
+                dismiss();
+            }
+        });
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
 
@@ -82,12 +103,19 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
     private void setupRecyclerView() {
         if (items == null)
             items = new ArrayList<>();
+
+        if (items.size() == 0) {
+            emptyView.setVisibility(View.VISIBLE);
+            dialogSearchView.setVisibility(View.GONE);
+            actionButton.setText(sourceSpinnerID == R.id.productSpinner ?
+                    "Add a new product" : "Add a new supplier");
+        }
+
         dialogRecyclerView.setHasFixedSize(true);
         dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         searchAdapter = new SearchAdapter(context, items);
         searchAdapter.setListener(position -> {
-            Log.i("LISTENER", "STATE2");
             if (itemSelectionListener != null) {
                 itemSelectionListener.onItemSelected(position);
                 dismiss();

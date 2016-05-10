@@ -113,11 +113,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             textLabel = (TextView) v.findViewById(R.id.textLabel);
 
             v.setOnClickListener(view -> {
-                Log.i("LISTENER", "STATE3");
-                if (listener != null) {
-                    Log.i("LISTENER", "STATE4");
+                if (listener != null)
                     listener.onItemClicked(getLayoutPosition());
-                }
             });
         }
 
