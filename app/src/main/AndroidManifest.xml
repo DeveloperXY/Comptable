@@ -99,6 +99,7 @@
         </activity>
         <activity android:name=".ui.orders.sales.SaleOrdersActivity" />
         <activity android:name=".ui.orders.purchases.PurchaseOrdersActivity" />
+        <activity android:name=".ui.startup.ActivationActivity"></activity>
     </application>
 
 </manifest>
