@@ -12,8 +12,6 @@ import android.widget.Button;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
-import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.utils.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +53,7 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
 
+        setupSearchView();
         setupRecyclerView();
     }
 
@@ -66,6 +65,11 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
     public PurchaseChooserDialog whoseSearchHintIs(String hint) {
         this.hint = hint;
         return this;
+    }
+
+    private void setupSearchView() {
+        dialogSearchView.setIconifiedByDefault(false);
+        dialogSearchView.setOnQueryTextListener(this);
     }
 
     private void setupRecyclerView() {
@@ -89,13 +93,13 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        final List<String> filteredItems = searchAdapter.filter(items, query);
-        searchAdapter.animateTo(filteredItems);
-        return true;
+        return false;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
+    public boolean onQueryTextChange(String query) {
+        final List<String> filteredItems = searchAdapter.filter(items, query);
+        searchAdapter.animateTo(filteredItems);
+        return true;
     }
 }
