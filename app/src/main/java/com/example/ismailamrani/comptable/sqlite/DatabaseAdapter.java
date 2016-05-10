@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.models.User;
 
 /**
@@ -36,7 +37,7 @@ public class DatabaseAdapter {
     private static final String DATABASE_NAME = "comptableDatabase";
     private static final String USER_TABLE = "User";
     private static final String ACTIVATION_TABLE = "Activation";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     private static final String CREATE_USER_TABLE =
             "CREATE TABLE " + USER_TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -52,6 +53,7 @@ public class DatabaseAdapter {
             "CREATE TABLE " + ACTIVATION_TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_CODE + " TEXT NOT NULL, " +
+                    KEY_COMPANY_ID + " INTEGER, " +
                     KEY_IS_ACTIVATED + " INTEGER)";
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
@@ -132,6 +134,24 @@ public class DatabaseAdapter {
 
     private long insertUser(ContentValues values) {
         return db.insert(USER_TABLE, null, values);
+    }
+
+    public Activation getCurrentActivation() {
+        Cursor cursor = db.query(
+                true,
+                ACTIVATION_TABLE,
+                new String[]{KEY_ID, KEY_CODE, KEY_COMPANY_ID, KEY_IS_ACTIVATED},
+                null, null, null, null, null, null);
+        return extractActivationFromCursor(cursor);
+    }
+
+    private Activation extractActivationFromCursor(Cursor cursor) {
+        return cursor == null ? null :
+                cursor.moveToFirst() ? new Activation(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2) == 1,
+                        cursor.getInt(3)) : null;
     }
 
     public void close() {
