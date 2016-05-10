@@ -37,42 +37,10 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                     PhpAPI.activateApp,
                     serialToJSON(serial),
                     Method.POST,
-                    new RequestListener() {
-                        @Override
-                        public void onRequestSucceeded(JSONObject response, int status) {
-                            try {
-                                String message = response.getString("message");
-
-                                runOnUiThread(() -> {
-                                    if (status == 1) {
-                                        Toast.makeText(ActivationActivity.this,
-                                                message, Toast.LENGTH_SHORT).show();
-                                    }
-                                    else if (status == -1) {
-                                        Toast.makeText(ActivationActivity.this,
-                                                message, Toast.LENGTH_SHORT).show();
-                                    }
-                                    else if (status == 0) {
-                                        Toast.makeText(ActivationActivity.this,
-                                                message, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onRequestFailed() {
-                            runOnUiThread(() -> Toast.makeText(ActivationActivity.this,
-                                    "Unknown error.", Toast.LENGTH_SHORT).show());
-                        }
-                    }
+                    new ActivationListener()
             );
-        }
-        else {
+        } else
             Toast.makeText(this, "Activation code required.", Toast.LENGTH_LONG).show();
-        }
     }
 
     private JSONObject serialToJSON(String serial) {
@@ -85,5 +53,38 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         }
 
         return data;
+    }
+
+    /**
+     * A listener on the activation procedure.
+     */
+    public class ActivationListener implements RequestListener {
+        @Override
+        public void onRequestSucceeded(JSONObject response, int status) {
+            try {
+                String message = response.getString("message");
+
+                runOnUiThread(() -> {
+                    if (status == 1) {
+                        Toast.makeText(ActivationActivity.this,
+                                message, Toast.LENGTH_SHORT).show();
+                    } else if (status == -1) {
+                        Toast.makeText(ActivationActivity.this,
+                                message, Toast.LENGTH_SHORT).show();
+                    } else if (status == 0) {
+                        Toast.makeText(ActivationActivity.this,
+                                message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onRequestFailed() {
+            runOnUiThread(() -> Toast.makeText(ActivationActivity.this,
+                    "Unknown error.", Toast.LENGTH_SHORT).show());
+        }
     }
 }
