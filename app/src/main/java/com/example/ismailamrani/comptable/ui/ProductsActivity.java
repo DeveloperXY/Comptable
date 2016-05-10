@@ -109,7 +109,7 @@ public class ProductsActivity extends ColoredStatusBarActivity {
                     itm.setLibelle(usr.getString("libelle"));
                     itm.setPrixTTC(Double.parseDouble(usr.getString("prixTTC")));
                     itm.setQte(Integer.parseInt(usr.getString("qte")));
-                    itm.setPhoto(PhpAPI.IpBackend + "produits/" + usr.getString("photo"));
+                    itm.setPhoto(PhpAPI.IpBackend_IMAGES + usr.getString("photo"));
 
                     ListProduit.add(itm);
                 }

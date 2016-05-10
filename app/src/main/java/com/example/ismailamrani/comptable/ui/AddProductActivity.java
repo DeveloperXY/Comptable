@@ -131,7 +131,7 @@ public class AddProductActivity extends ColoredStatusBarActivity
         if (imageStatus && nameStatus && htStatus && ttcStatus && barcodeStatus) {
             return new Product(0, name, Double.parseDouble(ht),
                     Double.parseDouble(ttc), barcode, codeimage,
-                    0, 1, PhpAPI.addProduit);
+                    0, 3, PhpAPI.addProduit);
         } else if (!imageStatus) {
             // No image was selected for the product.
             dialogTitle = "Missing image.";

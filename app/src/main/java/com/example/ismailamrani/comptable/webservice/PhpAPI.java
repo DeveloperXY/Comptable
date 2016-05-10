@@ -15,9 +15,10 @@ import okhttp3.RequestBody;
  * Created by Redouane on 24/03/2016.
  */
 public class PhpAPI {
-    private static final String PRODUCTION_HOST = "http://octagen-it.com/comptable/";
+    private static final String PRODUCTION_HOST = "http://idowny.com/comptable/";
     private static final String DEV_HOST = "http://192.168.137.1/comptablephpapi/";
-    public static String IpBackend = DEV_HOST;
+    public static final String IpBackend = PRODUCTION_HOST;
+    public static final String IpBackend_IMAGES = IpBackend + "produits/";
     public static final String login = IpBackend + "login.php";
 
     public static final String getStock = IpBackend + "getStock.php";
