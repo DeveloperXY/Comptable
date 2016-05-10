@@ -26,6 +26,7 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
 
     private Context context;
     private SearchAdapter searchAdapter;
+    private OnItemSelectionListener itemSelectionListener;
 
     @Bind(R.id.dialogSearchView)
     SearchView dialogSearchView;
@@ -67,6 +68,11 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         return this;
     }
 
+    public PurchaseChooserDialog runWhenItemSelected(OnItemSelectionListener listener) {
+        itemSelectionListener = listener;
+        return this;
+    }
+
     private void setupSearchView() {
         dialogSearchView.setIconifiedByDefault(false);
         dialogSearchView.setOnQueryTextListener(this);
@@ -101,5 +107,9 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         final List<String> filteredItems = searchAdapter.filter(items, query);
         searchAdapter.animateTo(filteredItems);
         return true;
+    }
+
+    public interface OnItemSelectionListener {
+        void onItemSelected(int position);
     }
 }
