@@ -1,7 +1,9 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,6 +16,8 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,6 +32,8 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activation);
         ButterKnife.bind(this);
+
+        activationField.addTextChangedListener(new SerialWatcher());
     }
 
     public void onActivate(View view) {
@@ -85,6 +91,46 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         public void onRequestFailed() {
             runOnUiThread(() -> Toast.makeText(ActivationActivity.this,
                     "Unknown error.", Toast.LENGTH_SHORT).show());
+        }
+    }
+
+    /**
+     * A text watcher on the activation text field.
+     */
+    public class SerialWatcher implements TextWatcher {
+
+        private boolean isUpdating;
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (isUpdating) {
+                isUpdating = false;
+                return;
+            }
+
+            String serial = s.toString().replaceAll("([^\\da-zA-Z])", "");
+            int position = 0;
+            StringBuilder sb = new StringBuilder();
+
+            for (char c : serial.toCharArray()) {
+                sb.append(Arrays.asList(4, 8, 12).contains(position) ? "-" + c : c);
+                position++;
+            }
+
+            isUpdating = true;
+            String result = sb.toString().toUpperCase();
+            activationField.setText(result.length() > 19 ? result.substring(0, 19) : result);
+            activationField.setSelection(activationField.getText().length());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
         }
     }
 }
