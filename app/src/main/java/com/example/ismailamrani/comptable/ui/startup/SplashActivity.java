@@ -23,7 +23,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
         Class<?> target;
 
         if (activation == null || !activation.isActivated())
-            target = null;
+            target = ActivationActivity.class;
         else {
             if (isUserLoggedIn())
                 target = HomeActivity.class;
@@ -31,8 +31,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
                 target = LoginActivity.class;
         }
 
-        if (target != null)
-            startActivity(new Intent(this, target));
+        startActivity(new Intent(this, target));
     }
 
     /**
