@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui.orders.purchases;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,6 +12,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
 import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Product;
@@ -149,7 +149,11 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void showChooserDialog(String title, List<String> items, int spinnerID) {
-        new MaterialDialog.Builder(this)
+        new PurchaseChooserDialog(this)
+                .whoseItemsAre(items)
+                .show();
+
+        /*new MaterialDialog.Builder(this)
                 .title(title)
                 .items(items)
                 .itemsCallbackSingleChoice(-1, (dialog, itemView, which, text) -> {
@@ -166,7 +170,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
 
                     return true;
                 })
-                .show();
+                .show();*/
     }
 
     @OnClick(R.id.nextButton)
