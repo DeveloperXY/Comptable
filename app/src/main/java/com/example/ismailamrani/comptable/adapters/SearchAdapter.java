@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 
 import java.util.ArrayList;
@@ -91,6 +93,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             if (fromPosition >= 0 && fromPosition != toPosition)
                 moveItem(fromPosition, toPosition);
         }
+    }
+
+    public List<String> filter(List<String> items, String query) {
+        return Stream.of(items)
+                .filter(item -> item.toLowerCase()
+                        .contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

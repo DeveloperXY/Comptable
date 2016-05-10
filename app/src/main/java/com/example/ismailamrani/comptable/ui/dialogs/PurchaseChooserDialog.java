@@ -7,12 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
+import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.utils.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Mohammed Aouf ZOUAG on 10/05/2016.
  */
-public class PurchaseChooserDialog extends Dialog {
+public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryTextListener {
 
     private Context context;
     private SearchAdapter searchAdapter;
@@ -84,5 +85,17 @@ public class PurchaseChooserDialog extends Dialog {
      */
     private void setSearchHint(String hint) {
         dialogSearchView.setQueryHint(hint);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        final List<String> filteredItems = searchAdapter.filter(items, query);
+        searchAdapter.animateTo(filteredItems);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
     }
 }
