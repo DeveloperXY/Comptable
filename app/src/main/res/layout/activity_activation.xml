@@ -81,7 +81,8 @@
             android:id="@+id/activateButton"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/activate_btn_background"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:onClick="onActivate" />
 
     </LinearLayout>
 </RelativeLayout>
