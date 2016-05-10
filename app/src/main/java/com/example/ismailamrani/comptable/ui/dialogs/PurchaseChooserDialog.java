@@ -3,12 +3,16 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +25,19 @@ import butterknife.ButterKnife;
  */
 public class PurchaseChooserDialog extends Dialog {
 
+    private Context context;
+
     @Bind(R.id.dialogSearchView)
     SearchView dialogSearchView;
+    @Bind(R.id.dialogRecyclerView)
+    RecyclerView dialogRecyclerView;
 
     private List<String> items;
     private String hint;
 
     public PurchaseChooserDialog(Context context) {
         super(context);
+        this.context = context;
     }
 
     @Override
@@ -40,9 +49,11 @@ public class PurchaseChooserDialog extends Dialog {
 
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
+
+        setupRecyclerView();
     }
 
-    public void onCancel(View view) {
+    protected void onCancel(View view) {
         dismiss();
     }
 
@@ -54,6 +65,12 @@ public class PurchaseChooserDialog extends Dialog {
     public PurchaseChooserDialog whoseSearchHintIs(String hint) {
         this.hint = hint;
         return this;
+    }
+
+    private void setupRecyclerView() {
+        items = new ArrayList<>();
+        dialogRecyclerView.setHasFixedSize(true);
+        dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
     }
 
     /**
