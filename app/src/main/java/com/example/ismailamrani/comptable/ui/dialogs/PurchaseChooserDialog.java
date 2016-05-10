@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 
 import com.example.ismailamrani.comptable.R;
@@ -39,6 +40,10 @@ public class PurchaseChooserDialog extends Dialog {
 
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
+    }
+
+    public void onCancel(View view) {
+        dismiss();
     }
 
     public PurchaseChooserDialog whoseItemsAre(List<String> items) {
