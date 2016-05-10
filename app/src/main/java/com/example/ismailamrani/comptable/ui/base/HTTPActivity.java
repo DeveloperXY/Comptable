@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.ismailamrani.comptable.app.OGApplication;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -53,6 +54,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, final Response response) throws IOException {
                         final String res = response.body().string();
+                        Log.i("RESPONSE", res);
                         try {
                             JSONObject obj = new JSONObject(res);
                             int resp = obj.getInt(KEY_STATUS);

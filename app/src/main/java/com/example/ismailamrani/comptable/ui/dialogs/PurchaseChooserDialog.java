@@ -68,10 +68,9 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
                         AddProductActivity.class : AddFournisseurActivity.class;
                 context.startActivity(new Intent(context, targetActivity));
             }
-            else {
-                // The dialog does have some items
-                dismiss();
-            }
+
+            // The dialog has to be dismissed under any circumstances
+            dismiss();
         });
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);

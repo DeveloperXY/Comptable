@@ -29,12 +29,16 @@ public class DatabaseAdapter {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_COMPANY_ID = "companyID";
 
+    public static final String KEY_CODE = "code";
+    public static final String KEY_IS_ACTIVATED = "isActivated";
+
     private static final String TAG = DatabaseAdapter.class.getSimpleName();
     private static final String DATABASE_NAME = "comptableDatabase";
-    private static final String DATABASE_TABLE = "User";
-    private static final int DATABASE_VERSION = 1;
-    private static final String TABLES_CREATE =
-            "CREATE TABLE " + DATABASE_TABLE + " (" +
+    private static final String USER_TABLE = "User";
+    private static final String ACTIVATION_TABLE = "Activation";
+    private static final int DATABASE_VERSION = 2;
+    private static final String CREATE_USER_TABLE =
+            "CREATE TABLE " + USER_TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_FIRSTNAME + " TEXT NOT NULL, " +
                     KEY_LASTNAME + " TEXT NOT NULL, " +
@@ -44,6 +48,11 @@ public class DatabaseAdapter {
                     KEY_USERNAME + " TEXT NOT NULL, " +
                     KEY_PASSWORD + " TEXT NOT NULL, " +
                     KEY_COMPANY_ID + " INTEGER)";
+    private static final String CREATE_ACTIVATION_TABLE =
+            "CREATE TABLE " + ACTIVATION_TABLE + " (" +
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_CODE + " TEXT NOT NULL, " +
+                    KEY_IS_ACTIVATED + " INTEGER)";
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
     private Context mContext;
@@ -82,7 +91,7 @@ public class DatabaseAdapter {
     public User getLoggedUser() {
         Cursor cursor = db.query(
                 true,
-                DATABASE_TABLE,
+                USER_TABLE,
                 new String[]{KEY_ID, KEY_FIRSTNAME, KEY_LASTNAME,
                         KEY_TYPE, KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID},
                 null, null, null, null, null, null);
@@ -122,7 +131,7 @@ public class DatabaseAdapter {
     }
 
     private long insertUser(ContentValues values) {
-        return db.insert(DATABASE_TABLE, null, values);
+        return db.insert(USER_TABLE, null, values);
     }
 
     public void close() {
@@ -137,14 +146,16 @@ public class DatabaseAdapter {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(TABLES_CREATE);
+            db.execSQL(CREATE_USER_TABLE);
+            db.execSQL(CREATE_ACTIVATION_TABLE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.w(TAG, "Upgrading database from version " + oldVersion +
                     " to " + newVersion + ", which will destroy all old data.");
-            db.execSQL("DROP TABLE IF EXISTS contacts");
+            db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + ACTIVATION_TABLE);
             onCreate(db);
         }
     }
