@@ -1,8 +1,12 @@
 package com.example.ismailamrani.comptable.ui.orders.purchases;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
+import com.example.ismailamrani.comptable.utils.WindowUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -149,10 +154,12 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
-        new PurchaseChooserDialog(this)
+        Dialog dialog = new PurchaseChooserDialog(this)
                 .whoseItemsAre(items)
-                .whoseSearchHintIs(searchHint)
-                .show();
+                .whoseSearchHintIs(searchHint);
+
+        dialog.setOnDismissListener(d -> WindowUtils.hideKeyboard(this));
+        dialog.show();
 
         /*new MaterialDialog.Builder(this)
                 .title(title)

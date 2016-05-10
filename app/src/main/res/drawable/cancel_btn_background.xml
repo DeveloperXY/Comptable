@@ -4,15 +4,11 @@
     <item android:state_pressed="true">
         <shape>
             <solid android:color="#57243441"/>
-            <stroke android:color="#ffffff"
-                android:width="2dp"/>
         </shape>
     </item>
     <item >
         <shape>
-            <stroke android:color="#000000" android:width="1dp"/>
             <solid android:color="#48627b"/>
-
         </shape>
     </item>
 
