@@ -51,6 +51,7 @@ public class PhpAPI {
     public static final String getPurchaseOrder = IpBackend + "getPurchaseOrder.php";
 
     public static final String getActivationStatus = IpBackend + "getActivationStatus.php";
+    public static final String activateApp = IpBackend + "activateApp.php";
 
     /**
      * @param param  the request's body that contains the request's params to the server
