@@ -120,11 +120,11 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void prepareDialogData(JSONObject response, int spinnerID) {
-        String title;
+        String hint;
         List<String> items = new ArrayList<>();
 
         if (spinnerID == R.id.productSpinner) {
-            title = "Available products";
+            hint = "Search for products...";
             try {
                 products = Product.parseProducts(response.getJSONArray("produit"));
                 items = Stream.of(products)
@@ -134,7 +134,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         } else {
-            title = "Available suppliers";
+            hint = "Search for suppliers...";
             try {
                 suppliers = Supplier.parseSuppliers(response.getJSONArray("fournisseur"));
                 items = Stream.of(suppliers)
@@ -145,12 +145,13 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
             }
         }
 
-        showChooserDialog(title, items, spinnerID);
+        showChooserDialog(hint, items, spinnerID);
     }
 
-    private void showChooserDialog(String title, List<String> items, int spinnerID) {
+    private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
         new PurchaseChooserDialog(this)
                 .whoseItemsAre(items)
+                .whoseSearchHintIs(searchHint)
                 .show();
 
         /*new MaterialDialog.Builder(this)
