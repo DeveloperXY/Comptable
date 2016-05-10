@@ -3,10 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.ismailamrani.comptable.ui.startup.ActivationActivity">
+    tools:context="com.example.ismailamrani.comptable.ui.startup.ActivationActivity"
+    android:background="@mipmap/ic_bg">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="100">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"></RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/imageView"
+            android:layout_weight="20"
+            android:src="@mipmap/ic_logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="Activate the application"
+            android:id="@+id/textView2"
+            android:layout_weight="10"
+            android:gravity="center" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20"></RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Please enter the serial key that you received :"
+                android:id="@+id/textView3"
+                android:gravity="left|center_vertical"
+                android:textColor="#ffffff"
+                android:padding="16dp"
+                android:layout_weight="40" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:padding="16dp"
+                android:background="@drawable/activation_field_background">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/activationField"
+                    android:background="@android:color/transparent"
+                    android:hint="Activation code"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#9e9e9e"
+                    android:textSize="24sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activate"
+            android:id="@+id/activateButton"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/activate_btn_background"
+            android:textColor="#ffffff" />
+
+    </LinearLayout>
 </RelativeLayout>

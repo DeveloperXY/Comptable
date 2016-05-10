@@ -10,4 +10,6 @@
     <color name="swipeRefresh2">#cc3d5469</color>
     <color name="swipeRefresh3">#883d5469</color>
     <color name="swipeRefresh4">#443d5469</color>
+    <color name="activateButton">@color/colorBlue</color>
+    <color name="activateButtonPressed">@color/swipeRefresh1</color>
 </resources>
