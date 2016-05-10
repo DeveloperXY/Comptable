@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 
@@ -85,6 +86,13 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         searchAdapter = new SearchAdapter(context, items);
+        searchAdapter.setListener(position -> {
+            Log.i("LISTENER", "STATE2");
+            if (itemSelectionListener != null) {
+                itemSelectionListener.onItemSelected(position);
+                dismiss();
+            }
+        });
         dialogRecyclerView.setAdapter(searchAdapter);
     }
 

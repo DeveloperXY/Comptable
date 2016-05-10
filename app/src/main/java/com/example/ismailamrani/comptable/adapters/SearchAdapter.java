@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     private Context mContext;
     private List<String> mItems;
+    private OnItemClickListener listener;
 
     public SearchAdapter(Context context, List<String> items) {
         mContext = context;
@@ -109,10 +111,26 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         public ViewHolder(View v) {
             super(v);
             textLabel = (TextView) v.findViewById(R.id.textLabel);
+
+            v.setOnClickListener(view -> {
+                Log.i("LISTENER", "STATE3");
+                if (listener != null) {
+                    Log.i("LISTENER", "STATE4");
+                    listener.onItemClicked(getLayoutPosition());
+                }
+            });
         }
 
         public void bind(String item) {
             textLabel.setText(item);
         }
+    }
+
+    public void setListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClicked(int position);
     }
 }

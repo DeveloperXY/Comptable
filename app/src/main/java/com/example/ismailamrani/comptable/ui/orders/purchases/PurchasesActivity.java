@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -156,29 +157,23 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
         Dialog dialog = new PurchaseChooserDialog(this)
                 .whoseItemsAre(items)
-                .whoseSearchHintIs(searchHint);
-
-        dialog.setOnDismissListener(d -> WindowUtils.hideKeyboard(this));
-        dialog.show();
-
-        /*new MaterialDialog.Builder(this)
-                .title(title)
-                .items(items)
-                .itemsCallbackSingleChoice(-1, (dialog, itemView, which, text) -> {
+                .whoseSearchHintIs(searchHint)
+                .runWhenItemSelected(position -> {
+                    Log.i("LISTENER", "STATE1");
                     if (spinnerID == R.id.productSpinner) {
                         // A product has been selected
-                        selectedProduct = products.get(which);
+                        selectedProduct = products.get(position);
                         productField.setText(selectedProduct.getLibelle());
                     }
                     else {
                         // A supplier has been selected
-                        selectedSupplier = suppliers.get(which);
+                        selectedSupplier = suppliers.get(position);
                         supplierField.setText(selectedSupplier.getNom());
                     }
+                });
 
-                    return true;
-                })
-                .show();*/
+        dialog.setOnDismissListener(d -> WindowUtils.hideKeyboard(this));
+        dialog.show();
     }
 
     @OnClick(R.id.nextButton)
