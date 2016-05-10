@@ -6,13 +6,13 @@ package com.example.ismailamrani.comptable.models;
 public class Activation {
     private int id;
     private String code;
-    private boolean status;
+    private boolean activated;
     private int companyID;
 
-    public Activation(int id, String code, boolean status, int companyID) {
+    public Activation(int id, String code, boolean activated, int companyID) {
         this.id = id;
         this.code = code;
-        this.status = status;
+        this.activated = activated;
         this.companyID = companyID;
     }
 
@@ -32,12 +32,12 @@ public class Activation {
         this.code = code;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isActivated() {
+        return activated;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public int getCompanyID() {

@@ -24,21 +24,12 @@ import butterknife.OnClick;
  */
 public class HomeActivity extends ColoredStatusBarActivity {
 
-    private DatabaseAdapter databaseAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new CalculateScreenSize().CalculateScreenSize(this);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-
-        databaseAdapter = DatabaseAdapter.getInstance(this);
-
-        if (!isUserLoggedIn()) {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
     }
 
     /**
@@ -77,12 +68,5 @@ public class HomeActivity extends ColoredStatusBarActivity {
         }
 
         startActivity(new Intent(this, targetActivity));
-    }
-
-    /**
-     * @return true if a user is already logged in, false otherwise.
-     */
-    private boolean isUserLoggedIn() {
-        return databaseAdapter.getLoggedUser() != null;
     }
 }
