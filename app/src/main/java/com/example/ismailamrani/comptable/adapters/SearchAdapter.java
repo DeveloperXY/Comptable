@@ -28,9 +28,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.order_row, viewGroup, false);
+                .inflate(R.layout.search_item_row, viewGroup, false);
 
-        return new ViewHolder(mContext, v);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -97,13 +97,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
         TextView textLabel;
 
-        public ViewHolder(Context context, View v) {
+        public ViewHolder(View v) {
             super(v);
-            textLabel = (TextView) v.findViewById(R.id.orderIDLabel);
+            textLabel = (TextView) v.findViewById(R.id.textLabel);
         }
 
         public void bind(String item) {
-
+            textLabel.setText(item);
         }
     }
 }

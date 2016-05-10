@@ -31,6 +31,5 @@
         android:layout_height="0dp"
         android:text="Cancel"
         android:id="@+id/cancelButton"
-        android:layout_weight="10"
-        android:onClick="onCancel" />
+        android:layout_weight="10" />
 </LinearLayout>
