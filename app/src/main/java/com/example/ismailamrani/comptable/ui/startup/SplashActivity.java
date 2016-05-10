@@ -32,6 +32,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
         }
 
         startActivity(new Intent(this, target));
+        finish();
     }
 
     /**

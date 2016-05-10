@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.sqlite;
 
+import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -134,6 +135,18 @@ public class DatabaseAdapter {
 
     private long insertUser(ContentValues values) {
         return db.insert(USER_TABLE, null, values);
+    }
+
+    public void activateApplication(Activation activation) {
+        if (getCurrentActivation() != null) {
+            ContentValues values = new ContentValues();
+            values.put(KEY_ID, activation.getId());
+            values.put(KEY_CODE, activation.getCode());
+            values.put(KEY_COMPANY_ID, activation.getCompanyID());
+            values.put(KEY_IS_ACTIVATED, activation.isActivated());
+
+            db.insert(ACTIVATION_TABLE, null, values);
+        }
     }
 
     public Activation getCurrentActivation() {
