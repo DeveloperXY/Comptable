@@ -164,12 +164,17 @@ public class OrdersListFragment extends Fragment {
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
-    protected void populateRecyclerView() {
+    private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new OrdersAdapter(getActivity(), mOrders);
             recyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
+    }
+
+    private void stopSwipeRefresh() {
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
