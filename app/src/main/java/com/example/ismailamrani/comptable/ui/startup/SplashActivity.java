@@ -2,11 +2,19 @@ package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.DialogUtil;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
+import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 04/05/2016.
@@ -21,23 +29,70 @@ public class SplashActivity extends ColoredStatusBarActivity {
 
         databaseAdapter = DatabaseAdapter.getInstance(this);
         Activation activation = databaseAdapter.getCurrentActivation();
-        Log.i("ACTIVATION", "Activation IS NULL: " + (activation == null));
-        Class<?> target;
 
         if (activation == null || !activation.isActivated()) {
-            if (activation != null)
-                Log.i("ACTIVATION", activation.toString());
-            target = ActivationActivity.class;
+            finish();
+            startActivity(new Intent(this, ActivationActivity.class));
         }
-        else {
-            if (isUserLoggedIn())
-                target = HomeActivity.class;
-            else
-                target = LoginActivity.class;
-        }
+        else
+            checkRemoteActivation(activation.getCode());
+    }
 
-        startActivity(new Intent(this, target));
-        finish();
+    /**
+     * Checks if this serial is activated on the distant server.
+     *
+     * @param serial to be checked.
+     */
+    private void checkRemoteActivation(String serial) {
+
+        sendHTTPRequest(PhpAPI.getActivationStatus,
+                JSONUtils.bundleSerialToJSON(serial),
+                Method.POST,
+                new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        finish();
+
+                        runOnUiThread(() -> {
+                            Class<?> target;
+
+                            if (status == 1) {
+                                try {
+                                    int activationStatus = response.getInt("activationStatus");
+                                    if (activationStatus == 1) {
+                                        // The application is activated, check for session
+                                        if (isUserLoggedIn())
+                                            target = HomeActivity.class;
+                                        else
+                                            target = LoginActivity.class;
+                                    } else {
+                                        target = ActivationActivity.class;
+                                        Toast.makeText(SplashActivity.this,
+                                                "Your activation code is not active. Please contact the administration.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    startActivity(new Intent(SplashActivity.this, target));
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (status == 0) {
+                                DialogUtil.showDialog(SplashActivity.this, "Apologies",
+                                        "It seems like we are missing your activation code. Please contact us as soon as possible.",
+                                        "Dismiss", null,
+                                        dialog -> startActivity(new Intent(SplashActivity.this, ActivationActivity.class)));
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+                        runOnUiThread(() -> Toast.makeText(SplashActivity.this,
+                                "Unknown error.", Toast.LENGTH_SHORT).show());
+                    }
+                }
+        );
     }
 
     /**

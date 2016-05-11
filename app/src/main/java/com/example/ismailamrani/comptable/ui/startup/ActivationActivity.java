@@ -13,6 +13,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -47,24 +48,12 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         if (!TextUtils.isEmpty(serial)) {
             sendHTTPRequest(
                     PhpAPI.activateApp,
-                    serialToJSON(serial),
+                    JSONUtils.bundleSerialToJSON(serial),
                     Method.POST,
                     new ActivationListener()
             );
         } else
             Toast.makeText(this, "Activation code required.", Toast.LENGTH_LONG).show();
-    }
-
-    private JSONObject serialToJSON(String serial) {
-        JSONObject data = new JSONObject();
-
-        try {
-            data.put("serial", serial);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return data;
     }
 
     /**
