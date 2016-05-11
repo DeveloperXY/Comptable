@@ -24,4 +24,20 @@ public class JSONUtils {
 
         return data;
     }
+
+    /**
+     * @param serial
+     * @return a JSONObject containing the passed-in serial.
+     */
+    public static JSONObject bundleSerialToJSON(String serial) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("serial", serial);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 }
