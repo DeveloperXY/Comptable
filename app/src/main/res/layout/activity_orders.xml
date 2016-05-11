@@ -26,8 +26,6 @@
             android:layout_height="0dp"
             android:layout_weight="226">
 
-            <include layout="@layout/swipe_refresh_layout_include" />
-
         </FrameLayout>
 
     </LinearLayout>

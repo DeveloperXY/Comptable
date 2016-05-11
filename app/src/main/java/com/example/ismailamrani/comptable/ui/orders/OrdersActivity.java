@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.utils.OrderEnum;
@@ -21,7 +20,6 @@ public class OrdersActivity extends AbstractOrdersActivity {
             Bundle data = intent.getExtras();
             if (data != null) {
                 String incoming = data.getString("orderType");
-                Log.i("INCOMING", "#" + incoming);
                 OrderEnum orderEnum = "SALE".equals(incoming) ? OrderEnum.SALE : OrderEnum.PURCHASE;
 
 

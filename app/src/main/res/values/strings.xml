@@ -2,4 +2,7 @@
     <string name="app_name">Comptable</string>
     <string name="title_activity_vente">Vente</string>
     <string name="cannot_connect_message"><![CDATA[We were unable to establish a connection to the server. Please make sure that you have a working internet connection & click to refresh.]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
