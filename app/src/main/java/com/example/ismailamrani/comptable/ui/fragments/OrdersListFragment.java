@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class OrdersListFragment extends Fragment {
 
     protected List<Order> mOrders;
     protected OrdersAdapter ordersAdapter;
+
+    private String currentOrderType;
 
     /**
      * The orders' list.
@@ -63,6 +66,16 @@ public class OrdersListFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static OrdersListFragment newInstance(String orderType) {
+        OrdersListFragment fragment = new OrdersListFragment();
+        Bundle args = new Bundle();
+
+        args.putString("orderType", orderType);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,10 +83,17 @@ public class OrdersListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_orders_list, container, false);
         ButterKnife.bind(this, view);
 
+        setupCurrentOrderType();
         setupSwipeRefresh();
         setupRecyclerView();
 
         return view;
+    }
+
+    private void setupCurrentOrderType() {
+        Bundle args = getArguments();
+        if (args != null)
+            currentOrderType = args.getString("orderType");
     }
 
     protected void setupRecyclerView() {

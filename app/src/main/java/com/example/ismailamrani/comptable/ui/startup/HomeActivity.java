@@ -11,11 +11,8 @@ import com.example.ismailamrani.comptable.ui.NewChargeActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.orders.OrdersActivity;
-import com.example.ismailamrani.comptable.ui.orders.PurchaseOrdersActivity;
-import com.example.ismailamrani.comptable.ui.orders.SaleOrdersActivity;
 import com.example.ismailamrani.comptable.ui.stock.StockActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
-import com.example.ismailamrani.comptable.utils.OrderEnum;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -10,7 +10,6 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
-import com.example.ismailamrani.comptable.utils.OrderEnum;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,7 +19,7 @@ public class OrdersActivity extends ColoredStatusBarActivity {
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
 
-    private OrderEnum currentOrderType;
+    private String currentOrderType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class OrdersActivity extends ColoredStatusBarActivity {
 
         switch (position) {
             case 0:
-                fragment = new OrdersListFragment();
+                fragment = OrdersListFragment.newInstance(currentOrderType);
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
                 break;
         }
@@ -55,7 +54,8 @@ public class OrdersActivity extends ColoredStatusBarActivity {
 
     protected void setupActionBar() {
         mActionBar.setActionBarListener(this);
-        mActionBar.setTitle(currentOrderType == OrderEnum.PURCHASE ? "Commandes achats" : "Commandes ventes");
+        mActionBar.setTitle(currentOrderType.equals("PURCHASE") ?
+                "Commandes achats" : "Commandes ventes");
     }
 
     /**
@@ -66,15 +66,14 @@ public class OrdersActivity extends ColoredStatusBarActivity {
         if (intent != null) {
             Bundle data = intent.getExtras();
             if (data != null) {
-                String incoming = data.getString("orderType");
-                currentOrderType = "SALE".equals(incoming) ? OrderEnum.SALE : OrderEnum.PURCHASE;
+                currentOrderType = data.getString("orderType");
             }
         }
     }
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, currentOrderType == OrderEnum.PURCHASE ?
+        startActivity(new Intent(this, "PURCHASE".equals(currentOrderType) ?
                 PurchasesActivity.class : SalesActivity.class));
     }
 }
