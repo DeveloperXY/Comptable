@@ -155,6 +155,15 @@ public class OrdersListFragment extends Fragment {
         }
     }
 
+    /**
+     * Toggles the visibility of the RecyclerView & the empty view associated with it.
+     */
+    protected void toggleRecyclerviewState() {
+        emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
+        recyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
