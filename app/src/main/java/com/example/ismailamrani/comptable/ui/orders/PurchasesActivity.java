@@ -1,19 +1,14 @@
-package com.example.ismailamrani.comptable.ui.orders.purchases;
+package com.example.ismailamrani.comptable.ui.orders;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;

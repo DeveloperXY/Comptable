@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:showIn="@layout/activity_purchase_orders_activity">
+    tools:showIn="@layout/activity_purchase_orders">
 
     <include
         android:id="@+id/emptyLayout"

@@ -1,24 +1,23 @@
-package com.example.ismailamrani.comptable.ui.orders.purchases;
+package com.example.ismailamrani.comptable.ui.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ui.orders.AbstractOrdersActivity;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import butterknife.ButterKnife;
 
-public class PurchaseOrdersActivity extends AbstractOrdersActivity {
+public class SaleOrdersActivity extends AbstractOrdersActivity {
 
-    private static final int REQUEST_ADD_PURCHASE_ORDER = 100;
+    private static final int REQUEST_ADD_SALE_ORDER = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_purchase_orders_activity);
+        setContentView(R.layout.activity_sale_orders);
         ButterKnife.bind(this);
 
         setupUI();
@@ -29,23 +28,23 @@ public class PurchaseOrdersActivity extends AbstractOrdersActivity {
     protected void setupUI() {
         super.setupUI();
 
-        setupActionBar(this, "Commandes achats");
+        setupActionBar(this, "Commandes ventes");
         // Specify the message of the empty view
-        emptyMessageLabel.setText("There are no purchase orders to show.\nClick to refresh.");
+        emptyMessageLabel.setText("There are no sale orders to show.\nClick to refresh.");
     }
 
     @Override
     public void onAddPressed() {
-        startActivityForResult(new Intent(this, PurchasesActivity.class),
-                REQUEST_ADD_PURCHASE_ORDER);
+        startActivityForResult(new Intent(this, SalesActivity.class),
+                REQUEST_ADD_SALE_ORDER);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case REQUEST_ADD_PURCHASE_ORDER:
-                if (resultCode == ResultCodes.PURCHASE_ORDER_CREATED) {
-                    // A purchase order was created
+            case REQUEST_ADD_SALE_ORDER:
+                if (resultCode == ResultCodes.SALE_ORDER_CREATED) {
+                    // A sale order was created
                     Snackbar.make(getWindow().getDecorView(),
                             "Commande créée avec succès.", Snackbar.LENGTH_LONG)
                             .show();
@@ -58,6 +57,6 @@ public class PurchaseOrdersActivity extends AbstractOrdersActivity {
     @Override
     protected void refresh() {
         super.refresh();
-        fetchOrders(PhpAPI.getPurchaseOrder, null);
+        fetchOrders(PhpAPI.getSaleOrder, null);
     }
 }

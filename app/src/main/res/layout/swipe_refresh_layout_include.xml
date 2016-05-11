@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="226"
-    tools:showIn="@layout/activity_purchase_orders_activity">
+    tools:showIn="@layout/activity_purchase_orders">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

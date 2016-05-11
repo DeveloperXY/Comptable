@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.ui.orders.sales.SaleOrdersActivity;
+import com.example.ismailamrani.comptable.ui.orders.SaleOrdersActivity;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 05/05/2016.

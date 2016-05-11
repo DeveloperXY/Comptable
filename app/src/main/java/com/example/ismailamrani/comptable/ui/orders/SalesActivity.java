@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders.sales;
+package com.example.ismailamrani.comptable.ui.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,11 +36,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 public class SalesActivity extends ColoredStatusBarActivity {

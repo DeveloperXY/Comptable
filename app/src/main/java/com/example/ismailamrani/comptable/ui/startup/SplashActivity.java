@@ -70,6 +70,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                                 Toast.LENGTH_SHORT).show();
                                     }
 
+                                    finish();
                                     startActivity(new Intent(SplashActivity.this, target));
 
                                 } catch (JSONException e) {
