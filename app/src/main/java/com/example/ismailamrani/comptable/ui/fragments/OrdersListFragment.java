@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
@@ -22,6 +23,7 @@ import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -144,12 +146,28 @@ public class OrdersListFragment extends Fragment {
                     new RequestListener() {
                         @Override
                         public void onRequestSucceeded(JSONObject response, int status) {
-
+                            if (status == 1) {
+                                try {
+                                    mOrders = Order.parseOrders(
+                                            response.getJSONArray("orders"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                getActivity().runOnUiThread(() -> onDataChanged());
+                            } else
+                                Toast.makeText(getActivity(),
+                                        "Error while retrieving orders",
+                                        Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onRequestFailed() {
-
+                            getActivity().runOnUiThread(() -> {
+                                errorLayout.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.INVISIBLE);
+                                recyclerView.setVisibility(View.INVISIBLE);
+                                stopSwipeRefresh();
+                            });
                         }
                     });
         }
