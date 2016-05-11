@@ -87,6 +87,13 @@ public class OrdersListFragment extends Fragment {
         setupSwipeRefresh();
         setupRecyclerView();
 
+        String emptyText = "There are no " +
+                (currentOrderType.equals("PURCHASE") ? "purchase" : "sale")
+                + " orders to show.\nClick to refresh.";
+
+        // Specify the message of the empty view
+        emptyMessageLabel.setText(emptyText);
+
         return view;
     }
 
