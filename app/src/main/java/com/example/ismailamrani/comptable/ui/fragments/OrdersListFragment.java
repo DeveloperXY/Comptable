@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.orders.adapters.OrdersAdapter;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +100,8 @@ public class OrdersListFragment extends Fragment {
         // Specify the message of the empty view
         emptyMessageLabel.setText(emptyText);
 
+        refresh();
+
         return view;
     }
 
@@ -116,13 +121,38 @@ public class OrdersListFragment extends Fragment {
     }
 
     private void setupSwipeRefresh() {
-//        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setOnRefreshListener(this::refresh);
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.swipeRefresh1,
                 R.color.swipeRefresh2,
                 R.color.swipeRefresh3,
                 R.color.swipeRefresh4
         );
+    }
+
+    private void refresh() {
+        if (!swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(true);
+
+        Stream.of(emptyView, errorLayout)
+                .forEach(v -> v.setVisibility(View.INVISIBLE));
+
+        if (listener != null) {
+            String url = "SALE".equals(currentOrderType) ?
+                    PhpAPI.getSaleOrder : PhpAPI.getPurchaseOrder;
+            listener.fetchOrders(url,
+                    new RequestListener() {
+                        @Override
+                        public void onRequestSucceeded(JSONObject response, int status) {
+
+                        }
+
+                        @Override
+                        public void onRequestFailed() {
+
+                        }
+                    });
+        }
     }
 
     @Override
@@ -143,6 +173,6 @@ public class OrdersListFragment extends Fragment {
     }
 
     public interface OrderListFragListener {
-        void fetchOrders(RequestListener listener);
+        void fetchOrders(String url, RequestListener listener);
     }
 }

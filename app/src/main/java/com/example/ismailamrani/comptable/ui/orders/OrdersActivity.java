@@ -10,6 +10,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
+import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
 import butterknife.Bind;
@@ -79,8 +80,13 @@ public class OrdersActivity extends ColoredStatusBarActivity
                 PurchasesActivity.class : SalesActivity.class));
     }
 
+    /**
+     * Fetches orders' data on behalf of the fragment.
+     * @param url
+     * @param listener
+     */
     @Override
-    public void fetchOrders(RequestListener listener) {
-
+    public void fetchOrders(String url, RequestListener listener) {
+        sendHTTPRequest(url, null, Method.GET, listener);
     }
 }
