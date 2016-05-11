@@ -10,11 +10,13 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class OrdersActivity extends ColoredStatusBarActivity {
+public class OrdersActivity extends ColoredStatusBarActivity
+        implements OrdersListFragment.OrderListFragListener {
 
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
@@ -75,5 +77,10 @@ public class OrdersActivity extends ColoredStatusBarActivity {
     public void onAddPressed() {
         startActivity(new Intent(this, "PURCHASE".equals(currentOrderType) ?
                 PurchasesActivity.class : SalesActivity.class));
+    }
+
+    @Override
+    public void fetchOrders(RequestListener listener) {
+
     }
 }

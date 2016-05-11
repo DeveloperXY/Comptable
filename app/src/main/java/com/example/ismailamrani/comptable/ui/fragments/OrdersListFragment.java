@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui.fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.orders.adapters.OrdersAdapter;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class OrdersListFragment extends Fragment {
 
     protected List<Order> mOrders;
     protected OrdersAdapter ordersAdapter;
+    private OrderListFragListener listener;
 
     private String currentOrderType;
 
@@ -103,7 +106,7 @@ public class OrdersListFragment extends Fragment {
             currentOrderType = args.getString("orderType");
     }
 
-    protected void setupRecyclerView() {
+    private void setupRecyclerView() {
         mOrders = new ArrayList<>();
 
         recyclerView.setHasFixedSize(true);
@@ -112,7 +115,7 @@ public class OrdersListFragment extends Fragment {
         recyclerView.addItemDecoration(new SpacesItemDecoration(4));
     }
 
-    protected void setupSwipeRefresh() {
+    private void setupSwipeRefresh() {
 //        swipeRefreshLayout.setOnRefreshListener(this::refresh);
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.swipeRefresh1,
@@ -120,5 +123,26 @@ public class OrdersListFragment extends Fragment {
                 R.color.swipeRefresh3,
                 R.color.swipeRefresh4
         );
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            listener = (OrderListFragListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OrderListFragListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    public interface OrderListFragListener {
+        void fetchOrders(RequestListener listener);
     }
 }
