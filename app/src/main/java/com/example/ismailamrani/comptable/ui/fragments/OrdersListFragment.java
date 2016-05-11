@@ -1,8 +1,8 @@
 package com.example.ismailamrani.comptable.ui.fragments;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.orders.adapters.OrdersAdapter;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
@@ -63,7 +62,6 @@ public class OrdersListFragment extends Fragment {
     public OrdersListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

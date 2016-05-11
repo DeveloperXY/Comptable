@@ -1,11 +1,15 @@
 package com.example.ismailamrani.comptable.ui.orders;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.OrderEnum;
 
 import butterknife.Bind;
@@ -26,6 +30,27 @@ public class OrdersActivity extends ColoredStatusBarActivity {
 
         setupOrdersType();
         setupActionBar();
+
+        displayFragment(0); // always display first fragment at startup
+    }
+
+    /**
+     * @param position of the fragment to show
+     */
+    private void displayFragment(int position) {
+        Fragment fragment = null;
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+
+        switch (position) {
+            case 0:
+                fragment = new OrdersListFragment();
+                ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
+                break;
+        }
+
+        ft.replace(R.id.frame_container, fragment, "fragment" + position);
+        ft.commit();
     }
 
     protected void setupActionBar() {
