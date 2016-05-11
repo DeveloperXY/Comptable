@@ -51,8 +51,6 @@ public class SplashActivity extends ColoredStatusBarActivity {
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
-                        finish();
-
                         runOnUiThread(() -> {
                             Class<?> target;
 
@@ -81,7 +79,10 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                 DialogUtil.showDialog(SplashActivity.this, "Apologies",
                                         "It seems like we are missing your activation code. Please contact us as soon as possible.",
                                         "Dismiss", null,
-                                        dialog -> startActivity(new Intent(SplashActivity.this, ActivationActivity.class)));
+                                        dialog -> {
+                                            finish();
+                                            startActivity(new Intent(SplashActivity.this, ActivationActivity.class));
+                                        });
                             }
                         });
                     }
