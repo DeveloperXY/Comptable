@@ -155,6 +155,14 @@ public class OrdersListFragment extends Fragment {
         }
     }
 
+    private void onDataChanged() {
+        toggleRecyclerviewState();
+        populateRecyclerView();
+
+        progressBar.setVisibility(View.INVISIBLE);
+        stopSwipeRefresh();
+    }
+
     /**
      * Toggles the visibility of the RecyclerView & the empty view associated with it.
      */
