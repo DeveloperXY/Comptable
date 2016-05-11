@@ -21,7 +21,12 @@ public class DialogUtil {
     public static void showDialog(Context context, final String title,
                                   final String message, final String actionText,
                                   final DialogInterface.OnClickListener listener) {
+        AlertDialog alertDialog = buildDialog(context, title, message, actionText, listener);
+        alertDialog.show();
+    }
 
+    private static AlertDialog buildDialog(Context context, String title, String message, final String actionText,
+                                           final DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(
                 context, R.style.AppCompatAlertDialogStyle);
         builder.setTitle(title);
@@ -30,6 +35,16 @@ public class DialogUtil {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
+
+        return alertDialog;
+    }
+
+    public static void showDialog(Context context, final String title,
+                                  final String message, final String actionText,
+                                  final DialogInterface.OnClickListener listener,
+                                  final DialogInterface.OnDismissListener dismissListener) {
+        AlertDialog alertDialog = buildDialog(context, title, message, actionText, listener);
+        alertDialog.setOnDismissListener(dismissListener);
         alertDialog.show();
     }
 }
