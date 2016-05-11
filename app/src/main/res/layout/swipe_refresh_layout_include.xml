@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="226"
-    tools:showIn="@layout/activity_purchase_orders">
+    android:layout_height="match_parent"
+    tools:showIn="@layout/activity_orders">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

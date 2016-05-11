@@ -4,6 +4,34 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_vente">
 
-    <include layout="@layout/orders_layout" />
+    <include
+        android:id="@+id/emptyLayout"
+        layout="@layout/empty_view_include" />
+
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/stock_network_error_include" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="246">
+
+        <include layout="@layout/custom_actionbar_include" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="226">
+
+            <include layout="@layout/swipe_refresh_layout_include" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/progressbar_layout_include" />
 
 </RelativeLayout>
