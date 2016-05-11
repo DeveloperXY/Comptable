@@ -99,7 +99,8 @@
         </activity>
         <activity android:name=".ui.orders.SaleOrdersActivity" />
         <activity android:name=".ui.orders.PurchaseOrdersActivity" />
-        <activity android:name=".ui.startup.ActivationActivity"></activity>
+        <activity android:name=".ui.startup.ActivationActivity"/>
+        <activity android:name=".ui.orders.OrdersActivity"/>
     </application>
 
 </manifest>

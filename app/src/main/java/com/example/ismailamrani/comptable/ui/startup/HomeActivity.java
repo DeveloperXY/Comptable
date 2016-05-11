@@ -10,10 +10,12 @@ import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
 import com.example.ismailamrani.comptable.ui.NewChargeActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.orders.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.orders.PurchaseOrdersActivity;
 import com.example.ismailamrani.comptable.ui.orders.SaleOrdersActivity;
 import com.example.ismailamrani.comptable.ui.stock.StockActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
+import com.example.ismailamrani.comptable.utils.OrderEnum;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,6 +42,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
             R.id.ventes, R.id.achat, R.id.fournis})
     public void OnClick(View view) {
         Class<?> targetActivity;
+        String orderType = "";
+
         switch (view.getId()) {
             case R.id.produit:
                 targetActivity = ProductsActivity.class;
@@ -57,15 +61,21 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 targetActivity = StockActivity.class;
                 break;
             case R.id.achat:
-                targetActivity = PurchaseOrdersActivity.class;
+                targetActivity = OrdersActivity.class;
+                orderType = "PURCHASE";
                 break;
             case R.id.ventes:
-                targetActivity = SaleOrdersActivity.class;
+                targetActivity = OrdersActivity.class;
+                orderType = "SALE";
                 break;
             default:
                 targetActivity = null;
         }
 
-        startActivity(new Intent(this, targetActivity));
+        Intent intent = new Intent(this, targetActivity);
+        if (targetActivity == OrdersActivity.class)
+            intent.putExtra("orderType", orderType);
+
+        startActivity(intent);
     }
 }

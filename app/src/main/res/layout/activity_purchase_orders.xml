@@ -4,6 +4,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/back_vente">
 
-    <include layout="@layout/orders_layout" />
-
 </RelativeLayout>
