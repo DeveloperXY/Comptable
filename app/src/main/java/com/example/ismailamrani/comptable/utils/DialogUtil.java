@@ -10,20 +10,6 @@ import com.example.ismailamrani.comptable.R;
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
  */
 public class DialogUtil {
-    /**
-     * Shows a custom dialog.
-     *
-     * @param title      of the dialog
-     * @param message    of the dialog
-     * @param actionText text of the dialog's action button
-     * @param listener   on the action button
-     */
-    public static void showDialog(Context context, final String title,
-                                  final String message, final String actionText,
-                                  final DialogInterface.OnClickListener listener) {
-        AlertDialog alertDialog = buildDialog(context, title, message, actionText, listener);
-        alertDialog.show();
-    }
 
     private static AlertDialog buildDialog(Context context, String title, String message, final String actionText,
                                            final DialogInterface.OnClickListener listener) {
@@ -37,6 +23,20 @@ public class DialogUtil {
         alertDialog.setCanceledOnTouchOutside(true);
 
         return alertDialog;
+    }
+
+    /**
+     * Shows a custom dialog.
+     *
+     * @param title      of the dialog
+     * @param message    of the dialog
+     * @param actionText text of the dialog's action button
+     * @param listener   on the action button
+     */
+    public static void showDialog(Context context, final String title,
+                                  final String message, final String actionText,
+                                  final DialogInterface.OnClickListener listener) {
+        showDialog(context, title, message, actionText, listener, null);
     }
 
     public static void showDialog(Context context, final String title,
