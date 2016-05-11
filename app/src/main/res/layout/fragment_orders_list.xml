@@ -4,6 +4,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment">
 
+    <include
+        android:id="@+id/emptyLayout"
+        layout="@layout/empty_view_include" />
+
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/stock_network_error_include" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
@@ -15,5 +23,7 @@
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/progressbar_layout_include" />
 
 </FrameLayout>
