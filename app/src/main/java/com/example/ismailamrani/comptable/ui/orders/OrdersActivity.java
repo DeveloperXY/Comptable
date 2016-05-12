@@ -39,6 +39,15 @@ public class OrdersActivity extends ColoredStatusBarActivity
         displayFragment(0); // always display first fragment at startup
     }
 
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getFragmentManager().findFragmentById(R.id.frame_container);
+        if (fragment instanceof OrderDetailsFragment)
+            displayFragment(0);
+        else
+            super.onBackPressed();
+    }
+
     /**
      * @param position of the fragment to show
      */
