@@ -9,7 +9,7 @@ import android.os.Bundle;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
+import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
