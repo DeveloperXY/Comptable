@@ -5,9 +5,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
+import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -88,5 +90,10 @@ public class OrdersActivity extends ColoredStatusBarActivity
     @Override
     public void fetchOrders(String url, RequestListener listener) {
         sendHTTPRequest(url, null, Method.GET, listener);
+    }
+
+    @Override
+    public void onOrderItemPressed(Order order) {
+        Log.i("RECEIVED", order.toString());
     }
 }

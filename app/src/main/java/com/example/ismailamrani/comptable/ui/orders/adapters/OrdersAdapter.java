@@ -1,10 +1,13 @@
 package com.example.ismailamrani.comptable.ui.orders.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
@@ -15,10 +18,11 @@ import java.util.List;
 /**
  * Created by Mohammed Aouf ZOUAG on 30/04/2016.
  */
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.OrdersViewHolder> {
 
     private Context mContext;
     private List<Order> mOrders;
+    private OrdersListener listener;
 
     public OrdersAdapter(Context context, List<Order> orders) {
         mContext = context;
@@ -30,7 +34,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersViewHolder> {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.order_row, viewGroup, false);
 
-        return new OrdersViewHolder(mContext, v);
+        return new OrdersViewHolder(v);
     }
 
     @Override
@@ -90,6 +94,39 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersViewHolder> {
 
             if (fromPosition >= 0 && fromPosition != toPosition)
                 moveItem(fromPosition, toPosition);
+        }
+    }
+
+    public void setOrdersListener(OrdersListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OrdersListener {
+        void onOrderSelected(Order order);
+    }
+
+    public class OrdersViewHolder extends RecyclerView.ViewHolder {
+
+        TextView orderIDLabel;
+        TextView plusSignLabel;
+        RelativeLayout statusColorLayout;
+
+        public OrdersViewHolder(View v) {
+            super(v);
+            orderIDLabel = (TextView) v.findViewById(R.id.orderIDLabel);
+            plusSignLabel = (TextView) v.findViewById(R.id.plusSignLabel);
+            statusColorLayout = (RelativeLayout) v.findViewById(R.id.statusColorLayout);
+
+            v.setOnClickListener(view -> {
+                if (listener != null)
+                    listener.onOrderSelected(mOrders.get(getLayoutPosition()));
+            });
+        }
+
+        public void bind(Order order) {
+            orderIDLabel.setText(order.getFactureID());
+            statusColorLayout.setBackgroundColor(
+                    Color.parseColor(order.getFacture() == 1 ? "#2E7D32" : "#D50000"));
         }
     }
 }

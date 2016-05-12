@@ -194,6 +194,10 @@ public class OrdersListFragment extends Fragment {
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new OrdersAdapter(getActivity(), mOrders);
+            ordersAdapter.setOrdersListener(order -> {
+                if (listener != null)
+                    listener.onOrderItemPressed(order);
+            });
             recyclerView.setAdapter(ordersAdapter);
         } else
             ordersAdapter.animateTo(mOrders);
@@ -223,5 +227,6 @@ public class OrdersListFragment extends Fragment {
 
     public interface OrderListFragListener {
         void fetchOrders(String url, RequestListener listener);
+        void onOrderItemPressed(Order order);
     }
 }
