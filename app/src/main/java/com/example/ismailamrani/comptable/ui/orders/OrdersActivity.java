@@ -11,6 +11,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.orders.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -50,6 +51,10 @@ public class OrdersActivity extends ColoredStatusBarActivity
             case 0:
                 fragment = OrdersListFragment.newInstance(currentOrderType);
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
+                break;
+            case 1:
+                fragment = new OrderDetailsFragment();
+                ft.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_out_left);
                 break;
         }
 
@@ -94,6 +99,6 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     @Override
     public void onOrderItemPressed(Order order) {
-        Log.i("RECEIVED", order.toString());
+        displayFragment(1);
     }
 }
