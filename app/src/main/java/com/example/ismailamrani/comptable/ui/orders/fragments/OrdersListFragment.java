@@ -142,6 +142,7 @@ public class OrdersListFragment extends Fragment {
         if (listener != null) {
             String url = "SALE".equals(currentOrderType) ?
                     PhpAPI.getSaleOrder : PhpAPI.getPurchaseOrder;
+
             listener.fetchOrders(url,
                     new RequestListener() {
                         @Override

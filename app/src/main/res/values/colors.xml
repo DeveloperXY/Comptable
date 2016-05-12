@@ -6,6 +6,11 @@
     <color name="colorGrey">#9e9e9e</color>
     <color name="colorBlue">#3d5469</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorOrderDetailBackground">#eee9e9</color>
+    <color name="colorPriceTag">#005b7f</color>
+    <color name="colorPriceText">#3e566b</color>
+    <color name="colorProductName">#9f9b9b</color>
+    <color name="colorLayoutBorder">#adaaaa</color>
     <color name="swipeRefresh1">#ff3d5469</color>
     <color name="swipeRefresh2">#cc3d5469</color>
     <color name="swipeRefresh3">#883d5469</color>
