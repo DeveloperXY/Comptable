@@ -10,8 +10,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/detailsRecyclerView"
+        <ListView
+            android:id="@+id/detailsListView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="90" />
@@ -36,12 +36,12 @@
                 android:id="@+id/totalValueLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/totalTextLabel"
                 android:gravity="center"
                 android:text="14000 DH"
                 android:textColor="@color/colorBlue"
-                android:textSize="18sp"
-                android:layout_marginLeft="8dp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/button"
