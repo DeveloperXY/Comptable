@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.OrderDetailsAdapter;
 import com.example.ismailamrani.comptable.models.OrderDetail;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
@@ -19,6 +21,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,6 +31,9 @@ public class OrderDetailsFragment extends Fragment {
 
     private int currentOrderID;
     private OrderDetailsFragListener listener;
+
+    @Bind(R.id.detailsListView)
+    ListView detailsListView;
 
     public OrderDetailsFragment() {
         // Required empty public constructor
@@ -46,6 +54,7 @@ public class OrderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order_details, container, false);
+        ButterKnife.bind(this, view);
 
         currentOrderID = getCurrentOrderID();
         if (listener != null)
@@ -57,11 +66,14 @@ public class OrderDetailsFragment extends Fragment {
                             JSONArray jsonArray = response.getJSONArray("orderDetails");
                             List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
 
+                            getActivity().runOnUiThread(() ->
+                                    detailsListView.setAdapter(
+                                            new OrderDetailsAdapter(getActivity(), details)));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    }
-                    else {
+                    } else {
                         getActivity().runOnUiThread(() ->
                                 Toast.makeText(getActivity(), "Unknown error",
                                         Toast.LENGTH_SHORT).show());
