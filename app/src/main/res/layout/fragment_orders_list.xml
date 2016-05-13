@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/errorLayout"
-        layout="@layout/stock_network_error_include" />
+        layout="@layout/network_error_include" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

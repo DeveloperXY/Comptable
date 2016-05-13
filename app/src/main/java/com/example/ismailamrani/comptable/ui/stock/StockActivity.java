@@ -6,10 +6,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
@@ -50,13 +52,16 @@ public class StockActivity extends ColoredStatusBarActivity
     /**
      * The view to be displayed in case there were no products in store.
      */
-    @Bind(R.id.emptyLayout)
+    @Bind(R.id.emptyStockLayout)
     RelativeLayout emptyView;
+
+    @Bind(R.id.emptyMessageLabel)
+    TextView emptyMessageLabel;
 
     /**
      * The view to be displayed in case a network error occur.
      */
-    @Bind(R.id.errorLayout)
+    @Bind(R.id.errorStockLayout)
     RelativeLayout errorLayout;
 
     @Bind(R.id.progressBar)
@@ -101,6 +106,7 @@ public class StockActivity extends ColoredStatusBarActivity
         stockRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
+        emptyMessageLabel.setText("There are no products to show.");
 
         fetchStockProducts(PhpAPI.getStock, null);
     }
@@ -184,8 +190,10 @@ public class StockActivity extends ColoredStatusBarActivity
 
                     @Override
                     public void onRequestFailed() {
-                        errorLayout.setVisibility(View.VISIBLE);
-                        stockProgressbar.setVisibility(View.INVISIBLE);
+                        runOnUiThread(() -> {
+                            errorLayout.setVisibility(View.VISIBLE);
+                            stockProgressbar.setVisibility(View.INVISIBLE);
+                        });
                     }
                 });
     }
