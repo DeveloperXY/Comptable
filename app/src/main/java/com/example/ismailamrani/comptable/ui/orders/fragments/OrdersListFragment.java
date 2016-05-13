@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.ui.orders.adapters.OrdersAdapter;
+import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;

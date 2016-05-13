@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
+import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;

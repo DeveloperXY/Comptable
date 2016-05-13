@@ -1,8 +1,7 @@
-package com.example.ismailamrani.comptable.ui.stock;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;

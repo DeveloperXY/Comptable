@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders.adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders.adapters;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.app.Activity;
 import android.content.Context;

@@ -6,13 +6,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
@@ -32,7 +32,6 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
 
 public class StockActivity extends ColoredStatusBarActivity
         implements SearchListener, SearchView.OnQueryTextListener {

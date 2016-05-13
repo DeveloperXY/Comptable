@@ -13,7 +13,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
-import com.example.ismailamrani.comptable.ui.orders.adapters.ProductOrderAdapter;
+import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
