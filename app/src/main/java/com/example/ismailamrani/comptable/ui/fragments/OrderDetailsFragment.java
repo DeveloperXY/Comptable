@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -30,20 +32,27 @@ import butterknife.ButterKnife;
 public class OrderDetailsFragment extends Fragment {
 
     private int currentOrderID;
+    private int currentOrderStatus;
     private OrderDetailsFragListener listener;
+    private OrderDetailsAdapter adapter;
 
     @Bind(R.id.detailsListView)
     ListView detailsListView;
+    @Bind(R.id.totalValueLabel)
+    TextView totalValueLabel;
+    @Bind(R.id.facturerButton)
+    Button facturerButton;
 
     public OrderDetailsFragment() {
         // Required empty public constructor
     }
 
-    public static OrderDetailsFragment newInstance(int orderID) {
+    public static OrderDetailsFragment newInstance(int orderID, int factureStatus) {
         OrderDetailsFragment fragment = new OrderDetailsFragment();
         Bundle args = new Bundle();
 
         args.putInt("orderID", orderID);
+        args.putInt("factureStatus", factureStatus);
 
         fragment.setArguments(args);
         return fragment;
@@ -56,46 +65,69 @@ public class OrderDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_details, container, false);
         ButterKnife.bind(this, view);
 
-        currentOrderID = getCurrentOrderID();
+        Bundle args = getArguments();
+        currentOrderID = getCurrentOrderID(args);
+        currentOrderStatus = getCurrentOrderStatus(args);
+
+        setupFacturerButton();
+
         if (listener != null)
-            listener.fetchOrderDetails(new RequestListener() {
-                @Override
-                public void onRequestSucceeded(JSONObject response, int status) {
-                    if (status == 1) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("orderDetails");
-                            List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
-
-                            getActivity().runOnUiThread(() ->
-                                    detailsListView.setAdapter(
-                                            new OrderDetailsAdapter(getActivity(), details)));
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        getActivity().runOnUiThread(() ->
-                                Toast.makeText(getActivity(), "Unknown error",
-                                        Toast.LENGTH_SHORT).show());
-                    }
-                }
-
-                @Override
-                public void onRequestFailed() {
-
-                }
-            });
+            listener.fetchOrderDetails(new OrderDetailsListener());
 
         return view;
     }
 
-    private int getCurrentOrderID() {
-        Bundle data = getArguments();
+    private void setupFacturerButton() {
+        facturerButton.setEnabled(currentOrderStatus == 0);
+        facturerButton.setOnClickListener(view ->
+                Toast.makeText(getActivity(), "Hop !", Toast.LENGTH_SHORT).show());
+    }
 
+    private int getCurrentOrderID(Bundle data) {
         if (data != null)
             return data.getInt("orderID");
 
         throw new IllegalStateException("You need to pass an order ID to the fragment.");
+    }
+
+    private int getCurrentOrderStatus(Bundle data) {
+        if (data != null)
+            return data.getInt("factureStatus");
+
+        throw new IllegalStateException("You need to pass an order status to the fragment.");
+    }
+
+    private class OrderDetailsListener implements RequestListener {
+        @Override
+        public void onRequestSucceeded(JSONObject response, int status) {
+            if (status == 1) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("orderDetails");
+                    List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
+
+                    getActivity().runOnUiThread(() -> {
+                        adapter = new OrderDetailsAdapter(getActivity(), details);
+                        totalValueLabel.setText("" + adapter.getTotalPrice() + " DH");
+                        detailsListView.setAdapter(adapter);
+                    });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                getActivity().runOnUiThread(() ->
+                        Toast.makeText(getActivity(), "Unknown error",
+                                Toast.LENGTH_SHORT).show());
+            }
+        }
+
+        @Override
+        public void onRequestFailed() {
+            getActivity().runOnUiThread(() ->
+                    Toast.makeText(getActivity(), "Network error",
+                            Toast.LENGTH_SHORT).show());
+        }
     }
 
     @Override

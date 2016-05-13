@@ -56,6 +56,19 @@ public class OrderDetailsAdapter extends ArrayAdapter<OrderDetail> {
         return convertView;
     }
 
+    /**
+     * @return the sum of prices of all the items within the current order.
+     */
+    public double getTotalPrice() {
+        double sum = 0;
+
+        for (int i = 0; i < detailsListItems.size(); i++) {
+            sum += detailsListItems.get(i).getPriceTTC();
+        }
+
+        return sum;
+    }
+
     static class ViewHolder {
         TextView productNameLabel;
         TextView quantityLabel;

@@ -80,8 +80,8 @@ public class OrdersActivity extends ColoredStatusBarActivity
                         PURCHASE_ORDERS : SALE_ORDERS);
                 break;
             case 1:
-                fragment = order != null ? OrderDetailsFragment.newInstance(order.getId()) :
-                        new OrderDetailsFragment();
+                fragment = order != null ? OrderDetailsFragment.newInstance(
+                        order.getId(), order.getFacture()) : new OrderDetailsFragment();
                 ft.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_out_left);
                 mActionBar.setTitle(currentOrder.getFactureID());
                 break;
