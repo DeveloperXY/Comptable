@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
             productLabel.setText(product.getLibelle());
             quantityLabel.setText(String.valueOf(product.getQte()));
             Picasso.with(itemView.getContext())
-                    .load(R.drawable.iphone)
+                    .load(PhpAPI.IpBackend_IMAGES + product.getPhoto())
                     .into(productImage);
         }
     }

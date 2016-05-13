@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders.fragments;
+package com.example.ismailamrani.comptable.ui.fragments;
 
 
 import android.app.Activity;

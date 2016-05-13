@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -11,8 +11,8 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.ui.orders.fragments.OrderDetailsFragment;
-import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment;
+import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
+import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;

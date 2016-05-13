@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.orders;
+package com.example.ismailamrani.comptable.ui;
 
 import android.app.Dialog;
 import android.os.Bundle;

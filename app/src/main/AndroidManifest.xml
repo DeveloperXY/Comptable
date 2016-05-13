@@ -79,13 +79,13 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".ui.orders.SalesActivity"
+            android:name=".ui.SalesActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_vente"
             android:screenOrientation="portrait" />
         <activity android:name=".ui.StockActivity" />
         <activity
-            android:name=".ui.orders.PurchasesActivity"
+            android:name=".ui.PurchasesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
@@ -100,7 +100,7 @@
         <activity android:name=".ui.orders.SaleOrdersActivity" />
         <activity android:name=".ui.orders.PurchaseOrdersActivity" />
         <activity android:name=".ui.startup.ActivationActivity"/>
-        <activity android:name=".ui.orders.OrdersActivity"/>
+        <activity android:name=".ui.OrdersActivity"/>
     </application>
 
 </manifest>
