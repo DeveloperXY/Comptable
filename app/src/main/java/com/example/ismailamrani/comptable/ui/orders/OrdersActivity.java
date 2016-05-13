@@ -26,6 +26,9 @@ public class OrdersActivity extends ColoredStatusBarActivity
         implements OrdersListFragment.OrderListFragListener,
         OrderDetailsFragment.OrderDetailsFragListener {
 
+    public static final String PURCHASE_ORDERS = "Commandes achats";
+    public static final String SALE_ORDERS = "Commandes ventes";
+
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
 
@@ -69,11 +72,14 @@ public class OrdersActivity extends ColoredStatusBarActivity
             case 0:
                 fragment = OrdersListFragment.newInstance(currentOrderType);
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
+                mActionBar.setTitle(currentOrderType.equals("PURCHASE") ?
+                        PURCHASE_ORDERS : SALE_ORDERS);
                 break;
             case 1:
                 fragment = order != null ? OrderDetailsFragment.newInstance(order.getId()) :
                         new OrderDetailsFragment();
                 ft.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_out_left);
+                mActionBar.setTitle(currentOrder.getFactureID());
                 break;
         }
 
@@ -83,8 +89,6 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     protected void setupActionBar() {
         mActionBar.setActionBarListener(this);
-        mActionBar.setTitle(currentOrderType.equals("PURCHASE") ?
-                "Commandes achats" : "Commandes ventes");
     }
 
     /**
