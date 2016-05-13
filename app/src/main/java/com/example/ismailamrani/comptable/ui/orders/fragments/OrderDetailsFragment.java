@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -46,7 +49,19 @@ public class OrderDetailsFragment extends Fragment {
             listener.fetchOrderDetails(new RequestListener() {
                 @Override
                 public void onRequestSucceeded(JSONObject response, int status) {
+                    if (status == 1) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("orderDetails");
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        getActivity().runOnUiThread(() ->
+                                Toast.makeText(getActivity(), "Unknown error",
+                                        Toast.LENGTH_SHORT).show());
+                    }
                 }
 
                 @Override
@@ -62,7 +77,7 @@ public class OrderDetailsFragment extends Fragment {
         Bundle data = getArguments();
 
         if (data != null)
-            data.getInt("orderID");
+            return data.getInt("orderID");
 
         throw new IllegalStateException("You need to pass an order ID to the fragment.");
     }

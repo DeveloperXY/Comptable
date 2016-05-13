@@ -47,12 +47,11 @@ public class JSONUtils {
      * @param order
      * @return a JSONObject containing the passed-in order ID.
      */
-    public static JSONObject bundleToJSON(Order order, String orderType) {
+    public static JSONObject bundleOrderToJSON(Order order) {
         JSONObject data = new JSONObject();
 
         try {
             data.put("orderID", order.getId());
-            data.put("orderType", orderType);
         } catch (JSONException e) {
             e.printStackTrace();
         }

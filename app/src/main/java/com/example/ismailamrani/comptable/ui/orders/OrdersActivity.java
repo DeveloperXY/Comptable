@@ -133,7 +133,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
     @Override
     public void fetchOrderDetails(RequestListener requestListener) {
         // Bundle the request params as JSON
-        JSONObject params = JSONUtils.bundleToJSON(currentOrder, currentOrderType);
+        JSONObject params = JSONUtils.bundleOrderToJSON(currentOrder);
         // Decide which one is the target URL
         String url = "SALE".equals(currentOrderType) ?
                 PhpAPI.getSaleDetails : PhpAPI.getPurchaseDetails;
