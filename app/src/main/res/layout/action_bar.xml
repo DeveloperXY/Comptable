@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:background="@mipmap/ic_bg_ab"
         android:orientation="horizontal"
-        android:weightSum="360">
+        android:weightSum="360"
+        android:id="@+id/mainActionLayout">
 
         <RelativeLayout
             android:layout_width="0dp"

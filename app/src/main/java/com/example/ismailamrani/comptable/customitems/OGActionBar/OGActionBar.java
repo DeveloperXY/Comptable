@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
@@ -17,6 +18,7 @@ public class OGActionBar extends RelativeLayout {
 
     RelativeLayout menu, add, search;
     CustomTextView title;
+    LinearLayout mainActionLayout;
 
     OGActionBarInterface listener;
     SearchListener searchListener;
@@ -34,6 +36,7 @@ public class OGActionBar extends RelativeLayout {
         add = (RelativeLayout) layout.findViewById(R.id.Add);
         search = (RelativeLayout) layout.findViewById(R.id.Search);
         title = (CustomTextView) layout.findViewById(R.id.Title);
+        mainActionLayout = (LinearLayout) layout.findViewById(R.id.mainActionLayout);
 
         menu.setOnClickListener(v -> {
             if (listener != null)
@@ -51,6 +54,15 @@ public class OGActionBar extends RelativeLayout {
         });
 
         addView(layout);
+    }
+
+    /**
+     * Specifies the background color of this custom action bar.
+     *
+     * @param parsedColor
+     */
+    public void setBackgroundColor(int parsedColor) {
+        mainActionLayout.setBackgroundColor(parsedColor);
     }
 
     public void setTitle(String title) {
