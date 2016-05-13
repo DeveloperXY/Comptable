@@ -52,6 +52,10 @@ public class OrdersActivity extends ColoredStatusBarActivity
      * @param position of the fragment to show
      */
     private void displayFragment(int position) {
+        displayFragment(position, null);
+    }
+
+    private void displayFragment(int position, Order order) {
         Fragment fragment = null;
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -62,7 +66,8 @@ public class OrdersActivity extends ColoredStatusBarActivity
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
                 break;
             case 1:
-                fragment = new OrderDetailsFragment();
+                fragment = order != null ? OrderDetailsFragment.newInstance(order.getId()) :
+                        new OrderDetailsFragment();
                 ft.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_out_left);
                 break;
         }
@@ -108,6 +113,6 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     @Override
     public void onOrderItemPressed(Order order) {
-        displayFragment(1);
+        displayFragment(1, order);
     }
 }
