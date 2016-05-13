@@ -20,12 +20,14 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class OrdersActivity extends ColoredStatusBarActivity
-        implements OrdersListFragment.OrderListFragListener {
+        implements OrdersListFragment.OrderListFragListener,
+        OrderDetailsFragment.OrderDetailsFragListener {
 
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
 
     private String currentOrderType;
+    private Order currentOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     /**
      * Fetches orders' data on behalf of the fragment.
+     *
      * @param url
      * @param listener
      */
@@ -113,6 +116,12 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     @Override
     public void onOrderItemPressed(Order order) {
+        currentOrder = order;
         displayFragment(1, order);
+    }
+
+    @Override
+    public void fetchOrderDetails(String url, RequestListener requestListener) {
+
     }
 }

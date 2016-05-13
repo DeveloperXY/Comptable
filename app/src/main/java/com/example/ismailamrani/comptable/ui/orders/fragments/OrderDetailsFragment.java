@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui.orders.fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +17,7 @@ import com.example.ismailamrani.comptable.R;
 public class OrderDetailsFragment extends Fragment {
 
     private int currentOrderID;
+    private OrderDetailsFragListener listener;
 
     public OrderDetailsFragment() {
         // Required empty public constructor
@@ -48,5 +51,26 @@ public class OrderDetailsFragment extends Fragment {
             data.getInt("orderID");
 
         throw new IllegalStateException("You need to pass an order ID to the fragment.");
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            listener = (OrderDetailsFragListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OrderDetailsFragListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    public interface OrderDetailsFragListener {
+        void fetchOrderDetails(String url, RequestListener requestListener);
     }
 }
