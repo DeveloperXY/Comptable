@@ -1,7 +1,11 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 13/05/2016.
@@ -24,6 +28,22 @@ public class OrderDetail {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<OrderDetail> parseSuppliers(JSONArray array) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject orderDetail = array.getJSONObject(i);
+                orderDetails.add(new OrderDetail(orderDetail));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return orderDetails;
     }
 
     public int getProductID() {

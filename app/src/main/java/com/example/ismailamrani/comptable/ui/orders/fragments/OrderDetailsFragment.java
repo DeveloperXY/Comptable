@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.OrderDetail;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +55,7 @@ public class OrderDetailsFragment extends Fragment {
                     if (status == 1) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("orderDetails");
+                            List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
