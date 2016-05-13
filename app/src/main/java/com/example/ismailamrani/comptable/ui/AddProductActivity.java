@@ -22,6 +22,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -160,41 +161,30 @@ public class AddProductActivity extends ColoredStatusBarActivity
         return null;
     }
 
-    void postAddProduct(String url, JSONObject userCredentials) {
-        Request request = PhpAPI.createHTTPRequest(userCredentials, url, Method.POST);
-
-        client.newCall(request)
-                .enqueue(new Callback() {
+    void postAddProduct(String url, JSONObject data) {
+        sendHTTPRequest(url, data, Method.POST,
+                new RequestListener() {
                     @Override
-                    public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(AddProductActivity.this,
-                                call.request().toString(), Toast.LENGTH_LONG).show());
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1) {
+                            setResult(ResultCodes.PRODUCT_ADDED);
+                            finish();
+
+                            runOnUiThread(() ->
+                                    Toast.makeText(getApplicationContext(),
+                                            "Product successfully added.",
+                                            Toast.LENGTH_LONG).show());
+                        } else if (status == 0) {
+                            runOnUiThread(() ->
+                                    Toast.makeText(getApplicationContext(),
+                                            "erreur  !!!!", Toast.LENGTH_LONG).show());
+                        }
                     }
 
                     @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        final String res = response.body().string();
-                        try {
-                            JSONObject obj = new JSONObject(res);
-                            int resp = obj.getInt("success");
-
-                            if (resp == 1) {
-                                setResult(ResultCodes.PRODUCT_ADDED);
-                                finish();
-
-                                runOnUiThread(() ->
-                                        Toast.makeText(getApplicationContext(),
-                                                "Product successfully added.",
-                                                Toast.LENGTH_LONG).show());
-                            } else if (resp == 0) {
-                                runOnUiThread(() ->
-                                        Toast.makeText(getApplicationContext(),
-                                                "erreur  !!!!", Toast.LENGTH_LONG).show());
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void onRequestFailed() {
+                        runOnUiThread(() -> Toast.makeText(AddProductActivity.this,
+                                "Unknown error.", Toast.LENGTH_LONG).show());
                     }
                 });
     }

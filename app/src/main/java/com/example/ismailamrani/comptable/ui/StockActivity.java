@@ -111,7 +111,7 @@ public class StockActivity extends ColoredStatusBarActivity
         stockRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
-        emptyMessageLabel.setText("There are no products to show.");
+        emptyMessageLabel.setText("There are no products to show.\nClick to refresh.");
 
         refresh();
     }
