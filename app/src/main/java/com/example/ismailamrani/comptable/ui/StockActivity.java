@@ -1,8 +1,9 @@
-package com.example.ismailamrani.comptable.ui.stock;
+package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -79,6 +80,9 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.MyActionBar)
     OGActionBar mActionBar;
 
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,7 @@ public class StockActivity extends ColoredStatusBarActivity
         setupActionBar();
         setupRecyclerView();
         setupSearchView();
+        setupSwipeRefresh();
     }
 
     private void setupActionBar() {
@@ -108,7 +113,19 @@ public class StockActivity extends ColoredStatusBarActivity
         );
         emptyMessageLabel.setText("There are no products to show.");
 
+        refresh();
+    }
+
+    private void refresh() {
+        if (!swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(true);
+
         fetchStockProducts(PhpAPI.getStock, null);
+    }
+
+    private void stopSwipeRefresh() {
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
     }
 
     private void setupSearchView() {
@@ -120,6 +137,16 @@ public class StockActivity extends ColoredStatusBarActivity
             toggleSearchViewVisibility(View.GONE); // Hide search view
             stockAdapter.animateTo(mProducts);
         });
+    }
+
+    private void setupSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.swipeRefresh1,
+                R.color.swipeRefresh2,
+                R.color.swipeRefresh3,
+                R.color.swipeRefresh4
+        );
     }
 
     @Override
@@ -163,10 +190,14 @@ public class StockActivity extends ColoredStatusBarActivity
             case REQUEST_ADD_PRODUCT:
                 if (resultCode == ResultCodes.PRODUCT_ADDED) {
                     // A product has been successfully added
-                    fetchStockProducts(PhpAPI.getStock, null);
+                    refresh();
                 }
                 break;
         }
+    }
+
+    public void onErrorViewPressed(View view) {
+        refresh();
     }
 
     void fetchStockProducts(String url, JSONObject data) {
@@ -185,6 +216,7 @@ public class StockActivity extends ColoredStatusBarActivity
                             populateRecyclerView();
 
                             stockProgressbar.setVisibility(View.INVISIBLE);
+                            stopSwipeRefresh();
                         });
                     }
 
@@ -193,6 +225,7 @@ public class StockActivity extends ColoredStatusBarActivity
                         runOnUiThread(() -> {
                             errorLayout.setVisibility(View.VISIBLE);
                             stockProgressbar.setVisibility(View.INVISIBLE);
+                            stopSwipeRefresh();
                         });
                     }
                 });
