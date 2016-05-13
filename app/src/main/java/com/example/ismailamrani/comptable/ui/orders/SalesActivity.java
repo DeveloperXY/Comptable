@@ -179,7 +179,7 @@ public class SalesActivity extends ColoredStatusBarActivity {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
-                            setResult(ResultCodes.SALE_ORDER_CREATED);
+                            setResult(ResultCodes.ORDER_CREATED);
                             finish();
                         } else {
                             runOnUiThread(() -> Toast.makeText(SalesActivity.this,

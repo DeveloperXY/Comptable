@@ -132,7 +132,7 @@ public class OrdersListFragment extends Fragment {
         );
     }
 
-    private void refresh() {
+    public void refresh() {
         if (!swipeRefreshLayout.isRefreshing())
             swipeRefreshLayout.setRefreshing(true);
 

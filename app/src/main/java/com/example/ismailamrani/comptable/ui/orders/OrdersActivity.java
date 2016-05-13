@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -15,6 +16,7 @@ import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;
@@ -28,6 +30,8 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     public static final String PURCHASE_ORDERS = "Commandes achats";
     public static final String SALE_ORDERS = "Commandes ventes";
+
+    public static final int REQUEST_CREATE_ORDER = 1;
 
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
@@ -106,8 +110,28 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, "PURCHASE".equals(currentOrderType) ?
-                PurchasesActivity.class : SalesActivity.class));
+        Class<?> targetActivity = "PURCHASE".equals(currentOrderType) ?
+                PurchasesActivity.class : SalesActivity.class;
+
+        startActivityForResult(new Intent(this, targetActivity), REQUEST_CREATE_ORDER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CREATE_ORDER:
+                switch (resultCode) {
+                    case ResultCodes.ORDER_CREATED:
+                        Fragment fragment = getFragmentManager().findFragmentById(R.id.frame_container);
+                        if (fragment instanceof OrdersListFragment)
+                            ((OrdersListFragment) fragment).refresh();
+
+                        Snackbar.make(getWindow().getDecorView(),
+                                "Commande créée avec succès.", Snackbar.LENGTH_LONG).show();
+                        break;
+                }
+                break;
+        }
     }
 
     /**
