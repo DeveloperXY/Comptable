@@ -3,7 +3,7 @@
     <item >
         <shape>
             <stroke android:color="@color/colorLayoutBorder"
-                android:width="4dp"/>
+                android:width="2dp"/>
         </shape>
     </item>
 </selector>
