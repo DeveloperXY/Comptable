@@ -79,8 +79,25 @@ public class OrderDetailsFragment extends Fragment {
 
     private void setupFacturerButton() {
         facturerButton.setVisibility(currentOrderStatus == 1 ? View.INVISIBLE : View.VISIBLE);
-        facturerButton.setOnClickListener(view ->
-                Toast.makeText(getActivity(), "Hop !", Toast.LENGTH_SHORT).show());
+        facturerButton.setOnClickListener(view -> {
+            if (listener != null)
+                listener.chargeOrder(new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        getActivity().runOnUiThread(() -> {
+                            facturerButton.setVisibility(View.INVISIBLE);
+                            listener.onOrderCharged();
+                        });
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+                        getActivity().runOnUiThread(() ->
+                                Toast.makeText(getActivity(), "Unknown error",
+                                        Toast.LENGTH_SHORT).show());
+                    }
+                });
+        });
     }
 
     private int getCurrentOrderID(Bundle data) {
@@ -149,5 +166,9 @@ public class OrderDetailsFragment extends Fragment {
 
     public interface OrderDetailsFragListener {
         void fetchOrderDetails(RequestListener requestListener);
+
+        void chargeOrder(RequestListener requestListener);
+
+        void onOrderCharged();
     }
 }

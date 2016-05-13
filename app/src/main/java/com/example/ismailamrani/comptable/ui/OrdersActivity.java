@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
@@ -89,7 +88,6 @@ public class OrdersActivity extends ColoredStatusBarActivity
                 mActionBar.setTitle(currentOrder.getFactureID());
                 if (order.getFacture() == 1)
                     mActionBar.setBackgroundColor("#2E7D32");
-
                 break;
         }
 
@@ -173,5 +171,20 @@ public class OrdersActivity extends ColoredStatusBarActivity
                 PhpAPI.getSaleDetails : PhpAPI.getPurchaseDetails;
 
         sendHTTPRequest(url, params, Method.POST, requestListener);
+    }
+
+    @Override
+    public void chargeOrder(RequestListener requestListener) {
+        JSONObject params = JSONUtils.bundleChargeIDToJSON(currentOrder.getId());
+        String url = "SALE".equals(currentOrderType) ?
+                PhpAPI.chargeSaleOrder : PhpAPI.chargePurchaseOrder;
+        sendHTTPRequest(url, params, Method.POST, requestListener);
+    }
+
+    @Override
+    public void onOrderCharged() {
+        mActionBar.setBackgroundColor("#2E7D32");
+        Snackbar.make(getWindow().getDecorView(),
+                "Commande facturée avec succès.", Snackbar.LENGTH_LONG).show();
     }
 }
