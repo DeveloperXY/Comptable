@@ -78,7 +78,7 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     private void setupFacturerButton() {
-        facturerButton.setEnabled(currentOrderStatus == 0);
+        facturerButton.setVisibility(currentOrderStatus == 1 ? View.INVISIBLE : View.VISIBLE);
         facturerButton.setOnClickListener(view ->
                 Toast.makeText(getActivity(), "Hop !", Toast.LENGTH_SHORT).show());
     }

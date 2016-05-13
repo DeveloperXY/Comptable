@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
@@ -78,12 +79,17 @@ public class OrdersActivity extends ColoredStatusBarActivity
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
                 mActionBar.setTitle(currentOrderType.equals("PURCHASE") ?
                         PURCHASE_ORDERS : SALE_ORDERS);
+                mActionBar.setBackground(R.mipmap.ic_bg_ab);
                 break;
             case 1:
                 fragment = order != null ? OrderDetailsFragment.newInstance(
                         order.getId(), order.getFacture()) : new OrderDetailsFragment();
                 ft.setCustomAnimations(R.animator.slide_in_right, R.animator.slide_out_left);
+
                 mActionBar.setTitle(currentOrder.getFactureID());
+                if (order.getFacture() == 1)
+                    mActionBar.setBackgroundColor("#2E7D32");
+
                 break;
         }
 

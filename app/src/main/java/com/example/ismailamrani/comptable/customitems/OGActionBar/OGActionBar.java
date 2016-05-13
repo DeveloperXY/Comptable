@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.customitems.OGActionBar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,10 +60,14 @@ public class OGActionBar extends RelativeLayout {
     /**
      * Specifies the background color of this custom action bar.
      *
-     * @param parsedColor
+     * @param color
      */
-    public void setBackgroundColor(int parsedColor) {
-        mainActionLayout.setBackgroundColor(parsedColor);
+    public void setBackgroundColor(String color) {
+        mainActionLayout.setBackgroundColor(Color.parseColor(color));
+    }
+
+    public void setBackground(int drawable) {
+        mainActionLayout.setBackgroundDrawable(getResources().getDrawable(drawable));
     }
 
     public void setTitle(String title) {
