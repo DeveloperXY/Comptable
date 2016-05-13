@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -13,8 +12,12 @@ import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.orders.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.orders.fragments.OrdersListFragment;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+
+import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -120,8 +123,21 @@ public class OrdersActivity extends ColoredStatusBarActivity
         displayFragment(1, order);
     }
 
+    /**
+     * Retrieves the details of the order that is currently being viewed.
+     * The fragment does not need to supply any information about the order
+     * because it's already stored on the activity level.
+     *
+     * @param requestListener to be executed as a response to the outgoing HTTP request.
+     */
     @Override
-    public void fetchOrderDetails(String url, RequestListener requestListener) {
+    public void fetchOrderDetails(RequestListener requestListener) {
+        // Bundle the request params as JSON
+        JSONObject params = JSONUtils.bundleToJSON(currentOrder, currentOrderType);
+        // Decide which one is the target URL
+        String url = "SALE".equals(currentOrderType) ?
+                PhpAPI.getSaleDetails : PhpAPI.getPurchaseDetails;
 
+        sendHTTPRequest(url, params, Method.POST, requestListener);
     }
 }

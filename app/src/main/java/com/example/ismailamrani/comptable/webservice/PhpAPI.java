@@ -49,6 +49,8 @@ public class PhpAPI {
     public static final String createPurchaseOrder = IpBackend + "createPurchaseOrder.php";
     public static final String getSaleOrder = IpBackend + "getSaleOrder.php";
     public static final String getPurchaseOrder = IpBackend + "getPurchaseOrder.php";
+    public static final String getPurchaseDetails = IpBackend + "getPurchaseDetails.php";
+    public static final String getSaleDetails = IpBackend + "getSaleDetails.php";
 
     public static final String getActivationStatus = IpBackend + "getActivationStatus.php";
     public static final String activateApp = IpBackend + "activateApp.php";

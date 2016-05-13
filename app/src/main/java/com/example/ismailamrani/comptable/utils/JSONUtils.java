@@ -1,5 +1,7 @@
 package com.example.ismailamrani.comptable.utils;
 
+import com.example.ismailamrani.comptable.models.Order;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +36,23 @@ public class JSONUtils {
 
         try {
             data.put("serial", serial);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
+    /**
+     * @param order
+     * @return a JSONObject containing the passed-in order ID.
+     */
+    public static JSONObject bundleToJSON(Order order, String orderType) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("orderID", order.getId());
+            data.put("orderType", orderType);
         } catch (JSONException e) {
             e.printStackTrace();
         }

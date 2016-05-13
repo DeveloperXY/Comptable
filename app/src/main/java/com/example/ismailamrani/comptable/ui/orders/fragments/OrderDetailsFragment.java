@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 
+import org.json.JSONObject;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -40,6 +42,18 @@ public class OrderDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_order_details, container, false);
 
         currentOrderID = getCurrentOrderID();
+        if (listener != null)
+            listener.fetchOrderDetails(new RequestListener() {
+                @Override
+                public void onRequestSucceeded(JSONObject response, int status) {
+
+                }
+
+                @Override
+                public void onRequestFailed() {
+
+                }
+            });
 
         return view;
     }
@@ -71,6 +85,6 @@ public class OrderDetailsFragment extends Fragment {
     }
 
     public interface OrderDetailsFragListener {
-        void fetchOrderDetails(String url, RequestListener requestListener);
+        void fetchOrderDetails(RequestListener requestListener);
     }
 }
