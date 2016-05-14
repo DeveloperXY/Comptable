@@ -31,7 +31,6 @@ import butterknife.ButterKnife;
  */
 public class OrderDetailsFragment extends Fragment {
 
-    private int currentOrderID;
     private int currentOrderStatus;
     private OrderDetailsFragListener listener;
     private OrderDetailsAdapter adapter;
@@ -66,7 +65,6 @@ public class OrderDetailsFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         Bundle args = getArguments();
-        currentOrderID = getCurrentOrderID(args);
         currentOrderStatus = getCurrentOrderStatus(args);
 
         setupFacturerButton();
@@ -98,13 +96,6 @@ public class OrderDetailsFragment extends Fragment {
                     }
                 });
         });
-    }
-
-    private int getCurrentOrderID(Bundle data) {
-        if (data != null)
-            return data.getInt("orderID");
-
-        throw new IllegalStateException("You need to pass an order ID to the fragment.");
     }
 
     private int getCurrentOrderStatus(Bundle data) {
