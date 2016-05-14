@@ -62,8 +62,8 @@ public class OGActionBar extends RelativeLayout {
      *
      * @param color
      */
-    public void setBackgroundColor(String color) {
-        mainActionLayout.setBackgroundColor(Color.parseColor(color));
+    public void setBackgroundColor(int color) {
+        mainActionLayout.setBackgroundColor(color);
     }
 
     public void setBackground(int drawable) {

@@ -13,6 +13,7 @@ import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
+import com.example.ismailamrani.comptable.utils.Orders;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -59,11 +60,11 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 break;
             case R.id.achat:
                 targetActivity = OrdersActivity.class;
-                orderType = "PURCHASE";
+                orderType = Orders.PURCHASE;
                 break;
             case R.id.ventes:
                 targetActivity = OrdersActivity.class;
-                orderType = "SALE";
+                orderType = Orders.SALE;
                 break;
             default:
                 targetActivity = null;

@@ -11,6 +11,7 @@
     <color name="colorPriceText">#3e566b</color>
     <color name="colorProductName">#9f9b9b</color>
     <color name="colorLayoutBorder">#adaaaa</color>
+    <color name="colorGreen">#2E7D32</color>
     <color name="swipeRefresh1">#ff3d5469</color>
     <color name="swipeRefresh2">#cc3d5469</color>
     <color name="swipeRefresh3">#883d5469</color>

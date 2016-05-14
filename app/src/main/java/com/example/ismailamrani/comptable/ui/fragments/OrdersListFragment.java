@@ -19,6 +19,7 @@ import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
+import com.example.ismailamrani.comptable.utils.Orders;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -96,7 +97,7 @@ public class OrdersListFragment extends Fragment {
         setupRecyclerView();
 
         String emptyText = "There are no " +
-                (currentOrderType.equals("PURCHASE") ? "purchase" : "sale")
+                (currentOrderType.equals(Orders.PURCHASE) ? "purchase" : "sale")
                 + " orders to show.\nClick to refresh.";
 
         // Specify the message of the empty view
@@ -140,7 +141,7 @@ public class OrdersListFragment extends Fragment {
                 .forEach(v -> v.setVisibility(View.INVISIBLE));
 
         if (listener != null) {
-            String url = "SALE".equals(currentOrderType) ?
+            String url = Orders.SALE.equals(currentOrderType) ?
                     PhpAPI.getSaleOrder : PhpAPI.getPurchaseOrder;
 
             listener.fetchOrders(url,

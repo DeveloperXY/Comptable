@@ -15,6 +15,7 @@ import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.Orders;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -45,7 +46,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
         setContentView(R.layout.activity_orders);
         ButterKnife.bind(this);
 
-        setupOrdersType();
+        currentOrderType = retrieveOrdersType();
         setupActionBar();
 
         displayFragment(0); // always display first fragment at startup
@@ -76,7 +77,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
             case 0:
                 fragment = OrdersListFragment.newInstance(currentOrderType);
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
-                mActionBar.setTitle(currentOrderType.equals("PURCHASE") ?
+                mActionBar.setTitle(currentOrderType.equals(Orders.PURCHASE) ?
                         PURCHASE_ORDERS : SALE_ORDERS);
                 mActionBar.setBackground(R.mipmap.ic_bg_ab);
                 break;
@@ -87,7 +88,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
                 mActionBar.setTitle(currentOrder.getFactureID());
                 if (order.getFacture() == 1)
-                    mActionBar.setBackgroundColor("#2E7D32");
+                    mActionBar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
                 break;
         }
 
@@ -102,19 +103,21 @@ public class OrdersActivity extends ColoredStatusBarActivity
     /**
      * Retrieves the type of orders to be currently displayed.
      */
-    private void setupOrdersType() {
+    private String retrieveOrdersType() {
         Intent intent = getIntent();
         if (intent != null) {
             Bundle data = intent.getExtras();
             if (data != null) {
-                currentOrderType = data.getString("orderType");
+                return data.getString("orderType");
             }
         }
+
+        return null;
     }
 
     @Override
     public void onAddPressed() {
-        Class<?> targetActivity = "PURCHASE".equals(currentOrderType) ?
+        Class<?> targetActivity = Orders.PURCHASE.equals(currentOrderType) ?
                 PurchasesActivity.class : SalesActivity.class;
 
         startActivityForResult(new Intent(this, targetActivity), REQUEST_CREATE_ORDER);
@@ -167,7 +170,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
         // Bundle the request params as JSON
         JSONObject params = JSONUtils.bundleOrderToJSON(currentOrder);
         // Decide which one is the target URL
-        String url = "SALE".equals(currentOrderType) ?
+        String url = Orders.SALE.equals(currentOrderType) ?
                 PhpAPI.getSaleDetails : PhpAPI.getPurchaseDetails;
 
         sendHTTPRequest(url, params, Method.POST, requestListener);
@@ -176,14 +179,14 @@ public class OrdersActivity extends ColoredStatusBarActivity
     @Override
     public void chargeOrder(RequestListener requestListener) {
         JSONObject params = JSONUtils.bundleChargeIDToJSON(currentOrder.getId());
-        String url = "SALE".equals(currentOrderType) ?
+        String url = Orders.SALE.equals(currentOrderType) ?
                 PhpAPI.chargeSaleOrder : PhpAPI.chargePurchaseOrder;
         sendHTTPRequest(url, params, Method.POST, requestListener);
     }
 
     @Override
     public void onOrderCharged() {
-        mActionBar.setBackgroundColor("#2E7D32");
+        mActionBar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
         Snackbar.make(getWindow().getDecorView(),
                 "Commande facturée avec succès.", Snackbar.LENGTH_LONG).show();
     }
