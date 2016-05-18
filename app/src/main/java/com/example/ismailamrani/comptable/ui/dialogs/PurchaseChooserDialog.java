@@ -30,19 +30,9 @@ public class PurchaseChooserDialog extends ChooserDialog implements SearchView.O
 
     private int sourceSpinnerID;
 
-    @Bind(R.id.actionButton)
-    protected Button actionButton;
-
     public PurchaseChooserDialog(Context context, int sourceSpinnerID) {
         super(context);
         this.sourceSpinnerID = sourceSpinnerID;
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        actionButton.setOnClickListener(v -> onActionButtonClicked());
     }
 
     @Override

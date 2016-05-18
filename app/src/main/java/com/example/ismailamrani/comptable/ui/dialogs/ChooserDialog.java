@@ -39,6 +39,8 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
     protected RecyclerView dialogRecyclerView;
     @Bind(R.id.emptyView)
     protected TextView emptyView;
+    @Bind(R.id.actionButton)
+    protected Button actionButton;
 
     protected List<String> items;
     protected String hint;
@@ -54,6 +56,8 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.purchase_dialog);
         ButterKnife.bind(this);
+
+        actionButton.setOnClickListener(v -> onActionButtonClicked());
 
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
