@@ -148,7 +148,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
-        Dialog dialog = new PurchaseChooserDialog(this, spinnerID)
+        new PurchaseChooserDialog(this, spinnerID)
                 .whoseItemsAre(items)
                 .whoseSearchHintIs(searchHint)
                 .runWhenItemSelected(item -> {
@@ -159,8 +159,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
                                 .findFirst()
                                 .get();
                         productField.setText(selectedProduct.getLibelle());
-                    }
-                    else {
+                    } else {
                         // A supplier has been selected
                         selectedSupplier = Stream.of(suppliers)
                                 .filter(s -> s.getNom().equals(item))
@@ -168,10 +167,8 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
                                 .get();
                         supplierField.setText(selectedSupplier.getNom());
                     }
-                });
-
-        dialog.setOnDismissListener(d -> WindowUtils.hideKeyboard(this));
-        dialog.show();
+                })
+                .show();
     }
 
     @OnClick(R.id.nextButton)

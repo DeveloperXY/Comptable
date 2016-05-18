@@ -48,7 +48,7 @@ public class Local {
                 object.getString("fax"),
                 object.getString("email"),
                 object.getString("activite"),
-                object.getInt("id")
+                object.getInt("ids")
         );
     }
 

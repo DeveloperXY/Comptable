@@ -1,7 +1,9 @@
 package com.example.ismailamrani.comptable.ui.dialogs;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
 import com.example.ismailamrani.comptable.ui.AddFournisseurActivity;
 import com.example.ismailamrani.comptable.ui.AddProductActivity;
+import com.example.ismailamrani.comptable.utils.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
         ButterKnife.bind(this);
 
         actionButton.setOnClickListener(v -> onActionButtonClicked());
+        setOnDismissListener(dialog -> WindowUtils.hideKeyboard((Activity) context));
 
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
