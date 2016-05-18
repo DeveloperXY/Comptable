@@ -52,34 +52,40 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
-        spinner.setOnClickListener(v -> sendHTTPRequest(PhpAPI.getLocal, null, Method.GET,
-                new RequestListener() {
-                    @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        runOnUiThread(() -> {
-                            if (status == 1) {
-                                try {
-                                    JSONArray array = response.getJSONArray("local");
-                                    locales = Local.parseLocales(array);
-                                    showLocalesDialog();
+        spinner.setOnClickListener(v -> {
+            // Send the HTTP request only once, at the first time the activity is shown
+            if (locales != null)
+                showLocalesDialog();
+            else
+                sendHTTPRequest(PhpAPI.getLocal, null, Method.GET,
+                        new RequestListener() {
+                            @Override
+                            public void onRequestSucceeded(JSONObject response, int status) {
+                                runOnUiThread(() -> {
+                                    if (status == 1) {
+                                        try {
+                                            JSONArray array = response.getJSONArray("local");
+                                            locales = Local.parseLocales(array);
+                                            showLocalesDialog();
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            } else {
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        runOnUiThread(() -> Toast.makeText(ChargesActivity.this,
+                                                "There was an error while fetching locales.",
+                                                Toast.LENGTH_SHORT).show());
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onRequestFailed() {
                                 runOnUiThread(() -> Toast.makeText(ChargesActivity.this,
-                                        "There was an error while fetching locales.",
-                                        Toast.LENGTH_SHORT).show());
+                                        "Unable to fetch locales.", Toast.LENGTH_SHORT).show());
                             }
                         });
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(ChargesActivity.this,
-                                "Unable to fetch locales.", Toast.LENGTH_SHORT).show());
-                    }
-                }));
+        });
     }
 
     private void showLocalesDialog() {
