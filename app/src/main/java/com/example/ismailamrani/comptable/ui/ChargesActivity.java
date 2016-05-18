@@ -1,6 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +55,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
+        setupTextWatcher();
         spinner.setOnClickListener(new SpinnerClickListener());
     }
 
@@ -70,6 +73,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                             .findFirst().get();
 
                     localLabel.setText(selectedLocal.getAddress());
+                    checkFields();
                 })
                 .show();
     }
@@ -78,6 +82,39 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Ajouter Une Charge");
         mActionBar.disableAddButton();
+    }
+
+    private void setupTextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkFields();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+
+        priceField.addTextChangedListener(textWatcher);
+        descriptionField.addTextChangedListener(textWatcher);
+    }
+
+    /**
+     * Sets the 'enabled' status of the 'save' button based on the length
+     * of the contents of the activity's fields.
+     */
+    private void checkFields() {
+        saveButton.setEnabled(
+                localLabel.getText().length() != 0 &&
+                        priceField.getText().toString().length() != 0 &&
+                        descriptionField.getText().toString().length() != 0);
     }
 
     class SpinnerClickListener implements View.OnClickListener {
