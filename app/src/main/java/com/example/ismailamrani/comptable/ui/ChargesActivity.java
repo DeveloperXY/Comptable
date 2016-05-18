@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,7 +53,36 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
-        spinner.setOnClickListener(v -> {
+        spinner.setOnClickListener(new SpinnerClickListener());
+    }
+
+    private void showLocalesDialog() {
+        List<String> stringLocales = Stream.of(locales)
+                .map(Local::getAddress)
+                .collect(Collectors.toList());
+
+        new LocalChooserDialog(this)
+                .whoseItemsAre(stringLocales)
+                .whoseSearchHintIs("Search for locales...")
+                .runWhenItemSelected(item -> {
+                    selectedLocal = Stream.of(locales)
+                            .filter(l -> l.getAddress().equals(item))
+                            .findFirst().get();
+
+                    localLabel.setText(selectedLocal.getAddress());
+                })
+                .show();
+    }
+
+    private void setupActionBar() {
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Ajouter Une Charge");
+        mActionBar.disableAddButton();
+    }
+
+    class SpinnerClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
             // Send the HTTP request only once, at the first time the activity is shown
             if (locales != null)
                 showLocalesDialog();
@@ -85,30 +115,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                         "Unable to fetch locales.", Toast.LENGTH_SHORT).show());
                             }
                         });
-        });
-    }
-
-    private void showLocalesDialog() {
-        List<String> stringLocales = Stream.of(locales)
-                .map(Local::getAddress)
-                .collect(Collectors.toList());
-
-        new LocalChooserDialog(this)
-                .whoseItemsAre(stringLocales)
-                .whoseSearchHintIs("Search for locales...")
-                .runWhenItemSelected(item -> {
-                    selectedLocal = Stream.of(locales)
-                            .filter(l -> l.getAddress().equals(item))
-                            .findFirst().get();
-
-                    localLabel.setText(selectedLocal.getAddress());
-                })
-                .show();
-    }
-
-    private void setupActionBar() {
-        mActionBar.setActionBarListener(this);
-        mActionBar.setTitle("Ajouter Une Charge");
-        mActionBar.disableAddButton();
+        }
     }
 }
