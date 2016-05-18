@@ -8,6 +8,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
  */
 public class ChargesActivity extends ColoredStatusBarActivity {
 
+    @Bind(R.id.spinner)
     ImageView spinner;
 
     @Override
@@ -24,9 +26,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
-
-        mActionBar.disableAddButton();
-        spinner = (ImageView) findViewById(R.id.spinner);
         spinner.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(),
                         SpinnerChargeActivity.class)));
@@ -35,5 +34,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     private void setupActionBar() {
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Ajouter Une Charge");
+        mActionBar.disableAddButton();
     }
 }

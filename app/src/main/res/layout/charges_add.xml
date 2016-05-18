@@ -4,285 +4,231 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="2460">
+    android:weightSum="246">
 
     <include layout="@layout/custom_actionbar_include" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2256"
+        android:layout_weight="226"
         android:background="#3e566a"
-        android:weightSum="2256"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="2256">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="204"
-            />
+            android:layout_weight="160" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="604"
-            >
+            android:layout_weight="560">
 
             <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                custom:size="52"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                custom:size="52">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@mipmap/ic_charge"/>
-                    />
+                    android:src="@mipmap/ic_charge" />
+
             </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="80"
-            />
+            android:layout_weight="160" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="170"
             android:orientation="horizontal"
-            android:weightSum="1440"
-            >
+            android:weightSum="1440">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="125" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1196"
+                android:background="@drawable/charge_style"
                 android:orientation="horizontal"
                 android:weightSum="1196"
-                android:background="@drawable/charge_style"
+                android:gravity="center">
 
-                >
                 <TextView
+                    android:id="@+id/localLabel"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="988"
-                    android:paddingLeft="20dp"
-                    android:text="Local"
-                    android:paddingTop="8dp"
-                    android:textSize="15dp"
-                    android:textColor="#a8abae"
-                    />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="2"
-                    android:weightSum="148"
-                    >
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="24"
-                        ></RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="97"
-                        android:background="#000000"
-                        ></RelativeLayout>
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="40"
-                    ></RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="140"
-                    >
-                    <ImageView
-                        android:id="@+id/spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/spinner"
-                        />
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="90"
-            ></RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="170"
-            android:orientation="horizontal"
-            android:weightSum="1440"
-            >
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125"
-                ></RelativeLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1196"
-                android:orientation="horizontal"
-                android:weightSum="1196"
-                android:background="@drawable/charge_style"
-
-                >
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="988"
-                    android:hint="Prix"
+                    android:background="@android:color/transparent"
+                    android:hint="Local"
+                    android:paddingLeft="16dp"
                     android:textColorHint="#a8abae"
-                    android:paddingLeft="20dp"
-                    />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="2"
-                    android:weightSum="148"
-                    >
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="24"
-                        ></RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="97"
-                        android:background="#000000"
-                        ></RelativeLayout>
-                </LinearLayout>
+                    android:gravity="left|center_vertical"
+                    android:textSize="16sp" />
 
-                <RelativeLayout
-                    android:layout_width="0dp"
+                <View
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="40"
-                    ></RelativeLayout>
-                <RelativeLayout
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#48627b" />
+
+                <ImageView
+                    android:id="@+id/spinner"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="140"
-                    >
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/dh"
-                        />
-
-                </RelativeLayout>
-
+                    android:layout_height="wrap_content"
+                    android:layout_weight="207"
+                    android:padding="8dp"
+                    android:src="@drawable/spinner" />
             </LinearLayout>
 
-            
-            
         </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="90"
-            ></RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="404"
-            android:orientation="horizontal"
-            android:weightSum="1440"
-            >
+            android:layout_weight="50" />
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125"
-                ></RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1196"
-                android:background="@drawable/charge_style"
-                >
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Description"
-                    android:background="@drawable/charge_style"
-                    android:paddingBottom="40dp"
-                    android:paddingLeft="20dp"
-                    ></EditText>
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="115"
-                ></RelativeLayout>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="190"
-            ></RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="170"
             android:orientation="horizontal"
-            android:weightSum="1440"
-            >
+            android:weightSum="1440">
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="125"
-                ></RelativeLayout>
+                android:layout_weight="125" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1196"
+                android:background="@drawable/charge_style"
+                android:orientation="horizontal"
+                android:weightSum="1196"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/priceField"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="988"
+                    android:background="@android:color/transparent"
+                    android:hint="Prix"
+                    android:paddingLeft="16dp"
+                    android:textColorHint="#a8abae"
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="#48627b" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="207"
+                    android:padding="4dp"
+                    android:src="@drawable/dh"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="522"
+            android:orientation="horizontal"
+            android:weightSum="1440">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="125" />
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1196"
-                android:background="@drawable/supprimer_client_bn"
-                >
-                <TextView
+                android:background="@drawable/charge_style">
+
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Enregistrer"
-                    android:gravity="center"
-                    android:textSize="18dp"
-                    android:textColor="#ffffff"
-                    ></TextView>
+                    android:background="@drawable/charge_style"
+                    android:hint="Description"
+                    android:textSize="16sp"
+                    android:id="@+id/descriptionField"
+                    android:gravity="top|left"
+                    android:padding="16dp" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="115"
-                ></RelativeLayout>
+                android:layout_weight="115" />
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="120" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="210"
+            android:orientation="horizontal"
+            android:weightSum="1440">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="125" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Enregistrer"
+                android:textColor="#ffffff"
+                android:layout_weight="1196"
+                android:background="@drawable/supprimer_client_bn">
+
+            </Button>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="115" />
+        </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
