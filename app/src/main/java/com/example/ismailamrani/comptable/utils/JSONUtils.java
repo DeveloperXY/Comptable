@@ -70,4 +70,18 @@ public class JSONUtils {
 
         return data;
     }
+
+    public static JSONObject bundleChargeDataToJSON(int localeID, String price, String desc) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("Description", desc);
+            data.put("Prix", price);
+            data.put("Local", localeID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 }

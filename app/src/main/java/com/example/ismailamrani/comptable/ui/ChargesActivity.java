@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -46,6 +48,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     Button saveButton;
 
     private List<Local> locales;
+    /**
+     * The currently selected local.
+     */
     private Local selectedLocal;
 
     @Override
@@ -56,6 +61,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
         setupActionBar();
         setupTextWatcher();
+
         spinner.setOnClickListener(new SpinnerClickListener());
     }
 
@@ -84,6 +90,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         mActionBar.disableAddButton();
     }
 
+    /**
+     * Sets a TextWatcher on the price & description text fields.
+     */
     private void setupTextWatcher() {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
@@ -107,7 +116,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     }
 
     /**
-     * Sets the 'enabled' status of the 'save' button based on the length
+     * Sets the 'enabled' state of the 'save' button based on the length
      * of the contents of the activity's fields.
      */
     private void checkFields() {
@@ -115,6 +124,31 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                 localLabel.getText().length() != 0 &&
                         priceField.getText().toString().length() != 0 &&
                         descriptionField.getText().toString().length() != 0);
+    }
+
+    public void onSave(View view) {
+        String price = priceField.getText().toString();
+        String description = descriptionField.getText().toString();
+        JSONObject params = JSONUtils.bundleChargeDataToJSON(
+                selectedLocal.getId(), price, description);
+
+        sendHTTPRequest(PhpAPI.addCharge, params, Method.POST,
+                new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1)
+                            finish();
+                        else
+                            runOnUiThread(() -> Toast.makeText(ChargesActivity.this,
+                                    "Unknown error.", Toast.LENGTH_SHORT).show());
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+                        runOnUiThread(() -> Toast.makeText(ChargesActivity.this,
+                                "Network error.", Toast.LENGTH_SHORT).show());
+                    }
+                });
     }
 
     class SpinnerClickListener implements View.OnClickListener {

@@ -55,7 +55,7 @@ public class AddCharge extends Activity {
                 System.out.println(">>>> desc" + chargeItems.getDesc());
                 chargeItems.setPrix(prix.getText().toString());
                 chargeItems.setLocal(local.getText().toString());
-                chargeItems.setUrl(PhpAPI.addccharge);
+                chargeItems.setUrl(PhpAPI.addCharge);
                 new addcharge().execute(chargeItems);
             }
         });

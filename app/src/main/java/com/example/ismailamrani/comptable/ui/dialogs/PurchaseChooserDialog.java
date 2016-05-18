@@ -38,9 +38,9 @@ public class PurchaseChooserDialog extends ChooserDialog implements SearchView.O
     @Override
     protected void onActionButtonClicked() {
         if (items.size() == 0) {
-                /* The dialog's RecyclerView has no items.
-                Decide the destination activity to be launched based on the
-                ID of the spinner who started the dialog */
+            /* The dialog's RecyclerView has no items.
+            Decide the destination activity to be launched based on the
+            ID of the spinner who started the dialog */
             Class<?> targetActivity = sourceSpinnerID == R.id.productSpinner ?
                     AddProductActivity.class : AddFournisseurActivity.class;
             context.startActivity(new Intent(context, targetActivity));

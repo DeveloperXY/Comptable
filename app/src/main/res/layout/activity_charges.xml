@@ -220,7 +220,8 @@
                 android:textColor="#ffffff"
                 android:layout_weight="1196"
                 android:background="@drawable/supprimer_client_bn"
-                android:enabled="false">
+                android:enabled="false"
+                android:onClick="onSave">
 
             </Button>
 
