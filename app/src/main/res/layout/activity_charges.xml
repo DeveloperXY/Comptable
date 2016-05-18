@@ -219,7 +219,8 @@
                 android:text="Enregistrer"
                 android:textColor="#ffffff"
                 android:layout_weight="1196"
-                android:background="@drawable/supprimer_client_bn">
+                android:background="@drawable/supprimer_client_bn"
+                android:enabled="false">
 
             </Button>
 

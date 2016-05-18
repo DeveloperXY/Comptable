@@ -7,6 +7,12 @@
             <solid android:color="#e12930"/>
         </shape>
     </item>
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:radius="4dp"/>
+            <solid android:color="#9e9e9e"/>
+        </shape>
+    </item>
     <item >
         <shape>
             <corners android:radius="4dp"/>
