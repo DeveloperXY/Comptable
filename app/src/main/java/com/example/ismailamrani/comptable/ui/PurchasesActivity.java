@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -153,15 +154,21 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         Dialog dialog = new PurchaseChooserDialog(this, spinnerID)
                 .whoseItemsAre(items)
                 .whoseSearchHintIs(searchHint)
-                .runWhenItemSelected(position -> {
+                .runWhenItemSelected(item -> {
                     if (spinnerID == R.id.productSpinner) {
                         // A product has been selected
-                        selectedProduct = products.get(position);
+                        selectedProduct = Stream.of(products)
+                                .filter(p -> p.getLibelle().equals(item))
+                                .findFirst()
+                                .get();
                         productField.setText(selectedProduct.getLibelle());
                     }
                     else {
                         // A supplier has been selected
-                        selectedSupplier = suppliers.get(position);
+                        selectedSupplier = Stream.of(suppliers)
+                                .filter(s -> s.getNom().equals(item))
+                                .findFirst()
+                                .get();
                         supplierField.setText(selectedSupplier.getNom());
                     }
                 });
@@ -230,6 +237,7 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
      * @param orderInfos
      */
     void postCreatePurchaseOrder(String url, JSONObject orderInfos) {
+        Log.i("JSON", orderInfos.toString());
         sendHTTPRequest(url, orderInfos, Method.POST,
                 new RequestListener() {
                     @Override

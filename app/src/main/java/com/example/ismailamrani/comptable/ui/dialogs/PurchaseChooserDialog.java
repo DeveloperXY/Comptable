@@ -114,9 +114,9 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
         dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         searchAdapter = new SearchAdapter(context, items);
-        searchAdapter.setListener(position -> {
+        searchAdapter.setListener(item -> {
             if (itemSelectionListener != null) {
-                itemSelectionListener.onItemSelected(position);
+                itemSelectionListener.onItemSelected(item);
                 dismiss();
             }
         });
@@ -145,6 +145,6 @@ public class PurchaseChooserDialog extends Dialog implements SearchView.OnQueryT
     }
 
     public interface OnItemSelectionListener {
-        void onItemSelected(int position);
+        void onItemSelected(String item);
     }
 }

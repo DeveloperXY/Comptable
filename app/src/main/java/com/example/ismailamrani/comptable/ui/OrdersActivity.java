@@ -132,6 +132,8 @@ public class OrdersActivity extends ColoredStatusBarActivity
                         Fragment fragment = getFragmentManager().findFragmentById(R.id.frame_container);
                         if (fragment instanceof OrdersListFragment)
                             ((OrdersListFragment) fragment).refresh();
+                        else
+                            displayFragment(0);
 
                         Snackbar.make(getWindow().getDecorView(),
                                 "Commande créée avec succès.", Snackbar.LENGTH_LONG).show();

@@ -114,7 +114,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
             v.setOnClickListener(view -> {
                 if (listener != null)
-                    listener.onItemClicked(getLayoutPosition());
+                    listener.onItemClicked(mItems.get(getLayoutPosition()));
             });
         }
 
@@ -128,6 +128,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public interface OnItemClickListener {
-        void onItemClicked(int position);
+        void onItemClicked(String item);
     }
 }
