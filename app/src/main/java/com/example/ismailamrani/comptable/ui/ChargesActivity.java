@@ -1,18 +1,17 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.ui.dialogs.ChooserDialog;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -34,11 +33,22 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.spinner)
     ImageView spinner;
+    @Bind(R.id.localLabel)
+    TextView localLabel;
+    @Bind(R.id.priceField)
+    EditText priceField;
+    @Bind(R.id.descriptionField)
+    EditText descriptionField;
+    @Bind(R.id.saveButton)
+    Button saveButton;
+
+    private List<Local> locales;
+    private Local selectedLocal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.charges_add);
+        setContentView(R.layout.activity_charges);
         ButterKnife.bind(this);
 
         setupActionBar();
@@ -50,8 +60,8 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                             if (status == 1) {
                                 try {
                                     JSONArray array = response.getJSONArray("local");
-                                    List<Local> locales = Local.parseLocales(array);
-                                    showLocalesDialog(locales);
+                                    locales = Local.parseLocales(array);
+                                    showLocalesDialog();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -72,7 +82,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                 }));
     }
 
-    private void showLocalesDialog(List<Local> locales) {
+    private void showLocalesDialog() {
         List<String> stringLocales = Stream.of(locales)
                 .map(Local::getAddress)
                 .collect(Collectors.toList());
@@ -81,8 +91,11 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                 .whoseItemsAre(stringLocales)
                 .whoseSearchHintIs("Search for locales...")
                 .runWhenItemSelected(item -> {
-                    Toast.makeText(ChargesActivity.this, "Selected: " + item,
-                            Toast.LENGTH_SHORT).show();
+                    selectedLocal = Stream.of(locales)
+                            .filter(l -> l.getAddress().equals(item))
+                            .findFirst().get();
+
+                    localLabel.setText(selectedLocal.getAddress());
                 })
                 .show();
     }
