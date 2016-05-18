@@ -1,5 +1,12 @@
 package com.example.ismailamrani.comptable.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Mohammed Aouf ZOUAG on 18/05/2016.
  */
@@ -12,10 +19,12 @@ public class Local {
     private String fix;
     private String fax;
     private String email;
+    private String activite;
     private int companyID;
 
     public Local(int id, String address, String city, String country,
-                 String telephone, String fix, String fax, String email, int companyID) {
+                 String telephone, String fix, String fax, String email,
+                 String activite, int companyID) {
         this.id = id;
         this.address = address;
         this.city = city;
@@ -24,7 +33,39 @@ public class Local {
         this.fix = fix;
         this.fax = fax;
         this.email = email;
+        this.activite = activite;
         this.companyID = companyID;
+    }
+
+    public Local(JSONObject object) throws JSONException {
+        this(
+                object.getInt("idlocal"),
+                object.getString("adresse"),
+                object.getString("ville"),
+                object.getString("pays"),
+                object.getString("tel"),
+                object.getString("fix"),
+                object.getString("fax"),
+                object.getString("email"),
+                object.getString("activite"),
+                object.getInt("id")
+        );
+    }
+
+    public static List<Local> parseLocales(JSONArray array) {
+        List<Local> locales = new ArrayList<>();
+
+        for (int i = 0; i < array.length(); i++) {
+            try {
+                JSONObject local = array.getJSONObject(i);
+                locales.add(new Local(local));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return locales;
     }
 
     public int getId() {
