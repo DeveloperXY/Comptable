@@ -43,6 +43,7 @@ public class PhpAPI {
 
     public static final String addccharge = IpBackend + "addCharge.php";
     public static final String addlocal = IpBackend + "addLocal.php";
+    public static final String getLocal = IpBackend + "getLocal.php";
     public static final String addSociete = IpBackend + "addSociete.php";
 
     public static final String createSaleOrder = IpBackend + "createSaleOrder.php";
