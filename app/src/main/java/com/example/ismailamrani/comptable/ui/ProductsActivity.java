@@ -29,12 +29,13 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
 public class ProductsActivity extends ColoredStatusBarActivity {
 
-    OGActionBar MyActionBar;
     ListView List;
     ArrayList<Product> ListProduit = new ArrayList<>();
 
@@ -42,6 +43,7 @@ public class ProductsActivity extends ColoredStatusBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produits);
+        ButterKnife.bind(this);
 
         setupActionBar();
 
@@ -50,9 +52,8 @@ public class ProductsActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Produit");
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Produit");
     }
 
     @Override

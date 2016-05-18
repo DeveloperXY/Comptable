@@ -3,13 +3,22 @@ package com.example.ismailamrani.comptable.ui.base;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.WindowManager;
 
+import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 
+import butterknife.Bind;
+
 public abstract class ColoredStatusBarActivity extends HTTPActivity
         implements OGActionBarInterface {
+
+    @Nullable
+    @Bind(R.id.MyActionBar)
+    protected OGActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

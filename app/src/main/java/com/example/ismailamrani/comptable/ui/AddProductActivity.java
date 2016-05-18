@@ -48,8 +48,6 @@ public class AddProductActivity extends ColoredStatusBarActivity
         implements OGActionBarInterface {
     private static int RESULT_LOAD_IMAGE = 1;
 
-    private OkHttpClient client = new OkHttpClient();
-
     private String selectedImagePath;
     private String codeimage = "";
 
@@ -64,8 +62,6 @@ public class AddProductActivity extends ColoredStatusBarActivity
     @Bind(R.id.barCodeLabel)
     TextView barCodeLabel;
 
-    OGActionBar MyActionBar;
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +72,9 @@ public class AddProductActivity extends ColoredStatusBarActivity
     }
 
     private void setupActionBar() {
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Ajouter Un Produit");
-        MyActionBar.disableAddButton();
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Ajouter Un Produit");
+        mActionBar.disableAddButton();
     }
 
     @OnClick({R.id.productImage, R.id.scanBarcode, R.id.addProductBtn})

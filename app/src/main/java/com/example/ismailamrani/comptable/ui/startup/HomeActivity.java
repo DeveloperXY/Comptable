@@ -7,7 +7,7 @@ import android.view.View;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
 import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
-import com.example.ismailamrani.comptable.ui.NewChargeActivity;
+import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
@@ -50,7 +50,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 targetActivity = ClientListActivity.class;
                 break;
             case R.id.chargee:
-                targetActivity = NewChargeActivity.class;
+                targetActivity = ChargesActivity.class;
                 break;
             case R.id.fournis:
                 targetActivity = FournisseurListActivity.class;

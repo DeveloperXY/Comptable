@@ -29,12 +29,12 @@ import java.net.URLConnection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
 public class ProductDetailsActivity extends ColoredStatusBarActivity {
-
-    OGActionBar MyActionBar;
     ImageView Image;
     int id;
 
@@ -44,6 +44,7 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.produit_info);
+        ButterKnife.bind(this);
 
         setupActionBar();
 
@@ -60,8 +61,7 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
+        mActionBar.setActionBarListener(this);
     }
 
     private class getProduitbyId extends AsyncTask<String, Void, String> {
@@ -119,7 +119,7 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
                             Code.setText(usr.getString("codeBar"));
                             Stock.setText(usr.getString("qte"));
 
-                            MyActionBar.setTitle(usr.getString("libelle"));
+                            mActionBar.setTitle(usr.getString("libelle"));
                             //itm.setPhoto(URLs.IpBackend + "produits/" + usr.getString("photo"));
                         }
                     } catch (JSONException e) {

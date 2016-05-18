@@ -8,22 +8,24 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Redouane on 06/04/2016.
  */
-public class NewChargeActivity extends ColoredStatusBarActivity {
+public class ChargesActivity extends ColoredStatusBarActivity {
 
-    OGActionBar MyActionBar;
     ImageView spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.charges_add);
+        ButterKnife.bind(this);
 
         setupActionBar();
 
-        MyActionBar.disableAddButton();
+        mActionBar.disableAddButton();
         spinner = (ImageView) findViewById(R.id.spinner);
         spinner.setOnClickListener(v ->
                 startActivity(new Intent(getApplicationContext(),
@@ -31,8 +33,7 @@ public class NewChargeActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        MyActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
-        MyActionBar.setActionBarListener(this);
-        MyActionBar.setTitle("Ajouter Une Charge");
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Ajouter Une Charge");
     }
 }

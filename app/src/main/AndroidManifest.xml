@@ -54,7 +54,7 @@
         <activity
             android:name=".ui.InformationActivity"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".ui.NewChargeActivity" />
+        <activity android:name=".ui.ChargesActivity" />
         <activity
             android:name=".ui.SpinnerChargeActivity"
             android:theme="@style/AppTheme.CustomTheme" />

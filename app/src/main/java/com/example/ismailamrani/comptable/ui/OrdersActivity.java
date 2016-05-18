@@ -34,9 +34,6 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
     public static final int REQUEST_CREATE_ORDER = 1;
 
-    @Bind(R.id.MyActionBar)
-    protected OGActionBar mActionBar;
-
     private String currentOrderType;
     private Order currentOrder;
 

@@ -77,9 +77,6 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.actionBarContainer)
     RelativeLayout actionBarContainer;
 
-    @Bind(R.id.MyActionBar)
-    OGActionBar mActionBar;
-
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 

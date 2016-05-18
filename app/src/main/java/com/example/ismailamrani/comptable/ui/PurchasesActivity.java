@@ -45,8 +45,6 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     private List<Product> products;
     private List<Supplier> suppliers;
 
-    private OGActionBar mActionBar;
-
     @Bind(R.id.productField)
     EditText productField;
     @Bind(R.id.supplierField)
@@ -83,7 +81,6 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Achats");
         mActionBar.disableAddButton();

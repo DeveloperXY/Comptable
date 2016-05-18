@@ -40,8 +40,6 @@ import butterknife.OnClick;
 
 public class SalesActivity extends ColoredStatusBarActivity {
 
-    private OGActionBar mActionBar;
-
     @Bind(R.id.productsListview)
     ListView productsListview;
     @Bind(R.id.barCodeField)
@@ -84,7 +82,6 @@ public class SalesActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        mActionBar = (OGActionBar) findViewById(R.id.MyActionBar);
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Ventes");
     }

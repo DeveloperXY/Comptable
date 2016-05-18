@@ -29,19 +29,21 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Redouane on 31/03/2016.
  */
 public class ClientListActivity extends ColoredStatusBarActivity {
-    OGActionBar myactionbar;
     ListView list;
     ArrayList<ClientModel> List = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_client);
+        ButterKnife.bind(this);
+
         setupActionBar();
 
         list = (ListView) findViewById(R.id.Listclient);
@@ -49,9 +51,8 @@ public class ClientListActivity extends ColoredStatusBarActivity {
     }
 
     private void setupActionBar() {
-        myactionbar = (OGActionBar) findViewById(R.id.MyActionBar);
-        myactionbar.setActionBarListener(this);
-        myactionbar.setTitle("Client");
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Client");
     }
 
     @Override

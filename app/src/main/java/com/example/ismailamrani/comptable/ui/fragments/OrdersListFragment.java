@@ -138,7 +138,7 @@ public class OrdersListFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(true);
 
         Stream.of(emptyView, errorLayout)
-                .forEach(v -> v.setVisibility(View.INVISIBLE));
+                .forEach(v -> v.setVisibility(View.GONE));
 
         if (listener != null) {
             String url = Orders.SALE.equals(currentOrderType) ?
@@ -166,8 +166,8 @@ public class OrdersListFragment extends Fragment {
                         public void onRequestFailed() {
                             getActivity().runOnUiThread(() -> {
                                 errorLayout.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.INVISIBLE);
-                                recyclerView.setVisibility(View.INVISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                                recyclerView.setVisibility(View.GONE);
                                 stopSwipeRefresh();
                             });
                         }
@@ -179,7 +179,7 @@ public class OrdersListFragment extends Fragment {
         toggleRecyclerviewState();
         populateRecyclerView();
 
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
         stopSwipeRefresh();
     }
 
@@ -187,9 +187,9 @@ public class OrdersListFragment extends Fragment {
      * Toggles the visibility of the RecyclerView & the empty view associated with it.
      */
     private void toggleRecyclerviewState() {
-        emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.INVISIBLE);
-        recyclerView.setVisibility(mOrders.size() == 0 ? View.INVISIBLE : View.VISIBLE);
-        errorLayout.setVisibility(View.INVISIBLE);
+        emptyView.setVisibility(mOrders.size() == 0 ? View.VISIBLE : View.GONE);
+        recyclerView.setVisibility(mOrders.size() == 0 ? View.GONE : View.VISIBLE);
+        errorLayout.setVisibility(View.GONE);
     }
 
     private void populateRecyclerView() {
