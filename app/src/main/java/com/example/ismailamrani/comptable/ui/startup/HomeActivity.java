@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
 import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
-import com.example.ismailamrani.comptable.ui.ChargesActivity;
-import com.example.ismailamrani.comptable.ui.ProductsActivity;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
+import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
+import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 import com.example.ismailamrani.comptable.utils.Orders;
 
