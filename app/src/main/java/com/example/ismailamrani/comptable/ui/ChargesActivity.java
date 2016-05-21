@@ -14,5 +14,12 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charges);
         ButterKnife.bind(this);
+
+        setupActionBar();
+    }
+
+    private void setupActionBar() {
+        mActionBar.setActionBarListener(this);
+        mActionBar.setTitle("Charges");
     }
 }
