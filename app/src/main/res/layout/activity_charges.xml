@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.ismailamrani.comptable.ui.ChargesActivity">
 
-    <include
+    <!--<include
         android:id="@+id/emptyStockLayout"
         layout="@layout/empty_view_include"/>
 
     <include
         android:id="@+id/errorStockLayout"
-        layout="@layout/network_error_include"/>
+        layout="@layout/network_error_include"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +26,7 @@
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="8dp"
             android:layout_weight="206">
 
             <android.support.v7.widget.RecyclerView
@@ -36,42 +37,42 @@
         </android.support.v4.widget.SwipeRefreshLayout>
 
         <RelativeLayout
+            android:id="@+id/footerLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="20"
             android:background="@color/colorChargeFooter"
             android:gravity="center_vertical"
-            android:padding="8dp"
-            android:id="@+id/footerLayout">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/totalPriceLabel"
-                android:background="@drawable/total_price_tag_background"
                 android:layout_width="wrap_content"
-                android:text="14.000 DH"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/total_price_tag_background"
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
+                android:text="14.000 DH"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"
-                android:layout_alignParentRight="true"/>
+                android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/totalLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Total:"
-                android:id="@+id/totalLabel"
+                android:layout_marginRight="16dp"
                 android:layout_toLeftOf="@+id/totalPriceLabel"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Total:"
                 android:textColor="@color/colorWhite"
-                android:layout_marginRight="16dp"/>
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
     </LinearLayout>
 
-    <include layout="@layout/progressbar_layout_include"/>
+    <!--<include layout="@layout/progressbar_layout_include"/>-->
 
 </RelativeLayout>
