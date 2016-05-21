@@ -112,11 +112,12 @@ public class DatabaseAdapter {
 
         User user = extractUserFromCursor(cursor);
         Log.i("USER", user.toString());
+        cursor.close();
         return user;
     }
 
     private User extractUserFromCursor(Cursor cursor) {
-        return cursor.moveToFirst() ?
+        User user = cursor.moveToFirst() ?
                 new User.Builder()
                         .id(cursor.getInt(0))
                         .firstname(cursor.getString(1))
@@ -130,8 +131,11 @@ public class DatabaseAdapter {
                         .city(cursor.getString(9))
                         .country(cursor.getString(10))
                         .telephone(cursor.getString(11))
-                        .createUser() :
-                null;
+                        .createUser()
+                : null;
+
+        cursor.close();
+        return user;
     }
 
     /**
@@ -181,11 +185,25 @@ public class DatabaseAdapter {
                 new String[]{KEY_ADDRESS, KEY_CITY},
                 null, null, null, null, null, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst())
             return cursor.getString(0) + ", " + cursor.getString(1);
-        }
 
+        cursor.close();
         return "Locale address not found.";
+    }
+
+    public int getCurrentLocaleID() {
+        Cursor cursor = db.query(
+                true,
+                USER_TABLE,
+                new String[]{KEY_LOCALE_ID},
+                null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+            return cursor.getInt(0);
+
+        cursor.close();
+        return -1;
     }
 
     public Activation getCurrentActivation() {
@@ -194,7 +212,10 @@ public class DatabaseAdapter {
                 ACTIVATION_TABLE,
                 new String[]{KEY_ID, KEY_CODE, KEY_IS_ACTIVATED, KEY_COMPANY_ID},
                 null, null, null, null, null, null);
-        return extractActivationFromCursor(cursor);
+        Activation activation = extractActivationFromCursor(cursor);
+
+        cursor.close();
+        return activation;
     }
 
     private Activation extractActivationFromCursor(Cursor cursor) {
