@@ -3,8 +3,10 @@ package com.example.ismailamrani.comptable.ui.startup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
 import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
@@ -15,6 +17,7 @@ import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 import com.example.ismailamrani.comptable.utils.Orders;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -23,12 +26,21 @@ import butterknife.OnClick;
  */
 public class HomeActivity extends ColoredStatusBarActivity {
 
+    @Bind(R.id.localeLabel)
+    TextView localeLabel;
+
+    private DatabaseAdapter mDatabaseAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new CalculateScreenSize().CalculateScreenSize(this);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
+        String currentLocale = mDatabaseAdapter.getUserAddress();
+        localeLabel.setText(currentLocale);
     }
 
     /**

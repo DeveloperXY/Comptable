@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:costum="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/ic_bg_menu"
-    android:weightSum="492">
+              xmlns:costum="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/ic_bg_menu"
+              android:orientation="vertical"
+              android:weightSum="492">
 
 
     <RelativeLayout
@@ -29,7 +30,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="57"></RelativeLayout>
+        android:layout_weight="57"
+        android:gravity="top|center_horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/localeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Hay Al Azhar, Fez"
+            android:textColor="@color/colorBlue"
+            />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,12 +103,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="منتوج"
-                            costum:Frensh="Produit"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="منتوج"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Produit"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -123,12 +135,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/stock"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="93"
                     android:orientation="vertical"
                     android:weightSum="72"
-                    android:id="@+id/stock"
                     >
 
                     <RelativeLayout
@@ -157,12 +169,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="المخزون"
-                            costum:Frensh="Stock"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="المخزون"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Stock"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -237,12 +249,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="منتوج"
-                            costum:Frensh="Ventes"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="منتوج"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Ventes"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -269,12 +281,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/achat"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="93"
                     android:orientation="vertical"
                     android:weightSum="72"
-                    android:id="@+id/achat"
                     >
 
                     <RelativeLayout
@@ -303,12 +315,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="المخزون"
-                            costum:Frensh="Achats"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="المخزون"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Achats"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -382,12 +394,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="منتوج"
-                            costum:Frensh="Comptabilité"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="منتوج"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Comptabilité"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -414,12 +426,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/chargee"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="93"
                     android:orientation="vertical"
                     android:weightSum="72"
-                    android:id="@+id/chargee"
                     >
 
                     <RelativeLayout
@@ -448,12 +460,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="المخزون"
-                            costum:Frensh="Charges"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="المخزون"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Charges"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -528,12 +540,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="منتوج"
-                            costum:Frensh="Clients"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="منتوج"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Clients"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 
@@ -560,12 +572,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/fournis"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="93"
                     android:orientation="vertical"
                     android:weightSum="72"
-                    android:id="@+id/fournis"
                     >
 
                     <RelativeLayout
@@ -594,12 +606,12 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="15"
-                            costum:Font="cgr.ttf"
-                            costum:Arabic="المخزون"
-                            costum:Frensh="Fournisseurs"
+                            android:layout_centerInParent="true"
                             android:textColor="#ffffff"
-                            android:layout_centerInParent="true"/>
+                            costum:Arabic="المخزون"
+                            costum:Font="cgr.ttf"
+                            costum:Frensh="Fournisseurs"
+                            costum:Size="15"/>
 
                     </RelativeLayout>
 

@@ -171,6 +171,23 @@ public class DatabaseAdapter {
         db.insert(ACTIVATION_TABLE, null, values);
     }
 
+    /**
+     * @return the locale address of the current user.
+     */
+    public String getUserAddress() {
+        Cursor cursor = db.query(
+                true,
+                USER_TABLE,
+                new String[]{KEY_ADDRESS, KEY_CITY},
+                null, null, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0) + ", " + cursor.getString(1);
+        }
+
+        return "Locale address not found.";
+    }
+
     public Activation getCurrentActivation() {
         Cursor cursor = db.query(
                 true,
