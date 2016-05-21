@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -40,6 +41,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
         mDatabaseAdapter = DatabaseAdapter.getInstance(this);
         String currentLocale = mDatabaseAdapter.getUserAddress();
+        int currentLocaleID = mDatabaseAdapter.getCurrentLocaleID();
+        Log.i("LOCALE", "ID: " + currentLocaleID);
         localeLabel.setText(currentLocale);
     }
 

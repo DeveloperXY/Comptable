@@ -179,6 +179,7 @@ public class DatabaseAdapter {
      * @return the locale address of the current user.
      */
     public String getUserAddress() {
+        String address = "Locale address not found.";
         Cursor cursor = db.query(
                 true,
                 USER_TABLE,
@@ -186,24 +187,25 @@ public class DatabaseAdapter {
                 null, null, null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getString(0) + ", " + cursor.getString(1);
+            address = cursor.getString(0) + ", " + cursor.getString(1);
 
         cursor.close();
-        return "Locale address not found.";
+        return address;
     }
 
+    /**
+     * @return the locale ID of the current user.
+     */
     public int getCurrentLocaleID() {
-        Cursor cursor = db.query(
-                true,
-                USER_TABLE,
-                new String[]{KEY_LOCALE_ID},
+        int id = -1;
+        Cursor cursor = db.query(true, USER_TABLE, new String[]{KEY_LOCALE_ID},
                 null, null, null, null, null, null);
 
         if (cursor.moveToFirst())
-            return cursor.getInt(0);
+            id = cursor.getInt(0);
 
         cursor.close();
-        return -1;
+        return id;
     }
 
     public Activation getCurrentActivation() {
