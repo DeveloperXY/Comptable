@@ -49,7 +49,6 @@
         <activity android:name=".ui.EditClientActivity"/>
         <activity android:name=".ui.ProductDetailsActivity"/>
         <activity android:name=".fournisseur.AddFournisseurAsync"/>
-        <activity android:name=".charges.AddCharge"/>
         <activity android:name=".ui.AddLocalActivity"/>
         <activity
             android:name=".ui.InformationActivity"

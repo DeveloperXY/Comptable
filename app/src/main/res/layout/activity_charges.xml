@@ -41,7 +41,8 @@
             android:layout_weight="20"
             android:background="@color/colorChargeFooter"
             android:gravity="center_vertical"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:id="@+id/footerLayout">
 
             <TextView
                 android:id="@+id/totalPriceLabel"
