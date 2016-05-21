@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -16,11 +15,11 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.ui.AddProductActivity;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.Products;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -43,6 +42,7 @@ public class StockActivity extends ColoredStatusBarActivity
 
     private List<Product> mProducts;
     private StockAdapter stockAdapter;
+    private int currentLocaleID;
 
     /**
      * The stock's products list.
@@ -90,6 +90,9 @@ public class StockActivity extends ColoredStatusBarActivity
         setupRecyclerView();
         setupSearchView();
         setupSwipeRefresh();
+
+        currentLocaleID = DatabaseAdapter.getInstance(this)
+                .getCurrentLocaleID();
     }
 
     private void setupActionBar() {
@@ -117,7 +120,7 @@ public class StockActivity extends ColoredStatusBarActivity
         if (!swipeRefreshLayout.isRefreshing())
             swipeRefreshLayout.setRefreshing(true);
 
-        fetchStockProducts(PhpAPI.getStock, null);
+        fetchStockProducts(PhpAPI.getStock, JSONUtils.bundleLocaleIDToJSON(currentLocaleID));
     }
 
     private void stopSwipeRefresh() {
