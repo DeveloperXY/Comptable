@@ -20,6 +20,11 @@ public class User {
     private String username;
     private String password;
     private int companyID;
+    private int localeID;
+    private String address;
+    private String city;
+    private String country;
+    private String telephone;
 
     public static class Builder {
         private int id;
@@ -31,6 +36,11 @@ public class User {
         private String username;
         private String password;
         private int companyID;
+        private int localeID;
+        private String address;
+        private String city;
+        private String country;
+        private String telephone;
 
         public User createUser() {
             return new User(this);
@@ -80,6 +90,31 @@ public class User {
             this.companyID = companyID;
             return this;
         }
+
+        public Builder localeID(int localeID) {
+            this.localeID = localeID;
+            return this;
+        }
+
+        public Builder address(String address) {
+            this.address = address;
+            return this;
+        }
+
+        public Builder city(String city) {
+            this.city = city;
+            return this;
+        }
+
+        public Builder country(String country) {
+            this.country = country;
+            return this;
+        }
+
+        public Builder telephone(String telephone) {
+            this.telephone = telephone;
+            return this;
+        }
     }
 
     public User(Builder builder) {
@@ -92,6 +127,11 @@ public class User {
         this.username = builder.username;
         this.password = builder.password;
         this.companyID = builder.companyID;
+        this.localeID = builder.localeID;
+        this.address = builder.address;
+        this.city = builder.city;
+        this.country = builder.country;
+        this.telephone = builder.telephone;
     }
 
     /**
@@ -216,6 +256,11 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", companyID=" + companyID +
+                ", localeID=" + localeID +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", telephone='" + telephone + '\'' +
                 '}';
     }
 }
