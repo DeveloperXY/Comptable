@@ -150,6 +150,11 @@ public class User {
             this.username = user.getString("Username");
             this.password = user.getString("Password");
             this.companyID = user.getInt("SocieteID");
+            this.localeID = user.getInt("LocaleID");
+            this.address = user.getString("Adresse");
+            this.city = user.getString("Ville");
+            this.country = user.getString("Pays");
+            this.telephone = user.getString("Tel");
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -226,6 +231,46 @@ public class User {
 
     public void setCompanyID(int companyID) {
         this.companyID = companyID;
+    }
+
+    public int getLocaleID() {
+        return localeID;
+    }
+
+    public void setLocaleID(int localeID) {
+        this.localeID = localeID;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.sqlite;
 
-import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -30,6 +29,11 @@ public class DatabaseAdapter {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_COMPANY_ID = "companyID";
+    public static final String KEY_LOCALE_ID = "localeID";
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_CITY = "city";
+    public static final String KEY_COUNTRY = "country";
+    public static final String KEY_TELEPHONE = "telephone";
 
     public static final String KEY_CODE = "code";
     public static final String KEY_IS_ACTIVATED = "isActivated";
@@ -49,7 +53,13 @@ public class DatabaseAdapter {
                     KEY_EXPIRATION_DATE + " INTEGER, " +
                     KEY_USERNAME + " TEXT NOT NULL, " +
                     KEY_PASSWORD + " TEXT NOT NULL, " +
-                    KEY_COMPANY_ID + " INTEGER)";
+                    KEY_COMPANY_ID + " INTEGER, " +
+                    KEY_LOCALE_ID + " INTEGER, " +
+                    KEY_ADDRESS + " TEXT NOT NULL, " +
+                    KEY_CITY + " TEXT NOT NULL, " +
+                    KEY_COUNTRY + " TEXT NOT NULL, " +
+                    KEY_TELEPHONE + " TEXT NOT NULL)";
+
     private static final String CREATE_ACTIVATION_TABLE =
             "CREATE TABLE " + ACTIVATION_TABLE + " (" +
                     KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -96,9 +106,13 @@ public class DatabaseAdapter {
                 true,
                 USER_TABLE,
                 new String[]{KEY_ID, KEY_FIRSTNAME, KEY_LASTNAME,
-                        KEY_TYPE, KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID},
+                        KEY_TYPE, KEY_USERNAME, KEY_PASSWORD, KEY_COMPANY_ID,
+                        KEY_LOCALE_ID, KEY_ADDRESS, KEY_CITY, KEY_COUNTRY, KEY_TELEPHONE},
                 null, null, null, null, null, null);
-        return extractUserFromCursor(cursor);
+
+        User user = extractUserFromCursor(cursor);
+        Log.i("USER", user.toString());
+        return user;
     }
 
     private User extractUserFromCursor(Cursor cursor) {
@@ -111,6 +125,11 @@ public class DatabaseAdapter {
                         .username(cursor.getString(4))
                         .password(cursor.getString(5))
                         .companyID(cursor.getInt(6))
+                        .localeID(cursor.getInt(7))
+                        .address(cursor.getString(8))
+                        .city(cursor.getString(9))
+                        .country(cursor.getString(10))
+                        .telephone(cursor.getString(11))
                         .createUser() :
                 null;
     }
@@ -129,6 +148,11 @@ public class DatabaseAdapter {
         values.put(KEY_USERNAME, user.getUsername());
         values.put(KEY_PASSWORD, user.getPassword());
         values.put(KEY_COMPANY_ID, user.getCompanyID());
+        values.put(KEY_LOCALE_ID, user.getLocaleID());
+        values.put(KEY_ADDRESS, user.getAddress());
+        values.put(KEY_CITY, user.getCity());
+        values.put(KEY_COUNTRY, user.getCountry());
+        values.put(KEY_TELEPHONE, user.getTelephone());
 
         insertUser(values);
     }
