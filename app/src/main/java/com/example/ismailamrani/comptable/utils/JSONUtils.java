@@ -84,4 +84,16 @@ public class JSONUtils {
 
         return data;
     }
+
+    public static JSONObject bundleLocaleIDToJSON(int localeID) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("localeID", localeID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 }

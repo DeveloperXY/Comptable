@@ -8,7 +8,9 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -18,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,7 +32,9 @@ public class ProductsActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.List)
     ListView productsListView;
-    ArrayList<Product> ListProduit = new ArrayList<>();
+
+    private List<Product> productsList = new ArrayList<>();
+    private DatabaseAdapter mDatabaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +42,22 @@ public class ProductsActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_produits);
         ButterKnife.bind(this);
 
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
+
         setupActionBar();
         fetchProducts();
     }
 
     private void setupActionBar() {
         mActionBar.setActionBarListener(this);
-        mActionBar.setTitle("Produit");
+        mActionBar.setTitle("Produits");
     }
 
     private void fetchProducts() {
-        sendHTTPRequest(PhpAPI.getProduit, null, Method.POST,
+        int localeID = mDatabaseAdapter.getCurrentLocaleID();
+        JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);
+
+        sendHTTPRequest(PhpAPI.getProduit, data, Method.POST,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
@@ -63,13 +73,13 @@ public class ProductsActivity extends ColoredStatusBarActivity {
                                 itm.setQte(Integer.parseInt(usr.getString("qte")));
                                 itm.setPhoto(PhpAPI.IpBackend_IMAGES + usr.getString("photo"));
 
-                                ListProduit.add(itm);
+                                productsList.add(itm);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        ProduitAdapter adapter = new ProduitAdapter(ProductsActivity.this, ListProduit);
+                        ProduitAdapter adapter = new ProduitAdapter(ProductsActivity.this, productsList);
                         runOnUiThread(() -> productsListView.setAdapter(adapter));
                     }
 
