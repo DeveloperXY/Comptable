@@ -20,6 +20,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.Products;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -205,15 +206,21 @@ public class StockActivity extends ColoredStatusBarActivity
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
-                            mProducts = Product.parseProducts(
+                            List<Product> products = Product.parseProducts(
                                     response.getJSONArray("products"));
-                            runOnUiThread(() -> {
-                                toggleRecyclerviewState();
-                                populateRecyclerView();
 
-                                stockProgressbar.setVisibility(View.INVISIBLE);
-                                stopSwipeRefresh();
-                            });
+                            if (ListComparison.areEqual(mProducts, products))
+                                runOnUiThread(() -> stopSwipeRefresh());
+                            else {
+                                mProducts = products;
+                                runOnUiThread(() -> {
+                                    toggleRecyclerviewState();
+                                    populateRecyclerView();
+
+                                    stockProgressbar.setVisibility(View.INVISIBLE);
+                                    stopSwipeRefresh();
+                                });
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

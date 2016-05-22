@@ -193,4 +193,42 @@ public class Product implements Item {
     public String getLabel() {
         return Libelle;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (ID != product.ID) return false;
+        if (Qte != product.Qte) return false;
+        if (Locale_ID != product.Locale_ID) return false;
+        if (supplier != product.supplier) return false;
+        if (Libelle != null ? !Libelle.equals(product.Libelle) : product.Libelle != null)
+            return false;
+        if (PrixHT != null ? !PrixHT.equals(product.PrixHT) : product.PrixHT != null) return false;
+        if (PrixTTC != null ? !PrixTTC.equals(product.PrixTTC) : product.PrixTTC != null)
+            return false;
+        if (CodeBarre != null ? !CodeBarre.equals(product.CodeBarre) : product.CodeBarre != null)
+            return false;
+        if (Photo != null ? !Photo.equals(product.Photo) : product.Photo != null) return false;
+        return url != null ? url.equals(product.url) : product.url == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = ID;
+        result = 31 * result + (Libelle != null ? Libelle.hashCode() : 0);
+        result = 31 * result + (PrixHT != null ? PrixHT.hashCode() : 0);
+        result = 31 * result + (PrixTTC != null ? PrixTTC.hashCode() : 0);
+        result = 31 * result + (CodeBarre != null ? CodeBarre.hashCode() : 0);
+        result = 31 * result + (Photo != null ? Photo.hashCode() : 0);
+        result = 31 * result + Qte;
+        result = 31 * result + Locale_ID;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + supplier;
+        return result;
+    }
 }
