@@ -1,9 +1,12 @@
 package com.example.ismailamrani.comptable.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @Bind(R.id.progressBar)
+    ProgressBar chargeProgressbar;
+
     @Bind(R.id.totalPriceLabel)
     TextView totalPriceLabel;
 
@@ -54,6 +60,11 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         setupSwipeRefresh();
 
         fetchChargeItems();
+    }
+
+    @Override
+    public void onAddPressed() {
+        startActivity(new Intent(this, AddChargeActivity.class));
     }
 
     private void setupActionBar() {
@@ -114,6 +125,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                     populateRecyclerView();
                                     calculateTotalPrice();
                                     stopSwipeRefresh();
+                                    chargeProgressbar.setVisibility(View.INVISIBLE);
                                 });
                             }
 
@@ -127,6 +139,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                         runOnUiThread(() -> {
                             Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
                                     Toast.LENGTH_LONG).show();
+                            chargeProgressbar.setVisibility(View.INVISIBLE);
                             stopSwipeRefresh();
                         });
                     }
