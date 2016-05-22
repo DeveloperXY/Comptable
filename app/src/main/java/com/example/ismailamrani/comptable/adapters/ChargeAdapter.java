@@ -94,6 +94,15 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
         }
     }
 
+    public double getTotalPrice() {
+        double total = 0;
+
+        for (int i = 0; i < mCharges.size(); i++)
+            total += mCharges.get(i).getPrice();
+
+        return total;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView descriptionLabel;

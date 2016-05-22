@@ -54,9 +54,10 @@
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="14.000 DH"
+                android:text="0 DH"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tools:text="14.000 DH"/>
 
             <TextView
                 android:id="@+id/totalLabel"

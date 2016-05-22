@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -35,6 +36,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @Bind(R.id.totalPriceLabel)
+    TextView totalPriceLabel;
 
     private ChargeAdapter mChargeAdapter;
     private List<Charge> mCharges;
@@ -108,6 +112,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                 runOnUiThread(() -> {
                                     chargesRecyclerView.scrollToPosition(0);
                                     populateRecyclerView();
+                                    calculateTotalPrice();
                                     stopSwipeRefresh();
                                 });
                             }
@@ -126,6 +131,10 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                         });
                     }
                 });
+    }
+
+    private void calculateTotalPrice() {
+        totalPriceLabel.setText(mChargeAdapter.getTotalPrice() + " DH");
     }
 
     private void populateRecyclerView() {
