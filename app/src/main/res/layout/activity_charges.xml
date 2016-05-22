@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.ismailamrani.comptable.ui.ChargesActivity">
 
-    <!--<include
-        android:id="@+id/emptyStockLayout"
+    <include
+        android:id="@+id/emptyChargeLayout"
         layout="@layout/empty_view_include"/>
 
     <include
-        android:id="@+id/errorStockLayout"
-        layout="@layout/network_error_include"/>-->
+        android:id="@+id/errorChargeLayout"
+        layout="@layout/network_error_include"/>
 
     <LinearLayout
         android:layout_width="match_parent"

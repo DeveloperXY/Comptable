@@ -229,8 +229,12 @@ public class StockActivity extends ColoredStatusBarActivity
                     @Override
                     public void onRequestFailed() {
                         runOnUiThread(() -> {
-                            errorLayout.setVisibility(View.VISIBLE);
-                            stockProgressbar.setVisibility(View.INVISIBLE);
+                            if (errorLayout.getVisibility() != View.VISIBLE) {
+                                errorLayout.setVisibility(View.VISIBLE);
+                                stockRecyclerView.setVisibility(View.INVISIBLE);
+                                stockProgressbar.setVisibility(View.INVISIBLE);
+                            }
+
                             stopSwipeRefresh();
                         });
                     }

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,15 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    /**
+     * The view to be displayed in case a network error occur.
+     */
+    @Bind(R.id.errorChargeLayout)
+    RelativeLayout errorLayout;
+
+    @Bind(R.id.footerLayout)
+    RelativeLayout footerLayout;
 
     @Bind(R.id.progressBar)
     ProgressBar chargeProgressbar;
@@ -112,22 +122,23 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                             JSONArray jsonArray = response.getJSONArray("charge");
                             List<Charge> charges = Charge.parseCharges(jsonArray);
 
-                            // To avoid the refresh flicker caused by the call to
-                            // populateRecyclerView(), check if the newly parsed
-                            // list of Charge objects is exactly the same as the
-                            // old one
-                            if (ListComparison.areEqual(mCharges, charges))
-                                runOnUiThread(() -> stopSwipeRefresh());
-                            else {
-                                mCharges = charges;
-                                runOnUiThread(() -> {
+                            runOnUiThread(() -> {
+                                // To avoid the refresh flicker caused by the call to
+                                // populateRecyclerView(), check if the newly parsed
+                                // list of Charge objects is exactly the same as the
+                                // old one
+                                if (!ListComparison.areEqual(mCharges, charges)) {
+                                    mCharges = charges;
                                     chargesRecyclerView.scrollToPosition(0);
                                     populateRecyclerView();
                                     calculateTotalPrice();
-                                    stopSwipeRefresh();
-                                    chargeProgressbar.setVisibility(View.INVISIBLE);
-                                });
-                            }
+                                }
+
+                                stopSwipeRefresh();
+                                toggleRecyclerviewState();
+                                chargeProgressbar.setVisibility(View.INVISIBLE);
+                            });
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -139,7 +150,14 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                         runOnUiThread(() -> {
                             Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
                                     Toast.LENGTH_LONG).show();
-                            chargeProgressbar.setVisibility(View.INVISIBLE);
+
+                            if (errorLayout.getVisibility() != View.VISIBLE) {
+                                errorLayout.setVisibility(View.VISIBLE);
+                                chargesRecyclerView.setVisibility(View.INVISIBLE);
+                                chargeProgressbar.setVisibility(View.INVISIBLE);
+                                footerLayout.setVisibility(View.INVISIBLE);
+                            }
+
                             stopSwipeRefresh();
                         });
                     }
@@ -156,5 +174,11 @@ public class ChargesActivity extends ColoredStatusBarActivity {
             chargesRecyclerView.setAdapter(mChargeAdapter);
         } else
             mChargeAdapter.animateTo(mCharges);
+    }
+
+    private void toggleRecyclerviewState() {
+        chargesRecyclerView.setVisibility(mCharges.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
+        footerLayout.setVisibility(View.VISIBLE);
     }
 }
