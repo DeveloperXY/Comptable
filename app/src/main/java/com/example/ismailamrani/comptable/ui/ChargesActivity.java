@@ -20,6 +20,7 @@ import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -34,6 +35,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ChargesActivity extends ColoredStatusBarActivity {
+
+    private static final int REQUEST_ADD_CHARGE = 3;
 
     @Bind(R.id.chargesRecyclerView)
     RecyclerView chargesRecyclerView;
@@ -83,7 +86,20 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddChargeActivity.class));
+        startActivityForResult(new Intent(this, AddChargeActivity.class), REQUEST_ADD_CHARGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADD_CHARGE:
+                switch (resultCode) {
+                    case ResultCodes.CHARGE_CREATED:
+                        refresh();
+                        break;
+                }
+                break;
+        }
     }
 
     private void setupActionBar() {
@@ -110,9 +126,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     }
 
     private void refresh() {
-        if (!swipeRefreshLayout.isRefreshing())
-            swipeRefreshLayout.setRefreshing(true);
-
         fetchChargeItems();
     }
 
@@ -151,7 +164,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                 toggleRecyclerviewState();
                                 chargeProgressbar.setVisibility(View.INVISIBLE);
                             });
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();

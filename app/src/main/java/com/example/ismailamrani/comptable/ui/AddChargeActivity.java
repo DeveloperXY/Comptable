@@ -19,6 +19,7 @@ import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -135,8 +136,10 @@ public class AddChargeActivity extends ColoredStatusBarActivity {
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1)
+                        if (status == 1) {
+                            setResult(ResultCodes.CHARGE_CREATED);
                             finish();
+                        }
                         else
                             runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
                                     "Unknown error.", Toast.LENGTH_SHORT).show());
