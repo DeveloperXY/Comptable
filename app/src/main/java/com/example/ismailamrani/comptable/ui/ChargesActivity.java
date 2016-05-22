@@ -3,12 +3,22 @@ package com.example.ismailamrani.comptable.ui;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
 import com.example.ismailamrani.comptable.models.Charge;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
+import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +64,25 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     }
 
     private void fetchChargeItems() {
+        JSONObject data = JSONUtils.bundleLocaleIDToJSON(
+                DatabaseAdapter.getInstance(this).getCurrentLocaleID());
+        sendHTTPRequest(PhpAPI.getChargeByLocaleID, data, Method.POST,
+                new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("charge");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onRequestFailed() {
+                        Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
         mCharges = Arrays.asList(
                 new Charge(1, "Description 1", 100, "2016-10-24", 3),
                 new Charge(2, "Description 2", 200, "2016-10-24", 3),

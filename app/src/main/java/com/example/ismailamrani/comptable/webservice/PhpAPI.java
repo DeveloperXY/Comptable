@@ -42,6 +42,7 @@ public class PhpAPI {
     public static final String removeFournisseur = IpBackend + "removeFournisseur.php";
 
     public static final String addCharge = IpBackend + "addCharge.php";
+    public static final String getChargeByLocaleID = IpBackend + "getChargeByLocaleID.php";
     public static final String addlocal = IpBackend + "addLocal.php";
     public static final String getLocal = IpBackend + "getLocal.php";
     public static final String addSociete = IpBackend + "addSociete.php";
