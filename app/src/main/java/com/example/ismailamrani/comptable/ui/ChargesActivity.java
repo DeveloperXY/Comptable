@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -102,14 +101,12 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                             // populateRecyclerView(), check if the newly parsed
                             // list of Charge objects is exactly the same as the
                             // old one
-                            if (ListComparison.areEqual(mCharges, charges)) {
-                                Log.i("COMPARISON", "STATE 1");
+                            if (ListComparison.areEqual(mCharges, charges))
                                 runOnUiThread(() -> stopSwipeRefresh());
-                            }
                             else {
-                                Log.i("COMPARISON", "STATE 2");
                                 mCharges = charges;
                                 runOnUiThread(() -> {
+                                    chargesRecyclerView.scrollToPosition(0);
                                     populateRecyclerView();
                                     stopSwipeRefresh();
                                 });
@@ -133,12 +130,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
     private void populateRecyclerView() {
         if (mChargeAdapter == null) {
-            Log.i("COMPARISON", "STATE 3");
             mChargeAdapter = new ChargeAdapter(this, mCharges);
             chargesRecyclerView.setAdapter(mChargeAdapter);
         } else
             mChargeAdapter.animateTo(mCharges);
-
-        Log.i("COMPARISON", "STATE 4");
     }
 }

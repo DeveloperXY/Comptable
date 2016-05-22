@@ -93,6 +93,7 @@ public class StockActivity extends ColoredStatusBarActivity
 
         currentLocaleID = DatabaseAdapter.getInstance(this)
                 .getCurrentLocaleID();
+        refresh(); // Must be called last
     }
 
     private void setupActionBar() {
@@ -112,8 +113,6 @@ public class StockActivity extends ColoredStatusBarActivity
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
         emptyMessageLabel.setText("There are no products to show.\nClick to refresh.");
-
-        refresh();
     }
 
     private void refresh() {
@@ -208,16 +207,16 @@ public class StockActivity extends ColoredStatusBarActivity
                         try {
                             mProducts = Product.parseProducts(
                                     response.getJSONArray("products"));
+                            runOnUiThread(() -> {
+                                toggleRecyclerviewState();
+                                populateRecyclerView();
+
+                                stockProgressbar.setVisibility(View.INVISIBLE);
+                                stopSwipeRefresh();
+                            });
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        runOnUiThread(() -> {
-                            toggleRecyclerviewState();
-                            populateRecyclerView();
-
-                            stockProgressbar.setVisibility(View.INVISIBLE);
-                            stopSwipeRefresh();
-                        });
                     }
 
                     @Override
