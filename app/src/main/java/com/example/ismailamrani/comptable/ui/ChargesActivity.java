@@ -1,8 +1,10 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -11,6 +13,7 @@ import com.example.ismailamrani.comptable.models.Charge;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
@@ -31,6 +34,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     @Bind(R.id.chargesRecyclerView)
     RecyclerView chargesRecyclerView;
 
+    @Bind(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private ChargeAdapter mChargeAdapter;
     private List<Charge> mCharges;
 
@@ -42,6 +48,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
         setupActionBar();
         setupRecyclerView();
+        setupSwipeRefresh();
+
+        fetchChargeItems();
     }
 
     private void setupActionBar() {
@@ -54,12 +63,28 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         chargesRecyclerView.setHasFixedSize(true);
         chargesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chargesRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+    }
 
-        refresh();
+    private void setupSwipeRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.swipeRefresh1,
+                R.color.swipeRefresh2,
+                R.color.swipeRefresh3,
+                R.color.swipeRefresh4
+        );
     }
 
     private void refresh() {
+        if (!swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(true);
+
         fetchChargeItems();
+    }
+
+    private void stopSwipeRefresh() {
+        if (swipeRefreshLayout.isRefreshing())
+            swipeRefreshLayout.setRefreshing(false);
     }
 
     private void fetchChargeItems() {
@@ -71,8 +96,25 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("charge");
-                            mCharges = Charge.parseCharges(jsonArray);
-                            runOnUiThread(() -> populateRecyclerView());
+                            List<Charge> charges = Charge.parseCharges(jsonArray);
+
+                            // To avoid the refresh flicker caused by the call to
+                            // populateRecyclerView(), check if the newly parsed
+                            // list of Charge objects is exactly the same as the
+                            // old one
+                            if (ListComparison.areEqual(mCharges, charges)) {
+                                Log.i("COMPARISON", "STATE 1");
+                                runOnUiThread(() -> stopSwipeRefresh());
+                            }
+                            else {
+                                Log.i("COMPARISON", "STATE 2");
+                                mCharges = charges;
+                                runOnUiThread(() -> {
+                                    populateRecyclerView();
+                                    stopSwipeRefresh();
+                                });
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -80,17 +122,23 @@ public class ChargesActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
-                                Toast.LENGTH_LONG).show();
+                        runOnUiThread(() -> {
+                            Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
+                                    Toast.LENGTH_LONG).show();
+                            stopSwipeRefresh();
+                        });
                     }
                 });
     }
 
     private void populateRecyclerView() {
         if (mChargeAdapter == null) {
+            Log.i("COMPARISON", "STATE 3");
             mChargeAdapter = new ChargeAdapter(this, mCharges);
             chargesRecyclerView.setAdapter(mChargeAdapter);
         } else
             mChargeAdapter.animateTo(mCharges);
+
+        Log.i("COMPARISON", "STATE 4");
     }
 }

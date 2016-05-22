@@ -89,4 +89,33 @@ public class Charge {
 
         return charges;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Charge charge = (Charge) o;
+
+        if (id != charge.id) return false;
+        if (Double.compare(charge.price, price) != 0) return false;
+        if (localeID != charge.localeID) return false;
+        if (description != null ? !description.equals(charge.description) : charge.description != null)
+            return false;
+        return date != null ? date.equals(charge.date) : charge.date == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + localeID;
+        return result;
+    }
 }
