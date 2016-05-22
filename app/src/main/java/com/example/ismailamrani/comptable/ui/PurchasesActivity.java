@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -13,17 +12,16 @@ import android.widget.Toast;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
 import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
-import com.example.ismailamrani.comptable.utils.WindowUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -93,7 +91,10 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         fetchDialogItems(
                 spinnerID == R.id.productSpinner ?
                         PhpAPI.getProduit :
-                        PhpAPI.getFournisseur, null, spinnerID);
+                        PhpAPI.getFournisseur,
+                JSONUtils.bundleLocaleIDToJSON(DatabaseAdapter.getInstance(this)
+                        .getCurrentLocaleID())
+                , spinnerID);
     }
 
     void fetchDialogItems(String url, JSONObject data, int spinnerID) {

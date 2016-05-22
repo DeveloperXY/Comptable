@@ -57,7 +57,7 @@ public class ProductsActivity extends ColoredStatusBarActivity {
         int localeID = mDatabaseAdapter.getCurrentLocaleID();
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);
 
-        sendHTTPRequest(PhpAPI.getProduit, data, Method.POST,
+        sendHTTPRequest(PhpAPI.getProduit, data, Method.GET,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
