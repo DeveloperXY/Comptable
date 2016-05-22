@@ -21,7 +21,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -72,6 +71,8 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("charge");
+                            mCharges = Charge.parseCharges(jsonArray);
+                            runOnUiThread(() -> populateRecyclerView());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -83,13 +84,6 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                 Toast.LENGTH_LONG).show();
                     }
                 });
-        mCharges = Arrays.asList(
-                new Charge(1, "Description 1", 100, "2016-10-24", 3),
-                new Charge(2, "Description 2", 200, "2016-10-24", 3),
-                new Charge(3, "Description 3", 300, "2016-10-24", 3),
-                new Charge(4, "Description 4", 400, "2016-10-24", 3),
-                new Charge(5, "Description 5", 500, "2016-10-24", 3));
-        populateRecyclerView();
     }
 
     private void populateRecyclerView() {
