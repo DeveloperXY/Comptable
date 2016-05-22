@@ -47,8 +47,17 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     @Bind(R.id.errorChargeLayout)
     RelativeLayout errorLayout;
 
+    /**
+     * The view to be displayed in case there were no items to show.
+     */
+    @Bind(R.id.emptyChargeLayout)
+    RelativeLayout emptyView;
+
     @Bind(R.id.footerLayout)
     RelativeLayout footerLayout;
+
+    @Bind(R.id.emptyMessageLabel)
+    TextView emptyMessageLabel;
 
     @Bind(R.id.progressBar)
     ProgressBar chargeProgressbar;
@@ -87,6 +96,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         chargesRecyclerView.setHasFixedSize(true);
         chargesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chargesRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
+        emptyMessageLabel.setText("There is no data to show.\nClick to refresh.");
     }
 
     private void setupSwipeRefresh() {
@@ -134,6 +144,9 @@ public class ChargesActivity extends ColoredStatusBarActivity {
                                     calculateTotalPrice();
                                 }
 
+                                if(mCharges == null)
+                                    mCharges = new ArrayList<>();
+
                                 stopSwipeRefresh();
                                 toggleRecyclerviewState();
                                 chargeProgressbar.setVisibility(View.INVISIBLE);
@@ -177,8 +190,11 @@ public class ChargesActivity extends ColoredStatusBarActivity {
     }
 
     private void toggleRecyclerviewState() {
+        int emptyViewVis = mCharges.size() == 0 ? View.VISIBLE : View.INVISIBLE;
+        emptyView.setVisibility(emptyViewVis);
         chargesRecyclerView.setVisibility(mCharges.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
-        footerLayout.setVisibility(View.VISIBLE);
+        // The footer layout should only be displayed in case the empty view wasn't
+        footerLayout.setVisibility(emptyViewVis == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
     }
 }
