@@ -19,6 +19,7 @@ import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
+import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Orders;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
@@ -150,12 +151,18 @@ public class OrdersListFragment extends Fragment {
                         public void onRequestSucceeded(JSONObject response, int status) {
                             if (status == 1) {
                                 try {
-                                    mOrders = Order.parseOrders(
+                                    List<Order> orders = Order.parseOrders(
                                             response.getJSONArray("orders"));
+
+                                    if (ListComparison.areEqual(mOrders, orders))
+                                        getActivity().runOnUiThread(() -> stopSwipeRefresh());
+                                    else {
+                                        mOrders = orders;
+                                        getActivity().runOnUiThread(() -> onDataChanged());
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                getActivity().runOnUiThread(() -> onDataChanged());
                             } else
                                 Toast.makeText(getActivity(),
                                         "Error while retrieving orders",

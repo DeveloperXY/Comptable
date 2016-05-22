@@ -92,4 +92,32 @@ public class Order {
 
         return orders;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (id != order.id) return false;
+        if (facture != order.facture) return false;
+        if (Double.compare(order.totalPrice, totalPrice) != 0) return false;
+        if (date != null ? !date.equals(order.date) : order.date != null) return false;
+        return factureID != null ? factureID.equals(order.factureID) : order.factureID == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + facture;
+        result = 31 * result + (factureID != null ? factureID.hashCode() : 0);
+        temp = Double.doubleToLongBits(totalPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
