@@ -1,12 +1,15 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -29,9 +32,12 @@ import butterknife.ButterKnife;
 public class ActivationActivity extends ColoredStatusBarActivity {
 
     private DatabaseAdapter databaseAdapter;
+    private boolean shouldFinish = false;
 
     @Bind(R.id.activationField)
     EditText activationField;
+    @Bind(R.id.imageView)
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +79,21 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                             Activation activation = new Activation(
                                     response.getJSONArray("activation").getJSONObject(0));
                             databaseAdapter.activateApplication(activation);
-                            startActivity(new Intent(ActivationActivity.this, LoginActivity.class));
-                            finish();
+
+                            Intent intent = new Intent(ActivationActivity.this, LoginActivity.class);
+                            shouldFinish = true;
+
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+                                startActivity(intent);
+                            else {
+                                View sharedView = imageView;
+                                String transitionName = "header";
+
+                                ActivityOptions transitionActivityOptions =
+                                        ActivityOptions.makeSceneTransitionAnimation(
+                                                ActivationActivity.this, sharedView, transitionName);
+                                startActivity(intent, transitionActivityOptions.toBundle());
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -131,5 +150,13 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         public void afterTextChanged(Editable s) {
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (shouldFinish)
+            finish();
     }
 }
