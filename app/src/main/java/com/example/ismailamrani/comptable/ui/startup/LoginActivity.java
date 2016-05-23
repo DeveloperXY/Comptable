@@ -1,8 +1,8 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -10,6 +10,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -18,22 +19,29 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class LoginActivity extends ColoredStatusBarActivity {
     private DatabaseAdapter databaseAdapter;
+    private boolean shouldFinish = false;
 
+    @Bind(R.id.Valider)
     LinearLayout Valider;
-    EditText nom, motdepass;
+    @Bind(R.id.username)
+    EditText nom;
+    @Bind(R.id.mp)
+    EditText motdepass;
+    @Bind(R.id.logoImage)
+    ImageView logoImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
         databaseAdapter = DatabaseAdapter.getInstance(this);
-
-        Valider = (LinearLayout) findViewById(R.id.Valider);
-        nom = (EditText) findViewById(R.id.username);
-        motdepass = (EditText) findViewById(R.id.mp);
 
         Valider.setOnClickListener(v -> {
             String username = nom.getText().toString();
@@ -52,14 +60,15 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         // the response
                                         JSONObject loggedInUser = response.getJSONArray("user")
                                                 .getJSONObject(0);
+
                                         // Save user to local disk
                                         saveUserToInternalDatabase(loggedInUser);
+
                                         // Move to main menu
-                                        Intent intent = new Intent(LoginActivity.this,
-                                                HomeActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                        startActivity(intent);
+                                        shouldFinish = true;
+                                        ActivityTransition.startActivityWithSharedElement(
+                                                LoginActivity.this, HomeActivity.class,
+                                                logoImage, "header");
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -121,5 +130,13 @@ public class LoginActivity extends ColoredStatusBarActivity {
      */
     private void saveUserToInternalDatabase(JSONObject jsonUser) {
         databaseAdapter.saveLoggedInUser(new User(jsonUser));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (shouldFinish)
+            finish();
     }
 }
