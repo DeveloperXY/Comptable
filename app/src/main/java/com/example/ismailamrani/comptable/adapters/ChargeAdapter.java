@@ -2,19 +2,15 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Charge;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +21,7 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
 
     private Context mContext;
     private List<Charge> mCharges;
+    private ChargeAdapterListener mChargeAdapterListener;
 
     public ChargeAdapter(Context context, List<Charge> charges) {
         mContext = context;
@@ -68,6 +65,8 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
     }
 
     public void animateTo(List<Charge> charges) {
+        Log.i("LIST", "OLD: " + mCharges);
+        Log.i("LIST", "NEW: " + charges);
         applyAndAnimateRemovals(charges);
         applyAndAnimateAdditions(charges);
         applyAndAnimateMovedItems(charges);
@@ -108,6 +107,14 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
         return total;
     }
 
+    public void setListener(ChargeAdapterListener listener) {
+        mChargeAdapterListener = listener;
+    }
+
+    public interface ChargeAdapterListener {
+        long getServerTimeInMillis();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView descriptionLabel;
@@ -124,17 +131,7 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
         public void bind(Charge charge) {
             descriptionLabel.setText(charge.getDescription());
             chargePriceLabel.setText(charge.getPrice() + " DH");
-
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            try {
-                long dateInMillis = format.parse(charge.getDate()).getTime();
-                long now = System.currentTimeMillis();
-                timeLabel.setText(DateUtils.getRelativeTimeSpanString(
-                        dateInMillis, now, DateUtils.MINUTE_IN_MILLIS));
-
-            } catch (ParseException e) {
-                Toast.makeText(mContext, "Error parsing date", Toast.LENGTH_LONG).show();
-            }
+            timeLabel.setText(charge.getDateFrom());
         }
     }
 }

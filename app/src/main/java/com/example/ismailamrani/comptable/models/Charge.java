@@ -15,13 +15,16 @@ public class Charge {
     private String description;
     private double price;
     private String date;
+    private String dateFrom;
     private int localeID;
 
-    public Charge(int id, String description, double price, String date, int localeID) {
+    public Charge(int id, String description, double price, String date,
+                  String dateFrom, int localeID) {
         this.id = id;
         this.description = description;
         this.price = price;
         this.date = date;
+        this.dateFrom = dateFrom;
         this.localeID = localeID;
     }
 
@@ -31,6 +34,7 @@ public class Charge {
                 object.getString("description"),
                 object.getDouble("prix"),
                 object.getString("date"),
+                "",
                 object.getInt("local"));
     }
 
@@ -74,6 +78,14 @@ public class Charge {
         this.localeID = localeID;
     }
 
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
     public static List<Charge> parseCharges(JSONArray array) {
         List<Charge> charges = new ArrayList<>();
 
@@ -102,7 +114,8 @@ public class Charge {
         if (localeID != charge.localeID) return false;
         if (description != null ? !description.equals(charge.description) : charge.description != null)
             return false;
-        return date != null ? date.equals(charge.date) : charge.date == null;
+        if (date != null ? !date.equals(charge.date) : charge.date != null) return false;
+        return dateFrom != null ? dateFrom.equals(charge.dateFrom) : charge.dateFrom == null;
 
     }
 
@@ -115,7 +128,20 @@ public class Charge {
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (dateFrom != null ? dateFrom.hashCode() : 0);
         result = 31 * result + localeID;
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Charge{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", date='" + date + '\'' +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", localeID=" + localeID +
+                '}';
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
 import com.example.ismailamrani.comptable.models.Charge;
@@ -74,6 +76,7 @@ public class ChargesActivity extends AnimatedActivity {
 
     private ChargeAdapter mChargeAdapter;
     private List<Charge> mCharges;
+    private long currentServerTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +158,7 @@ public class ChargesActivity extends AnimatedActivity {
     private void populateRecyclerView() {
         if (mChargeAdapter == null) {
             mChargeAdapter = new ChargeAdapter(this, mCharges);
+            mChargeAdapter.setListener(() -> currentServerTime);
             chargesRecyclerView.setAdapter(mChargeAdapter);
         } else
             mChargeAdapter.animateTo(mCharges);
@@ -217,7 +221,9 @@ public class ChargesActivity extends AnimatedActivity {
                     String serverNowTime = response.getString("date");
                     Log.i("DATE", "CURRENT SERVER DATE: " + serverNowTime);
                     DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    long serverNowInMillis = format.parse(serverNowTime).getTime();
+                    currentServerTime = format.parse(serverNowTime).getTime();
+
+                    setChargesTiming();
 
                     runOnUiThread(() -> {
                         // To avoid the refresh flicker caused by the call to
@@ -231,7 +237,7 @@ public class ChargesActivity extends AnimatedActivity {
                             calculateTotalPrice();
                         }
 
-                        if(mCharges == null)
+                        if (mCharges == null)
                             mCharges = new ArrayList<>();
 
                         stopSwipeRefresh();
@@ -242,6 +248,31 @@ public class ChargesActivity extends AnimatedActivity {
                 } catch (JSONException | ParseException e) {
                     e.printStackTrace();
                 }
+            }
+
+            private void setChargesTiming() {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Stream.of(charges)
+                        .forEach(charge -> {
+                            // Calculate the relative time span for each element
+                            try {
+                                long dateInMillis = format.parse(charge.getDate()).getTime();
+                                long secondsDifference = (currentServerTime - dateInMillis) / 1000;
+
+                                if (secondsDifference < 60) {
+                                    charge.setDateFrom(secondsDifference == 1 ? "1 second ago" :
+                                            ((currentServerTime - dateInMillis) / 1000) + " seconds ago");
+                                } else {
+                                    charge.setDateFrom(
+                                            DateUtils.getRelativeTimeSpanString(
+                                                    dateInMillis, currentServerTime,
+                                                    DateUtils.MINUTE_IN_MILLIS).toString());
+                                }
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        });
             }
 
             @Override
