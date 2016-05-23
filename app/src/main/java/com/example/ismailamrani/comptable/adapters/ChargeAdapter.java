@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
 
     private Context mContext;
     private List<Charge> mCharges;
-    private ChargeAdapterListener mChargeAdapterListener;
 
     public ChargeAdapter(Context context, List<Charge> charges) {
         mContext = context;
@@ -65,8 +63,6 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
     }
 
     public void animateTo(List<Charge> charges) {
-        Log.i("LIST", "OLD: " + mCharges);
-        Log.i("LIST", "NEW: " + charges);
         applyAndAnimateRemovals(charges);
         applyAndAnimateAdditions(charges);
         applyAndAnimateMovedItems(charges);
@@ -105,14 +101,6 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
             total += mCharges.get(i).getPrice();
 
         return total;
-    }
-
-    public void setListener(ChargeAdapterListener listener) {
-        mChargeAdapterListener = listener;
-    }
-
-    public interface ChargeAdapterListener {
-        long getServerTimeInMillis();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

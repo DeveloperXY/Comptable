@@ -158,7 +158,6 @@ public class ChargesActivity extends AnimatedActivity {
     private void populateRecyclerView() {
         if (mChargeAdapter == null) {
             mChargeAdapter = new ChargeAdapter(this, mCharges);
-            mChargeAdapter.setListener(() -> currentServerTime);
             chargesRecyclerView.setAdapter(mChargeAdapter);
         } else
             mChargeAdapter.animateTo(mCharges);
