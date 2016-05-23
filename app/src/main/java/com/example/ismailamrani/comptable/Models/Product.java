@@ -1,5 +1,8 @@
 package com.example.ismailamrani.comptable.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +13,7 @@ import java.util.List;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class Product implements Item {
+public class Product implements Item, Parcelable {
 
     private int ID;
     private String Libelle;
@@ -66,6 +69,51 @@ public class Product implements Item {
         this.url = url;
         this.supplier = supplier;
     }
+
+    private Product(Parcel in) {
+        ID = in.readInt();
+        Libelle = in.readString();
+        PrixHT = in.readDouble();
+        PrixTTC = in.readDouble();
+        CodeBarre = in.readString();
+        Photo = in.readString();
+        Qte = in.readInt();
+        Locale_ID = in.readInt();
+        url = in.readString();
+        supplier = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(ID);
+        dest.writeString(Libelle);
+        dest.writeDouble(PrixHT);
+        dest.writeDouble(PrixTTC);
+        dest.writeString(CodeBarre);
+        dest.writeString(Photo);
+        dest.writeInt(Qte);
+        dest.writeInt(Locale_ID);
+        dest.writeString(url);
+        dest.writeInt(supplier);
+    }
+
+    public static final Parcelable.Creator<Product> CREATOR = new Parcelable.Creator<Product>() {
+
+        @Override
+        public Product createFromParcel(Parcel source) {
+            return new Product(source);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     /**
      * @param array of products in JSON format
