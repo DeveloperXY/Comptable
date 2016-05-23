@@ -2,14 +2,19 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Charge;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,8 +123,18 @@ public class ChargeAdapter extends RecyclerView.Adapter<ChargeAdapter.ViewHolder
 
         public void bind(Charge charge) {
             descriptionLabel.setText(charge.getDescription());
-            timeLabel.setText(charge.getDate());
             chargePriceLabel.setText(charge.getPrice() + " DH");
+
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                long dateInMillis = format.parse(charge.getDate()).getTime();
+                long now = System.currentTimeMillis();
+                timeLabel.setText(DateUtils.getRelativeTimeSpanString(
+                        dateInMillis, now, DateUtils.MINUTE_IN_MILLIS));
+
+            } catch (ParseException e) {
+                Toast.makeText(mContext, "Error parsing date", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -28,6 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,55 +145,7 @@ public class ChargesActivity extends AnimatedActivity {
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(
                 DatabaseAdapter.getInstance(this).getCurrentLocaleID());
         sendHTTPRequest(PhpAPI.getChargeByLocaleID, data, Method.POST,
-                new RequestListener() {
-                    @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("charge");
-                            List<Charge> charges = Charge.parseCharges(jsonArray);
-
-                            runOnUiThread(() -> {
-                                // To avoid the refresh flicker caused by the call to
-                                // populateRecyclerView(), check if the newly parsed
-                                // list of Charge objects is exactly the same as the
-                                // old one
-                                if (!ListComparison.areEqual(mCharges, charges)) {
-                                    mCharges = charges;
-                                    chargesRecyclerView.scrollToPosition(0);
-                                    populateRecyclerView();
-                                    calculateTotalPrice();
-                                }
-
-                                if(mCharges == null)
-                                    mCharges = new ArrayList<>();
-
-                                stopSwipeRefresh();
-                                toggleRecyclerviewState();
-                                chargeProgressbar.setVisibility(View.INVISIBLE);
-                            });
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> {
-                            Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
-                                    Toast.LENGTH_LONG).show();
-
-                            if (errorLayout.getVisibility() != View.VISIBLE) {
-                                errorLayout.setVisibility(View.VISIBLE);
-                                chargesRecyclerView.setVisibility(View.INVISIBLE);
-                                chargeProgressbar.setVisibility(View.INVISIBLE);
-                                footerLayout.setVisibility(View.INVISIBLE);
-                            }
-
-                            stopSwipeRefresh();
-                        });
-                    }
-                });
+                new FetchChargesListener());
     }
 
     private void calculateTotalPrice() {
@@ -211,5 +167,93 @@ public class ChargesActivity extends AnimatedActivity {
         errorLayout.setVisibility(View.INVISIBLE);
         // The footer layout should only be displayed in case the empty view wasn't
         footerLayout.setVisibility(emptyViewVis == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private class FetchChargesListener implements RequestListener {
+
+        private List<Charge> charges;
+
+        @Override
+        public void onRequestSucceeded(JSONObject response, int status) {
+            try {
+                JSONArray jsonArray = response.getJSONArray("charge");
+                charges = Charge.parseCharges(jsonArray);
+
+                // After retrieving the individual list items, retrieve the cuurent
+                // timing of the distant server
+                sendHTTPRequest(PhpAPI.getServerTime, null, Method.GET,
+                        new ServerTimeListener());
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onRequestFailed() {
+            runOnUiThread(() -> {
+                Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
+                        Toast.LENGTH_LONG).show();
+
+                handleRequestError();
+            });
+        }
+
+        private void handleRequestError() {
+            if (errorLayout.getVisibility() != View.VISIBLE) {
+                errorLayout.setVisibility(View.VISIBLE);
+                chargesRecyclerView.setVisibility(View.INVISIBLE);
+                chargeProgressbar.setVisibility(View.INVISIBLE);
+                footerLayout.setVisibility(View.INVISIBLE);
+            }
+
+            stopSwipeRefresh();
+        }
+
+        private class ServerTimeListener implements RequestListener {
+            @Override
+            public void onRequestSucceeded(JSONObject response, int status) {
+                try {
+                    String serverNowTime = response.getString("date");
+                    Log.i("DATE", "CURRENT SERVER DATE: " + serverNowTime);
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    long serverNowInMillis = format.parse(serverNowTime).getTime();
+
+                    runOnUiThread(() -> {
+                        // To avoid the refresh flicker caused by the call to
+                        // populateRecyclerView(), check if the newly parsed
+                        // list of Charge objects is exactly the same as the
+                        // old one
+                        if (!ListComparison.areEqual(mCharges, charges)) {
+                            mCharges = charges;
+                            chargesRecyclerView.scrollToPosition(0);
+                            populateRecyclerView();
+                            calculateTotalPrice();
+                        }
+
+                        if(mCharges == null)
+                            mCharges = new ArrayList<>();
+
+                        stopSwipeRefresh();
+                        toggleRecyclerviewState();
+                        chargeProgressbar.setVisibility(View.INVISIBLE);
+                    });
+
+                } catch (JSONException | ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onRequestFailed() {
+                runOnUiThread(() -> {
+                    Toast.makeText(ChargesActivity.this,
+                            "Error while retrieving server timing.",
+                            Toast.LENGTH_LONG).show();
+
+                    handleRequestError();
+                });
+            }
+        }
     }
 }
