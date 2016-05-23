@@ -92,13 +92,6 @@ public class OrdersActivity extends AnimatedActivity
         ft.commit();
     }
 
-    @Override
-    protected void setupActionBar() {
-        super.setupActionBar();
-
-        mActionBar.setActionBarListener(this);
-    }
-
     /**
      * Retrieves the type of orders to be currently displayed.
      */

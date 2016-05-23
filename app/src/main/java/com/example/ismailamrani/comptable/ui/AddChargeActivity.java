@@ -84,8 +84,10 @@ public class AddChargeActivity extends ColoredStatusBarActivity {
                 .show();
     }
 
-    private void setupActionBar() {
-        mActionBar.setActionBarListener(this);
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setTitle("Ajouter Une Charge");
         mActionBar.disableAddButton();
     }

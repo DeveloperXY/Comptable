@@ -55,7 +55,6 @@ public class FournisseurListActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Fournisseur");
     }
 

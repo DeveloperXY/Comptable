@@ -34,6 +34,10 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
             getWindow().setStatusBarColor(Color.parseColor("#3d5469"));
     }
 
+    protected void setupActionBar() {
+        mActionBar.setActionBarListener(this);
+    }
+
     @Override
     public void onMenuPressed() {
         Intent intent = new Intent(this, HomeActivity.class);

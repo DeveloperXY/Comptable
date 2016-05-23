@@ -102,7 +102,6 @@ public class StockActivity extends AnimatedActivity
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setActionBarListener(this);
         mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");
         mActionBar.isSearchable(true);

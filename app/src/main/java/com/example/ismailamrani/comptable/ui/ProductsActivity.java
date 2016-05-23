@@ -53,7 +53,6 @@ public class ProductsActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Produits");
     }
 

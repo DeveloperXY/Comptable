@@ -16,7 +16,6 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
@@ -81,8 +80,10 @@ public class SalesActivity extends ColoredStatusBarActivity {
                 (buttonView, isChecked) -> priceField.setEnabled(isChecked));
     }
 
-    private void setupActionBar() {
-        mActionBar.setActionBarListener(this);
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setTitle("Ventes");
     }
 

@@ -22,7 +22,10 @@ public abstract class AnimatedActivity extends ColoredStatusBarActivity {
     /**
      * Setup the action bar for the reveal animation.
      */
+    @Override
     protected void setupActionBar() {
+        super.setupActionBar();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mActionBar.setVisibility(View.INVISIBLE);
             actionbarImage.setImageResource(getIntent().getIntExtra("imageRes", -1));

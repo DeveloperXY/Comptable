@@ -54,7 +54,6 @@ public class ClientListActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Client");
     }
 

@@ -78,8 +78,10 @@ public class PurchasesActivity extends ColoredStatusBarActivity {
         productsListview.setAdapter(productAdapter);
     }
 
-    private void setupActionBar() {
-        mActionBar.setActionBarListener(this);
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setTitle("Achats");
         mActionBar.disableAddButton();
     }

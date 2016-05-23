@@ -52,10 +52,6 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
         mActionBar.setTitle(product.getLibelle());
     }
 
-    private void setupActionBar() {
-        mActionBar.setActionBarListener(this);
-    }
-
     @Override
     public void onAddPressed() {
         startActivity(new Intent(this, AddProductActivity.class));
