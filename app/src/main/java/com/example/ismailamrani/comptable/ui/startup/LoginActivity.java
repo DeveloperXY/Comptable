@@ -66,9 +66,10 @@ public class LoginActivity extends ColoredStatusBarActivity {
 
                                         // Move to main menu
                                         shouldFinish = true;
-                                        ActivityTransition.startActivityWithSharedElement(
-                                                LoginActivity.this, HomeActivity.class,
-                                                logoImage, "header");
+                                        runOnUiThread(() ->
+                                                ActivityTransition.startActivityWithSharedElement(
+                                                        LoginActivity.this, HomeActivity.class,
+                                                        logoImage, "header"));
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();

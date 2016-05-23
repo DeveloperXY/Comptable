@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
@@ -22,10 +20,9 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class OrdersActivity extends ColoredStatusBarActivity
+public class OrdersActivity extends AnimatedActivity
         implements OrdersListFragment.OrderListFragListener,
         OrderDetailsFragment.OrderDetailsFragListener {
 
@@ -45,6 +42,7 @@ public class OrdersActivity extends ColoredStatusBarActivity
 
         currentOrderType = retrieveOrdersType();
         setupActionBar();
+        setupRevealTransition();
 
         displayFragment(0); // always display first fragment at startup
     }
@@ -93,7 +91,10 @@ public class OrdersActivity extends ColoredStatusBarActivity
         ft.commit();
     }
 
+    @Override
     protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
     }
 

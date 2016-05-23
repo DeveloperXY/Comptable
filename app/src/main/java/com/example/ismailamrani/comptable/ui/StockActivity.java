@@ -18,7 +18,6 @@ import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -36,7 +35,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class StockActivity extends ColoredStatusBarActivity
+public class StockActivity extends AnimatedActivity
         implements SearchListener, SearchView.OnQueryTextListener {
 
     private static final int REQUEST_ADD_PRODUCT = 100;
@@ -81,6 +80,9 @@ public class StockActivity extends ColoredStatusBarActivity
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @Bind(R.id.actionbarImage)
+    ImageView actionbarImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,7 @@ public class StockActivity extends ColoredStatusBarActivity
         ButterKnife.bind(this);
 
         setupActionBar();
+        setupRevealTransition();
         setupRecyclerView();
         setupSearchView();
         setupSwipeRefresh();
@@ -97,7 +100,10 @@ public class StockActivity extends ColoredStatusBarActivity
         refresh(); // Must be called last
     }
 
-    private void setupActionBar() {
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
         mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");

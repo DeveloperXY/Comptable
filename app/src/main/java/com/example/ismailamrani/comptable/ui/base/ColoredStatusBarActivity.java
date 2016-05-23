@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
@@ -19,6 +20,10 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
     @Nullable
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
+
+    @Nullable
+    @Bind(R.id.actionbarImage)
+    protected ImageView actionbarImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

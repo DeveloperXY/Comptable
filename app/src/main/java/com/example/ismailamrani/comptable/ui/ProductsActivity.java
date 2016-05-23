@@ -9,7 +9,6 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -28,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class ProductsActivity extends ColoredStatusBarActivity {
+public class ProductsActivity extends AnimatedActivity {
 
     @Bind(R.id.List)
     ListView productsListView;
@@ -45,10 +44,14 @@ public class ProductsActivity extends ColoredStatusBarActivity {
         mDatabaseAdapter = DatabaseAdapter.getInstance(this);
 
         setupActionBar();
+        setupRevealTransition();
         fetchProducts();
     }
 
-    private void setupActionBar() {
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Produits");
     }

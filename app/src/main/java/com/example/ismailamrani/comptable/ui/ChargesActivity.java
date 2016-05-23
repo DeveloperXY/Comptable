@@ -15,7 +15,6 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
 import com.example.ismailamrani.comptable.models.Charge;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -34,7 +33,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ChargesActivity extends ColoredStatusBarActivity {
+public class ChargesActivity extends AnimatedActivity {
 
     private static final int REQUEST_ADD_CHARGE = 3;
 
@@ -78,6 +77,7 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
+        setupRevealTransition();
         setupRecyclerView();
         setupSwipeRefresh();
 
@@ -102,7 +102,10 @@ public class ChargesActivity extends ColoredStatusBarActivity {
         }
     }
 
-    private void setupActionBar() {
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Charges");
     }

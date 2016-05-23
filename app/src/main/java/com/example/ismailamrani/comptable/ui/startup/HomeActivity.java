@@ -3,6 +3,8 @@ package com.example.ismailamrani.comptable.ui.startup;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 import com.example.ismailamrani.comptable.utils.Orders;
 
@@ -70,40 +73,62 @@ public class HomeActivity extends ColoredStatusBarActivity {
             R.id.ventes, R.id.achat, R.id.fournis})
     public void OnClick(View view) {
         Class<?> targetActivity;
+        @IdRes int clickedImageID; // the ID of the clicked ImageView
+        @DrawableRes int clickedImageResID; // The resource ID of the clicked image
         String orderType = "";
 
         switch (view.getId()) {
             case R.id.produit:
                 targetActivity = ProductsActivity.class;
+                clickedImageID = R.id.productsMenuImage;
+                clickedImageResID = R.mipmap.ic_produit;
                 break;
             case R.id.client:
                 targetActivity = ClientListActivity.class;
+                clickedImageID = R.id.clientsMenuImage;
+                clickedImageResID = R.mipmap.ic_client;
                 break;
             case R.id.chargee:
                 targetActivity = ChargesActivity.class;
+                clickedImageID = R.id.chargesMenuImage;
+                clickedImageResID = R.mipmap.ic_charge;
                 break;
             case R.id.fournis:
                 targetActivity = FournisseurListActivity.class;
+                clickedImageID = R.id.supplierMenuImage;
+                clickedImageResID = R.mipmap.ic_fournisseur;
                 break;
             case R.id.stock:
                 targetActivity = StockActivity.class;
+                clickedImageID = R.id.stockMenuImage;
+                clickedImageResID = R.mipmap.ic_stock;
                 break;
             case R.id.achat:
                 targetActivity = OrdersActivity.class;
+                clickedImageID = R.id.purchasesMenuImage;
+                clickedImageResID = R.mipmap.ic_buy;
                 orderType = Orders.PURCHASE;
                 break;
             case R.id.ventes:
                 targetActivity = OrdersActivity.class;
+                clickedImageID = R.id.salesMenuImage;
+                clickedImageResID = R.mipmap.ic_sell;
                 orderType = Orders.SALE;
                 break;
             default:
                 targetActivity = null;
+                clickedImageID = -1;
+                clickedImageResID = -1;
         }
 
+        View clickedImage = findViewById(clickedImageID);
+
         Intent intent = new Intent(this, targetActivity);
+        intent.putExtra("imageRes", clickedImageResID);
         if (targetActivity == OrdersActivity.class)
             intent.putExtra("orderType", orderType);
 
-        startActivity(intent);
+        ActivityTransition.startActivityWithSharedElement(this, intent,
+                clickedImage, "menuAnim");
     }
 }

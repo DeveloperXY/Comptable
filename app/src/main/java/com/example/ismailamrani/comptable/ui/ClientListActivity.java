@@ -7,9 +7,7 @@ import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ClientAdapter;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.ClientModel;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -34,7 +32,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Redouane on 31/03/2016.
  */
-public class ClientListActivity extends ColoredStatusBarActivity {
+public class ClientListActivity extends AnimatedActivity {
     ListView list;
     ArrayList<ClientModel> List = new ArrayList<>();
 
@@ -45,12 +43,16 @@ public class ClientListActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
+        setupRevealTransition();
 
         list = (ListView) findViewById(R.id.Listclient);
         new GetData().execute(PhpAPI.getClient);
     }
 
-    private void setupActionBar() {
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Client");
     }

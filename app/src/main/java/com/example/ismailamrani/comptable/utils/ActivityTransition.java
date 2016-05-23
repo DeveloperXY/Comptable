@@ -32,4 +32,18 @@ public class ActivityTransition {
             context.startActivity(intent, transitionActivityOptions.toBundle());
         }
     }
+
+    public static void startActivityWithSharedElement(Context context,
+                                                      Intent intent,
+                                                      View sharedView,
+                                                      String transitionName) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            context.startActivity(intent);
+        else {
+            ActivityOptions transitionActivityOptions =
+                    ActivityOptions.makeSceneTransitionAnimation(
+                            (Activity) context, sharedView, transitionName);
+            context.startActivity(intent, transitionActivityOptions.toBundle());
+        }
+    }
 }

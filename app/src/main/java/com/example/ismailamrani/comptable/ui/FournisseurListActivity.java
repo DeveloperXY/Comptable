@@ -8,9 +8,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
-import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;
@@ -35,7 +33,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class FournisseurListActivity extends ColoredStatusBarActivity {
+public class FournisseurListActivity extends AnimatedActivity {
 
     ListView list;
     ArrayList<Supplier> ListF = new ArrayList<>();
@@ -47,11 +45,15 @@ public class FournisseurListActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
+        setupRevealTransition();
         list = (ListView) findViewById(R.id.Listfournisseur);
         new GetData().execute(PhpAPI.getFournisseur);
     }
 
-    private void setupActionBar() {
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
         mActionBar.setActionBarListener(this);
         mActionBar.setTitle("Fournisseur");
     }

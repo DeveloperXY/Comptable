@@ -89,10 +89,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/productsMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_produit"/>
+                            android:src="@mipmap/ic_produit"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -155,10 +157,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/stockMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_stock"/>
+                            android:src="@mipmap/ic_stock"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -235,10 +239,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/salesMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_sell"/>
+                            android:src="@mipmap/ic_sell"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -301,10 +307,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/purchasesMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_buy"/>
+                            android:src="@mipmap/ic_buy"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -380,10 +388,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/comptabiliteMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_comp"/>
+                            android:src="@mipmap/ic_comp"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -446,10 +456,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/chargesMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_charge"/>
+                            android:src="@mipmap/ic_charge"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -526,10 +538,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/clientsMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_client"/>
+                            android:src="@mipmap/ic_client"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
@@ -592,10 +606,12 @@
                         android:layout_weight="34">
 
                         <ImageView
+                            android:id="@+id/supplierMenuImage"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
-                            android:src="@mipmap/ic_fournisseur"/>
+                            android:src="@mipmap/ic_fournisseur"
+                            android:transitionName="menuAnim"/>
 
                     </RelativeLayout>
 
