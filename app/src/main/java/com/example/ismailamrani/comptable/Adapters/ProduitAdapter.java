@@ -110,7 +110,7 @@ public class ProduitAdapter extends BaseAdapter {
 
         afficher.setOnClickListener(v -> {
             Intent i = new Intent(context, ProductDetailsActivity.class);
-            i.putExtra("id", mProducts.get(position).getID());
+            i.putExtra("product", mProducts.get(position));
             context.startActivity(i);
         });
 

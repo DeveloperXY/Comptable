@@ -59,6 +59,18 @@ public class JSONUtils {
         return data;
     }
 
+    public static JSONObject bundleIDToJSON(int id) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("ID", id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
     public static JSONObject bundleChargeIDToJSON(int chargeID) {
         JSONObject data = new JSONObject();
 

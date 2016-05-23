@@ -117,7 +117,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
 
             v.setOnClickListener(view -> {
                 Intent intent = new Intent(mContext, ProductDetailsActivity.class);
-                intent.putExtra("id", mProducts.get(getLayoutPosition()).getID());
+                intent.putExtra("product", mProducts.get(getLayoutPosition()));
 
                 ActivityTransition.startActivityWithMultipleSharedElements(
                         mContext, intent,
