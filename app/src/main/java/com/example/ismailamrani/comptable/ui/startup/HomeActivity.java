@@ -1,7 +1,9 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -39,11 +41,24 @@ public class HomeActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        setupWindowAnimations();
+        setupLocale();
+    }
+
+    private void setupLocale() {
         mDatabaseAdapter = DatabaseAdapter.getInstance(this);
         String currentLocale = mDatabaseAdapter.getUserAddress();
         int currentLocaleID = mDatabaseAdapter.getCurrentLocaleID();
         Log.i("LOCALE", "ID: " + currentLocaleID);
         localeLabel.setText(currentLocale);
+    }
+
+    private void setupWindowAnimations() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Fade fade = new Fade();
+            fade.setDuration(1000);
+            getWindow().setEnterTransition(fade);
+        }
     }
 
     /**
