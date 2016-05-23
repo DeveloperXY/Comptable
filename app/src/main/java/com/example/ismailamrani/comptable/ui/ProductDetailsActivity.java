@@ -4,19 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,43 +39,17 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
-        int id = getIntent().getExtras().getInt("id");
+        Product product = getIntent().getParcelableExtra("product");
 
-        sendHTTPRequest(PhpAPI.getProduitById, JSONUtils.bundleIDToJSON(id), Method.POST,
-                new RequestListener() {
-                    @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            try {
-                                JSONArray listproduits = response.getJSONArray("produit");
-
-                                for (int i = 0; i < listproduits.length(); i++) {
-                                    JSONObject usr = listproduits.getJSONObject(i);
-                                    Picasso.with(getApplicationContext()).load(PhpAPI.IpBackend + "produits/" + usr.getString("photo")).into(Image);
-                                    Libelle.setText(usr.getString("libelle"));
-                                    PrixHT.setText(usr.getString("prixHT"));
-                                    PrixTTC.setText(usr.getString("prixTTC"));
-                                    Code.setText(usr.getString("codeBar"));
-                                    Stock.setText(usr.getString("qte"));
-
-                                    mActionBar.setTitle(usr.getString("libelle"));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        } else if (status == 0) {
-                            Toast.makeText(getApplicationContext(), "Produit Not Found  !!!!",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                                "Produit Not Found  !!!!", Toast.LENGTH_LONG).show());
-                    }
-                });
+        Picasso.with(getApplicationContext())
+                .load(PhpAPI.IpBackend_IMAGES + product.getPhoto())
+                .into(Image);
+        Libelle.setText(product.getLibelle());
+        PrixHT.setText(product.getPrixHT() + "");
+        PrixTTC.setText(product.getPrixTTC() + "");
+        Code.setText(product.getCodeBarre());
+        Stock.setText(product.getQte() + "");
+        mActionBar.setTitle(product.getLibelle());
     }
 
     private void setupActionBar() {
