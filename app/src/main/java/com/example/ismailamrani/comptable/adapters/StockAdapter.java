@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
+import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -116,7 +118,12 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
             v.setOnClickListener(view -> {
                 Intent intent = new Intent(mContext, ProductDetailsActivity.class);
                 intent.putExtra("id", mProducts.get(getLayoutPosition()).getID());
-                mContext.startActivity(intent);
+
+                ActivityTransition.startActivityWithMultipleSharedElements(
+                        mContext, intent,
+                        Pair.create(productLabel, "productLabelAnim"),
+                        Pair.create(productImage, "productImageAnim")
+                );
             });
         }
 

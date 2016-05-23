@@ -80,9 +80,6 @@ public class StockActivity extends AnimatedActivity
     @Bind(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @Bind(R.id.actionbarImage)
-    ImageView actionbarImage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

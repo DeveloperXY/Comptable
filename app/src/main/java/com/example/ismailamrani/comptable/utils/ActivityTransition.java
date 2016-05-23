@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Pair;
 import android.view.View;
 
 /**
@@ -43,6 +44,18 @@ public class ActivityTransition {
             ActivityOptions transitionActivityOptions =
                     ActivityOptions.makeSceneTransitionAnimation(
                             (Activity) context, sharedView, transitionName);
+            context.startActivity(intent, transitionActivityOptions.toBundle());
+        }
+    }
+
+    public static void startActivityWithMultipleSharedElements(
+            Context context, Intent intent, Pair<View, String>... sharedElements) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            context.startActivity(intent);
+        else {
+            ActivityOptions transitionActivityOptions =
+                    ActivityOptions.makeSceneTransitionAnimation(
+                            (Activity) context, sharedElements);
             context.startActivity(intent, transitionActivityOptions.toBundle());
         }
     }

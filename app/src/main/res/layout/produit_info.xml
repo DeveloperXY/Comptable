@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:costum="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="246">
+              xmlns:costum="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="246">
 
-    <include layout="@layout/custom_actionbar_include" />
+    <include layout="@layout/custom_actionbar_include"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,31 +27,33 @@
                     android:id="@+id/Imageaff"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:transitionName="productImageAnim"/>
 
                 <com.example.ismailamrani.comptable.customitems.CustomHeightLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    costum:size="20"
+                    android:layout_alignParentBottom="true"
                     android:background="#9048627b"
-                    android:layout_alignParentBottom="true">
+                    android:transitionName="productLabelAnim"
+                    costum:size="20">
 
                     <com.example.ismailamrani.comptable.customitems.CustomTextView
                         android:id="@+id/Libelleaff"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        costum:Size="14"
-                        costum:Font="cgrb.ttf"
-                        costum:Arabic=""
-                        costum:Frensh=""
-                        android:textColor="#ffffff"
                         android:layout_centerVertical="true"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:shadowColor="#000000"
-                        android:shadowRadius="2"
                         android:shadowDx="2"
-                        android:shadowDy="2"/>
+                        android:shadowDy="2"
+                        android:shadowRadius="2"
+                        android:textColor="#ffffff"
+                        costum:Arabic=""
+                        costum:Font="cgrb.ttf"
+                        costum:Frensh=""
+                        costum:Size="14"/>
 
                 </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
 
@@ -60,8 +62,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -77,21 +79,21 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="13"
-                            costum:Font="cgrb.ttf"
+                            android:textColor="#48627b"
                             costum:Arabic="منتوج"
+                            costum:Font="cgrb.ttf"
                             costum:Frensh="Prix HT : "
-                            android:textColor="#48627b"/>
+                            costum:Size="13"/>
 
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/PrixHTaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="12"
-                            costum:Font="cgr.ttf"
+                            android:textColor="#5a5a5a"
                             costum:Arabic=""
+                            costum:Font="cgr.ttf"
                             costum:Frensh=""
-                            android:textColor="#5a5a5a"/>
+                            costum:Size="12"/>
 
                     </LinearLayout>
 
@@ -103,21 +105,21 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="13"
-                            costum:Font="cgrb.ttf"
+                            android:textColor="#48627b"
                             costum:Arabic="منتوج"
+                            costum:Font="cgrb.ttf"
                             costum:Frensh="Prix TTC : "
-                            android:textColor="#48627b"/>
+                            costum:Size="13"/>
 
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/PrixTTCaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="12"
-                            costum:Font="cgr.ttf"
+                            android:textColor="#5a5a5a"
                             costum:Arabic=""
+                            costum:Font="cgr.ttf"
                             costum:Frensh=""
-                            android:textColor="#5a5a5a"/>
+                            costum:Size="12"/>
 
                     </LinearLayout>
 
@@ -129,45 +131,45 @@
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="13"
-                            costum:Font="cgrb.ttf"
+                            android:textColor="#48627b"
                             costum:Arabic="منتوج"
+                            costum:Font="cgrb.ttf"
                             costum:Frensh="Quantité : "
-                            android:textColor="#48627b"/>
+                            costum:Size="13"/>
 
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/Stockaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="12"
-                            costum:Font="cgr.ttf"
+                            android:textColor="#5a5a5a"
                             costum:Arabic=""
+                            costum:Font="cgr.ttf"
                             costum:Frensh=""
-                            android:textColor="#5a5a5a"/>
+                            costum:Size="12"/>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="30dp">
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_codebar"
-                            android:paddingRight="10dp"/>
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_codebar"/>
 
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
                             android:id="@+id/Codeaff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            costum:Size="12"
-                            costum:Font="cgr.ttf"
+                            android:textColor="#5a5a5a"
                             costum:Arabic=""
+                            costum:Font="cgr.ttf"
                             costum:Frensh=""
-                            android:textColor="#5a5a5a"/>
+                            costum:Size="12"/>
 
                     </LinearLayout>
 

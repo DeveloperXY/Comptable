@@ -40,7 +40,9 @@ public abstract class AnimatedActivity extends ColoredStatusBarActivity {
 
                 @Override
                 public void onTransitionEnd(Transition transition) {
-                    // Removing listener here is very important because shared element transition is executed again backwards on exit. If we don't remove the listener this code will be triggered again.
+                    // Removing listener here is very important because shared element transition
+                    // is executed again backwards on exit.
+                    // If we don't remove the listener this code will be triggered again.
                     transition.removeListener(this);
                     animateRevealShow(mActionBar);
                 }
