@@ -18,16 +18,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
 public class ProductDetailsActivity extends ColoredStatusBarActivity {
-    ImageView Image;
-    int id;
 
-    TextView PrixHT, PrixTTC, Stock, Code, Libelle;
+    @Bind(R.id.Imageaff)
+    ImageView Image;
+    @Bind(R.id.PrixHTaff)
+    TextView PrixHT;
+    @Bind(R.id.PrixTTCaff)
+    TextView PrixTTC;
+    @Bind(R.id.Codeaff)
+    TextView Code;
+    @Bind(R.id.Stockaff)
+    TextView Stock;
+    @Bind(R.id.Libelleaff)
+    TextView Libelle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +46,8 @@ public class ProductDetailsActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
+        int id = getIntent().getExtras().getInt("id");
 
-        Image = (ImageView) findViewById(R.id.Imageaff);
-        PrixHT = (TextView) findViewById(R.id.PrixHTaff);
-        PrixTTC = (TextView) findViewById(R.id.PrixTTCaff);
-        Code = (TextView) findViewById(R.id.Codeaff);
-        Stock = (TextView) findViewById(R.id.Stockaff);
-        Libelle = (TextView) findViewById(R.id.Libelleaff);
-
-        Intent i = getIntent();
-        id = i.getExtras().getInt("id");
         sendHTTPRequest(PhpAPI.getProduitById, JSONUtils.bundleIDToJSON(id), Method.POST,
                 new RequestListener() {
                     @Override
