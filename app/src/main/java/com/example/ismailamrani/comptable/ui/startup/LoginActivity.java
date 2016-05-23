@@ -18,8 +18,6 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import okhttp3.OkHttpClient;
-
 public class LoginActivity extends ColoredStatusBarActivity {
     private DatabaseAdapter databaseAdapter;
 
@@ -29,7 +27,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_login);
 
         databaseAdapter = DatabaseAdapter.getInstance(this);
 

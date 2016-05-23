@@ -1,8 +1,5 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -16,6 +13,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -80,20 +78,10 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                                     response.getJSONArray("activation").getJSONObject(0));
                             databaseAdapter.activateApplication(activation);
 
-                            Intent intent = new Intent(ActivationActivity.this, LoginActivity.class);
                             shouldFinish = true;
-
-                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-                                startActivity(intent);
-                            else {
-                                View sharedView = imageView;
-                                String transitionName = "header";
-
-                                ActivityOptions transitionActivityOptions =
-                                        ActivityOptions.makeSceneTransitionAnimation(
-                                                ActivationActivity.this, sharedView, transitionName);
-                                startActivity(intent, transitionActivityOptions.toBundle());
-                            }
+                            ActivityTransition.startActivityWithSharedElement(
+                                    ActivationActivity.this, LoginActivity.class,
+                                    imageView, "header");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
