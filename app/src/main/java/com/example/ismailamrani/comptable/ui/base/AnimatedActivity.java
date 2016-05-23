@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui;
+package com.example.ismailamrani.comptable.ui.base;
 
 import android.animation.Animator;
 import android.annotation.TargetApi;
@@ -10,7 +10,6 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 23/05/2016.
@@ -24,8 +23,10 @@ public abstract class AnimatedActivity extends ColoredStatusBarActivity {
      * Setup the action bar for the reveal animation.
      */
     protected void setupActionBar() {
-        mActionBar.setVisibility(View.INVISIBLE);
-        actionbarImage.setImageResource(getIntent().getIntExtra("imageRes", -1));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mActionBar.setVisibility(View.INVISIBLE);
+            actionbarImage.setImageResource(getIntent().getIntExtra("imageRes", -1));
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

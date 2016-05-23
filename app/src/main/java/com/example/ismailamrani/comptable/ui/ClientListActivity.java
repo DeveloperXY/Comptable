@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ClientAdapter;
 import com.example.ismailamrani.comptable.models.ClientModel;
+import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
 import com.example.ismailamrani.comptable.webservice.getQuery;

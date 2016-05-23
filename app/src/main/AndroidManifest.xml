@@ -102,7 +102,7 @@
         <activity android:name=".ui.OrdersActivity"/>
         <activity android:name=".ui.ChargesActivity">
         </activity>
-        <activity android:name=".ui.AnimatedActivity">
+        <activity android:name=".ui.base.AnimatedActivity">
         </activity>
     </application>
 

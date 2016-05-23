@@ -12,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:transitionName="menuAnim"/>
+        android:transitionName="menuAnim"
+        android:layout_margin="16dp"/>
 
     <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
         android:id="@+id/MyActionBar"
