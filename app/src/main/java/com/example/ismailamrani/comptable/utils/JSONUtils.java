@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 /**
  * Created by Mohammed Aouf ZOUAG on 04/05/2016.
  */
@@ -59,16 +61,19 @@ public class JSONUtils {
         return data;
     }
 
-    public static JSONObject bundleIDToJSON(int id) {
-        JSONObject data = new JSONObject();
+    public static JSONObject merge(JSONObject a, JSONObject b) {
+        Iterator<String> it = b.keys();
 
-        try {
-            data.put("ID", id);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        while (it.hasNext()) {
+            String key = it.next();
+            try {
+                a.put(key, b.get(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
-        return data;
+        return a;
     }
 
     public static JSONObject bundleChargeIDToJSON(int chargeID) {

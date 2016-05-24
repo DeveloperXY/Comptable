@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -47,10 +49,20 @@ public class LoginActivity extends ColoredStatusBarActivity {
             String username = nom.getText().toString();
             String password = motdepass.getText().toString();
             User user = validateUserCredentials(username, password);
+            int currentCompanyID = databaseAdapter.getUserCompanyID();
+            Log.i("COMPANY", "#" + currentCompanyID);
 
             if (user != null) {
+                JSONObject params = user.toJSON();
+                try {
+                    params.put("companyID", currentCompanyID);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.i("ERROR", "Unable to retrieve company ID.");
+                }
+
                 // Send the login POST request.
-                sendHTTPRequest(PhpAPI.login, user.toJSON(), Method.POST,
+                sendHTTPRequest(PhpAPI.login, params, Method.POST,
                         new RequestListener() {
                             @Override
                             public void onRequestSucceeded(JSONObject response, int status) {
@@ -60,6 +72,10 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         // the response
                                         JSONObject loggedInUser = response.getJSONArray("user")
                                                 .getJSONObject(0);
+                                        JSONObject local = response.getJSONArray("locals")
+                                                .getJSONObject(0);
+                                        loggedInUser = JSONUtils.merge(loggedInUser, local);
+                                        Log.i("TOTAL", "JSON: " + loggedInUser);
 
                                         // Save user to local disk
                                         saveUserToInternalDatabase(loggedInUser);
