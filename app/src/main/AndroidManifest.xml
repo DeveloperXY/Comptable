@@ -69,14 +69,6 @@
             android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".ui.AddFournisseurActivity"/>
         <activity android:name=".ui.EditFournisseurActivity"/>
-        <!--
-             ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-
         <activity
             android:name=".ui.SalesActivity"
             android:configChanges="orientation"
@@ -96,14 +88,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.orders.SaleOrdersActivity"/>
-        <activity android:name=".ui.orders.PurchaseOrdersActivity"/>
         <activity android:name=".ui.startup.ActivationActivity"/>
         <activity android:name=".ui.OrdersActivity"/>
-        <activity android:name=".ui.ChargesActivity">
-        </activity>
-        <activity android:name=".ui.base.AnimatedActivity">
-        </activity>
+        <activity android:name=".ui.ChargesActivity"/>
     </application>
 
 </manifest>
