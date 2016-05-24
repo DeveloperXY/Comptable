@@ -193,6 +193,18 @@ public class DatabaseAdapter {
         return address;
     }
 
+    public int getUserCompanyID() {
+        int id = -1;
+        Cursor cursor = db.query(true, ACTIVATION_TABLE, new String[]{KEY_COMPANY_ID},
+                null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+            id = cursor.getInt(0);
+
+        cursor.close();
+        return id;
+    }
+
     /**
      * @return the locale ID of the current user.
      */
