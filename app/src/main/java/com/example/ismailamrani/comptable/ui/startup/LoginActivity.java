@@ -75,15 +75,15 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         e.printStackTrace();
                                     }
                                 } else if (status == 0)
-                                    Toast.makeText(LoginActivity.this,
+                                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
                                             "Unregistered user name.",
-                                            Toast.LENGTH_LONG).show();
+                                            Toast.LENGTH_LONG).show());
                             }
 
                             @Override
                             public void onRequestFailed() {
-                                Toast.makeText(LoginActivity.this,
-                                        "Error while logging in.", Toast.LENGTH_LONG).show();
+                                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                                        "Error while logging in.", Toast.LENGTH_LONG).show());
                             }
                         });
             }

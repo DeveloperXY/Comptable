@@ -217,8 +217,7 @@ public class ChargesActivity extends RefreshableActivity {
                                 long secondsDifference = (currentServerTime - dateInMillis) / 1000;
 
                                 if (secondsDifference < 60) {
-                                    charge.setDateFrom(secondsDifference == 1 ? "1 second ago" :
-                                            ((currentServerTime - dateInMillis) / 1000) + " seconds ago");
+                                    charge.setDateFrom("A few seconds ago");
                                 } else {
                                     charge.setDateFrom(
                                             DateUtils.getRelativeTimeSpanString(
