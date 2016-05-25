@@ -3,7 +3,6 @@ package com.example.ismailamrani.comptable.adapters;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +22,14 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     /**
      * The index of the selected drawer item.
      */
-    private int selectedItem;
+    private int selectedIndex;
 
     public DrawerRecyclerAdapter(String[] titles, TypedArray icons, Context context) {
         this.titles = titles;
         this.icons = icons;
         this.context = context;
 
-        selectedItem = -1;
+        selectedIndex = -1;
     }
 
     @Override
@@ -51,8 +50,13 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     @Override
     public void onBindViewHolder(DrawerViewHolder holder, int position) {
         if (position != 0) {
-            if (selectedItem != -1 && selectedItem == position)
-                holder.itemView.setSelected(true);
+            holder.itemView.setSelected(selectedIndex == position);
+            holder.itemView
+                    .setOnClickListener(v -> {
+                        notifyItemChanged(selectedIndex);
+                        selectedIndex = position;
+                        notifyItemChanged(selectedIndex);
+                    });
 
             holder.itemLabel.setText(titles[position - 1]);
             holder.iconImage.setImageResource(icons.getResourceId(position - 1, -1));
@@ -70,12 +74,11 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
         else return 1;
     }
 
-    public void setSelectedItem(int index) {
-        selectedItem = index;
-        notifyItemChanged(index);
+    public void setSelectedIndex(int index) {
+        selectedIndex = index;
     }
 
-    public class DrawerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class DrawerViewHolder extends RecyclerView.ViewHolder {
         TextView itemLabel;
         ImageView iconImage;
         Context context;
@@ -83,27 +86,11 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
         public DrawerViewHolder(View drawerItem, int itemType, Context context) {
             super(drawerItem);
             this.context = context;
-            drawerItem.setOnClickListener(this);
+
             if (itemType == 1) {
                 itemLabel = (TextView) itemView.findViewById(R.id.itemLabel);
                 iconImage = (ImageView) itemView.findViewById(R.id.iconImage);
-
-                Log.i("ADAPTER", "#1: " + selectedItem);
-                Log.i("ADAPTER", "#2: " + getLayoutPosition());
-
-                if (selectedItem != -1 && selectedItem == getLayoutPosition())
-                    drawerItem.setSelected(true);
-
-                drawerItem.setOnClickListener(v -> drawerItem.setSelected(true));
             }
-        }
-
-        /**
-         * This defines onClick for every item with respect to its position.
-         */
-        @Override
-        public void onClick(View v) {
-
         }
     }
 }

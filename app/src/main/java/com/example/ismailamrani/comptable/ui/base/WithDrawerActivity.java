@@ -87,7 +87,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 selectedIndex = -1;
         }
 
-        mDrawerRecyclerAdapter.setSelectedItem(selectedIndex);
+        mDrawerRecyclerAdapter.setSelectedIndex(selectedIndex);
     }
 
     @Override
