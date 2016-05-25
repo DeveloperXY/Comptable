@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/empty_view_include" />
-
-    <include layout="@layout/network_error_include" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="246">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/search_layout_include" />
+        <include layout="@layout/empty_view_include"/>
 
-        <include layout="@layout/custom_actionbar_include" />
+        <include layout="@layout/network_error_include"/>
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="226">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="246">
 
-            <include layout="@layout/refreshable_recycler_view"/>
+            <include layout="@layout/search_layout_include"/>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+            <include layout="@layout/custom_actionbar_include"/>
 
-    </LinearLayout>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="226">
 
-    <include layout="@layout/progressbar_layout_include" />
+                <include layout="@layout/refreshable_recycler_view"/>
 
-</RelativeLayout>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/progressbar_layout_include"/>
+
+    </RelativeLayout>
+</android.support.v4.widget.DrawerLayout>

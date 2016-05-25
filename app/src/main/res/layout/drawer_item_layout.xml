@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:costum="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:background="@drawable/activation_field_background"
+              android:gravity="center"
+              android:padding="8dp">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/iconImage"
+        android:src="@mipmap/ic_buy"
+        android:layout_weight="30"/>
+
+    <com.example.ismailamrani.comptable.customitems.CustomTextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        costum:Arabic="المخزون"
+        costum:Font="cgr.ttf"
+        costum:Frensh="Stock"
+        costum:Size="15"
+        android:text="Stock"
+        android:layout_weight="70"
+        android:gravity="left|center_vertical"
+        android:textSize="24sp"
+        android:id="@+id/itemLabel"/>
+</LinearLayout>
