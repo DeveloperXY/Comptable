@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:costum="http://schemas.android.com/apk/res-auto"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="60dp"
-              android:background="@drawable/activation_field_background"
-              android:gravity="center"
-              android:padding="8dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:costum="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal"
+                android:background="@drawable/drawer_item_background"
+                android:gravity="center_vertical">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
         android:id="@+id/iconImage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:src="@mipmap/ic_buy"
-        android:layout_weight="30"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"/>
 
     <com.example.ismailamrani.comptable.customitems.CustomTextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:textColor="#ffffff"
+        android:id="@+id/itemLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stock"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
         costum:Arabic="المخزون"
         costum:Font="cgr.ttf"
         costum:Frensh="Stock"
         costum:Size="15"
-        android:text="Stock"
-        android:layout_weight="70"
-        android:gravity="left|center_vertical"
-        android:textSize="24sp"
-        android:id="@+id/itemLabel"/>
-</LinearLayout>
+        android:layout_toRightOf="@+id/iconImage"
+        android:layout_centerVertical="true"
+        />
+</RelativeLayout>

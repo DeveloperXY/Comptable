@@ -24,6 +24,6 @@
         <item>@mipmap/ic_fournisseur</item>
         <item>@mipmap/ic_charge</item>
         <item>@mipmap/ic_comp</item>
-        <item>@mipmap/ic_logout</item>
+        <item>@drawable/ic_logout</item>
     </string-array>
 </resources>
