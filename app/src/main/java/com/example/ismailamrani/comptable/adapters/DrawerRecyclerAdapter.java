@@ -1,7 +1,5 @@
 package com.example.ismailamrani.comptable.adapters;
 
-import android.content.Context;
-import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.DrawerItem;
+
+import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 25/05/2016.
  */
 public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAdapter.DrawerViewHolder> {
-    private String[] titles;
-    private TypedArray icons;
-    private Context context;
+    private List<DrawerItem> mItems;
 
     /**
      * The index of the selected drawer item.
@@ -25,10 +24,8 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     private int selectedIndex;
     private DrawerClickListener listener;
 
-    public DrawerRecyclerAdapter(String[] titles, TypedArray icons, Context context) {
-        this.titles = titles;
-        this.icons = icons;
-        this.context = context;
+    public DrawerRecyclerAdapter(List<DrawerItem> items) {
+        this.mItems = items;
 
         selectedIndex = -1;
     }
@@ -39,10 +36,10 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
 
         if (viewType == 1) {
             View itemLayout = layoutInflater.inflate(R.layout.drawer_item_layout, parent, false);
-            return new DrawerViewHolder(itemLayout, viewType, context);
+            return new DrawerViewHolder(itemLayout, viewType);
         } else if (viewType == 0) {
             View itemHeader = layoutInflater.inflate(R.layout.nav_header_layout, parent, false);
-            return new DrawerViewHolder(itemHeader, viewType, context);
+            return new DrawerViewHolder(itemHeader, viewType);
         }
 
         return null;
@@ -62,14 +59,16 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                             listener.onItemClicked(position - 1);
                     });
 
-            holder.itemLabel.setText(titles[position - 1]);
-            holder.iconImage.setImageResource(icons.getResourceId(position - 1, -1));
+            DrawerItem item = mItems.get(position - 1);
+
+            holder.itemLabel.setText(item.getTitle());
+            holder.iconImage.setImageResource(item.getIcon());
         }
     }
 
     @Override
     public int getItemCount() {
-        return titles.length + 1;
+        return mItems.size() + 1;
     }
 
     @Override
@@ -85,11 +84,9 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     public class DrawerViewHolder extends RecyclerView.ViewHolder {
         TextView itemLabel;
         ImageView iconImage;
-        Context context;
 
-        public DrawerViewHolder(View drawerItem, int itemType, Context context) {
+        public DrawerViewHolder(View drawerItem, int itemType) {
             super(drawerItem);
-            this.context = context;
 
             if (itemType == 1) {
                 itemLabel = (TextView) itemView.findViewById(R.id.itemLabel);

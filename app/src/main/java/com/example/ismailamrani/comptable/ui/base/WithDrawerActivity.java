@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui.base;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,18 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
+import com.example.ismailamrani.comptable.models.DrawerItem;
+import com.example.ismailamrani.comptable.ui.ChargesActivity;
+import com.example.ismailamrani.comptable.ui.ClientListActivity;
+import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
+import com.example.ismailamrani.comptable.ui.OrdersActivity;
+import com.example.ismailamrani.comptable.ui.ProductsActivity;
+import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.utils.DrawerOrder;
+import com.example.ismailamrani.comptable.utils.Orders;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 
@@ -49,7 +61,19 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         String[] titles = getResources().getStringArray(R.array.navDrawerItems);
         TypedArray icons = getResources().obtainTypedArray(R.array.navDrawerIcons);
 
-        mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(titles, icons, this);
+        List<DrawerItem> drawerItems = new ArrayList<>();
+
+        for (int i = 0; i < titles.length; i++) {
+            String title = titles[i];
+            Intent intent = getIntentBasedOnPosition(i);
+            int icon = icons.getResourceId(i, -1);
+
+            drawerItems.add(new DrawerItem(title, intent, icon));
+        }
+
+        icons.recycle();
+
+        mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(drawerItems);
         mDrawerRecyclerAdapter.setDrawerClickListener(position -> {
 
         });
@@ -91,6 +115,53 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         }
 
         mDrawerRecyclerAdapter.setSelectedIndex(selectedIndex);
+    }
+    /**
+     * @param position of the drawer item
+     * @return the intent corresponding to the passed-in position of this drawer item.
+     */
+    private Intent getIntentBasedOnPosition(int position) {
+        Class<?> targetActivity;
+        String orderType = ""; // the type of orders to be shown
+
+        switch (position) {
+            case 0:
+                targetActivity = ProductsActivity.class;
+                break;
+            case 1:
+                targetActivity = OrdersActivity.class;
+                orderType = Orders.SALE;
+                break;
+            case 2:
+                targetActivity = OrdersActivity.class;
+                orderType = Orders.PURCHASE;
+                break;
+            case 3:
+                targetActivity = ClientListActivity.class;
+                break;
+            case 4:
+                targetActivity = StockActivity.class;
+                break;
+            case 5:
+                targetActivity = FournisseurListActivity.class;
+                break;
+            case 6:
+                targetActivity = ChargesActivity.class;
+                break;
+            case 7:
+            default:
+                targetActivity = null;
+                break;
+        }
+
+        Intent intent = null;
+        if (targetActivity != null) {
+            intent = new Intent(this, targetActivity);
+            if (targetActivity == OrdersActivity.class)
+                intent.putExtra("orderType", orderType);
+        }
+
+        return intent;
     }
 
     /**

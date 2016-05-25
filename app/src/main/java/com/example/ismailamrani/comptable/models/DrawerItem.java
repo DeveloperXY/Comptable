@@ -1,5 +1,7 @@
 package com.example.ismailamrani.comptable.models;
 
+import android.content.Intent;
+
 /**
  * Created by Mohammed Aouf ZOUAG on 25/05/2016.
  */
@@ -9,17 +11,17 @@ public class DrawerItem {
      */
     private String title;
     /**
-     * The class of the target activity, that will be launched on click.
+     * The intent corresponding to the target activity, that will be launched on click.
      */
-    private Class<?> activityClass;
+    private Intent intent;
     /**
      * The icon associated with this drawer item.
      */
     private int icon;
 
-    public DrawerItem(String title, Class<?> activityClass, int icon) {
+    public DrawerItem(String title, Intent intent, int icon) {
         this.title = title;
-        this.activityClass = activityClass;
+        this.intent = intent;
         this.icon = icon;
     }
 
@@ -31,12 +33,12 @@ public class DrawerItem {
         this.title = title;
     }
 
-    public Class<?> getActivityClass() {
-        return activityClass;
+    public Intent getIntent() {
+        return intent;
     }
 
-    public void setActivityClass(Class<?> activityClass) {
-        this.activityClass = activityClass;
+    public void setIntent(Intent intent) {
+        this.intent = intent;
     }
 
     public int getIcon() {
