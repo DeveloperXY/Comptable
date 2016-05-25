@@ -15,6 +15,7 @@ import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
+import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DrawerOrder;
 import com.example.ismailamrani.comptable.utils.Orders;
@@ -79,9 +80,19 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
             Intent intent = drawerItem.getIntent();
             if (intent != null) {
                 activityShouldFinish();
-                intent.putExtra("imageRes", drawerItem.getIcon());
-                ActivityTransition.startActivityWithSharedElement(
-                        this, intent, clickedImage, "menuAnim");
+
+                // TODO: hack; this code will break if you move the HomeActivity class into another package
+                if (intent.getComponent().getShortClassName().equals(".ui.startup.HomeActivity")) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else {
+                    intent.putExtra("imageRes", drawerItem.getIcon());
+                    ActivityTransition.startActivityWithSharedElement(
+                            this, intent, clickedImage, "menuAnim");
+                }
+
                 drawerLayout.closeDrawer(drawerRecyclerView);
             }
         });
@@ -94,8 +105,8 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
      * Sets the selected item of the navigation drawer based on activity order.
      */
     private void setupSelectedDrawerItem() {
-        // The starting index will be one, counting the header view
-        int selectedIndex = 1;
+        // The starting index will be two, counting the header view, & the home page view
+        int selectedIndex = 2;
 
         switch (getActivity()) {
             case PRODUCTS:
@@ -134,29 +145,32 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
 
         switch (position) {
             case 0:
-                targetActivity = ProductsActivity.class;
+                targetActivity = HomeActivity.class;
                 break;
             case 1:
-                targetActivity = OrdersActivity.class;
-                orderType = Orders.SALE;
+                targetActivity = ProductsActivity.class;
                 break;
             case 2:
                 targetActivity = OrdersActivity.class;
-                orderType = Orders.PURCHASE;
+                orderType = Orders.SALE;
                 break;
             case 3:
-                targetActivity = ClientListActivity.class;
+                targetActivity = OrdersActivity.class;
+                orderType = Orders.PURCHASE;
                 break;
             case 4:
-                targetActivity = StockActivity.class;
+                targetActivity = ClientListActivity.class;
                 break;
             case 5:
-                targetActivity = FournisseurListActivity.class;
+                targetActivity = StockActivity.class;
                 break;
             case 6:
-                targetActivity = ChargesActivity.class;
+                targetActivity = FournisseurListActivity.class;
                 break;
             case 7:
+                targetActivity = ChargesActivity.class;
+                break;
+            case 8:
             default:
                 targetActivity = null;
                 break;

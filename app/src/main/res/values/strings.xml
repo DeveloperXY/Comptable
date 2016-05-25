@@ -4,6 +4,7 @@
     <string name="cannot_connect_message"><![CDATA[We were unable to establish a connection to the server. Please make sure that you have a working internet connection & click to refresh.]]></string>
 
     <string-array name="navDrawerItems">
+        <item>Accueil</item>
         <item>Produits</item>
         <item>Ventes</item>
         <item>Achats</item>
@@ -16,6 +17,7 @@
     </string-array>
 
     <string-array name="navDrawerIcons">
+        <item>@android:drawable/ic_menu_sort_by_size</item>
         <item>@mipmap/ic_produit</item>
         <item>@mipmap/ic_sell</item>
         <item>@mipmap/ic_buy</item>
