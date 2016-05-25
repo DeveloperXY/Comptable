@@ -39,11 +39,6 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/drawerRecyclerView"
-        android:layout_width="@dimen/drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:scrollbars="vertical"/>
+    <include layout="@layout/drawer_include"/>
 
 </android.support.v4.widget.DrawerLayout>

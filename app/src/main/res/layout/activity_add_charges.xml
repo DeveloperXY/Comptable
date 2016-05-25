@@ -1,236 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="246">
-
-    <include layout="@layout/custom_actionbar_include" />
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="226"
-        android:background="#3e566a"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="2256">
+        android:weightSum="246">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="160" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="560">
-
-            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                custom:size="52">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/ic_charge" />
-
-            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="160" />
+        <include layout="@layout/custom_actionbar_include"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="170"
-            android:orientation="horizontal"
-            android:weightSum="1440">
+            android:layout_weight="226"
+            android:background="#3e566a"
+            android:orientation="vertical"
+            android:weightSum="2256">
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="160"/>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1196"
-                android:background="@drawable/charge_style"
-                android:orientation="horizontal"
-                android:weightSum="1196"
-                android:gravity="center">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="560">
 
-                <TextView
-                    android:id="@+id/localLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="988"
-                    android:background="@android:color/transparent"
-                    android:hint="Local"
-                    android:paddingLeft="16dp"
-                    android:textColorHint="#a8abae"
-                    android:gravity="left|center_vertical"
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="#48627b" />
-
-                <ImageView
-                    android:id="@+id/spinner"
-                    android:layout_width="0dp"
+                <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="207"
-                    android:padding="8dp"
-                    android:src="@drawable/spinner" />
-            </LinearLayout>
+                    android:layout_centerInParent="true"
+                    custom:size="52">
 
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_charge"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="170"
-            android:orientation="horizontal"
-            android:weightSum="1440">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1196"
-                android:background="@drawable/charge_style"
-                android:orientation="horizontal"
-                android:weightSum="1196"
-                android:gravity="center">
-
-                <EditText
-                    android:id="@+id/priceField"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="988"
-                    android:background="@android:color/transparent"
-                    android:hint="Prix"
-                    android:paddingLeft="16dp"
-                    android:textColorHint="#a8abae"
-                    android:textSize="16sp"
-                    android:inputType="numberDecimal" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="#48627b" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="207"
-                    android:padding="4dp"
-                    android:src="@drawable/dh"
-                    android:layout_gravity="center" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="522"
-            android:orientation="horizontal"
-            android:weightSum="1440">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125" />
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1196"
-                android:background="@drawable/charge_style">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/charge_style"
-                    android:hint="Description"
-                    android:textSize="16sp"
-                    android:id="@+id/descriptionField"
-                    android:gravity="top|left"
-                    android:padding="16dp" />
-
+                </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="115" />
-        </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="160"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="120" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="170"
+                android:orientation="horizontal"
+                android:weightSum="1440">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="210"
-            android:orientation="horizontal"
-            android:weightSum="1440">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="125"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1196"
+                    android:background="@drawable/charge_style"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1196">
+
+                    <TextView
+                        android:id="@+id/localLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="988"
+                        android:background="@android:color/transparent"
+                        android:gravity="left|center_vertical"
+                        android:hint="Local"
+                        android:paddingLeft="16dp"
+                        android:textColorHint="#a8abae"
+                        android:textSize="16sp"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="#48627b"/>
+
+                    <ImageView
+                        android:id="@+id/spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="207"
+                        android:padding="8dp"
+                        android:src="@drawable/spinner"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="125" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"/>
 
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Enregistrer"
-                android:textColor="#ffffff"
-                android:layout_weight="1196"
-                android:background="@drawable/supprimer_client_bn"
-                android:enabled="false"
-                android:onClick="onSave">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="170"
+                android:orientation="horizontal"
+                android:weightSum="1440">
 
-            </Button>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="125"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1196"
+                    android:background="@drawable/charge_style"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="1196">
+
+                    <EditText
+                        android:id="@+id/priceField"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="988"
+                        android:background="@android:color/transparent"
+                        android:hint="Prix"
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="16dp"
+                        android:textColorHint="#a8abae"
+                        android:textSize="16sp"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="#48627b"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="207"
+                        android:padding="4dp"
+                        android:src="@drawable/dh"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="115" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="522"
+                android:orientation="horizontal"
+                android:weightSum="1440">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="125"/>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1196"
+                    android:background="@drawable/charge_style">
+
+                    <EditText
+                        android:id="@+id/descriptionField"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/charge_style"
+                        android:gravity="top|left"
+                        android:hint="Description"
+                        android:padding="16dp"
+                        android:textSize="16sp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="115"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="120"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="210"
+                android:orientation="horizontal"
+                android:weightSum="1440">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="125"/>
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1196"
+                    android:background="@drawable/supprimer_client_bn"
+                    android:enabled="false"
+                    android:onClick="onSave"
+                    android:text="Enregistrer"
+                    android:textColor="#ffffff">
+
+                </Button>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="115"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+    <include layout="@layout/drawer_include"/>
+
+</android.support.v4.widget.DrawerLayout>

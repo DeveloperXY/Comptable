@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="246">
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/custom_actionbar_include" />
-
-    <ListView
-        android:id="@+id/Listfournisseur"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="226"></ListView>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="246">
 
+        <include layout="@layout/custom_actionbar_include"/>
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/Listfournisseur"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="226"></ListView>
+    </LinearLayout>
+
+    <include layout="@layout/drawer_include"/>
+
+</android.support.v4.widget.DrawerLayout>
