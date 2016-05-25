@@ -1,16 +1,5 @@
 package com.example.ismailamrani.comptable.webservice;
 
-import com.example.ismailamrani.comptable.utils.Method;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-
-import okhttp3.FormBody;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-
 /**
  * Created by Redouane on 24/03/2016.
  */
@@ -59,66 +48,4 @@ public class PhpAPI {
     public static final String getActivationStatus = IpBackend + "getActivationStatus.php";
     public static final String activateApp = IpBackend + "activateApp.php";
     public static final String getServerTime = IpBackend + "getServerTime.php";
-
-    /**
-     * @param param  the request's body that contains the request's params to the server
-     * @param url    target
-     * @param method HTTP method (POST/GET)
-     * @return a fully setup request
-     */
-    public static Request createHTTPRequest(JSONObject param, String url, Method method) {
-        if (param == null)
-            param = new JSONObject();
-
-        if (method == Method.GET)
-            return new Request.Builder()
-                    .url(url + buildGETRequestParams(param))
-                    .build();
-
-        if (method == Method.POST) {
-            FormBody.Builder builder = new FormBody.Builder();
-            Iterator<String> keys = param.keys();
-            while (keys.hasNext()) {
-                try {
-                    String key = keys.next();
-                    builder.add(key, param.getString(key));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            RequestBody requestBody = builder.build();
-
-            return new Request.Builder()
-                    .url(url)
-                    .post(requestBody)
-                    .build();
-        }
-
-        return null;
-    }
-
-    /**
-     * @param params JSONObject with the key/value params
-     * @return ?key=value&
-     */
-    public static String buildGETRequestParams(JSONObject params) {
-        StringBuilder sb = new StringBuilder("?");
-
-        Iterator<String> keys = params.keys();
-        while (keys.hasNext()) {
-            try {
-                String key = keys.next();
-                sb.append(key)
-                        .append("=")
-                        .append(params.get(key));
-
-                if (keys.hasNext())
-                    sb.append("&");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return sb.toString();
-    }
 }

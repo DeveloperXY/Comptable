@@ -50,7 +50,6 @@ public class LoginActivity extends ColoredStatusBarActivity {
             String password = motdepass.getText().toString();
             User user = validateUserCredentials(username, password);
             int currentCompanyID = databaseAdapter.getUserCompanyID();
-            Log.i("COMPANY", "#" + currentCompanyID);
 
             if (user != null) {
                 JSONObject params = user.toJSON();
@@ -75,7 +74,6 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         JSONObject local = response.getJSONArray("locals")
                                                 .getJSONObject(0);
                                         loggedInUser = JSONUtils.merge(loggedInUser, local);
-                                        Log.i("TOTAL", "JSON: " + loggedInUser);
 
                                         // Save user to local disk
                                         saveUserToInternalDatabase(loggedInUser);
