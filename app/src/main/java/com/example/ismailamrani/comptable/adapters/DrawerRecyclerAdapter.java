@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.adapters;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +16,21 @@ import com.example.ismailamrani.comptable.R;
  * Created by Mohammed Aouf ZOUAG on 25/05/2016.
  */
 public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAdapter.DrawerViewHolder> {
-    String[] titles;
-    TypedArray icons;
-    Context context;
+    private String[] titles;
+    private TypedArray icons;
+    private Context context;
+
+    /**
+     * The index of the selected drawer item.
+     */
+    private int selectedItem;
 
     public DrawerRecyclerAdapter(String[] titles, TypedArray icons, Context context) {
         this.titles = titles;
         this.icons = icons;
         this.context = context;
+
+        selectedItem = -1;
     }
 
     @Override
@@ -43,6 +51,9 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     @Override
     public void onBindViewHolder(DrawerViewHolder holder, int position) {
         if (position != 0) {
+            if (selectedItem != -1 && selectedItem == position)
+                holder.itemView.setSelected(true);
+
             holder.itemLabel.setText(titles[position - 1]);
             holder.iconImage.setImageResource(icons.getResourceId(position - 1, -1));
         }
@@ -59,6 +70,11 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
         else return 1;
     }
 
+    public void setSelectedItem(int index) {
+        selectedItem = index;
+        notifyItemChanged(index);
+    }
+
     public class DrawerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemLabel;
         ImageView iconImage;
@@ -72,9 +88,13 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                 itemLabel = (TextView) itemView.findViewById(R.id.itemLabel);
                 iconImage = (ImageView) itemView.findViewById(R.id.iconImage);
 
-                drawerItem.setOnClickListener(v -> {
+                Log.i("ADAPTER", "#1: " + selectedItem);
+                Log.i("ADAPTER", "#2: " + getLayoutPosition());
+
+                if (selectedItem != -1 && selectedItem == getLayoutPosition())
                     drawerItem.setSelected(true);
-                });
+
+                drawerItem.setOnClickListener(v -> drawerItem.setSelected(true));
             }
         }
 

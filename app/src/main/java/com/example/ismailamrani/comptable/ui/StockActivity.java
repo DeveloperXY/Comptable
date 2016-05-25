@@ -144,6 +144,11 @@ public class StockActivity extends RefreshableActivity
     }
 
     @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.STOCK;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_ADD_PRODUCT:

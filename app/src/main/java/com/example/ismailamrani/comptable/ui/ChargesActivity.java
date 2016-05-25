@@ -91,6 +91,11 @@ public class ChargesActivity extends RefreshableActivity {
     }
 
     @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.CHARGES;
+    }
+
+    @Override
     protected void setupRecyclerView() {
         super.setupRecyclerView();
 

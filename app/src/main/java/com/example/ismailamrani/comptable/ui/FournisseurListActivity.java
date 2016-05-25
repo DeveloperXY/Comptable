@@ -64,6 +64,11 @@ public class FournisseurListActivity extends AnimatedActivity {
         startActivity(new Intent(this, AddFournisseurActivity.class));
     }
 
+    @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.SUPPLIERS;
+    }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         @Override

@@ -56,6 +56,11 @@ public class ProductsActivity extends AnimatedActivity {
         mActionBar.setTitle("Produits");
     }
 
+    @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.PRODUCTS;
+    }
+
     private void fetchProducts() {
         int localeID = mDatabaseAdapter.getCurrentLocaleID();
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);

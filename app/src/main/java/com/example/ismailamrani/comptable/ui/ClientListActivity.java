@@ -62,6 +62,11 @@ public class ClientListActivity extends AnimatedActivity {
         startActivity(new Intent(this, AddClientActivity.class));
     }
 
+    @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.CLIENTS;
+    }
+
     private class GetData extends AsyncTask<String, Void, String> {
 
         @Override

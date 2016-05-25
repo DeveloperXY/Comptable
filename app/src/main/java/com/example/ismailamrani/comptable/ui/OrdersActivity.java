@@ -61,6 +61,12 @@ public class OrdersActivity extends AnimatedActivity
         }
     }
 
+    @Override
+    public ActivityOrder getActivity() {
+        return currentOrderType.equals(Orders.PURCHASE) ?
+                ActivityOrder.PURCHASES : ActivityOrder.SALES;
+    }
+
     /**
      * @param position of the fragment to show
      */
