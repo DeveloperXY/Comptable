@@ -71,6 +71,10 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
             if (itemType == 1) {
                 itemLabel = (TextView) itemView.findViewById(R.id.itemLabel);
                 iconImage = (ImageView) itemView.findViewById(R.id.iconImage);
+
+                drawerItem.setOnClickListener(v -> {
+                    drawerItem.setSelected(true);
+                });
             }
         }
 

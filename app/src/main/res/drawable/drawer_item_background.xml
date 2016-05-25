@@ -7,6 +7,12 @@
                       android:startColor="@color/colorBlue" android:angle="135"/>
         </shape>
     </item>
+    <item android:state_selected="true">
+        <shape>
+            <gradient android:endColor="@color/colorDrawerItemPressed"
+                      android:startColor="@color/colorBlue" android:angle="135"/>
+        </shape>
+    </item>
     <item>
         <shape>
             <solid android:color="@color/colorBlue"/>
