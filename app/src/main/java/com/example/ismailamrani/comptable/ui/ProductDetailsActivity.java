@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Ismail Amrani on 25/03/2016.
  */
-public class ProductDetailsActivity extends ColoredStatusBarActivity {
+public class ProductDetailsActivity extends WithDrawerActivity {
 
     @Bind(R.id.Imageaff)
     ImageView Image;
