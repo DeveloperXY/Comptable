@@ -23,6 +23,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
      * The index of the selected drawer item.
      */
     private int selectedIndex;
+    private DrawerClickListener listener;
 
     public DrawerRecyclerAdapter(String[] titles, TypedArray icons, Context context) {
         this.titles = titles;
@@ -56,6 +57,9 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                         notifyItemChanged(selectedIndex);
                         selectedIndex = position;
                         notifyItemChanged(selectedIndex);
+
+                        if (listener != null)
+                            listener.onItemClicked(position - 1);
                     });
 
             holder.itemLabel.setText(titles[position - 1]);
@@ -92,5 +96,13 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                 iconImage = (ImageView) itemView.findViewById(R.id.iconImage);
             }
         }
+    }
+
+    public void setDrawerClickListener(DrawerClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface DrawerClickListener {
+        void onItemClicked(int position);
     }
 }

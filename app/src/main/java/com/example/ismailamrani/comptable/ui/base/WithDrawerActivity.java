@@ -50,6 +50,9 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         TypedArray icons = getResources().obtainTypedArray(R.array.navDrawerIcons);
 
         mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(titles, icons, this);
+        mDrawerRecyclerAdapter.setDrawerClickListener(position -> {
+
+        });
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         drawerRecyclerView.setAdapter(mDrawerRecyclerAdapter);
         setupSelectedDrawerItem();
@@ -90,6 +93,9 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         mDrawerRecyclerAdapter.setSelectedIndex(selectedIndex);
     }
 
+    /**
+     * Helps identifying each implementing activity.
+     */
     @Override
     public ActivityOrder getActivity() {
         return ActivityOrder.NONE;
