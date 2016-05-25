@@ -17,7 +17,7 @@ import com.example.ismailamrani.comptable.R;
  * This activity sets the ground for a reveal animation that targets
  * the action bar, on startup.
  */
-public abstract class AnimatedActivity extends ColoredStatusBarActivity {
+public abstract class AnimatedActivity extends WithDrawerActivity {
 
     /**
      * Setup the action bar for the reveal animation.

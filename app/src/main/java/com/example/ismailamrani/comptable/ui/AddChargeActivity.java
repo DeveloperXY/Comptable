@@ -14,7 +14,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Redouane on 06/04/2016.
  */
-public class AddChargeActivity extends ColoredStatusBarActivity {
+public class AddChargeActivity extends WithDrawerActivity {
 
     @Bind(R.id.spinner)
     ImageView spinner;

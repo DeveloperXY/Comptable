@@ -18,7 +18,7 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
 /**
  * Created by Ismail Amrani on 23/03/2016.
  */
-public class AddProductActivity extends ColoredStatusBarActivity
+public class AddProductActivity extends WithDrawerActivity
         implements OGActionBarInterface {
     private static int RESULT_LOAD_IMAGE = 1;
 

@@ -1,12 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -14,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
@@ -55,12 +50,6 @@ public class StockActivity extends RefreshableActivity
     @Bind(R.id.actionBarContainer)
     RelativeLayout actionBarContainer;
 
-    @Bind(R.id.drawerRecyclerView)
-    RecyclerView drawerRecyclerView;
-
-    @Bind(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +57,6 @@ public class StockActivity extends RefreshableActivity
         ButterKnife.bind(this);
 
         setupActionBar();
-        setupNavigationDrawer();
         setupRevealTransition();
         setupRecyclerView();
         setupSearchView();
@@ -86,15 +74,6 @@ public class StockActivity extends RefreshableActivity
         mActionBar.setSearchListener(this);
         mActionBar.setTitle("Stock");
         mActionBar.isSearchable(true);
-    }
-
-    private void setupNavigationDrawer() {
-        String[] titles = getResources().getStringArray(R.array.navDrawerItems);
-        TypedArray icons = getResources().obtainTypedArray(R.array.navDrawerIcons);
-
-        DrawerRecyclerAdapter adapter = new DrawerRecyclerAdapter(titles, icons, this);
-        drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        drawerRecyclerView.setAdapter(adapter);
     }
 
     /**
@@ -135,11 +114,6 @@ public class StockActivity extends RefreshableActivity
             toggleSearchViewVisibility(View.GONE);
         else
             super.onBackPressed();
-    }
-
-    @Override
-    public void onMenuPressed() {
-        drawerLayout.openDrawer(drawerRecyclerView);
     }
 
     @Override

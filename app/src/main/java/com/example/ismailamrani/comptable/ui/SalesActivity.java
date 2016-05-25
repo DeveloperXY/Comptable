@@ -17,7 +17,7 @@ import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -37,7 +37,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class SalesActivity extends ColoredStatusBarActivity {
+public class SalesActivity extends WithDrawerActivity {
 
     @Bind(R.id.productsListview)
     ListView productsListview;

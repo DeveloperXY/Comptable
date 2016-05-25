@@ -15,7 +15,7 @@ import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -34,7 +34,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PurchasesActivity extends ColoredStatusBarActivity {
+public class PurchasesActivity extends WithDrawerActivity {
 
     private Product selectedProduct;
     private Supplier selectedSupplier;
