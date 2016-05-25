@@ -15,6 +15,7 @@ import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
+import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DrawerOrder;
 import com.example.ismailamrani.comptable.utils.Orders;
 
@@ -74,11 +75,14 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         icons.recycle();
 
         mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(drawerItems);
-        mDrawerRecyclerAdapter.setDrawerClickListener(drawerItem -> {
+        mDrawerRecyclerAdapter.setDrawerClickListener((drawerItem, clickedImage) -> {
             Intent intent = drawerItem.getIntent();
             if (intent != null) {
                 activityShouldFinish();
-                startActivity(intent);
+                intent.putExtra("imageRes", drawerItem.getIcon());
+                ActivityTransition.startActivityWithSharedElement(
+                        this, intent, clickedImage, "menuAnim");
+                drawerLayout.closeDrawer(drawerRecyclerView);
             }
         });
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));

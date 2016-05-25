@@ -58,7 +58,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                         notifyItemChanged(selectedIndex);
 
                         if (listener != null)
-                            listener.onItemClicked(item);
+                            listener.onItemClicked(item, holder.iconImage);
                     });
 
 
@@ -101,6 +101,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     }
 
     public interface DrawerClickListener {
-        void onItemClicked(DrawerItem clickedDrawerItem);
+        void onItemClicked(DrawerItem clickedDrawerItem, View clickedImage);
     }
 }
