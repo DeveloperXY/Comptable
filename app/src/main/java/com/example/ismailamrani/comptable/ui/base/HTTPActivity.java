@@ -24,7 +24,8 @@ import okhttp3.Response;
 /**
  * Created by Mohammed Aouf ZOUAG on 06/05/2016.
  * <p>
- * An abstract activity class which is able to send HTTP requests.
+ * An abstract activity class which is able to send HTTP requests & inform
+ * corresponding listeners.
  */
 public abstract class HTTPActivity extends AppCompatActivity {
 

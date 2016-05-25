@@ -14,6 +14,10 @@ import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 
 import butterknife.Bind;
 
+/**
+ * Extending this activity takes care of coloring the status bar & initializing
+ * the custom action bar.
+ */
 public abstract class ColoredStatusBarActivity extends HTTPActivity
         implements OGActionBarInterface {
 
@@ -27,6 +31,10 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
 
+    /**
+     * The target view of the shared-element-transition animation that
+     * comes before the reveal animation.
+     */
     @Nullable
     @Bind(R.id.actionbarImage)
     protected ImageView actionbarImage;

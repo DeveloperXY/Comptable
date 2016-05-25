@@ -26,7 +26,7 @@ import butterknife.Bind;
 /**
  * Created by Mohammed Aouf ZOUAG on 25/05/2016.
  * <p>
- * Represents an activity with a DrawerLayout.
+ * Extending this activity plugs in a DrawerLayout that is ready to use.
  */
 public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         implements DrawerOrder {
