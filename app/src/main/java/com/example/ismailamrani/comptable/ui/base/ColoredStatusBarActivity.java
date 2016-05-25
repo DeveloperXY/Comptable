@@ -17,6 +17,12 @@ import butterknife.Bind;
 public abstract class ColoredStatusBarActivity extends HTTPActivity
         implements OGActionBarInterface {
 
+    /**
+     * This flag, if set to 'true', will cause the activity to be finished
+     * when the onStop() method is called.
+     */
+    protected boolean shouldFinish = false;
+
     @Nullable
     @Bind(R.id.MyActionBar)
     protected OGActionBar mActionBar;
@@ -49,5 +55,20 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
     @Override
     public void onAddPressed() {
 
+    }
+
+    /**
+     * Signals that the current activity should be finished onStop().
+     */
+    protected void activityShouldFinish() {
+        shouldFinish = true;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (shouldFinish)
+            finish();
     }
 }

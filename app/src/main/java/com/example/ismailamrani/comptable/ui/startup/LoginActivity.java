@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 
 public class LoginActivity extends ColoredStatusBarActivity {
     private DatabaseAdapter databaseAdapter;
-    private boolean shouldFinish = false;
 
     @Bind(R.id.Valider)
     LinearLayout Valider;
@@ -79,7 +78,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         saveUserToInternalDatabase(loggedInUser);
 
                                         // Move to main menu
-                                        shouldFinish = true;
+                                        activityShouldFinish();
                                         runOnUiThread(() ->
                                                 ActivityTransition.startActivityWithSharedElement(
                                                         LoginActivity.this, HomeActivity.class,
@@ -145,13 +144,5 @@ public class LoginActivity extends ColoredStatusBarActivity {
      */
     private void saveUserToInternalDatabase(JSONObject jsonUser) {
         databaseAdapter.saveLoggedInUser(new User(jsonUser));
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (shouldFinish)
-            finish();
     }
 }

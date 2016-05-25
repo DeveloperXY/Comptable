@@ -48,6 +48,8 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     @Override
     public void onBindViewHolder(DrawerViewHolder holder, int position) {
         if (position != 0) {
+            DrawerItem item = mItems.get(position - 1);
+
             holder.itemView.setSelected(selectedIndex == position);
             holder.itemView
                     .setOnClickListener(v -> {
@@ -56,10 +58,9 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                         notifyItemChanged(selectedIndex);
 
                         if (listener != null)
-                            listener.onItemClicked(position - 1);
+                            listener.onItemClicked(item);
                     });
 
-            DrawerItem item = mItems.get(position - 1);
 
             holder.itemLabel.setText(item.getTitle());
             holder.iconImage.setImageResource(item.getIcon());
@@ -100,6 +101,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
     }
 
     public interface DrawerClickListener {
-        void onItemClicked(int position);
+        void onItemClicked(DrawerItem clickedDrawerItem);
     }
 }

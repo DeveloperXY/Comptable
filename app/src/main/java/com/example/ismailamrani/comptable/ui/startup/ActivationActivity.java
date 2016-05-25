@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 public class ActivationActivity extends ColoredStatusBarActivity {
 
     private DatabaseAdapter databaseAdapter;
-    private boolean shouldFinish = false;
 
     @Bind(R.id.activationField)
     EditText activationField;
@@ -78,7 +77,7 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                                     response.getJSONArray("activation").getJSONObject(0));
                             databaseAdapter.activateApplication(activation);
 
-                            shouldFinish = true;
+                            activityShouldFinish();
                             ActivityTransition.startActivityWithSharedElement(
                                     ActivationActivity.this, LoginActivity.class,
                                     imageView, "header");
@@ -138,13 +137,5 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         public void afterTextChanged(Editable s) {
 
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        if (shouldFinish)
-            finish();
     }
 }

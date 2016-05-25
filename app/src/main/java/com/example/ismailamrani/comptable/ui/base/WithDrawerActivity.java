@@ -74,8 +74,10 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         icons.recycle();
 
         mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(drawerItems);
-        mDrawerRecyclerAdapter.setDrawerClickListener(position -> {
-
+        mDrawerRecyclerAdapter.setDrawerClickListener(drawerItem -> {
+            Intent intent = drawerItem.getIntent();
+            if (intent != null)
+                startActivity(intent);
         });
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         drawerRecyclerView.setAdapter(mDrawerRecyclerAdapter);
