@@ -51,10 +51,14 @@ public class OrdersActivity extends AnimatedActivity
     @Override
     public void onBackPressed() {
         Fragment fragment = getFragmentManager().findFragmentById(R.id.frame_container);
-        if (fragment instanceof OrderDetailsFragment)
-            displayFragment(0);
-        else
-            super.onBackPressed();
+        if (drawerLayout.isDrawerOpen(drawerRecyclerView))
+            drawerLayout.closeDrawer(drawerRecyclerView);
+        else {
+            if (fragment instanceof OrderDetailsFragment)
+                displayFragment(0);
+            else
+                super.onBackPressed();
+        }
     }
 
     /**

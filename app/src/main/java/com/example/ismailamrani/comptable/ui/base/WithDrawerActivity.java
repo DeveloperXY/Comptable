@@ -40,6 +40,13 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity {
         drawerLayout.openDrawer(drawerRecyclerView);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(drawerRecyclerView))
+            drawerLayout.closeDrawer(drawerRecyclerView);
+        else super.onBackPressed();
+    }
+
     private void setupNavigationDrawer() {
         String[] titles = getResources().getStringArray(R.array.navDrawerItems);
         TypedArray icons = getResources().obtainTypedArray(R.array.navDrawerIcons);
