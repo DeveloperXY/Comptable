@@ -9,6 +9,7 @@ import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -39,6 +40,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
     ImageView headerImageView;
     @Bind(R.id.logoutImage)
     ImageView logoutImage;
+    @Bind(R.id.settingsImage)
+    ImageView settingsImage;
 
     private DatabaseAdapter mDatabaseAdapter;
 
@@ -56,6 +59,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
         if (mDatabaseAdapter.getUserType().startsWith("e"))
             logoutImage.setVisibility(View.VISIBLE);
+        else
+            settingsImage.setVisibility(View.VISIBLE);
     }
 
     private void setupLocale() {
@@ -147,5 +152,12 @@ public class HomeActivity extends ColoredStatusBarActivity {
         activityShouldFinish();
         ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,
                 headerImageView, "header");
+    }
+
+    public void onSettingsPressed(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater()
+                .inflate(R.menu.options_menu, popupMenu.getMenu());
+        popupMenu.show();
     }
 }

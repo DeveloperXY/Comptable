@@ -24,6 +24,17 @@
             android:onClick="onLogoutPressed"
             android:src="@drawable/ic_tiny_logout"
             android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/settingsImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:onClick="onSettingsPressed"
+            android:src="@drawable/ic_settings"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <RelativeLayout
