@@ -23,6 +23,7 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
      */
     private int selectedIndex;
     private DrawerClickListener listener;
+    private ImageView drawerHeaderImage;
 
     public DrawerRecyclerAdapter(List<DrawerItem> items) {
         this.mItems = items;
@@ -61,7 +62,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
                             listener.onItemClicked(item, holder.iconImage);
                     });
 
-
             holder.itemLabel.setText(item.getTitle());
             holder.iconImage.setImageResource(item.getIcon());
         }
@@ -78,6 +78,10 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
         else return 1;
     }
 
+    public ImageView getDrawerHeaderImage() {
+        return drawerHeaderImage;
+    }
+
     public void setSelectedIndex(int index) {
         selectedIndex = index;
     }
@@ -92,6 +96,9 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
             if (itemType == 1) {
                 itemLabel = (TextView) itemView.findViewById(R.id.itemLabel);
                 iconImage = (ImageView) itemView.findViewById(R.id.iconImage);
+            }
+            else {
+                drawerHeaderImage = (ImageView) itemView.findViewById(R.id.drawerHeaderImage);
             }
         }
     }

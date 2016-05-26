@@ -2,6 +2,8 @@ package com.example.ismailamrani.comptable.ui.base;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
 import com.example.ismailamrani.comptable.models.DrawerItem;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
 import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
@@ -16,6 +19,7 @@ import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
+import com.example.ismailamrani.comptable.ui.startup.LoginActivity;
 import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DrawerOrder;
 import com.example.ismailamrani.comptable.utils.Orders;
@@ -40,6 +44,13 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
     protected DrawerLayout drawerLayout;
 
     private DrawerRecyclerAdapter mDrawerRecyclerAdapter;
+    protected DatabaseAdapter mDatabaseAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
+    }
 
     @Override
     protected void onStart() {
@@ -94,6 +105,9 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 }
 
                 drawerLayout.closeDrawer(drawerRecyclerView);
+            }
+            else {
+                logout();
             }
         });
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -172,6 +186,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 targetActivity = ChargesActivity.class;
                 break;
             case 8:
+            case 9:
             default:
                 targetActivity = null;
                 break;
@@ -185,6 +200,20 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         }
 
         return intent;
+    }
+
+    /**
+     * Logs the current user out.
+     */
+    protected void logout() {
+        mDatabaseAdapter.removeCurrentUser();
+
+        activityShouldFinish();
+        ActivityCompat.finishAffinity(this);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     /**

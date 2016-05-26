@@ -14,7 +14,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
+        android:id="@+id/drawerHeaderImage"
         android:src="@mipmap/ic_logo"
         android:scaleType="fitXY"
         android:layout_centerInParent="true"
