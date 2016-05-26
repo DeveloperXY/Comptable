@@ -8,6 +8,7 @@ import android.support.annotation.IdRes;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -34,6 +35,10 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
     @Bind(R.id.localeLabel)
     TextView localeLabel;
+    @Bind(R.id.headerImageView)
+    ImageView headerImageView;
+    @Bind(R.id.logoutImage)
+    ImageView logoutImage;
 
     private DatabaseAdapter mDatabaseAdapter;
 
@@ -44,12 +49,16 @@ public class HomeActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
+
         setupWindowAnimations();
         setupLocale();
+
+        if (mDatabaseAdapter.getUserType().startsWith("e"))
+            logoutImage.setVisibility(View.VISIBLE);
     }
 
     private void setupLocale() {
-        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
         String currentLocale = mDatabaseAdapter.getUserAddress();
         int currentLocaleID = mDatabaseAdapter.getCurrentLocaleID();
         Log.i("LOCALE", "ID: " + currentLocaleID);
@@ -130,5 +139,13 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
         ActivityTransition.startActivityWithSharedElement(this, intent,
                 clickedImage, "menuAnim");
+    }
+
+    public void onLogoutPressed(View view) {
+        mDatabaseAdapter.removeCurrentUser();
+
+        activityShouldFinish();
+        ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,
+                headerImageView, "header");
     }
 }

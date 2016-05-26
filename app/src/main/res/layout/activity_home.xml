@@ -12,7 +12,19 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="37"></RelativeLayout>
+        android:layout_weight="37">
+
+        <ImageView
+            android:id="@+id/logoutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="4dp"
+            android:onClick="onLogoutPressed"
+            android:src="@drawable/ic_tiny_logout"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,6 +32,7 @@
         android:layout_weight="92">
 
         <ImageView
+            android:id="@+id/headerImageView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

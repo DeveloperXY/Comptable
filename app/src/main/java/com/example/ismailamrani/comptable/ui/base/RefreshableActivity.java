@@ -12,7 +12,7 @@ import com.example.ismailamrani.comptable.R;
 import butterknife.Bind;
 
 /**
- * Extending this class automatically provides you with :
+ * Extending this class automatically provides the child class with :
  * 1- A RecyclerView where to show data
  * 2- A SwipeRefreshLayout so as to be able to refresh the list above
  * 3- A progress bar to be shown while fetching the RecyclerView's data

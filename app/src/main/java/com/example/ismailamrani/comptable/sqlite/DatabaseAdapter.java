@@ -111,9 +111,12 @@ public class DatabaseAdapter {
                 null, null, null, null, null, null);
 
         User user = extractUserFromCursor(cursor);
-        Log.i("USER", user.toString());
         cursor.close();
         return user;
+    }
+
+    public void removeCurrentUser() {
+        db.delete(USER_TABLE, null, null) ;
     }
 
     private User extractUserFromCursor(Cursor cursor) {
@@ -191,6 +194,24 @@ public class DatabaseAdapter {
 
         cursor.close();
         return address;
+    }
+
+    public String getUserType() {
+        String type = "";
+        Cursor cursor = db.query(
+                true,
+                USER_TABLE,
+                new String[]{KEY_TYPE},
+                null, null, null, null, null, null);
+
+        if (cursor.moveToFirst())
+            type = cursor.getString(0);
+
+        type = type.toLowerCase();
+        Log.i("DATABASE", "Current user type: " + type);
+
+        cursor.close();
+        return type;
     }
 
     public int getUserCompanyID() {

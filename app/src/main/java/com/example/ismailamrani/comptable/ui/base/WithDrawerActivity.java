@@ -135,6 +135,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
 
         mDrawerRecyclerAdapter.setSelectedIndex(selectedIndex);
     }
+
     /**
      * @param position of the drawer item
      * @return the intent corresponding to the passed-in position of this drawer item.
