@@ -156,8 +156,18 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
     public void onSettingsPressed(View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.getMenuInflater()
-                .inflate(R.menu.options_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.action_change_locale:
+                    break;
+                case R.id.action_logout:
+                    onLogoutPressed(view);
+                    break;
+            }
+
+            return true;
+        });
+        popupMenu.inflate(R.menu.options_menu);
         popupMenu.show();
     }
 }
