@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
@@ -34,6 +35,7 @@ public class OrdersActivity extends AnimatedActivity
 
     private String currentOrderType;
     private Order currentOrder;
+    private DatabaseAdapter mDatabaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class OrdersActivity extends AnimatedActivity
         setContentView(R.layout.activity_orders);
         ButterKnife.bind(this);
 
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
         currentOrderType = retrieveOrdersType();
         setupActionBar();
         setupRevealTransition();
@@ -153,7 +156,8 @@ public class OrdersActivity extends AnimatedActivity
      */
     @Override
     public void fetchOrders(String url, RequestListener listener) {
-        sendHTTPRequest(url, null, Method.GET, listener);
+        JSONObject data = JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID());
+        sendHTTPRequest(url, data, Method.GET, listener);
     }
 
     @Override
