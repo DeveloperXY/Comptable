@@ -199,7 +199,7 @@ public class InformationActivity extends ColoredStatusBarActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Supprimer", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    Intent i = new Intent(context, ClientListActivity.class);
+                    Intent i = new Intent(context, ClientsActivity.class);
                     context.startActivity(i);
                 } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur de suppression !!!!", Toast.LENGTH_LONG);

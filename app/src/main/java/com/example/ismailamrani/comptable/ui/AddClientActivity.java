@@ -120,7 +120,7 @@ public class AddClientActivity extends ColoredStatusBarActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, ClientListActivity.class));
+                    startActivity(new Intent(context, ClientsActivity.class));
 
                 } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
