@@ -1,5 +1,8 @@
 package com.example.ismailamrani.comptable.models;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -154,5 +157,12 @@ public class Local {
                 ", activite='" + activite + '\'' +
                 ", companyID=" + companyID +
                 '}';
+    }
+
+    public static List<Local> filter(List<Local> items, String query) {
+        return Stream.of(items)
+                .filter(item -> item.getAddress().toLowerCase()
+                        .contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

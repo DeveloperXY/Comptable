@@ -3,8 +3,6 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +15,6 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
-import com.example.ismailamrani.comptable.ui.AddFournisseurActivity;
-import com.example.ismailamrani.comptable.ui.AddProductActivity;
 import com.example.ismailamrani.comptable.utils.WindowUtils;
 
 import java.util.ArrayList;
@@ -30,11 +26,11 @@ import butterknife.ButterKnife;
 /**
  * Created by Mohammed Aouf ZOUAG on 10/05/2016.
  */
-public abstract class ChooserDialog extends Dialog implements SearchView.OnQueryTextListener {
+public abstract class ChooserDialog<T> extends Dialog implements SearchView.OnQueryTextListener {
 
     protected Context context;
-    private SearchAdapter searchAdapter;
-    private OnItemSelectionListener itemSelectionListener;
+    protected SearchAdapter<T> searchAdapter;
+    private OnItemSelectionListener<T> itemSelectionListener;
 
     @Bind(R.id.dialogSearchView)
     protected SearchView dialogSearchView;
@@ -45,12 +41,14 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
     @Bind(R.id.actionButton)
     protected Button actionButton;
 
-    protected List<String> items;
+    protected List<T> mItems;
     protected String hint;
+    protected SearchAdapter.ViewHolderBinder<T> binder;
 
-    public ChooserDialog(Context context) {
+    public ChooserDialog(Context context, SearchAdapter.ViewHolderBinder<T> binder) {
         super(context);
         this.context = context;
+        this.binder = binder;
     }
 
     @Override
@@ -70,8 +68,8 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
         setupRecyclerView();
     }
 
-    public ChooserDialog whoseItemsAre(List<String> items) {
-        this.items = new ArrayList<>(items);
+    public ChooserDialog whoseItemsAre(List<T> items) {
+        this.mItems = new ArrayList<>(items);
         return this;
     }
 
@@ -80,7 +78,7 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
         return this;
     }
 
-    public ChooserDialog runWhenItemSelected(OnItemSelectionListener listener) {
+    public ChooserDialog runWhenItemSelected(OnItemSelectionListener<T> listener) {
         itemSelectionListener = listener;
         return this;
     }
@@ -95,17 +93,17 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
     }
 
     private void setupRecyclerView() {
-        if (items == null)
-            items = new ArrayList<>();
+        if (mItems == null)
+            mItems = new ArrayList<>();
 
-        if (items.size() == 0) {
+        if (mItems.size() == 0) {
             whenNoItemsArePresent();
         }
 
         dialogRecyclerView.setHasFixedSize(true);
         dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        searchAdapter = new SearchAdapter(context, items);
+        searchAdapter = new SearchAdapter<>(context, mItems, binder);
         searchAdapter.setListener(item -> {
             if (itemSelectionListener != null) {
                 itemSelectionListener.onItemSelected(item);
@@ -137,14 +135,7 @@ public abstract class ChooserDialog extends Dialog implements SearchView.OnQuery
         return false;
     }
 
-    @Override
-    public boolean onQueryTextChange(String query) {
-        final List<String> filteredItems = searchAdapter.filter(items, query);
-        searchAdapter.animateTo(filteredItems);
-        return true;
-    }
-
-    public interface OnItemSelectionListener {
-        void onItemSelected(String item);
+    public interface OnItemSelectionListener<T> {
+        void onItemSelected(T item);
     }
 }

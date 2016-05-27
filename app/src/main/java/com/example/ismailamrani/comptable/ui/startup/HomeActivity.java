@@ -13,8 +13,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.annimon.stream.Collectors;
-import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
@@ -25,6 +23,7 @@ import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.ChooserDialog;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
@@ -181,15 +180,16 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
     private void showLocaleChooserDialog() {
         List<Local> locales = mDatabaseAdapter.retrieveCurrentLocales();
-        List<String> stringLocales = Stream.of(locales)
-                .map(Local::getAddress)
-                .collect(Collectors.toList());
 
         new LocalChooserDialog(this)
-                .whoseItemsAre(stringLocales)
+                .whoseItemsAre(locales)
                 .whoseSearchHintIs("Search for locales...")
-                .runWhenItemSelected(item -> {
-                    Toast.makeText(HomeActivity.this, item, Toast.LENGTH_SHORT).show();
+                .runWhenItemSelected(new ChooserDialog.OnItemSelectionListener<Local>() {
+                    @Override
+                    public void onItemSelected(Local item) {
+                        Toast.makeText(HomeActivity.this, item.toString(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 })
                 .show();
     }

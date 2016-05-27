@@ -2,15 +2,13 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.annimon.stream.Collectors;
-import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Local;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,28 +16,29 @@ import java.util.List;
 /**
  * Created by Mohammed Aouf ZOUAG on 30/04/2016.
  */
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
+public class SearchAdapter<T> extends BaseSearchAdapter<SearchAdapter.ViewHolder<T>, T> {
 
     private Context mContext;
-    private List<String> mItems;
-    private OnItemClickListener listener;
+    private OnItemClickListener<T> listener;
+    private ViewHolderBinder<T> mBinder;
 
-    public SearchAdapter(Context context, List<String> items) {
+    public SearchAdapter(Context context, List<T> items, ViewHolderBinder<T> binder) {
         mContext = context;
         mItems = new ArrayList<>(items);
+        mBinder = binder;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder<T> onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.search_item_row, viewGroup, false);
 
-        return new ViewHolder(v);
+        return new ViewHolder<>(v, mBinder, listener, mItems);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        String item = mItems.get(position);
+    public void onBindViewHolder(ViewHolder<T> holder, int position) {
+        T item = mItems.get(position);
         holder.bind(item);
     }
 
@@ -48,86 +47,50 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         return mItems.size();
     }
 
-    public String removeItem(int position) {
-        final String item = mItems.remove(position);
-        notifyItemRemoved(position);
-        return item;
+    public interface ViewHolderBinder<T> {
+        void bind(ViewHolder<T> viewHolder, T item);
     }
 
-    public void addItem(int position, String item) {
-        mItems.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public void moveItem(int fromPosition, int toPosition) {
-        final String item = mItems.remove(fromPosition);
-        mItems.add(toPosition, item);
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    public void animateTo(List<String> items) {
-        applyAndAnimateRemovals(items);
-        applyAndAnimateAdditions(items);
-        applyAndAnimateMovedItems(items);
-    }
-
-    private void applyAndAnimateRemovals(List<String> newItems) {
-        for (int i = mItems.size() - 1; i >= 0; i--) {
-            final String item = mItems.get(i);
-            if (!newItems.contains(item))
-                removeItem(i);
-        }
-    }
-
-    private void applyAndAnimateAdditions(List<String> newItems) {
-        for (int i = 0, count = newItems.size(); i < count; i++) {
-            final String item = newItems.get(i);
-            if (!mItems.contains(item))
-                addItem(i, item);
-        }
-    }
-
-    private void applyAndAnimateMovedItems(List<String> newItems) {
-        for (int toPosition = newItems.size() - 1; toPosition >= 0; toPosition--) {
-            final String item = newItems.get(toPosition);
-            final int fromPosition = mItems.indexOf(item);
-
-            if (fromPosition >= 0 && fromPosition != toPosition)
-                moveItem(fromPosition, toPosition);
-        }
-    }
-
-    public List<String> filter(List<String> items, String query) {
-        return Stream.of(items)
-                .filter(item -> item.toLowerCase()
-                        .contains(query.toLowerCase()))
-                .collect(Collectors.toList());
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public static class ViewHolder<T> extends RecyclerView.ViewHolder {
+        ViewHolderBinder<T> mBinder;
         TextView textLabel;
 
-        public ViewHolder(View v) {
+        public ViewHolder(View v, ViewHolderBinder<T> binder,
+                          OnItemClickListener<T> listener, List<T> items) {
             super(v);
+            mBinder = binder;
             textLabel = (TextView) v.findViewById(R.id.textLabel);
 
             v.setOnClickListener(view -> {
                 if (listener != null)
-                    listener.onItemClicked(mItems.get(getLayoutPosition()));
+                    listener.onItemClicked(items.get(getLayoutPosition()));
             });
         }
 
-        public void bind(String item) {
-            textLabel.setText(item);
+        public void bind(T item) {
+            mBinder.bind(this, item);
         }
     }
 
-    public void setListener(OnItemClickListener listener) {
+    public static class StringViewHolderBinder implements ViewHolderBinder<String> {
+        @Override
+        public void bind(ViewHolder<String> viewHolder, String item) {
+            viewHolder.textLabel.setText(item);
+        }
+    }
+
+    public static class LocaleViewHolderBinder implements ViewHolderBinder<Local> {
+        @Override
+        public void bind(ViewHolder<Local> viewHolder, Local item) {
+            viewHolder.textLabel.setText(item.getAddress());
+        }
+    }
+
+    public void setListener(OnItemClickListener<T> listener) {
         this.listener = listener;
     }
 
-    public interface OnItemClickListener {
-        void onItemClicked(String item);
+    public interface OnItemClickListener<T> {
+        void onItemClicked(T item);
     }
 }
