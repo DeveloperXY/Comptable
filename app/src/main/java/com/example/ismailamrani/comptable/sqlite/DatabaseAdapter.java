@@ -200,6 +200,23 @@ public class DatabaseAdapter {
         return db.insert(USER_TABLE, null, values);
     }
 
+    public boolean updateUser(User newUser) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_FIRSTNAME, newUser.getFirstname());
+        values.put(KEY_LASTNAME, newUser.getLastname());
+        values.put(KEY_TYPE, newUser.getType());
+        values.put(KEY_USERNAME, newUser.getUsername());
+        values.put(KEY_PASSWORD, newUser.getPassword());
+        values.put(KEY_COMPANY_ID, newUser.getCompanyID());
+        values.put(KEY_LOCALE_ID, newUser.getLocaleID());
+        values.put(KEY_ADDRESS, newUser.getAddress());
+        values.put(KEY_CITY, newUser.getCity());
+        values.put(KEY_COUNTRY, newUser.getCountry());
+        values.put(KEY_TELEPHONE, newUser.getTelephone());
+
+        return db.update(USER_TABLE, values, null, null) > 0;
+    }
+
     public void activateApplication(Activation activation) {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, activation.getId());

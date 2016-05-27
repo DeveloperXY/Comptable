@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
+import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
@@ -70,10 +70,14 @@ public class HomeActivity extends ColoredStatusBarActivity {
     }
 
     private void setupLocale() {
-        String currentLocale = mDatabaseAdapter.getUserAddress();
+        updateCurrentLocaleLabel();
+
         int currentLocaleID = mDatabaseAdapter.getCurrentLocaleID();
-        Log.i("LOCALE", "ID: " + currentLocaleID);
-        localeLabel.setText(currentLocale);
+        Log.i("LOCALE", "Current locale ID is: " + currentLocaleID);
+    }
+
+    private void updateCurrentLocaleLabel() {
+        localeLabel.setText(mDatabaseAdapter.getUserAddress());
     }
 
     private void setupWindowAnimations() {
@@ -186,9 +190,16 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 .whoseSearchHintIs("Search for locales...")
                 .runWhenItemSelected(new ChooserDialog.OnItemSelectionListener<Local>() {
                     @Override
-                    public void onItemSelected(Local item) {
-                        Toast.makeText(HomeActivity.this, item.toString(), Toast.LENGTH_SHORT)
-                                .show();
+                    public void onItemSelected(Local selectedLocal) {
+                        User user = mDatabaseAdapter.getLoggedUser();
+                        user.setLocaleID(selectedLocal.getId());
+                        user.setAddress(selectedLocal.getAddress());
+                        user.setCity(selectedLocal.getCity());
+                        user.setCountry(selectedLocal.getCountry());
+                        user.setTelephone(selectedLocal.getTelephone());
+                        mDatabaseAdapter.updateUser(user);
+
+                        updateCurrentLocaleLabel();
                     }
                 })
                 .show();
