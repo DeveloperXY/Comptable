@@ -192,23 +192,25 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 .runWhenItemSelected(new ChooserDialog.OnItemSelectionListener<Local>() {
                     @Override
                     public void onItemSelected(Local selectedLocal) {
-                        User user = mDatabaseAdapter.getLoggedUser();
-                        User copy = new User(user);
-                        copy.setLocaleID(selectedLocal.getId());
-                        copy.setAddress(selectedLocal.getAddress());
-                        copy.setCity(selectedLocal.getCity());
-                        copy.setCountry(selectedLocal.getCountry());
-                        copy.setTelephone(selectedLocal.getTelephone());
-                        mDatabaseAdapter.updateUser(copy);
+                        if (mDatabaseAdapter.getCurrentLocaleID() != selectedLocal.getId()) {
+                            User user = mDatabaseAdapter.getLoggedUser();
+                            User copy = new User(user);
+                            copy.setLocaleID(selectedLocal.getId());
+                            copy.setAddress(selectedLocal.getAddress());
+                            copy.setCity(selectedLocal.getCity());
+                            copy.setCountry(selectedLocal.getCountry());
+                            copy.setTelephone(selectedLocal.getTelephone());
+                            mDatabaseAdapter.updateUser(copy);
 
-                        updateCurrentLocaleLabel();
-                        Snackbar.make(getWindow().getDecorView(),
-                                "Locale changed.", Snackbar.LENGTH_LONG)
-                                .setAction("UNDO", v -> {
-                                    mDatabaseAdapter.updateUser(user);
-                                    updateCurrentLocaleLabel();
-                                })
-                                .show();
+                            updateCurrentLocaleLabel();
+                            Snackbar.make(getWindow().getDecorView(),
+                                    "Locale changed.", Snackbar.LENGTH_LONG)
+                                    .setAction("UNDO", v -> {
+                                        mDatabaseAdapter.updateUser(user);
+                                        updateCurrentLocaleLabel();
+                                    })
+                                    .show();
+                        }
                     }
                 })
                 .show();
