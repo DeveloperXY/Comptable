@@ -54,64 +54,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="170"
-                android:orientation="horizontal"
-                android:weightSum="1440">
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="125"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1196"
-                    android:background="@drawable/charge_style"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="1196">
-
-                    <TextView
-                        android:id="@+id/localLabel"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="988"
-                        android:background="@android:color/transparent"
-                        android:gravity="left|center_vertical"
-                        android:hint="Local"
-                        android:paddingLeft="16dp"
-                        android:textColorHint="#a8abae"
-                        android:textSize="16sp"/>
-
-                    <View
-                        android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="#48627b"/>
-
-                    <ImageView
-                        android:id="@+id/spinner"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="207"
-                        android:padding="8dp"
-                        android:src="@drawable/spinner"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="50"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="170"
+                android:layout_weight="220"
                 android:orientation="horizontal"
                 android:weightSum="1440">
 
@@ -139,7 +82,7 @@
                         android:inputType="numberDecimal"
                         android:paddingLeft="16dp"
                         android:textColorHint="#a8abae"
-                        android:textSize="16sp"/>
+                        android:textSize="24sp"/>
 
                     <View
                         android:layout_width="1dp"
@@ -168,7 +111,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="522"
+                android:layout_weight="692"
                 android:orientation="horizontal"
                 android:weightSum="1440">
 

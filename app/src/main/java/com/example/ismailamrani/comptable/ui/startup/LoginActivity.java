@@ -18,6 +18,7 @@ import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,12 +71,13 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         // the response
                                         JSONObject loggedInUser = response.getJSONArray("user")
                                                 .getJSONObject(0);
-                                        JSONObject local = response.getJSONArray("locals")
-                                                .getJSONObject(0);
-                                        loggedInUser = JSONUtils.merge(loggedInUser, local);
+                                        JSONArray locales = response.getJSONArray("locals");
+                                        JSONObject local = locales.getJSONObject(0);
 
+                                        loggedInUser = JSONUtils.merge(loggedInUser, local);
                                         // Save user to local disk
                                         saveUserToInternalDatabase(loggedInUser);
+                                        saveLocalesToInternalDatabase(locales);
 
                                         // Move to main menu
                                         activityShouldFinish();
@@ -101,6 +103,10 @@ public class LoginActivity extends ColoredStatusBarActivity {
                         });
             }
         });
+    }
+
+    private void saveLocalesToInternalDatabase(JSONArray locales) {
+
     }
 
     /**

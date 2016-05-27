@@ -6,40 +6,27 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.annimon.stream.Collectors;
-import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Local;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.utils.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Redouane on 06/04/2016.
+ * Created by Mohammed Aouf ZOUAG on 21/05/2016.
  */
 public class AddChargeActivity extends WithDrawerActivity {
 
-    @Bind(R.id.spinner)
-    ImageView spinner;
-    @Bind(R.id.localLabel)
-    TextView localLabel;
     @Bind(R.id.priceField)
     EditText priceField;
     @Bind(R.id.descriptionField)
@@ -47,11 +34,7 @@ public class AddChargeActivity extends WithDrawerActivity {
     @Bind(R.id.saveButton)
     Button saveButton;
 
-    private List<Local> locales;
-    /**
-     * The currently selected local.
-     */
-    private Local selectedLocal;
+    private DatabaseAdapter mDatabaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +45,7 @@ public class AddChargeActivity extends WithDrawerActivity {
         setupActionBar();
         setupTextWatcher();
 
-        spinner.setOnClickListener(new SpinnerClickListener());
-    }
-
-    private void showLocalesDialog() {
-        List<String> stringLocales = Stream.of(locales)
-                .map(Local::getAddress)
-                .collect(Collectors.toList());
-
-        new LocalChooserDialog(this)
-                .whoseItemsAre(stringLocales)
-                .whoseSearchHintIs("Search for locales...")
-                .runWhenItemSelected(item -> {
-                    selectedLocal = Stream.of(locales)
-                            .filter(l -> l.getAddress().equals(item))
-                            .findFirst().get();
-
-                    localLabel.setText(selectedLocal.getAddress());
-                    checkFields();
-                })
-                .show();
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
     }
 
     @Override
@@ -123,8 +87,7 @@ public class AddChargeActivity extends WithDrawerActivity {
      */
     private void checkFields() {
         saveButton.setEnabled(
-                localLabel.getText().length() != 0 &&
-                        priceField.getText().toString().length() != 0 &&
+                priceField.getText().toString().length() != 0 &&
                         descriptionField.getText().toString().length() != 0);
     }
 
@@ -132,7 +95,7 @@ public class AddChargeActivity extends WithDrawerActivity {
         String price = priceField.getText().toString();
         String description = descriptionField.getText().toString();
         JSONObject params = JSONUtils.bundleChargeDataToJSON(
-                selectedLocal.getId(), price, description);
+                mDatabaseAdapter.getCurrentLocaleID(), price, description);
 
         sendHTTPRequest(PhpAPI.addCharge, params, Method.POST,
                 new RequestListener() {
@@ -141,8 +104,7 @@ public class AddChargeActivity extends WithDrawerActivity {
                         if (status == 1) {
                             setResult(ResultCodes.CHARGE_CREATED);
                             finish();
-                        }
-                        else
+                        } else
                             runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
                                     "Unknown error.", Toast.LENGTH_SHORT).show());
                     }
@@ -153,43 +115,5 @@ public class AddChargeActivity extends WithDrawerActivity {
                                 "Network error.", Toast.LENGTH_SHORT).show());
                     }
                 });
-    }
-
-    class SpinnerClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            // Send the HTTP request only once, at the first time the activity is shown
-            if (locales != null)
-                showLocalesDialog();
-            else
-                sendHTTPRequest(PhpAPI.getLocal, null, Method.GET,
-                        new RequestListener() {
-                            @Override
-                            public void onRequestSucceeded(JSONObject response, int status) {
-                                runOnUiThread(() -> {
-                                    if (status == 1) {
-                                        try {
-                                            JSONArray array = response.getJSONArray("local");
-                                            locales = Local.parseLocales(array);
-                                            showLocalesDialog();
-
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else {
-                                        runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
-                                                "There was an error while fetching locales.",
-                                                Toast.LENGTH_SHORT).show());
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onRequestFailed() {
-                                runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
-                                        "Unable to fetch locales.", Toast.LENGTH_SHORT).show());
-                            }
-                        });
-        }
     }
 }
