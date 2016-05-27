@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.design.widget.Snackbar;
 import android.transition.Fade;
 import android.util.Log;
 import android.view.View;
@@ -192,14 +193,22 @@ public class HomeActivity extends ColoredStatusBarActivity {
                     @Override
                     public void onItemSelected(Local selectedLocal) {
                         User user = mDatabaseAdapter.getLoggedUser();
-                        user.setLocaleID(selectedLocal.getId());
-                        user.setAddress(selectedLocal.getAddress());
-                        user.setCity(selectedLocal.getCity());
-                        user.setCountry(selectedLocal.getCountry());
-                        user.setTelephone(selectedLocal.getTelephone());
-                        mDatabaseAdapter.updateUser(user);
+                        User copy = new User(user);
+                        copy.setLocaleID(selectedLocal.getId());
+                        copy.setAddress(selectedLocal.getAddress());
+                        copy.setCity(selectedLocal.getCity());
+                        copy.setCountry(selectedLocal.getCountry());
+                        copy.setTelephone(selectedLocal.getTelephone());
+                        mDatabaseAdapter.updateUser(copy);
 
                         updateCurrentLocaleLabel();
+                        Snackbar.make(getWindow().getDecorView(),
+                                "Locale changed.", Snackbar.LENGTH_LONG)
+                                .setAction("UNDO", v -> {
+                                    mDatabaseAdapter.updateUser(user);
+                                    updateCurrentLocaleLabel();
+                                })
+                                .show();
                     }
                 })
                 .show();

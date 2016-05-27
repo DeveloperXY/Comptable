@@ -134,6 +134,23 @@ public class User {
         this.telephone = builder.telephone;
     }
 
+    public User(User user) {
+        this.id = user.id;
+        this.firstname = user.firstname;
+        this.lastname = user.lastname;
+        this.type = user.type;
+        this.creationDate = user.creationDate;
+        this.expirationDate = user.expirationDate;
+        this.username = user.username;
+        this.password = user.password;
+        this.companyID = user.companyID;
+        this.localeID = user.localeID;
+        this.address = user.address;
+        this.city = user.city;
+        this.country = user.country;
+        this.telephone = user.telephone;
+    }
+
     /**
      * Overloaded constructor.
      * Builds a new instance whose informations are extracted from the passed-in
