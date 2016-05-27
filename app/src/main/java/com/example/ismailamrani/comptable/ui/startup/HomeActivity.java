@@ -19,7 +19,7 @@ import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientListActivity;
-import com.example.ismailamrani.comptable.ui.FournisseurListActivity;
+import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
@@ -119,7 +119,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 clickedImageResID = R.mipmap.ic_charge;
                 break;
             case R.id.fournis:
-                targetActivity = FournisseurListActivity.class;
+                targetActivity = SuppliersActivity.class;
                 clickedImageID = R.id.supplierMenuImage;
                 clickedImageResID = R.mipmap.ic_fournisseur;
                 break;

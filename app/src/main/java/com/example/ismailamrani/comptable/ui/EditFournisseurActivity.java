@@ -204,7 +204,7 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, FournisseurListActivity.class));
+                    startActivity(new Intent(context, SuppliersActivity.class));
 
                 } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);

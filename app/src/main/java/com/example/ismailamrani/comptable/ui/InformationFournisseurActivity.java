@@ -214,7 +214,7 @@ public class InformationFournisseurActivity extends ColoredStatusBarActivity {
                     Toast.makeText(getApplicationContext(), "Bien Supprimer",
                             Toast.LENGTH_LONG).show();
                     finish();
-                    context.startActivity(new Intent(context, FournisseurListActivity.class));
+                    context.startActivity(new Intent(context, SuppliersActivity.class));
                 } else if (resp == 0) {
                     Toast.makeText(getApplicationContext(), "erreur de suppression !!!!",
                             Toast.LENGTH_LONG).show();
