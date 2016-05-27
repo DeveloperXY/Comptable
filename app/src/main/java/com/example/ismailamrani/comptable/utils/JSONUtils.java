@@ -113,4 +113,16 @@ public class JSONUtils {
 
         return data;
     }
+
+    public static JSONObject bundleCompanyIDToJSON(int companyID) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("companyID", companyID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 }

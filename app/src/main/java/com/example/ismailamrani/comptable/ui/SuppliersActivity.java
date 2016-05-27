@@ -9,6 +9,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -62,7 +63,9 @@ public class SuppliersActivity extends AnimatedActivity {
     }
 
     private void fetchSuppliers() {
-        sendHTTPRequest(PhpAPI.getFournisseur, null, Method.POST,
+        JSONObject params = JSONUtils.bundleCompanyIDToJSON(
+                mDatabaseAdapter.getUserCompanyID());
+        sendHTTPRequest(PhpAPI.getFournisseur, params, Method.POST,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
