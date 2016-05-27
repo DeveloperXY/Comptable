@@ -206,7 +206,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
      * Logs the current user out.
      */
     protected void logout() {
-        mDatabaseAdapter.removeCurrentUser();
+        mDatabaseAdapter.logout();
 
         activityShouldFinish();
         ActivityCompat.finishAffinity(this);

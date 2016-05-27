@@ -39,16 +39,16 @@ public class Local {
 
     public Local(JSONObject object) throws JSONException {
         this(
-                object.getInt("idlocal"),
-                object.getString("adresse"),
-                object.getString("ville"),
-                object.getString("pays"),
-                object.getString("tel"),
-                object.getString("fix"),
-                object.getString("fax"),
-                object.getString("email"),
-                object.getString("activite"),
-                object.getInt("ids")
+                object.getInt("ID"),
+                object.getString("Adresse"),
+                object.getString("Ville"),
+                object.getString("Pays"),
+                object.getString("Tel"),
+                "",
+                "",
+                "",
+                "",
+                0
         );
     }
 
@@ -138,5 +138,21 @@ public class Local {
 
     public void setCompanyID(int companyID) {
         this.companyID = companyID;
+    }
+
+    @Override
+    public String toString() {
+        return "Local{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", fix='" + fix + '\'' +
+                ", fax='" + fax + '\'' +
+                ", email='" + email + '\'' +
+                ", activite='" + activite + '\'' +
+                ", companyID=" + companyID +
+                '}';
     }
 }

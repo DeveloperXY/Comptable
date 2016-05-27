@@ -7,8 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.models.Activation;
+import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
+
+import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 29/04/2016.
@@ -34,6 +38,10 @@ public class DatabaseAdapter {
     public static final String KEY_CITY = "city";
     public static final String KEY_COUNTRY = "country";
     public static final String KEY_TELEPHONE = "telephone";
+    public static final String KEY_FIX = "fix";
+    public static final String KEY_FAX = "fax";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_ACTIVITY = "activity";
 
     public static final String KEY_CODE = "code";
     public static final String KEY_IS_ACTIVATED = "isActivated";
@@ -42,6 +50,7 @@ public class DatabaseAdapter {
     private static final String DATABASE_NAME = "comptableDatabase";
     private static final String USER_TABLE = "User";
     private static final String ACTIVATION_TABLE = "Activation";
+    private static final String LOCAL_TABLE = "Local";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_USER_TABLE =
             "CREATE TABLE " + USER_TABLE + " (" +
@@ -66,6 +75,19 @@ public class DatabaseAdapter {
                     KEY_CODE + " TEXT NOT NULL, " +
                     KEY_COMPANY_ID + " INTEGER, " +
                     KEY_IS_ACTIVATED + " INTEGER)";
+
+    private static final String CREATE_LOCAL_TABLE =
+            "CREATE TABLE " + LOCAL_TABLE + " (" +
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_ADDRESS + " TEXT NOT NULL, " +
+                    KEY_CITY + " TEXT NOT NULL, " +
+                    KEY_COUNTRY + " TEXT NOT NULL, " +
+                    KEY_TELEPHONE + " TEXT NOT NULL, " +
+                    KEY_FIX + " TEXT, " +
+                    KEY_FAX + " TEXT, " +
+                    KEY_EMAIL + " TEXT, " +
+                    KEY_ACTIVITY + " TEXT)";
+
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
     private Context mContext;
@@ -115,8 +137,17 @@ public class DatabaseAdapter {
         return user;
     }
 
+    public void logout() {
+        removeCurrentUser();
+        removeCurrentLocales();
+    }
+
     public void removeCurrentUser() {
         db.delete(USER_TABLE, null, null) ;
+    }
+
+    public void removeCurrentLocales() {
+        db.delete(LOCAL_TABLE, null, null) ;
     }
 
     private User extractUserFromCursor(Cursor cursor) {
@@ -176,6 +207,21 @@ public class DatabaseAdapter {
         values.put(KEY_IS_ACTIVATED, activation.isActivated() ? 1 : 0);
 
         db.insert(ACTIVATION_TABLE, null, values);
+    }
+
+    public void saveLocales(List<Local> locals) {
+        Log.i("Locales", "Saving locales: " + locals.toString());
+        Stream.of(locals).forEach(this::insertLocal);
+    }
+
+    public void insertLocal(Local local) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_ADDRESS, local.getAddress());
+        values.put(KEY_CITY, local.getCity());
+        values.put(KEY_COUNTRY, local.getCountry());
+        values.put(KEY_TELEPHONE, local.getTelephone());
+
+        db.insert(LOCAL_TABLE, null, values);
     }
 
     /**
@@ -276,6 +322,7 @@ public class DatabaseAdapter {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(CREATE_USER_TABLE);
             db.execSQL(CREATE_ACTIVATION_TABLE);
+            db.execSQL(CREATE_LOCAL_TABLE);
         }
 
         @Override
@@ -284,6 +331,7 @@ public class DatabaseAdapter {
                     " to " + newVersion + ", which will destroy all old data.");
             db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + ACTIVATION_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + LOCAL_TABLE);
             onCreate(db);
         }
     }

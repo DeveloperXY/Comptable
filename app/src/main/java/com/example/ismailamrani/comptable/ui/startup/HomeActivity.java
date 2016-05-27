@@ -147,7 +147,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
     }
 
     public void onLogoutPressed(View view) {
-        mDatabaseAdapter.removeCurrentUser();
+        mDatabaseAdapter.logout();
 
         activityShouldFinish();
         ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,

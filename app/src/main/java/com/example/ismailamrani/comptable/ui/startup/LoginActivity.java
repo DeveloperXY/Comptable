@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
@@ -21,6 +22,9 @@ import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -106,7 +110,16 @@ public class LoginActivity extends ColoredStatusBarActivity {
     }
 
     private void saveLocalesToInternalDatabase(JSONArray locales) {
+        List<Local> localList = new ArrayList<>();
+        for (int i = 0; i < locales.length(); i++) {
+            try {
+                localList.add(new Local(locales.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
+        databaseAdapter.saveLocales(localList);
     }
 
     /**
