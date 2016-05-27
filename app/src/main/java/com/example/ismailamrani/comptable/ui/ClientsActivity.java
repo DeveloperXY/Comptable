@@ -9,6 +9,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ClientAdapter;
 import com.example.ismailamrani.comptable.models.ClientModel;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
+import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -62,7 +63,9 @@ public class ClientsActivity extends AnimatedActivity {
     }
 
     private void fetchClients() {
-        sendHTTPRequest(PhpAPI.getClient, null, Method.POST,
+        JSONObject data = JSONUtils.bundleCompanyIDToJSON(
+                mDatabaseAdapter.getUserCompanyID());
+        sendHTTPRequest(PhpAPI.getClient, data, Method.POST,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
