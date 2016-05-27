@@ -18,6 +18,7 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
+import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -43,6 +44,7 @@ public class AddProductActivity extends WithDrawerActivity
 
     private String selectedImagePath;
     private String codeimage = "";
+    private DatabaseAdapter mDatabaseAdapter;
 
     @Bind(R.id.productImage)
     ImageView productImage;
@@ -62,6 +64,7 @@ public class AddProductActivity extends WithDrawerActivity
         ButterKnife.bind(this);
 
         setupActionBar();
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class AddProductActivity extends WithDrawerActivity
         if (imageStatus && nameStatus && htStatus && ttcStatus && barcodeStatus) {
             return new Product(0, name, Double.parseDouble(ht),
                     Double.parseDouble(ttc), barcode, codeimage,
-                    0, 3, PhpAPI.addProduit);
+                    0, mDatabaseAdapter.getCurrentLocaleID(), PhpAPI.addProduit);
         } else if (!imageStatus) {
             // No image was selected for the product.
             dialogTitle = "Missing image.";
