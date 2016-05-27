@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
@@ -174,15 +173,12 @@ public class StockActivity extends RefreshableActivity
                                     response.getJSONArray("products"));
 
                             if (ListComparison.areEqual(mProducts, products))
-                                runOnUiThread(() -> stopSwipeRefresh());
+                                runOnUiThread(this::handleDataChange);
                             else {
                                 mProducts = products;
                                 runOnUiThread(() -> {
-                                    toggleRecyclerviewState();
+                                    handleDataChange();
                                     populateRecyclerView();
-
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    stopSwipeRefresh();
                                 });
                             }
                         } catch (JSONException e) {
@@ -194,6 +190,12 @@ public class StockActivity extends RefreshableActivity
                     public void onRequestFailed() {
                         runOnUiThread(() -> handleRequestError());
                     }
+
+                    private void handleDataChange() {
+                        toggleRecyclerviewState();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        stopSwipeRefresh();
+                    }
                 });
     }
 
@@ -203,16 +205,6 @@ public class StockActivity extends RefreshableActivity
             dataRecyclerView.setAdapter(stockAdapter);
         } else
             stockAdapter.animateTo(mProducts);
-
-        checkIfStockIsEmpty();
-    }
-
-    private void checkIfStockIsEmpty() {
-        if (mProducts.size() == 0) {
-            Snackbar.make(getWindow().getDecorView(), "Your stock is empty.",
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Add a product", v -> onAddPressed()).show();
-        }
     }
 
     /**

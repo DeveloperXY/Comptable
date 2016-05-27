@@ -155,10 +155,10 @@ public class OrdersListFragment extends Fragment {
                                             response.getJSONArray("orders"));
 
                                     if (ListComparison.areEqual(mOrders, orders))
-                                        getActivity().runOnUiThread(() -> stopSwipeRefresh());
+                                        getActivity().runOnUiThread(this::handleDataChange);
                                     else {
                                         mOrders = orders;
-                                        getActivity().runOnUiThread(() -> onDataChanged());
+                                        getActivity().runOnUiThread(this::onDataChanged);
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -178,16 +178,19 @@ public class OrdersListFragment extends Fragment {
                                 stopSwipeRefresh();
                             });
                         }
+
+                        private void onDataChanged() {
+                            populateRecyclerView();
+                            handleDataChange();
+                        }
+
+                        private void handleDataChange() {
+                            toggleRecyclerviewState();
+                            progressBar.setVisibility(View.GONE);
+                            stopSwipeRefresh();
+                        }
                     });
         }
-    }
-
-    private void onDataChanged() {
-        toggleRecyclerviewState();
-        populateRecyclerView();
-
-        progressBar.setVisibility(View.GONE);
-        stopSwipeRefresh();
     }
 
     /**
