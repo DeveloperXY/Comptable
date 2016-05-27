@@ -12,6 +12,7 @@ import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -216,12 +217,44 @@ public class DatabaseAdapter {
 
     public void insertLocal(Local local) {
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, local.getId());
         values.put(KEY_ADDRESS, local.getAddress());
         values.put(KEY_CITY, local.getCity());
         values.put(KEY_COUNTRY, local.getCountry());
         values.put(KEY_TELEPHONE, local.getTelephone());
 
         db.insert(LOCAL_TABLE, null, values);
+    }
+
+    public List<Local> retrieveCurrentLocales() {
+        Cursor cursor = db.query(
+                true,
+                LOCAL_TABLE,
+                new String[]{KEY_ID, KEY_ADDRESS, KEY_CITY, KEY_COUNTRY, KEY_TELEPHONE},
+                null, null, null, null, null, null);
+
+        List<Local> locals = extractLocalesFromCursor(cursor);
+        Log.i("Locales", "Retrieved locales: " + locals.toString());
+        cursor.close();
+
+        return locals;
+    }
+
+    private List<Local> extractLocalesFromCursor(Cursor cursor) {
+        List<Local> localList = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            localList.add(new Local(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    "", "", "", "", 0
+            ));
+        }
+
+        return localList;
     }
 
     /**
