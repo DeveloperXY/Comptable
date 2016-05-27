@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -34,8 +33,6 @@ public class AddChargeActivity extends WithDrawerActivity {
     @Bind(R.id.saveButton)
     Button saveButton;
 
-    private DatabaseAdapter mDatabaseAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +41,6 @@ public class AddChargeActivity extends WithDrawerActivity {
 
         setupActionBar();
         setupTextWatcher();
-
-        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
     }
 
     @Override
