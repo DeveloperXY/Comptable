@@ -223,7 +223,10 @@ public class PurchasesActivity extends WithDrawerActivity {
      * @param orderInfos
      */
     void postCreatePurchaseOrder(String url, JSONArray orderInfos) {
-        postCreatePurchaseOrder(url, JSONUtils.bundleWithTag(orderInfos, "data"));
+        postCreatePurchaseOrder(url, JSONUtils.merge(
+                JSONUtils.bundleWithTag(orderInfos, "data"),
+                JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID())
+        ));
     }
 
     /**

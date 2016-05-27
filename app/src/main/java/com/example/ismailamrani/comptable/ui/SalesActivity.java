@@ -162,7 +162,10 @@ public class SalesActivity extends WithDrawerActivity {
      * @param orderInfos
      */
     void postCreateSaleOrder(String url, JSONArray orderInfos) {
-        postCreateSaleOrder(url, JSONUtils.bundleWithTag(orderInfos, "data"));
+        postCreateSaleOrder(url, JSONUtils.merge(
+                JSONUtils.bundleWithTag(orderInfos, "data"),
+                JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID())
+        ));
     }
 
     /**
