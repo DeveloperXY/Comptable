@@ -19,6 +19,7 @@ import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
+import com.example.ismailamrani.comptable.ui.ComptabiliteDetailsActivity;
 import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
@@ -95,7 +96,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
      * @param view that was clicked.
      */
     @OnClick({R.id.produit, R.id.client, R.id.chargee, R.id.stock,
-            R.id.ventes, R.id.achat, R.id.fournis})
+            R.id.ventes, R.id.achat, R.id.fournis, R.id.comptabilite})
     public void OnClick(View view) {
         Class<?> targetActivity;
         @IdRes int clickedImageID; // the ID of the clicked ImageView
@@ -139,6 +140,11 @@ public class HomeActivity extends ColoredStatusBarActivity {
                 clickedImageID = R.id.salesMenuImage;
                 clickedImageResID = R.mipmap.ic_sell;
                 orderType = Orders.SALE;
+                break;
+            case R.id.comptabilite:
+                targetActivity = ComptabiliteDetailsActivity.class;
+                clickedImageID = R.id.comptabiliteMenuImage;
+                clickedImageResID = R.mipmap.ic_comp;
                 break;
             default:
                 targetActivity = null;

@@ -7,6 +7,6 @@ public interface DrawerOrder {
     ActivityOrder getActivity();
 
     enum ActivityOrder {
-        PRODUCTS, STOCK, SALES, PURCHASES, CHARGES, CLIENTS, SUPPLIERS, NONE
+        PRODUCTS, STOCK, SALES, PURCHASES, CHARGES, CLIENTS, SUPPLIERS, COMPTABILITE, NONE
     }
 }

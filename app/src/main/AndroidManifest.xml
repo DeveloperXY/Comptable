@@ -91,6 +91,8 @@
         <activity android:name=".ui.startup.ActivationActivity"/>
         <activity android:name=".ui.OrdersActivity"/>
         <activity android:name=".ui.ChargesActivity"/>
+        <activity android:name=".ui.ComptabiliteDetailsActivity">
+        </activity>
     </application>
 
 </manifest>

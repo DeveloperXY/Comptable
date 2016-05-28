@@ -143,6 +143,9 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
             case CHARGES:
                 selectedIndex += 6;
                 break;
+            case COMPTABILITE:
+                selectedIndex += 7;
+                break;
             default:
                 selectedIndex = -1;
         }
