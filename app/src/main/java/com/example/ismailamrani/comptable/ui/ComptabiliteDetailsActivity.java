@@ -14,5 +14,20 @@ public class ComptabiliteDetailsActivity extends AnimatedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comptabilite_details);
         ButterKnife.bind(this);
+
+        setupActionBar();
+        setupRevealTransition();
+    }
+
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
+        mActionBar.setTitle("Comptabilité");
+    }
+
+    @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.COMPTABILITE;
     }
 }
