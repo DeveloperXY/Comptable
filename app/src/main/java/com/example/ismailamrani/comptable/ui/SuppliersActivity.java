@@ -65,7 +65,7 @@ public class SuppliersActivity extends AnimatedActivity {
     private void fetchSuppliers() {
         JSONObject params = JSONUtils.bundleCompanyIDToJSON(
                 mDatabaseAdapter.getUserCompanyID());
-        sendHTTPRequest(PhpAPI.getFournisseur, params, Method.POST,
+        sendHTTPRequest(PhpAPI.getFournisseur, params, Method.GET,
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {

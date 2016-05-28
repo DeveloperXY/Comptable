@@ -14,7 +14,6 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
@@ -93,8 +92,10 @@ public class PurchasesActivity extends WithDrawerActivity {
                 spinnerID == R.id.productSpinner ?
                         PhpAPI.getProduit :
                         PhpAPI.getFournisseur,
-                JSONUtils.bundleLocaleIDToJSON(DatabaseAdapter.getInstance(this)
-                        .getCurrentLocaleID())
+                JSONUtils.merge(
+                        JSONUtils.bundleLocaleIDToJSON(
+                                mDatabaseAdapter.getCurrentLocaleID()),
+                        JSONUtils.bundleCompanyIDToJSON(mDatabaseAdapter.getUserCompanyID()))
                 , spinnerID);
     }
 
@@ -104,8 +105,8 @@ public class PurchasesActivity extends WithDrawerActivity {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 0) {
-                            Toast.makeText(PurchasesActivity.this, "Error",
-                                    Toast.LENGTH_SHORT).show();
+                            runOnUiThread(() -> Toast.makeText(PurchasesActivity.this, "Error",
+                                    Toast.LENGTH_SHORT).show());
                         } else {
                             runOnUiThread(() -> prepareDialogData(response, spinnerID));
                         }
