@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -45,6 +46,8 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     @Bind(R.id.plusButton)
     Button plusButton;
 
+    private LoadingDialog mLoadingDialog;
+
     /**
      * This variable holds the ID of the locale whose details will be fetched & displayed.
      * It could be the ID of the current locale if the current user is a regular employee,
@@ -58,6 +61,9 @@ public class AccountingDetailsActivity extends AnimatedActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comptabilite_details);
         ButterKnife.bind(this);
+
+        mLoadingDialog = new LoadingDialog(this);
+        mLoadingDialog.show();
 
         if (currentUserType.startsWith("e"))
             plusButton.setVisibility(View.GONE);
@@ -85,6 +91,11 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     public ActivityOrder getActivity() {
         return ActivityOrder.COMPTABILITE;
     }
@@ -106,6 +117,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                                 runOnUiThread(() -> {
                                     try {
                                         showData(details);
+                                        mLoadingDialog.dismiss();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -119,8 +131,12 @@ public class AccountingDetailsActivity extends AnimatedActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(AccountingDetailsActivity.this,
-                                "Network error.", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> {
+                            Toast.makeText(AccountingDetailsActivity.this,
+                                    "Network error.", Toast.LENGTH_SHORT).show();
+
+                            mLoadingDialog.dismiss();
+                        });
                     }
                 });
     }

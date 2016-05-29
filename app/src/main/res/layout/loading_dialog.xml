@@ -7,12 +7,6 @@
               android:orientation="vertical"
               tools:background="#000000">
 
-    <ImageView
-        android:id="@+id/loadingDialogImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_logo"/>
-
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyleLarge"
