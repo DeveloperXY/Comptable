@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:background="@drawable/white_to_grey_gradient"
                 android:padding="2dp">
 
@@ -18,5 +18,6 @@
         android:paddingTop="4dp"
         android:textColor="#000000"
         android:textSize="18sp"
-        tools:text="Local 1, Fes"/>
+        tools:text="Local 1, Fes"
+        android:textStyle="bold"/>
 </RelativeLayout>

@@ -94,15 +94,14 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         mDrawerRecyclerAdapter.setDrawerClickListener((drawerItem, clickedImage) -> {
             Intent intent = drawerItem.getIntent();
             if (intent != null) {
-                activityShouldFinish();
-
                 // TODO: hack; this code will break if you move the HomeActivity class into another package
                 if (intent.getComponent().getShortClassName().equals(".ui.startup.HomeActivity")) {
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    ActivityCompat.finishAffinity(this);
                     startActivity(intent);
                 }
                 else {
+                    activityShouldFinish();
+
                     intent.putExtra("imageRes", drawerItem.getIcon());
                     ActivityTransition.startActivityWithSharedElement(
                             this, intent, clickedImage, "menuAnim");
@@ -218,7 +217,6 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
     protected void logout() {
         mDatabaseAdapter.logout();
 
-        activityShouldFinish();
         ActivityCompat.finishAffinity(this);
         startActivity(new Intent(this, LoginActivity.class));
     }
