@@ -1,13 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      xmlns:tools="http://schemas.android.com/tools">
+    >
     <item
-        android:id="@+id/action_add_favourite"
+        android:id="@+id/action_edit_supplier"
         android:orderInCategory="100"
-        android:title="Modifier" />
+        android:title="Modifier"/>
 
     <item
-        android:id="@+id/action_play_next"
+        android:id="@+id/action_delete_supplier"
         android:orderInCategory="101"
-        android:title="Supprimer" />
+        android:title="Supprimer"/>
 </menu>

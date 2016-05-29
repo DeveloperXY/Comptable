@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
+import com.example.ismailamrani.comptable.ui.EditFournisseurActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,22 +138,28 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         private void showPopupMenu(View view) {
             PopupMenu popup = new PopupMenu(mContext, view);
             popup.inflate(R.menu.menu_supplier_item);
-            popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+            popup.setOnMenuItemClickListener(
+                    new MyMenuItemClickListener(mSuppliers.get(getAdapterPosition())));
             popup.show();
         }
 
         class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
-            public MyMenuItemClickListener() {
+            private Supplier supplier;
+
+            public MyMenuItemClickListener(Supplier supplier) {
+                this.supplier = supplier;
             }
 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.action_add_favourite:
-                        Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
+                    case R.id.action_edit_supplier:
+                        Intent i = new Intent(mContext, EditFournisseurActivity.class);
+                        i.putExtra("id", supplier.getId());
+                        mContext.startActivity(i);
                         return true;
-                    case R.id.action_play_next:
+                    case R.id.action_delete_supplier:
                         Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
                         return true;
                     default:
