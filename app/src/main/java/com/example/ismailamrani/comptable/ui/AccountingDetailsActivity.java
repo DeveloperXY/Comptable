@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -68,7 +69,8 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     }
 
     public void onPlusPressed(View view) {
-
+        activityShouldFinish();
+        startActivity(new Intent(this, AccountingHomeActivity.class));
     }
 
     @Override
