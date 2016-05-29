@@ -15,6 +15,7 @@ import com.example.ismailamrani.comptable.adapters.SupplierAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
+import com.example.ismailamrani.comptable.utils.DialogUtil;
 import com.example.ismailamrani.comptable.utils.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ListComparison;
@@ -159,11 +160,17 @@ public class SuppliersActivity extends RefreshableActivity {
 
                 @Override
                 public void onDeleteSupplier(String supplierID) {
-                    sendHTTPRequest(
-                            PhpAPI.removeFournisseur,
-                            JSONUtils.bundleIDToJSON(supplierID),
-                            Method.POST,
-                            new DeleteSupplierListener());
+                    DialogUtil.showMutliDialog(
+                            SuppliersActivity.this,
+                            "Remove supplier",
+                            "Are you sure that you want to remove this supplier from your suppliers' list ?",
+                            "Yes",
+                            (dialog, which) -> sendHTTPRequest(
+                                    PhpAPI.removeFournisseur,
+                                    JSONUtils.bundleIDToJSON(supplierID),
+                                    Method.POST,
+                                    new DeleteSupplierListener()),
+                            "No", null);
                 }
             });
             dataRecyclerView.setAdapter(supplierAdapter);

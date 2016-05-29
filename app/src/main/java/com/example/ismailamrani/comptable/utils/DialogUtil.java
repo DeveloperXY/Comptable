@@ -25,6 +25,25 @@ public class DialogUtil {
         return alertDialog;
     }
 
+    private static AlertDialog buildDoubleChoiceDialog(
+            Context context, String title, String message,
+            final String actionText1,
+            final DialogInterface.OnClickListener listener1,
+            final String actionText2,
+            final DialogInterface.OnClickListener listener2) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                context, R.style.AppCompatAlertDialogStyle);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton(actionText1, listener1);
+        builder.setNegativeButton(actionText2, listener2);
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(true);
+
+        return alertDialog;
+    }
+
     /**
      * Shows a custom dialog.
      *
@@ -45,6 +64,17 @@ public class DialogUtil {
                                   final DialogInterface.OnDismissListener dismissListener) {
         AlertDialog alertDialog = buildDialog(context, title, message, actionText, listener);
         alertDialog.setOnDismissListener(dismissListener);
+        alertDialog.show();
+    }
+
+    public static void showMutliDialog(Context context, final String title,
+                                       final String message,
+                                       final String actionText1,
+                                       final DialogInterface.OnClickListener listener1,
+                                       final String actionText2,
+                                       final DialogInterface.OnClickListener listener2) {
+        AlertDialog alertDialog = buildDoubleChoiceDialog(
+                context, title, message, actionText1, listener1, actionText2, listener2);
         alertDialog.show();
     }
 }
