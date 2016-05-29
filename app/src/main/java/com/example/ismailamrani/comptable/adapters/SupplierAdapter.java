@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -22,15 +20,12 @@ import butterknife.ButterKnife;
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHolder> {
+public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolder, Supplier> {
 
-    private Context mContext;
-    private List<Supplier> mSuppliers;
     private SupplierListener listener;
 
     public SupplierAdapter(Context context, List<Supplier> suppliers) {
-        mContext = context;
-        mSuppliers = new ArrayList<>(suppliers);
+        super(context, suppliers);
     }
 
     @Override
@@ -41,68 +36,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Supplier supplier = mSuppliers.get(position);
-        viewHolder.bind(supplier);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mSuppliers.size();
-    }
-
-    public Supplier removeItem(int position) {
-        final Supplier supplier = mSuppliers.remove(position);
-        notifyItemRemoved(position);
-        return supplier;
-    }
-
-    public void addItem(int position, Supplier supplier) {
-        mSuppliers.add(position, supplier);
-        notifyItemInserted(position);
-    }
-
-    public void moveItem(int fromPosition, int toPosition) {
-        final Supplier supplier = mSuppliers.remove(fromPosition);
-        mSuppliers.add(toPosition, supplier);
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    public void animateTo(List<Supplier> suppliers) {
-        applyAndAnimateRemovals(suppliers);
-        applyAndAnimateAdditions(suppliers);
-        applyAndAnimateMovedItems(suppliers);
-    }
-
-    private void applyAndAnimateRemovals(List<Supplier> newSuppliers) {
-        for (int i = mSuppliers.size() - 1; i >= 0; i--) {
-            final Supplier supplier = mSuppliers.get(i);
-            if (!newSuppliers.contains(supplier))
-                removeItem(i);
-        }
-    }
-
-    private void applyAndAnimateAdditions(List<Supplier> newSuppliers) {
-        for (int i = 0, count = newSuppliers.size(); i < count; i++) {
-            final Supplier supplier = newSuppliers.get(i);
-            if (!mSuppliers.contains(supplier))
-                addItem(i, supplier);
-        }
-    }
-
-    private void applyAndAnimateMovedItems(List<Supplier> newSuppliers) {
-        for (int toPosition = newSuppliers.size() - 1; toPosition >= 0; toPosition--) {
-            final Supplier supplier = newSuppliers.get(toPosition);
-            final int fromPosition = mSuppliers.indexOf(supplier);
-
-            if (fromPosition >= 0 && fromPosition != toPosition)
-                moveItem(fromPosition, toPosition);
-        }
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends BinderViewHolder<Supplier> {
         @Bind(R.id.title)
         TextView title;
         @Bind(R.id.address)
@@ -118,7 +52,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
             View.OnClickListener clickListener = view -> {
                 if (listener != null)
-                    listener.onSupplierSelected(mSuppliers.get(getAdapterPosition()));
+                    listener.onSupplierSelected(mItems.get(getAdapterPosition()));
             };
 
             overflow.setOnClickListener(this::showPopupMenu);
@@ -136,7 +70,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
             PopupMenu popup = new PopupMenu(mContext, view);
             popup.inflate(R.menu.menu_supplier_item);
             popup.setOnMenuItemClickListener(
-                    new MyMenuItemClickListener(mSuppliers.get(getAdapterPosition())));
+                    new MyMenuItemClickListener(mItems.get(getAdapterPosition())));
             popup.show();
         }
 

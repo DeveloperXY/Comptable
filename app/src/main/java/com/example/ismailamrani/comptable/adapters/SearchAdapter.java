@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,18 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Mohammed Aouf ZOUAG on 30/04/2016.
+ * Created by Mohammed Aouf ZOUAG on 27/05/2016.
  */
 public class SearchAdapter<T> extends BaseSearchAdapter<SearchAdapter.ViewHolder<T>, T> {
 
-    private Context mContext;
     private OnItemClickListener<T> listener;
     private ViewHolderBinder<T> mBinder;
 
     public SearchAdapter(Context context, List<T> items, ViewHolderBinder<T> binder) {
-        mContext = context;
-        mItems = new ArrayList<>(items);
+        super(context, items);
         mBinder = binder;
     }
 
@@ -36,22 +32,11 @@ public class SearchAdapter<T> extends BaseSearchAdapter<SearchAdapter.ViewHolder
         return new ViewHolder<>(v, mBinder, listener, mItems);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder<T> holder, int position) {
-        T item = mItems.get(position);
-        holder.bind(item);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mItems.size();
-    }
-
     public interface ViewHolderBinder<T> {
         void bind(ViewHolder<T> viewHolder, T item);
     }
 
-    public static class ViewHolder<T> extends RecyclerView.ViewHolder {
+    public static class ViewHolder<T> extends BinderViewHolder<T> {
         ViewHolderBinder<T> mBinder;
         TextView textLabel;
 

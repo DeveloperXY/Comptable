@@ -2,7 +2,6 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,20 +16,15 @@ import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 30/04/2016.
  */
-public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> {
-
-    private Context mContext;
-    private List<Product> mProducts;
+public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Product> {
 
     public StockAdapter(Context context, List<Product> products) {
-        mContext = context;
-        mProducts = new ArrayList<>(products);
+        super(context, products);
     }
 
     @Override
@@ -41,68 +35,8 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Product product = mProducts.get(position);
-        viewHolder.bind(product);
-    }
 
-    @Override
-    public int getItemCount() {
-        return mProducts.size();
-    }
-
-    public Product removeItem(int position) {
-        final Product product = mProducts.remove(position);
-        notifyItemRemoved(position);
-        return product;
-    }
-
-    public void addItem(int position, Product product) {
-        mProducts.add(position, product);
-        notifyItemInserted(position);
-    }
-
-    public void moveItem(int fromPosition, int toPosition) {
-        final Product product = mProducts.remove(fromPosition);
-        mProducts.add(toPosition, product);
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    public void animateTo(List<Product> products) {
-        applyAndAnimateRemovals(products);
-        applyAndAnimateAdditions(products);
-        applyAndAnimateMovedItems(products);
-    }
-
-    private void applyAndAnimateRemovals(List<Product> newProducts) {
-        for (int i = mProducts.size() - 1; i >= 0; i--) {
-            final Product product = mProducts.get(i);
-            if (!newProducts.contains(product))
-                removeItem(i);
-        }
-    }
-
-    private void applyAndAnimateAdditions(List<Product> newProducts) {
-        for (int i = 0, count = newProducts.size(); i < count; i++) {
-            final Product product = newProducts.get(i);
-            if (!mProducts.contains(product))
-                addItem(i, product);
-        }
-    }
-
-    private void applyAndAnimateMovedItems(List<Product> newProducts) {
-        for (int toPosition = newProducts.size() - 1; toPosition >= 0; toPosition--) {
-            final Product product = newProducts.get(toPosition);
-            final int fromPosition = mProducts.indexOf(product);
-
-            if (fromPosition >= 0 && fromPosition != toPosition)
-                moveItem(fromPosition, toPosition);
-        }
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
+    public class ViewHolder extends BinderViewHolder<Product> {
         TextView productLabel;
         TextView quantityLabel;
         TextView colorFilterLayout;
@@ -117,7 +51,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.ViewHolder> 
 
             v.setOnClickListener(view -> {
                 Intent intent = new Intent(mContext, ProductDetailsActivity.class);
-                intent.putExtra("product", mProducts.get(getLayoutPosition()));
+                intent.putExtra("product", mItems.get(getLayoutPosition()));
 
                 ActivityTransition.startActivityWithMultipleSharedElements(
                         mContext, intent,

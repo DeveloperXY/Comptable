@@ -1,16 +1,20 @@
 package com.example.ismailamrani.comptable.adapters;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
 
 import java.util.List;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/05/2016.
+ *
+ * This adapter provides search functionality for the concerned RecyclerView.
  */
-public abstract class BaseSearchAdapter<T extends RecyclerView.ViewHolder, U>
-        extends RecyclerView.Adapter<T> {
+public abstract class BaseSearchAdapter<T extends BinderViewHolder<U>, U>
+        extends BinderAdapter<U, T> {
 
-    protected List<U> mItems;
+    public BaseSearchAdapter(Context context, List<U> items) {
+        super(context, items);
+    }
 
     public U removeItem(int position) {
         final U item = mItems.remove(position);
