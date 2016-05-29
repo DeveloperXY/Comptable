@@ -125,4 +125,16 @@ public class JSONUtils {
 
         return data;
     }
+
+    public static JSONObject bundleIDToJSON(String id) {
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("ID", id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
 }

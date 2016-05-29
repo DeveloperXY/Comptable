@@ -119,6 +119,7 @@ public class SuppliersActivity extends RefreshableActivity {
                     }
                 });
     }
+
     @Override
     protected void setupRecyclerView() {
         super.setupRecyclerView();
@@ -155,6 +156,15 @@ public class SuppliersActivity extends RefreshableActivity {
                     i.putExtra("id", supplierID);
                     startActivity(i);
                 }
+
+                @Override
+                public void onDeleteSupplier(String supplierID) {
+                    sendHTTPRequest(
+                            PhpAPI.removeFournisseur,
+                            JSONUtils.bundleIDToJSON(supplierID),
+                            Method.POST,
+                            new DeleteSupplierListener());
+                }
             });
             dataRecyclerView.setAdapter(supplierAdapter);
         } else
@@ -177,5 +187,30 @@ public class SuppliersActivity extends RefreshableActivity {
         emptyLayout.setVisibility(mSuppliers.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         dataRecyclerView.setVisibility(mSuppliers.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
+    }
+
+    class DeleteSupplierListener implements RequestListener {
+
+        @Override
+        public void onRequestSucceeded(JSONObject response, int status) {
+            if (status == 1) {
+                runOnUiThread(() -> {
+                    Toast.makeText(SuppliersActivity.this, "Supplier removed.",
+                            Toast.LENGTH_LONG).show();
+                    refresh();
+                });
+
+            } else if (status == 0) {
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(),
+                        "There was an error while processing your request.",
+                        Toast.LENGTH_LONG).show());
+            }
+        }
+
+        @Override
+        public void onRequestFailed() {
+            runOnUiThread(() -> Toast.makeText(SuppliersActivity.this,
+                    "Unknown error", Toast.LENGTH_LONG).show());
+        }
     }
 }

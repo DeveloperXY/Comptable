@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
@@ -157,7 +156,8 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
                             listener.onEditSupplier(supplier.getId());
                         return true;
                     case R.id.action_delete_supplier:
-                        Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
+                        if (listener != null)
+                            listener.onDeleteSupplier(supplier.getId());
                         return true;
                     default:
                 }
@@ -173,5 +173,6 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
     public interface SupplierListener {
         void onSupplierSelected(Supplier supplier);
         void onEditSupplier(String supplierID);
+        void onDeleteSupplier(String supplierID);
     }
 }
