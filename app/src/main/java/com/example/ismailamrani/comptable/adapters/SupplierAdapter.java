@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.EditFournisseurActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,9 +153,8 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_edit_supplier:
-                        Intent i = new Intent(mContext, EditFournisseurActivity.class);
-                        i.putExtra("id", supplier.getId());
-                        mContext.startActivity(i);
+                        if (listener != null)
+                            listener.onEditSupplier(supplier.getId());
                         return true;
                     case R.id.action_delete_supplier:
                         Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
@@ -175,5 +172,6 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
     public interface SupplierListener {
         void onSupplierSelected(Supplier supplier);
+        void onEditSupplier(String supplierID);
     }
 }

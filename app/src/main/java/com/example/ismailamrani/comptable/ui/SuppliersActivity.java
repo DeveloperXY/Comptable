@@ -142,9 +142,19 @@ public class SuppliersActivity extends RefreshableActivity {
     private void populateRecyclerView() {
         if (supplierAdapter == null) {
             supplierAdapter = new SupplierAdapter(this, mSuppliers);
-            supplierAdapter.setSupplierListener(supplier -> {
-                new SupplierDialog(this, supplier)
-                        .show();
+            supplierAdapter.setSupplierListener(new SupplierAdapter.SupplierListener() {
+                @Override
+                public void onSupplierSelected(Supplier supplier) {
+                    new SupplierDialog(SuppliersActivity.this, supplier)
+                            .show();
+                }
+
+                @Override
+                public void onEditSupplier(String supplierID) {
+                    Intent i = new Intent(SuppliersActivity.this, EditFournisseurActivity.class);
+                    i.putExtra("id", supplierID);
+                    startActivity(i);
+                }
             });
             dataRecyclerView.setAdapter(supplierAdapter);
         } else
