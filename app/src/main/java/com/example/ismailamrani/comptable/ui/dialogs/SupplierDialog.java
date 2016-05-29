@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -28,13 +29,22 @@ public class SupplierDialog extends Dialog {
     @Bind(R.id.supplierPhoneLabel)
     TextView supplierPhoneLabel;
 
+    @Bind(R.id.closeDialogItem)
+    ImageView closeDialogItem;
+    @Bind(R.id.editSupplierItem)
+    ImageView editSupplierItem;
+    @Bind(R.id.deleteSupplierItem)
+    ImageView deleteSupplierItem;
+
     private Context mContext;
     private Supplier supplier;
+    private SupplierDialogListener mDialogListener;
 
-    public SupplierDialog(Context context, Supplier supplier) {
+    public SupplierDialog(Context context, Supplier supplier, SupplierDialogListener listener) {
         super(context);
         mContext = context;
         this.supplier = supplier;
+        mDialogListener = listener;
     }
 
     @Override
@@ -45,6 +55,7 @@ public class SupplierDialog extends Dialog {
         ButterKnife.bind(this);
 
         setupWindow();
+        setupListeners();
         initializeUI();
     }
 
@@ -54,6 +65,19 @@ public class SupplierDialog extends Dialog {
         getWindow().setLayout((int) (point.x - point.x * 0.1), (int) (point.y - point.y * 0.3));
     }
 
+    private void setupListeners() {
+        closeDialogItem.setOnClickListener(v -> dismiss());
+        editSupplierItem.setOnClickListener(v -> {
+            dismiss();
+            if (mDialogListener != null)
+                mDialogListener.onEdit(supplier.getId());
+        });
+        deleteSupplierItem.setOnClickListener(v -> {
+            if (mDialogListener != null)
+                mDialogListener.onDelete(supplier.getId());
+        });
+    }
+
     private void initializeUI() {
         String address = supplier.getAdresse();
 
@@ -61,5 +85,10 @@ public class SupplierDialog extends Dialog {
         supplierAddressLabel.setText(address);
         bottomAddressLabel.setText(address);
         supplierPhoneLabel.setText(supplier.getTel());
+    }
+
+    public interface SupplierDialogListener {
+        void onDelete(String supplierID);
+        void onEdit(String supplierID);
     }
 }

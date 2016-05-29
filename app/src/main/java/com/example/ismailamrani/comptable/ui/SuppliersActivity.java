@@ -39,6 +39,7 @@ public class SuppliersActivity extends RefreshableActivity {
 
     private List<Supplier> mSuppliers;
     private SupplierAdapter supplierAdapter;
+    private SupplierDialog mSupplierDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,35 +148,56 @@ public class SuppliersActivity extends RefreshableActivity {
             supplierAdapter.setSupplierListener(new SupplierAdapter.SupplierListener() {
                 @Override
                 public void onSupplierSelected(Supplier supplier) {
-                    new SupplierDialog(SuppliersActivity.this, supplier)
-                            .show();
+                    mSupplierDialog = new SupplierDialog(
+                            SuppliersActivity.this,
+                            supplier,
+                            new SupplierDialog.SupplierDialogListener() {
+                                @Override
+                                public void onDelete(String supplierID) {
+                                    deleteSupplier(supplierID);
+                                }
+
+                                @Override
+                                public void onEdit(String supplierID) {
+                                    editSupplier(supplierID);
+                                }
+                            });
+                    mSupplierDialog.show();
                 }
 
                 @Override
                 public void onEditSupplier(String supplierID) {
-                    Intent i = new Intent(SuppliersActivity.this, EditFournisseurActivity.class);
-                    i.putExtra("id", supplierID);
-                    startActivity(i);
+                    editSupplier(supplierID);
                 }
 
                 @Override
                 public void onDeleteSupplier(String supplierID) {
-                    DialogUtil.showMutliDialog(
-                            SuppliersActivity.this,
-                            "Remove supplier",
-                            "Are you sure that you want to remove this supplier from your suppliers' list ?",
-                            "Yes",
-                            (dialog, which) -> sendHTTPRequest(
-                                    PhpAPI.removeFournisseur,
-                                    JSONUtils.bundleIDToJSON(supplierID),
-                                    Method.POST,
-                                    new DeleteSupplierListener()),
-                            "No", null);
+                    deleteSupplier(supplierID);
                 }
             });
             dataRecyclerView.setAdapter(supplierAdapter);
         } else
             supplierAdapter.animateTo(mSuppliers);
+    }
+
+    private void editSupplier(String supplierID) {
+        Intent i = new Intent(SuppliersActivity.this, EditFournisseurActivity.class);
+        i.putExtra("id", supplierID);
+        startActivity(i);
+    }
+
+    private void deleteSupplier(String supplierID) {
+        DialogUtil.showMutliDialog(
+                SuppliersActivity.this,
+                "Remove supplier",
+                "Are you sure that you want to remove this supplier from your suppliers' list ?",
+                "Yes",
+                (dialog, which) -> sendHTTPRequest(
+                        PhpAPI.removeFournisseur,
+                        JSONUtils.bundleIDToJSON(supplierID),
+                        Method.POST,
+                        new DeleteSupplierListener()),
+                "No", null);
     }
 
     /**
@@ -202,6 +224,9 @@ public class SuppliersActivity extends RefreshableActivity {
         public void onRequestSucceeded(JSONObject response, int status) {
             if (status == 1) {
                 runOnUiThread(() -> {
+                    if (mSupplierDialog.isShowing())
+                        mSupplierDialog.dismiss();
+
                     Toast.makeText(SuppliersActivity.this, "Supplier removed.",
                             Toast.LENGTH_LONG).show();
                     refresh();

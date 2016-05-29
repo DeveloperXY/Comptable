@@ -90,7 +90,10 @@
             android:textSize="24sp"
             android:padding="8dp"
             android:gravity="left"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite"
+            android:layout_toLeftOf="@+id/deleteSupplierItem"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,6 +107,35 @@
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
             android:paddingBottom="8dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/closeDialogItem"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:layout_alignTop="@+id/supplierTitleLabel"
+            android:layout_alignBottom="@+id/supplierTitleLabel"
+            android:scaleType="fitXY"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editSupplierItem"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_toLeftOf="@+id/closeDialogItem"
+            android:layout_alignTop="@+id/supplierTitleLabel"
+            android:layout_alignBottom="@+id/supplierTitleLabel"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteSupplierItem"
+            android:src="@android:drawable/ic_menu_delete"
+            android:layout_toLeftOf="@+id/editSupplierItem"
+            android:layout_alignTop="@+id/supplierTitleLabel"
+            android:layout_alignBottom="@+id/supplierTitleLabel"/>
     </RelativeLayout>
 
 </RelativeLayout>
