@@ -9,7 +9,7 @@ import android.support.design.widget.Snackbar;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
-import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="@drawable/white_to_grey_gradient"
-    android:padding="2dp">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/white_to_grey_gradient"
+                android:padding="2dp">
 
     <TextView
         android:id="@+id/localText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="35"
-        android:text="Local 1, Fes"
-        android:textColor="#000000"
-        android:paddingTop="4dp"
-        android:paddingRight="4dp"
+        android:gravity="center"
         android:paddingBottom="4dp"
         android:paddingLeft="16dp"
-        android:gravity="center"
-        android:textSize="18sp"/>
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        tools:text="Local 1, Fes"/>
 </RelativeLayout>

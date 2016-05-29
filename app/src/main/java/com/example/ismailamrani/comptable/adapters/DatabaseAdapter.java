@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.sqlite;
+package com.example.ismailamrani.comptable.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;

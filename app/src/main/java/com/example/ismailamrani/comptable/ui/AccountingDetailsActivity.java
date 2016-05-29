@@ -45,6 +45,14 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     @Bind(R.id.plusButton)
     Button plusButton;
 
+    /**
+     * This variable holds the ID of the locale whose details will be fetched & displayed.
+     * It could be the ID of the current locale if the current user is a regular employee,
+     * or it could be the ID of the selected locale from the previously displayed list of locales
+     * if the current user is a superior.
+     */
+    int currentLocaleID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +61,10 @@ public class AccountingDetailsActivity extends AnimatedActivity {
 
         if (mDatabaseAdapter.getUserType().startsWith("e"))
             plusButton.setVisibility(View.GONE);
+
+        Intent intent = getIntent();
+        if (intent != null)
+            currentLocaleID = intent.getIntExtra("localeID", mDatabaseAdapter.getCurrentLocaleID());
 
         setupActionBar();
         setupRevealTransition();
@@ -69,8 +81,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     }
 
     public void onPlusPressed(View view) {
-        activityShouldFinish();
-        startActivity(new Intent(this, AccountingHomeActivity.class));
+        onBackPressed();
     }
 
     @Override
@@ -81,7 +92,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     private void fetchDetails() {
         JSONObject data = JSONUtils.merge(
                 JSONUtils.bundleCompanyIDToJSON(mDatabaseAdapter.getUserCompanyID()),
-                JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID()));
+                JSONUtils.bundleLocaleIDToJSON(currentLocaleID));
 
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
                 new RequestListener() {
@@ -92,7 +103,13 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                                 JSONObject details = response.getJSONArray("comptabilite")
                                         .getJSONObject(0);
 
-                                showData(details);
+                                runOnUiThread(() -> {
+                                    try {
+                                        showData(details);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

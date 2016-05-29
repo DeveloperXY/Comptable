@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
-import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.DialogUtil;

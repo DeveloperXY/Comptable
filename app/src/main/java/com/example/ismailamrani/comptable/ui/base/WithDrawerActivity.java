@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
 import com.example.ismailamrani.comptable.models.DrawerItem;
-import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.AccountingHomeActivity;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
