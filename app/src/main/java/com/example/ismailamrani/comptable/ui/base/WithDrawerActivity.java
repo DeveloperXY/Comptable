@@ -47,11 +47,13 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
 
     private DrawerRecyclerAdapter mDrawerRecyclerAdapter;
     protected DatabaseAdapter mDatabaseAdapter;
+    protected String currentUserType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDatabaseAdapter = DatabaseAdapter.getInstance(this);
+        currentUserType = mDatabaseAdapter.getUserType();
     }
 
     @Override
@@ -162,7 +164,6 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
     private Intent getIntentBasedOnPosition(int position) {
         Class<?> targetActivity;
         String orderType = ""; // the type of orders to be shown
-        String userType = mDatabaseAdapter.getUserType();
 
         switch (position) {
             case 0:
@@ -192,7 +193,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 targetActivity = ChargesActivity.class;
                 break;
             case 8:
-                targetActivity = userType.startsWith("e") ?
+                targetActivity = currentUserType.startsWith("e") ?
                         AccountingDetailsActivity.class : AccountingHomeActivity.class;
                 break;
             case 9:

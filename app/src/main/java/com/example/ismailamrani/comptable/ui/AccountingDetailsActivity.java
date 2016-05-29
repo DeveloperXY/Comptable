@@ -59,7 +59,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
         setContentView(R.layout.activity_comptabilite_details);
         ButterKnife.bind(this);
 
-        if (mDatabaseAdapter.getUserType().startsWith("e"))
+        if (currentUserType.startsWith("e"))
             plusButton.setVisibility(View.GONE);
 
         Intent intent = getIntent();
