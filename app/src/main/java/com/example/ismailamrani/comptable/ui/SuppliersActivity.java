@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.utils.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ListComparison;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -24,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -33,18 +35,21 @@ import butterknife.ButterKnife;
  */
 public class SuppliersActivity extends RefreshableActivity {
 
-    List<Supplier> mSuppliers;
+    private List<Supplier> mSuppliers;
+    private SupplierAdapter supplierAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fournisseur);
+        setContentView(R.layout.activity_suppliers);
         ButterKnife.bind(this);
 
         setupActionBar();
         setupRevealTransition();
+        setupRecyclerView();
+        setupSwipeRefresh();
 
-        fetchSuppliers();
+        refresh();
     }
 
     @Override
@@ -75,7 +80,17 @@ public class SuppliersActivity extends RefreshableActivity {
                         try {
                             if (status == 1) {
                                 JSONArray suppliers = response.getJSONArray("fournisseur");
-                                mSuppliers = Supplier.parseSuppliers(suppliers);
+                                List<Supplier> supplierList = Supplier.parseSuppliers(suppliers);
+
+                                if (ListComparison.areEqual(mSuppliers, supplierList))
+                                    runOnUiThread(this::handleDataChange);
+                                else {
+                                    mSuppliers = supplierList;
+                                    runOnUiThread(() -> {
+                                        handleDataChange();
+                                        populateRecyclerView();
+                                    });
+                                }
 
                                 runOnUiThread(() -> {
                                     populateRecyclerView();
@@ -93,19 +108,42 @@ public class SuppliersActivity extends RefreshableActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                                "Network error.", Toast.LENGTH_LONG).show());
+                        runOnUiThread(() -> handleRequestError());
+                    }
+
+                    private void handleDataChange() {
+                        toggleRecyclerviewState();
+                        progressBar.setVisibility(View.INVISIBLE);
+                        stopSwipeRefresh();
                     }
                 });
     }
+    @Override
+    protected void setupRecyclerView() {
+        super.setupRecyclerView();
+        mSuppliers = new ArrayList<>();
 
-    private void populateRecyclerView() {
-        SupplierAdapter supplierAdapter = new SupplierAdapter(this, mSuppliers);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         dataRecyclerView.setLayoutManager(layoutManager);
         dataRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         dataRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        dataRecyclerView.setAdapter(supplierAdapter);
+
+        emptyMessageLabel.setText("There are no suppliers to show.\nClick to refresh.");
+    }
+
+    @Override
+    protected void refresh() {
+        super.refresh();
+
+        fetchSuppliers();
+    }
+
+    private void populateRecyclerView() {
+        if (supplierAdapter == null) {
+            supplierAdapter = new SupplierAdapter(this, mSuppliers);
+            dataRecyclerView.setAdapter(supplierAdapter);
+        } else
+            supplierAdapter.animateTo(mSuppliers);
     }
 
     /**
@@ -113,6 +151,16 @@ public class SuppliersActivity extends RefreshableActivity {
      */
     private int dpToPx(int dp) {
         Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        return Math.round(TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    /**
+     * Toggles the visibility of the RecyclerView & the empty view associated with it.
+     */
+    private void toggleRecyclerviewState() {
+        emptyLayout.setVisibility(mSuppliers.size() == 0 ? View.VISIBLE : View.INVISIBLE);
+        dataRecyclerView.setVisibility(mSuppliers.size() == 0 ? View.INVISIBLE : View.VISIBLE);
+        errorLayout.setVisibility(View.INVISIBLE);
     }
 }

@@ -132,4 +132,38 @@ public class Supplier implements Item {
 
         return suppliers;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Supplier supplier = (Supplier) o;
+
+        if (id != null ? !id.equals(supplier.id) : supplier.id != null) return false;
+        if (nom != null ? !nom.equals(supplier.nom) : supplier.nom != null) return false;
+        if (tel != null ? !tel.equals(supplier.tel) : supplier.tel != null) return false;
+        if (adresse != null ? !adresse.equals(supplier.adresse) : supplier.adresse != null)
+            return false;
+        if (fix != null ? !fix.equals(supplier.fix) : supplier.fix != null) return false;
+        if (fax != null ? !fax.equals(supplier.fax) : supplier.fax != null) return false;
+        if (email != null ? !email.equals(supplier.email) : supplier.email != null) return false;
+        if (image != null ? !image.equals(supplier.image) : supplier.image != null) return false;
+        return url != null ? url.equals(supplier.url) : supplier.url == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (nom != null ? nom.hashCode() : 0);
+        result = 31 * result + (tel != null ? tel.hashCode() : 0);
+        result = 31 * result + (adresse != null ? adresse.hashCode() : 0);
+        result = 31 * result + (fix != null ? fix.hashCode() : 0);
+        result = 31 * result + (fax != null ? fax.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        return result;
+    }
 }
