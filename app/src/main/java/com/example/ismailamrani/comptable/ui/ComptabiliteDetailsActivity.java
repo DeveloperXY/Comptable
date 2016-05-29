@@ -1,6 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,12 +41,17 @@ public class ComptabiliteDetailsActivity extends AnimatedActivity {
     TextView saleOperationsNumber;
     @Bind(R.id.totalPriceLabel)
     TextView totalPriceLabel;
+    @Bind(R.id.plusButton)
+    Button plusButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comptabilite_details);
         ButterKnife.bind(this);
+
+        if (mDatabaseAdapter.getUserType().startsWith("e"))
+            plusButton.setVisibility(View.GONE);
 
         setupActionBar();
         setupRevealTransition();

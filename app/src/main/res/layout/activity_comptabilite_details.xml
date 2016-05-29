@@ -441,7 +441,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_toLeftOf="@+id/totalPriceLabel"
                         android:gravity="center"
-                        android:text="Total:"
+                        android:text="Profit :"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold"/>
 
@@ -453,7 +453,8 @@
                     android:text="PLus"
                     android:id="@+id/plusButton"
                     android:background="@drawable/more_btn_background"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/colorWhite"
+                    android:onClick="onPlusPressed"/>
 
             </RelativeLayout>
 
