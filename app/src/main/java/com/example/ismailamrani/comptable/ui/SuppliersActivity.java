@@ -1,14 +1,20 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.FourniseurAdapter;
+import com.example.ismailamrani.comptable.adapters.SupplierAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
+import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
+import com.example.ismailamrani.comptable.utils.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.Method;
 import com.example.ismailamrani.comptable.utils.RequestListener;
@@ -18,19 +24,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Redouane on 08/04/2016.
+ * Created by Mohammed Aouf ZOUAG on 29/05/2016.
  */
-public class SuppliersActivity extends AnimatedActivity {
+public class SuppliersActivity extends RefreshableActivity {
 
-    @Bind(R.id.Listfournisseur)
-    ListView list;
-    ArrayList<Supplier> mSuppliers = new ArrayList<>();
+    List<Supplier> mSuppliers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class SuppliersActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Fournisseur");
+        mActionBar.setTitle("Fournisseurs");
     }
 
     @Override
@@ -71,33 +74,21 @@ public class SuppliersActivity extends AnimatedActivity {
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
                             if (status == 1) {
-                                JSONArray listproduits = response.getJSONArray("fournisseur");
+                                JSONArray suppliers = response.getJSONArray("fournisseur");
+                                mSuppliers = Supplier.parseSuppliers(suppliers);
 
-                                for (int i = 0; i < listproduits.length(); i++) {
-                                    JSONObject usr = listproduits.getJSONObject(i);
-                                    Supplier f = new Supplier();
-                                    f.setId(usr.getString("idfournisseur"));
-                                    f.setNom(usr.getString("nom"));
-                                    f.setTel(usr.getString("tel"));
-                                    f.setFax(usr.getString("fax"));
-                                    f.setFix(usr.getString("fix"));
-                                    f.setAdresse(usr.getString("adresse"));
-                                    f.setEmail(usr.getString("email"));
-                                    //  m.setImage(URLs.IpBackend + "clients/client.png");
-                                    mSuppliers.add(f);
-                                }
+                                runOnUiThread(() -> {
+                                    populateRecyclerView();
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                });
+
                             } else
                                 runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                                        "No Fournisseur Found  !!!!", Toast.LENGTH_LONG).show());
-
+                                        "No suppliers found.", Toast.LENGTH_LONG).show());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                        FourniseurAdapter fourniseurAdapter =
-                                new FourniseurAdapter(SuppliersActivity.this, mSuppliers);
-                        runOnUiThread(() -> list.setAdapter(fourniseurAdapter));
                     }
 
                     @Override
@@ -106,5 +97,22 @@ public class SuppliersActivity extends AnimatedActivity {
                                 "Network error.", Toast.LENGTH_LONG).show());
                     }
                 });
+    }
+
+    private void populateRecyclerView() {
+        SupplierAdapter supplierAdapter = new SupplierAdapter(this, mSuppliers);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
+        dataRecyclerView.setLayoutManager(layoutManager);
+        dataRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        dataRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        dataRecyclerView.setAdapter(supplierAdapter);
+    }
+
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

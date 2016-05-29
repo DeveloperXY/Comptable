@@ -5,20 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="246">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/custom_actionbar_include"/>
+        <include layout="@layout/empty_view_include"/>
 
-        <ListView
-            android:id="@+id/Listfournisseur"
+        <include layout="@layout/network_error_include"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="226"></ListView>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="246">
+
+            <include layout="@layout/search_layout_include"/>
+
+            <include layout="@layout/custom_actionbar_include"/>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="226">
+
+                <include layout="@layout/refreshable_recycler_view"/>
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/progressbar_layout_include"/>
+
+    </RelativeLayout>
 
     <include layout="@layout/drawer_include"/>
 

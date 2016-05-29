@@ -64,6 +64,8 @@ public class ScreenSize extends SQLiteOpenHelper {
         size.setHEIGHT(cursor.getInt(2));
 
         cursor.close();
+        db.close();
+
         return size;
     }
 
@@ -73,7 +75,9 @@ public class ScreenSize extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         count = cursor.getCount();
+
         cursor.close();
+        db.close();
 
         return count;
     }
