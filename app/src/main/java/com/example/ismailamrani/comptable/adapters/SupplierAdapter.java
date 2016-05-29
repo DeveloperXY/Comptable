@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.InformationFournisseurActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,9 +118,10 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
             ButterKnife.bind(this, v);
 
             View.OnClickListener clickListener = view -> {
-                Intent i = new Intent(mContext, InformationFournisseurActivity.class);
+                /*Intent i = new Intent(mContext, InformationFournisseurActivity.class);
                 i.putExtra("id", mSuppliers.get(getAdapterPosition()).getId());
-                mContext.startActivity(i);
+                mContext.startActivity(i);*/
+                new SupplierDialog(mContext).show();
             };
 
             overflow.setOnClickListener(this::showPopupMenu);
