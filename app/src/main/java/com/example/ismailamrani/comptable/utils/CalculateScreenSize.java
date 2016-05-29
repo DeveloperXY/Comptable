@@ -14,14 +14,18 @@ import com.example.ismailamrani.comptable.localdata.ScreenSize;
 public class CalculateScreenSize {
 
     public void CalculateScreenSize(Context context) {
-        Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
         Point S = new Point();
-        display.getSize(S);
+        calculateScreenSize(context, S);
 
         ScreenSize size = new ScreenSize(context);
         if (size.getCount() == 0) {
             size.AddSize(S.x, S.y - getStatutBarSize(S.y, S.x));
         }
+    }
+
+    public void calculateScreenSize(Context context, Point point) {
+        Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
+        display.getSize(point);
     }
 
     public int getStatutBarSize(int height, int widht) {
