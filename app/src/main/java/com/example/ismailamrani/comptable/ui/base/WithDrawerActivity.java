@@ -12,6 +12,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
 import com.example.ismailamrani.comptable.models.DrawerItem;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.AccountingHomeActivity;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
 import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
@@ -161,6 +162,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
     private Intent getIntentBasedOnPosition(int position) {
         Class<?> targetActivity;
         String orderType = ""; // the type of orders to be shown
+        String userType = mDatabaseAdapter.getUserType();
 
         switch (position) {
             case 0:
@@ -190,7 +192,8 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 targetActivity = ChargesActivity.class;
                 break;
             case 8:
-                targetActivity = AccountingDetailsActivity.class;
+                targetActivity = userType.startsWith("e") ?
+                        AccountingDetailsActivity.class : AccountingHomeActivity.class;
                 break;
             case 9:
             default:
