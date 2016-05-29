@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 
 /**
@@ -15,10 +16,12 @@ import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
 public class SupplierDialog extends Dialog {
 
     private Context mContext;
+    private Supplier supplier;
 
-    public SupplierDialog(Context context) {
+    public SupplierDialog(Context context, Supplier supplier) {
         super(context);
         mContext = context;
+        supplier = supplier;
     }
 
     @Override
@@ -28,11 +31,16 @@ public class SupplierDialog extends Dialog {
         setContentView(R.layout.supplier_dialog);
 
         setupWindow();
+        fetchSupplierDetails();
     }
 
     private void setupWindow() {
         Point point = new Point();
         new CalculateScreenSize().calculateScreenSize(mContext, point);
         getWindow().setLayout((int) (point.x - point.x * 0.1), (int) (point.y - point.y * 0.3));
+    }
+
+    private void fetchSupplierDetails() {
+
     }
 }

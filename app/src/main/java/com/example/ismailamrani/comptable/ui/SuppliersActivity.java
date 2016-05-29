@@ -14,6 +14,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SupplierAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
 import com.example.ismailamrani.comptable.utils.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ListComparison;
@@ -141,6 +142,10 @@ public class SuppliersActivity extends RefreshableActivity {
     private void populateRecyclerView() {
         if (supplierAdapter == null) {
             supplierAdapter = new SupplierAdapter(this, mSuppliers);
+            supplierAdapter.setSupplierListener(supplier -> {
+                new SupplierDialog(this, supplier)
+                        .show();
+            });
             dataRecyclerView.setAdapter(supplierAdapter);
         } else
             supplierAdapter.animateTo(mSuppliers);

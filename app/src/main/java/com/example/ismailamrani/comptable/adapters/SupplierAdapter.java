@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
     private Context mContext;
     private List<Supplier> mSuppliers;
+    private SupplierListener listener;
 
     public SupplierAdapter(Context context, List<Supplier> suppliers) {
         mContext = context;
@@ -118,10 +118,8 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
             ButterKnife.bind(this, v);
 
             View.OnClickListener clickListener = view -> {
-                /*Intent i = new Intent(mContext, InformationFournisseurActivity.class);
-                i.putExtra("id", mSuppliers.get(getAdapterPosition()).getId());
-                mContext.startActivity(i);*/
-                new SupplierDialog(mContext).show();
+                if (listener != null)
+                    listener.onSupplierSelected(mSuppliers.get(getAdapterPosition()));
             };
 
             overflow.setOnClickListener(this::showPopupMenu);
@@ -161,5 +159,13 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
                 return false;
             }
         }
+    }
+
+    public void setSupplierListener(SupplierListener listener) {
+        this.listener = listener;
+    }
+
+    public interface SupplierListener {
+        void onSupplierSelected(Supplier supplier);
     }
 }
