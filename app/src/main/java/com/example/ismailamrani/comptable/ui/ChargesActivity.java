@@ -158,8 +158,7 @@ public class ChargesActivity extends RefreshableActivity {
 
                 // After retrieving the individual list items, retrieve the cuurent
                 // timing of the distant server
-                sendHTTPRequest(PhpAPI.getServerTime, null, Method.GET,
-                        new ServerTimeListener());
+                sendHTTPRequest(PhpAPI.getServerTime, Method.GET, new ServerTimeListener());
 
             } catch (JSONException e) {
                 e.printStackTrace();

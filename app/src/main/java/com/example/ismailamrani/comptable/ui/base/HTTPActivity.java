@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Pair;
 
 import com.example.ismailamrani.comptable.app.OGApplication;
 import com.example.ismailamrani.comptable.utils.Method;
@@ -11,7 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -31,7 +34,21 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "success";
 
-    private OkHttpClient client;
+    private OkHttpClient client = ((OGApplication) getApplication()).getOkHttpInstance();
+
+    protected void sendHTTPRequest(String url,
+                                   List<Pair<String, String>> params,
+                                   Method method,
+                                   RequestListener listener) {
+        Request request = createHTTPRequest(params, url, method);
+        sendRequest(request, listener);
+    }
+
+    protected void sendHTTPRequest(String url,
+                                   Method method,
+                                   RequestListener listener) {
+        sendHTTPRequest(url, new JSONObject(), method, listener);
+    }
 
     /**
      * @param url      target destination
@@ -43,10 +60,11 @@ public abstract class HTTPActivity extends AppCompatActivity {
                                    JSONObject data,
                                    Method method,
                                    RequestListener listener) {
-        if (client == null)
-            client = ((OGApplication) getApplication()).getOkHttpInstance();
-
         Request request = createHTTPRequest(data, url, method);
+        sendRequest(request, listener);
+    }
+
+    private void sendRequest(Request request, final RequestListener listener) {
         client.newCall(request)
                 .enqueue(new Callback() {
                     @Override
@@ -108,6 +126,35 @@ public abstract class HTTPActivity extends AppCompatActivity {
         return null;
     }
 
+    private Request createHTTPRequest(List<Pair<String, String>> param, String url, Method method) {
+        if (param == null)
+            param = new ArrayList<>();
+
+        if (method == Method.GET)
+            return new Request.Builder()
+                    .url(url + buildGETRequestParams(param))
+                    .build();
+
+        if (method == Method.POST) {
+            FormBody.Builder builder = new FormBody.Builder();
+            Iterator<Pair<String, String>> keys = param.iterator();
+
+            while (keys.hasNext()) {
+                Pair<String, String> pair = keys.next();
+                String key = pair.first;
+                builder.add(key, pair.second);
+            }
+            RequestBody requestBody = builder.build();
+
+            return new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+        }
+
+        return null;
+    }
+
     /**
      * @param params JSONObject with the key/value params
      * @return ?key=value&
@@ -128,6 +175,28 @@ public abstract class HTTPActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * @param params pairs of string request parameters
+     * @return ?key=value&
+     */
+    private static String buildGETRequestParams(List<Pair<String, String>> params) {
+        StringBuilder sb = new StringBuilder("?");
+
+        Iterator<Pair<String, String>> keys = params.iterator();
+        while (keys.hasNext()) {
+            Pair<String, String> pair = keys.next();
+            String key = pair.first;
+            sb.append(key)
+                    .append("=")
+                    .append(pair.second);
+
+            if (keys.hasNext())
+                sb.append("&");
         }
 
         return sb.toString();

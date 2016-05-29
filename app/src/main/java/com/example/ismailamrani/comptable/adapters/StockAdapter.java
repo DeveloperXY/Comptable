@@ -35,7 +35,6 @@ public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Pro
         return new ViewHolder(v);
     }
 
-
     public class ViewHolder extends BinderViewHolder<Product> {
         TextView productLabel;
         TextView quantityLabel;
