@@ -42,10 +42,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hay Saada, Route Ain Chkef"
-                    android:id="@+id/textView8"
+                    android:maxLines="1"
+                    android:id="@+id/bottomAddressLabel"
                     android:layout_marginLeft="8dp"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:ellipsize="end"/>
             </LinearLayout>
 
             <LinearLayout
@@ -66,10 +67,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+212 694363053"
-                    android:id="@+id/textView12"
+                    android:id="@+id/supplierPhoneLabel"
                     android:layout_marginLeft="8dp"
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp"
+                    android:ellipsize="end"/>
             </LinearLayout>
 
         </LinearLayout>
