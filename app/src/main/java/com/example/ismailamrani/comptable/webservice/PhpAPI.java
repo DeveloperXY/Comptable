@@ -48,4 +48,5 @@ public class PhpAPI {
     public static final String getActivationStatus = IpBackend + "getActivationStatus.php";
     public static final String activateApp = IpBackend + "activateApp.php";
     public static final String getServerTime = IpBackend + "getServerTime.php";
+    public static final String getComptabilite = IpBackend + "getComptabilite.php";
 }

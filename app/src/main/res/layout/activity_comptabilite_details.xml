@@ -53,7 +53,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Nombre de produits :"
                                 android:id="@+id/textView4"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -62,14 +62,13 @@
                                 android:id="@+id/productNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="40"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
 
@@ -96,7 +95,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Nombre d&apos;articles / produits :"
                                 android:id="@+id/textView7"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -105,14 +104,13 @@
                                 android:id="@+id/articleNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="25"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -138,7 +136,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Nombre de fournisseurs :"
                                 android:id="@+id/textView9"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -147,14 +145,13 @@
                                 android:id="@+id/suppliersNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="15"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -180,7 +177,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Nombre de clients :"
                                 android:id="@+id/textView11"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -189,14 +186,95 @@
                                 android:id="@+id/clientsNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="150"
+                                android:textColor="@color/colorWhite"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout6"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/order_detail_item_border"
+                        android:padding="2dp"
+                        android:layout_marginTop="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorOrderDetailBackground"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:text="Nombre d&apos;opérations d&apos;achats :"
+                                android:id="@+id/textView6"
+                                android:layout_weight="70"
+                                android:gravity="left|center_vertical"
+                                android:textColor="#000000"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/purchaseOperationsNumber"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="30"
+                                android:background="@drawable/price_tag_background"
+                                android:gravity="center"
+                                android:paddingBottom="6dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="6dp"
+                                android:textColor="@color/colorWhite"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayout7"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/order_detail_item_border"
+                        android:padding="2dp"
+                        android:layout_marginTop="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorOrderDetailBackground"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:text="Nombre d&apos;opérations de ventes :"
+                                android:id="@+id/textView10"
+                                android:layout_weight="70"
+                                android:gravity="left|center_vertical"
+                                android:textColor="#000000"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/saleOperationsNumber"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="30"
+                                android:background="@drawable/price_tag_background"
+                                android:gravity="center"
+                                android:paddingBottom="6dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingTop="6dp"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -222,7 +300,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Total de ventes :"
                                 android:id="@+id/textView13"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -231,14 +309,13 @@
                                 android:id="@+id/salesNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="980"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -264,7 +341,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Total d&apos;achats :"
                                 android:id="@+id/textView15"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -273,14 +350,13 @@
                                 android:id="@+id/purchasesNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="3000"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
@@ -306,7 +382,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Total de charges :"
                                 android:id="@+id/textView17"
-                                android:layout_weight="80"
+                                android:layout_weight="70"
                                 android:gravity="left|center_vertical"
                                 android:textColor="#000000"
                                 android:textStyle="bold"/>
@@ -315,14 +391,13 @@
                                 android:id="@+id/chargesNumberValue"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="20"
+                                android:layout_weight="30"
                                 android:background="@drawable/price_tag_background"
                                 android:gravity="center"
                                 android:paddingBottom="6dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingTop="6dp"
-                                android:text="5300"
                                 android:textColor="@color/colorWhite"/>
                         </LinearLayout>
                     </RelativeLayout>
