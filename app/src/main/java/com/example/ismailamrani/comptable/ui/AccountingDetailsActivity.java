@@ -19,7 +19,7 @@ import org.json.JSONObject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ComptabiliteDetailsActivity extends AnimatedActivity {
+public class AccountingDetailsActivity extends AnimatedActivity {
 
     @Bind(R.id.productNumberValue)
     TextView productNumberValue;
@@ -66,6 +66,10 @@ public class ComptabiliteDetailsActivity extends AnimatedActivity {
         mActionBar.setTitle("Comptabilité");
     }
 
+    public void onPlusPressed(View view) {
+
+    }
+
     @Override
     public ActivityOrder getActivity() {
         return ActivityOrder.COMPTABILITE;
@@ -95,7 +99,7 @@ public class ComptabiliteDetailsActivity extends AnimatedActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(ComptabiliteDetailsActivity.this,
+                        runOnUiThread(() -> Toast.makeText(AccountingDetailsActivity.this,
                                 "Network error.", Toast.LENGTH_SHORT).show());
                     }
                 });

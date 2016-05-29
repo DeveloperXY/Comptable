@@ -14,7 +14,7 @@ import com.example.ismailamrani.comptable.models.DrawerItem;
 import com.example.ismailamrani.comptable.sqlite.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
-import com.example.ismailamrani.comptable.ui.ComptabiliteDetailsActivity;
+import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
 import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
@@ -190,7 +190,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 targetActivity = ChargesActivity.class;
                 break;
             case 8:
-                targetActivity = ComptabiliteDetailsActivity.class;
+                targetActivity = AccountingDetailsActivity.class;
                 break;
             case 9:
             default:

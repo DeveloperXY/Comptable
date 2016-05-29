@@ -91,7 +91,9 @@
         <activity android:name=".ui.startup.ActivationActivity"/>
         <activity android:name=".ui.OrdersActivity"/>
         <activity android:name=".ui.ChargesActivity"/>
-        <activity android:name=".ui.ComptabiliteDetailsActivity">
+        <activity android:name=".ui.AccountingDetailsActivity">
+        </activity>
+        <activity android:name=".ui.AccountingHomeActivity">
         </activity>
     </application>
 
