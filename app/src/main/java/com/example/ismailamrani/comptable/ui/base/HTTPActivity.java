@@ -13,8 +13,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,6 +40,14 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
     protected void sendHTTPRequest(String url,
                                    List<Pair<String, String>> params,
+                                   Method method,
+                                   RequestListener listener) {
+        Request request = createHTTPRequest(params, url, method);
+        sendRequest(request, listener);
+    }
+
+    protected void sendHTTPRequest(String url,
+                                   Map<String, String> params,
                                    Method method,
                                    RequestListener listener) {
         Request request = createHTTPRequest(params, url, method);
@@ -155,11 +165,39 @@ public abstract class HTTPActivity extends AppCompatActivity {
         return null;
     }
 
+    private Request createHTTPRequest(Map<String, String> param, String url, Method method) {
+        if (param == null)
+            param = new HashMap<>();
+
+        if (method == Method.GET)
+            return new Request.Builder()
+                    .url(url + buildGETRequestParams(param))
+                    .build();
+
+        if (method == Method.POST) {
+            FormBody.Builder builder = new FormBody.Builder();
+            Iterator<Map.Entry<String, String>> iterator = param.entrySet().iterator();
+
+            while (iterator.hasNext()) {
+                Map.Entry<String, String> entry = iterator.next();
+                builder.add(entry.getKey(), entry.getValue());
+            }
+            RequestBody requestBody = builder.build();
+
+            return new Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build();
+        }
+
+        return null;
+    }
+
     /**
      * @param params JSONObject with the key/value params
      * @return ?key=value&
      */
-    private static String buildGETRequestParams(JSONObject params) {
+    private String buildGETRequestParams(JSONObject params) {
         StringBuilder sb = new StringBuilder("?");
 
         Iterator<String> keys = params.keys();
@@ -184,7 +222,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
      * @param params pairs of string request parameters
      * @return ?key=value&
      */
-    private static String buildGETRequestParams(List<Pair<String, String>> params) {
+    private String buildGETRequestParams(List<Pair<String, String>> params) {
         StringBuilder sb = new StringBuilder("?");
 
         Iterator<Pair<String, String>> keys = params.iterator();
@@ -196,6 +234,24 @@ public abstract class HTTPActivity extends AppCompatActivity {
                     .append(pair.second);
 
             if (keys.hasNext())
+                sb.append("&");
+        }
+
+        return sb.toString();
+    }
+
+    private String buildGETRequestParams(Map<String, String> params) {
+        StringBuilder sb = new StringBuilder("?");
+
+        Iterator<Map.Entry<String, String>> iterator = params.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> entry = iterator.next();
+            String key = entry.getKey();
+            sb.append(key)
+                    .append("=")
+                    .append(entry.getValue());
+
+            if (iterator.hasNext())
                 sb.append("&");
         }
 
