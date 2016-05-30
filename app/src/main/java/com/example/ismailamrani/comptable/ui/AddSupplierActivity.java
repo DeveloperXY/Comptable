@@ -1,8 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Pair;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,23 +11,15 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.Method;
+import com.example.ismailamrani.comptable.utils.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
-import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,6 +27,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Redouane on 08/04/2016.
+ * Altered by Mohammed Aouf ZOUAG on 30/05/2016.
  */
 public class AddSupplierActivity extends ColoredStatusBarActivity {
 
@@ -66,82 +59,54 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
                 .into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
-            Supplier f = new Supplier();
-            f.setNom(nom.getText().toString());
-            f.setTel(gsm.getText().toString());
-            f.setFax(fax.getText().toString());
-            f.setFix(tel.getText().toString());
-            f.setAdresse(adresse.getText().toString());
-            f.setEmail(email.getText().toString());
-            f.setUrl(PhpAPI.addFournisseur);
+            Supplier supplier = new Supplier(
+                    "",
+                    nom.getText().toString(),
+                    gsm.getText().toString(),
+                    adresse.getText().toString(),
+                    tel.getText().toString(),
+                    fax.getText().toString(),
+                    email.getText().toString(),
+                    "",
+                    PhpAPI.addFournisseur);
 
-            new addFournisseur().execute(f);
+            createSupplier(supplier);
         });
     }
 
+    private void createSupplier(Supplier supplier) {
+        List<Pair<String, String>> params = new ArrayList<>();
+        params.add(Pair.create("Nom", supplier.getNom()));
+        params.add(Pair.create("Tel", supplier.getTel()));
+        params.add(Pair.create("Adresse", supplier.getAdresse()));
+        params.add(Pair.create("Fix", supplier.getFix()));
+        params.add(Pair.create("Fax", supplier.getFax()));
+        params.add(Pair.create("Email", supplier.getEmail()));
 
-    //*********************** add Fournisseur *****************
-    private class addFournisseur extends AsyncTask<Supplier, Void, String> {
+        sendHTTPRequest(supplier.getUrl(), params, Method.POST,
+                new RequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response, int status) {
+                        if (status == 1) {
+                            finish();
+                            runOnUiThread(() -> {
+                                Toast.makeText(AddSupplierActivity.this,
+                                        "Supplier successfully created.", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
+                            });
 
-        @Override
-        protected String doInBackground(Supplier... params) {
+                        } else if (status == 0) {
+                            runOnUiThread(() -> Toast.makeText(AddSupplierActivity.this,
+                                    "There was an error while processing your request.",
+                                    Toast.LENGTH_LONG).show());
+                        }
+                    }
 
-            try {
-                URL url = new URL(params[0].getUrl());
-                URLConnection conn = url.openConnection();
-                HttpURLConnection httpConn = (HttpURLConnection) conn;
-                httpConn.setAllowUserInteraction(false);
-                httpConn.setInstanceFollowRedirects(true);
-                httpConn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                Map<String, Object> Params = new LinkedHashMap<>();
-                // Params.put("ID", id);
-                Params.put("Nom", params[0].getNom());
-                Params.put("Tel", params[0].getTel());
-                Params.put("Adresse", params[0].getAdresse());
-                Params.put("Fix", params[0].getFix());
-                Params.put("Fax", params[0].getFax());
-                Params.put("Email", params[0].getEmail());
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(new getQuery().getQuery(Params));
-                writer.flush();
-                writer.close();
-                os.close();
-                httpConn.connect();
-                InputStream is = httpConn.getInputStream();
-
-                return new convertInputStreamToString().convertInputStreamToString(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            System.out.println(s);
-
-            try {
-                JSONObject j = new JSONObject(s);
-                int resp = j.getInt("success");
-                if (resp == 1) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
-                    toast.show();
-                    finish();
-                    startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
-
-                } else if (resp == 0) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+                    @Override
+                    public void onRequestFailed() {
+                        runOnUiThread(() -> Toast.makeText(AddSupplierActivity.this,
+                                "Network error.", Toast.LENGTH_LONG).show());
+                    }
+                });
     }
 }

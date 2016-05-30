@@ -18,8 +18,22 @@ public class Supplier implements Item {
     String fix;
     String fax;
     String email;
+    String image;
+    String url;
 
     public Supplier() {
+    }
+
+    public Supplier(String id, String nom, String tel, String adresse, String fix, String fax, String email, String image, String url) {
+        this.id = id;
+        this.nom = nom;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.fix = fix;
+        this.fax = fax;
+        this.email = email;
+        this.image = image;
+        this.url = url;
     }
 
     public Supplier(JSONObject object) throws JSONException {
@@ -40,8 +54,6 @@ public class Supplier implements Item {
         this.image = image;
     }
 
-    String image;
-
     public String getId() {
         return id;
     }
@@ -57,8 +69,6 @@ public class Supplier implements Item {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    String url;
 
     public String getFax() {
         return fax;
