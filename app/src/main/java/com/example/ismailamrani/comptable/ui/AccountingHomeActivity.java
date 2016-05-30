@@ -4,15 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.LocaleAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -67,7 +66,7 @@ public class AccountingHomeActivity extends AnimatedActivity {
                 JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID()));
 
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -87,12 +86,6 @@ public class AccountingHomeActivity extends AnimatedActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(AccountingHomeActivity.this,
-                                "Network error.", Toast.LENGTH_SHORT).show());
                     }
                 });
     }

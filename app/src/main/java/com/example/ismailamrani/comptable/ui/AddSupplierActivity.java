@@ -12,7 +12,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -84,7 +84,7 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
         params.add(Pair.create("Email", supplier.getEmail()));
 
         sendHTTPRequest(supplier.getUrl(), params, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -100,12 +100,6 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
                                     "There was an error while processing your request.",
                                     Toast.LENGTH_LONG).show());
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(AddSupplierActivity.this,
-                                "Network error.", Toast.LENGTH_LONG).show());
                     }
                 });
     }

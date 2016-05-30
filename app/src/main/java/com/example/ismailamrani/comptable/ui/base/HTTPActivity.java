@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui.base;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.app.OGApplication;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -83,6 +84,8 @@ public abstract class HTTPActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(final Call call, IOException e) {
                         listener.onRequestFailed();
+                        runOnUiThread(() -> Toast.makeText(HTTPActivity.this,
+                                "Network error.", Toast.LENGTH_LONG).show());
                     }
 
                     @Override

@@ -8,15 +8,15 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
-import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -66,7 +66,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
 
                 // Send the login POST request.
                 sendHTTPRequest(PhpAPI.login, params, Method.POST,
-                        new RequestListener() {
+                        new SuccessRequestListener() {
                             @Override
                             public void onRequestSucceeded(JSONObject response, int status) {
                                 if (status == 1) {
@@ -97,12 +97,6 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                     runOnUiThread(() -> Toast.makeText(LoginActivity.this,
                                             "Unregistered user name.",
                                             Toast.LENGTH_LONG).show());
-                            }
-
-                            @Override
-                            public void onRequestFailed() {
-                                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                                        "Error while logging in.", Toast.LENGTH_LONG).show());
                             }
                         });
             }

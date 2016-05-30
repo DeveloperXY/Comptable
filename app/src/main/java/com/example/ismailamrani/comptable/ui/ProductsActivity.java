@@ -3,16 +3,15 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -66,7 +65,7 @@ public class ProductsActivity extends AnimatedActivity {
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);
 
         sendHTTPRequest(PhpAPI.getProduit, data, Method.GET,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
@@ -89,13 +88,6 @@ public class ProductsActivity extends AnimatedActivity {
 
                         ProduitAdapter adapter = new ProduitAdapter(ProductsActivity.this, productsList);
                         runOnUiThread(() -> productsListView.setAdapter(adapter));
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(ProductsActivity.this,
-                                "No internet connection.",
-                                Toast.LENGTH_LONG).show());
                     }
                 });
     }

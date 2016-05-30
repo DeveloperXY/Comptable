@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
+import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -62,7 +62,7 @@ public class ActivationActivity extends ColoredStatusBarActivity {
     /**
      * A listener on the activation procedure.
      */
-    public class ActivationListener implements RequestListener {
+    public class ActivationListener extends SuccessRequestListener {
         @Override
         public void onRequestSucceeded(JSONObject response, int status) {
             try {
@@ -90,12 +90,6 @@ public class ActivationActivity extends ColoredStatusBarActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-
-        @Override
-        public void onRequestFailed() {
-            runOnUiThread(() -> Toast.makeText(ActivationActivity.this,
-                    "Unknown error.", Toast.LENGTH_SHORT).show());
         }
     }
 

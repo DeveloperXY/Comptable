@@ -15,6 +15,7 @@ import com.example.ismailamrani.comptable.adapters.SupplierAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.decorations.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
@@ -218,7 +219,7 @@ public class SuppliersActivity extends RefreshableActivity {
         errorLayout.setVisibility(View.INVISIBLE);
     }
 
-    class DeleteSupplierListener implements RequestListener {
+    class DeleteSupplierListener extends SuccessRequestListener {
 
         @Override
         public void onRequestSucceeded(JSONObject response, int status) {
@@ -237,12 +238,6 @@ public class SuppliersActivity extends RefreshableActivity {
                         "There was an error while processing your request.",
                         Toast.LENGTH_LONG).show());
             }
-        }
-
-        @Override
-        public void onRequestFailed() {
-            runOnUiThread(() -> Toast.makeText(SuppliersActivity.this,
-                    "Unknown error", Toast.LENGTH_LONG).show());
         }
     }
 }

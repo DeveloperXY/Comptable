@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.OrderDetailsAdapter;
 import com.example.ismailamrani.comptable.models.OrderDetail;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,20 +80,13 @@ public class OrderDetailsFragment extends Fragment {
         facturerButton.setVisibility(currentOrderStatus == 1 ? View.INVISIBLE : View.VISIBLE);
         facturerButton.setOnClickListener(view -> {
             if (listener != null)
-                listener.chargeOrder(new RequestListener() {
+                listener.chargeOrder(new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         getActivity().runOnUiThread(() -> {
                             facturerButton.setVisibility(View.INVISIBLE);
                             listener.onOrderCharged();
                         });
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        getActivity().runOnUiThread(() ->
-                                Toast.makeText(getActivity(), "Unknown error",
-                                        Toast.LENGTH_SHORT).show());
                     }
                 });
         });
@@ -105,7 +99,7 @@ public class OrderDetailsFragment extends Fragment {
         throw new IllegalStateException("You need to pass an order status to the fragment.");
     }
 
-    private class OrderDetailsListener implements RequestListener {
+    private class OrderDetailsListener extends SuccessRequestListener {
         @Override
         public void onRequestSucceeded(JSONObject response, int status) {
             if (status == 1) {
@@ -128,13 +122,6 @@ public class OrderDetailsFragment extends Fragment {
                         Toast.makeText(getActivity(), "Unknown error",
                                 Toast.LENGTH_SHORT).show());
             }
-        }
-
-        @Override
-        public void onRequestFailed() {
-            getActivity().runOnUiThread(() ->
-                    Toast.makeText(getActivity(), "Network error",
-                            Toast.LENGTH_SHORT).show());
         }
     }
 

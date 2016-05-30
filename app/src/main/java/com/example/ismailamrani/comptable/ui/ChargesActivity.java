@@ -8,20 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
-import com.example.ismailamrani.comptable.models.Charge;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
+import com.example.ismailamrani.comptable.models.Charge;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
-import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -167,12 +166,7 @@ public class ChargesActivity extends RefreshableActivity {
 
         @Override
         public void onRequestFailed() {
-            runOnUiThread(() -> {
-                Toast.makeText(ChargesActivity.this, "Error while retrieving charges.",
-                        Toast.LENGTH_LONG).show();
-
-                handleRequestError();
-            });
+            runOnUiThread(ChargesActivity.this::handleRequestError);
         }
 
         private class ServerTimeListener implements RequestListener {
@@ -237,13 +231,7 @@ public class ChargesActivity extends RefreshableActivity {
 
             @Override
             public void onRequestFailed() {
-                runOnUiThread(() -> {
-                    Toast.makeText(ChargesActivity.this,
-                            "Error while retrieving server timing.",
-                            Toast.LENGTH_LONG).show();
-
-                    handleRequestError();
-                });
+                runOnUiThread(ChargesActivity.this::handleRequestError);
             }
         }
     }

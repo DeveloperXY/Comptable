@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -93,7 +93,7 @@ public class AddChargeActivity extends WithDrawerActivity {
                 mDatabaseAdapter.getCurrentLocaleID(), price, description);
 
         sendHTTPRequest(PhpAPI.addCharge, params, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -102,12 +102,6 @@ public class AddChargeActivity extends WithDrawerActivity {
                         } else
                             runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
                                     "Unknown error.", Toast.LENGTH_SHORT).show());
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
-                                "Network error.", Toast.LENGTH_SHORT).show());
                     }
                 });
     }

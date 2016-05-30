@@ -18,9 +18,9 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -176,7 +176,7 @@ public class SalesActivity extends WithDrawerActivity {
      */
     void postCreateSaleOrder(String url, JSONObject orderInfos) {
         sendHTTPRequest(url, orderInfos, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -188,12 +188,6 @@ public class SalesActivity extends WithDrawerActivity {
                                             "Please try again.", Toast.LENGTH_SHORT)
                                     .show());
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }
@@ -270,7 +264,7 @@ public class SalesActivity extends WithDrawerActivity {
      */
     void postGetProduct(String url, JSONObject data) throws IOException {
         sendHTTPRequest(url, data, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 0)
@@ -293,12 +287,6 @@ public class SalesActivity extends WithDrawerActivity {
                                 e.printStackTrace();
                             }
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }

@@ -3,15 +3,14 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ClientAdapter;
 import com.example.ismailamrani.comptable.models.ClientModel;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -66,7 +65,7 @@ public class ClientsActivity extends AnimatedActivity {
         JSONObject data = JSONUtils.bundleCompanyIDToJSON(
                 mDatabaseAdapter.getUserCompanyID());
         sendHTTPRequest(PhpAPI.getClient, data, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         try {
@@ -90,12 +89,6 @@ public class ClientsActivity extends AnimatedActivity {
 
                         ClientAdapter adapter = new ClientAdapter(ClientsActivity.this, List);
                         runOnUiThread(() -> list.setAdapter(adapter));
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                                "Network error.", Toast.LENGTH_LONG).show());
                     }
                 });
     }

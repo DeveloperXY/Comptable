@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -131,12 +130,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
 
                     @Override
                     public void onRequestFailed() {
-                        runOnUiThread(() -> {
-                            Toast.makeText(AccountingDetailsActivity.this,
-                                    "Network error.", Toast.LENGTH_SHORT).show();
-
-                            mLoadingDialog.dismiss();
-                        });
+                        runOnUiThread(() -> mLoadingDialog.dismiss());
                     }
                 });
     }

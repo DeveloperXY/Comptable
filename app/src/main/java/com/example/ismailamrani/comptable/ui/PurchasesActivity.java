@@ -16,9 +16,9 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -101,7 +101,7 @@ public class PurchasesActivity extends WithDrawerActivity {
 
     void fetchDialogItems(String url, JSONObject data, int spinnerID) {
         sendHTTPRequest(url, data, Method.GET,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 0) {
@@ -110,13 +110,6 @@ public class PurchasesActivity extends WithDrawerActivity {
                         } else {
                             runOnUiThread(() -> prepareDialogData(response, spinnerID));
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                "No internet connection.",
-                                Toast.LENGTH_LONG).show());
                     }
                 });
     }
@@ -238,7 +231,7 @@ public class PurchasesActivity extends WithDrawerActivity {
      */
     void postCreatePurchaseOrder(String url, JSONObject orderInfos) {
         sendHTTPRequest(url, orderInfos, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -250,12 +243,6 @@ public class PurchasesActivity extends WithDrawerActivity {
                                             "Please try again.", Toast.LENGTH_SHORT)
                                     .show());
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                "Unknown error", Toast.LENGTH_LONG).show());
                     }
                 });
     }

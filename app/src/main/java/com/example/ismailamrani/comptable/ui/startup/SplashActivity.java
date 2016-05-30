@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
+import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -48,7 +48,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
         sendHTTPRequest(PhpAPI.getActivationStatus,
                 JSONUtils.bundleSerialToJSON(serial),
                 Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         runOnUiThread(() -> {
@@ -86,12 +86,6 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                         });
                             }
                         });
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(SplashActivity.this,
-                                "Unknown error.", Toast.LENGTH_SHORT).show());
                     }
                 }
         );

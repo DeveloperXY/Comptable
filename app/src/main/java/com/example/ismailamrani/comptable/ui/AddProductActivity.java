@@ -19,9 +19,9 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -153,7 +153,7 @@ public class AddProductActivity extends WithDrawerActivity
 
     void postAddProduct(String url, JSONObject data) {
         sendHTTPRequest(url, data, Method.POST,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response, int status) {
                         if (status == 1) {
@@ -169,12 +169,6 @@ public class AddProductActivity extends WithDrawerActivity
                                     Toast.makeText(getApplicationContext(),
                                             "erreur  !!!!", Toast.LENGTH_LONG).show());
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        runOnUiThread(() -> Toast.makeText(AddProductActivity.this,
-                                "Unknown error.", Toast.LENGTH_LONG).show());
                     }
                 });
     }
