@@ -36,7 +36,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
     private static final String KEY_STATUS = "success";
 
-    private OkHttpClient client = ((OGApplication) getApplication()).getOkHttpInstance();
+    private OkHttpClient client;
 
     protected void sendHTTPRequest(String url,
                                    List<Pair<String, String>> params,
@@ -75,6 +75,9 @@ public abstract class HTTPActivity extends AppCompatActivity {
     }
 
     private void sendRequest(Request request, final RequestListener listener) {
+        if (client == null)
+            client = ((OGApplication) getApplication()).getOkHttpInstance();
+
         client.newCall(request)
                 .enqueue(new Callback() {
                     @Override
