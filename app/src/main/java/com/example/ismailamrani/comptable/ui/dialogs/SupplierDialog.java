@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
+import com.example.ismailamrani.comptable.utils.ui.CalculateScreenSize;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

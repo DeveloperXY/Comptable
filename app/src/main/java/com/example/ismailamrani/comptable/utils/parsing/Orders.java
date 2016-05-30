@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.utils;
+package com.example.ismailamrani.comptable.utils.parsing;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 14/05/2016.

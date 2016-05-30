@@ -15,12 +15,12 @@ import com.example.ismailamrani.comptable.adapters.SupplierAdapter;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
-import com.example.ismailamrani.comptable.utils.DialogUtil;
-import com.example.ismailamrani.comptable.utils.GridSpacingItemDecoration;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.ListComparison;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
+import com.example.ismailamrani.comptable.utils.decorations.GridSpacingItemDecoration;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;

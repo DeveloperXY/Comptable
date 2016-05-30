@@ -22,9 +22,9 @@ import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 import com.example.ismailamrani.comptable.ui.startup.LoginActivity;
-import com.example.ismailamrani.comptable.utils.ActivityTransition;
-import com.example.ismailamrani.comptable.utils.DrawerOrder;
-import com.example.ismailamrani.comptable.utils.Orders;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
+import com.example.ismailamrani.comptable.utils.ui.DrawerOrder;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
 
 import java.util.ArrayList;
 import java.util.List;

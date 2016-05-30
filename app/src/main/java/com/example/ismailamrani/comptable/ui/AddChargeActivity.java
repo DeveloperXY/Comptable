@@ -10,10 +10,10 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
-import com.example.ismailamrani.comptable.utils.ResultCodes;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;

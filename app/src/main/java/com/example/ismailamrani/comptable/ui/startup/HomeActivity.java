@@ -28,9 +28,9 @@ import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.ChooserDialog;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
-import com.example.ismailamrani.comptable.utils.ActivityTransition;
-import com.example.ismailamrani.comptable.utils.CalculateScreenSize;
-import com.example.ismailamrani.comptable.utils.Orders;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
+import com.example.ismailamrani.comptable.utils.ui.CalculateScreenSize;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
 
 import java.util.List;
 

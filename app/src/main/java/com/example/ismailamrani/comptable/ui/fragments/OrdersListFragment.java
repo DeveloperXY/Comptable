@@ -19,10 +19,10 @@ import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
-import com.example.ismailamrani.comptable.utils.ListComparison;
-import com.example.ismailamrani.comptable.utils.Orders;
-import com.example.ismailamrani.comptable.utils.RequestListener;
-import com.example.ismailamrani.comptable.utils.SpacesItemDecoration;
+import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.utils;
+package com.example.ismailamrani.comptable.utils.parsing;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
-import com.example.ismailamrani.comptable.utils.WindowUtils;
+import com.example.ismailamrani.comptable.utils.ui.WindowUtils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.utils;
+package com.example.ismailamrani.comptable.utils.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;

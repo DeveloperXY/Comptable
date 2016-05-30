@@ -5,8 +5,8 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.example.ismailamrani.comptable.app.OGApplication;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;

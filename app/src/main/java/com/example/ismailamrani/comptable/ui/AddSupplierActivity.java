@@ -11,8 +11,8 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 

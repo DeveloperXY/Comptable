@@ -10,9 +10,9 @@ import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;

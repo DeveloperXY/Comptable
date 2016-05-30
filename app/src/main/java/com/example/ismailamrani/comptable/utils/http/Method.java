@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.utils;
+package com.example.ismailamrani.comptable.utils.http;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.

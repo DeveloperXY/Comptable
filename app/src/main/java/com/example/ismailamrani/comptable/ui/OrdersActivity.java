@@ -13,11 +13,11 @@ import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.ui.fragments.OrderDetailsFragment;
 import com.example.ismailamrani.comptable.ui.fragments.OrdersListFragment;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.Orders;
-import com.example.ismailamrani.comptable.utils.RequestListener;
-import com.example.ismailamrani.comptable.utils.ResultCodes;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;

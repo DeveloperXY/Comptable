@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.OrderDetailsAdapter;
 import com.example.ismailamrani.comptable.models.OrderDetail;
-import com.example.ismailamrani.comptable.utils.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;

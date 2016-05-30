@@ -14,12 +14,12 @@ import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
-import com.example.ismailamrani.comptable.utils.JSONUtils;
-import com.example.ismailamrani.comptable.utils.ListComparison;
-import com.example.ismailamrani.comptable.utils.Method;
-import com.example.ismailamrani.comptable.utils.Products;
-import com.example.ismailamrani.comptable.utils.RequestListener;
-import com.example.ismailamrani.comptable.utils.ResultCodes;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.parsing.Products;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
