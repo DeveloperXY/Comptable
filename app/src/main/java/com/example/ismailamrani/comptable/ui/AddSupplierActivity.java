@@ -122,6 +122,7 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
         params.add(Pair.create("Fix", supplier.getFix()));
         params.add(Pair.create("Fax", supplier.getFax()));
         params.add(Pair.create("Email", supplier.getEmail()));
+        params.add(Pair.create("companyID", mDatabaseAdapter.getUserCompanyID() + ""));
 
         sendHTTPRequest(supplier.getUrl(), params, Method.POST,
                 new SuccessRequestListener() {

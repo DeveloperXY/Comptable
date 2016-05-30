@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
@@ -39,6 +40,8 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
     @Bind(R.id.actionbarImage)
     protected ImageView actionbarImage;
 
+    protected DatabaseAdapter mDatabaseAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,8 @@ public abstract class ColoredStatusBarActivity extends HTTPActivity
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         if (android.os.Build.VERSION.SDK_INT >= 21)
             getWindow().setStatusBarColor(Color.parseColor("#3d5469"));
+
+        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
     }
 
     protected void setupActionBar() {

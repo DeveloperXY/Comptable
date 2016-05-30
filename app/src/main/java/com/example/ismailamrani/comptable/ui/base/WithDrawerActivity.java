@@ -11,20 +11,19 @@ import android.support.v7.widget.RecyclerView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
 import com.example.ismailamrani.comptable.models.DrawerItem;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
 import com.example.ismailamrani.comptable.ui.AccountingHomeActivity;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
-import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
-import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
+import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 import com.example.ismailamrani.comptable.ui.startup.LoginActivity;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.DrawerOrder;
-import com.example.ismailamrani.comptable.utils.parsing.Orders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +45,11 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
     protected DrawerLayout drawerLayout;
 
     private DrawerRecyclerAdapter mDrawerRecyclerAdapter;
-    protected DatabaseAdapter mDatabaseAdapter;
     protected String currentUserType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
         currentUserType = mDatabaseAdapter.getUserType();
     }
 
