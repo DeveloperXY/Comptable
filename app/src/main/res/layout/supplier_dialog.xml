@@ -99,7 +99,7 @@
             tools:text="Samsung"/>
 
         <TextView
-            android:id="@+id/supplierAddressLabel"
+            android:id="@+id/supplierEmailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/supplierTitleLabel"
@@ -109,13 +109,13 @@
             android:paddingRight="8dp"
             android:textColor="@color/colorWhite"
             android:textSize="12sp"
-            tools:text="Hay Saada, Route Ain Chkef"/>
+            tools:text="samsung@outlook.com"/>
 
         <LinearLayout
             android:id="@+id/iconsLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/supplierAddressLabel"
+            android:layout_alignBottom="@+id/supplierEmailLabel"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/supplierTitleLabel"

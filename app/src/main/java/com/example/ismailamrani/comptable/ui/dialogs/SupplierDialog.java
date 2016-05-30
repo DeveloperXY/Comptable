@@ -22,8 +22,8 @@ public class SupplierDialog extends Dialog {
 
     @Bind(R.id.supplierTitleLabel)
     TextView supplierTitleLabel;
-    @Bind(R.id.supplierAddressLabel)
-    TextView supplierAddressLabel;
+    @Bind(R.id.supplierEmailLabel)
+    TextView supplierEmailLabel;
     @Bind(R.id.bottomAddressLabel)
     TextView bottomAddressLabel;
     @Bind(R.id.supplierPhoneLabel)
@@ -79,11 +79,9 @@ public class SupplierDialog extends Dialog {
     }
 
     private void initializeUI() {
-        String address = supplier.getAdresse();
-
         supplierTitleLabel.setText(supplier.getNom());
-        supplierAddressLabel.setText(address);
-        bottomAddressLabel.setText(address);
+        supplierEmailLabel.setText(supplier.getEmail());
+        bottomAddressLabel.setText(supplier.getAdresse());
         supplierPhoneLabel.setText(supplier.getTel());
     }
 

@@ -78,6 +78,16 @@ public class DialogUtil {
                 listener1, actionText2, listener2, false);
     }
 
+    /**
+     * Creates a title-less dialog with 2 options.
+     *
+     * @param context
+     * @param message
+     * @param actionText1
+     * @param listener1
+     * @param actionText2
+     * @param listener2
+     */
     public static void showMutliDialog(Context context,
                                        final String message,
                                        final String actionText1,
