@@ -43,13 +43,11 @@ public class OrdersAdapter extends BaseSearchAdapter<OrdersAdapter.OrdersViewHol
     public class OrdersViewHolder extends BinderViewHolder<Order> {
 
         TextView orderIDLabel;
-        TextView plusSignLabel;
         RelativeLayout statusColorLayout;
 
         public OrdersViewHolder(View v) {
             super(v);
             orderIDLabel = (TextView) v.findViewById(R.id.orderIDLabel);
-            plusSignLabel = (TextView) v.findViewById(R.id.plusSignLabel);
             statusColorLayout = (RelativeLayout) v.findViewById(R.id.statusColorLayout);
 
             v.setOnClickListener(view -> {
