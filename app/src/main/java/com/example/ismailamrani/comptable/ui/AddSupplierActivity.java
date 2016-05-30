@@ -13,6 +13,7 @@ import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -59,19 +60,58 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
                 .into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
-            Supplier supplier = new Supplier(
-                    "",
+            Supplier supplier = validateSupplierInfos(
                     nom.getText().toString(),
                     gsm.getText().toString(),
                     adresse.getText().toString(),
                     tel.getText().toString(),
                     fax.getText().toString(),
-                    email.getText().toString(),
-                    "",
-                    PhpAPI.addFournisseur);
+                    email.getText().toString());
 
-            createSupplier(supplier);
+            if (supplier != null)
+                createSupplier(supplier);
         });
+    }
+
+    public Supplier validateSupplierInfos(String name, String gsm, String address, String fix,
+                                          String fax, String email) {
+        String dialogTitle;
+        String dialogMessage;
+
+        boolean nameStatus = name.length() != 0;
+        boolean gsmStatus = gsm.length() != 0;
+        boolean addressStatus = address.length() != 0;
+        boolean fixStatus = fix.length() != 0;
+        boolean faxStatus = fax.length() != 0;
+        boolean emailStatus = email.length() != 0;
+
+        if (nameStatus && gsmStatus && addressStatus && fixStatus && faxStatus && emailStatus)
+            return new Supplier("", name, gsm, address, fix, fax, email, "", PhpAPI.addFournisseur);
+
+        if (!nameStatus) {
+            dialogTitle = "Invalid supplier name.";
+            dialogMessage = "You need to specify the name of the supplier.";
+        } else if (!gsmStatus) {
+            dialogTitle = "Invalid phone number.";
+            dialogMessage = "You need to specify a valid phone number.";
+        } else if (!addressStatus) {
+            dialogTitle = "Invalid address.";
+            dialogMessage = "You need to specify the address of the supplier.";
+        } else if (!fixStatus) {
+            dialogTitle = "Invalid work phone number.";
+            dialogMessage = "You need to specify the work phone number of the supplier.";
+        } else if (!faxStatus) {
+            dialogTitle = "Invalid fax number.";
+            dialogMessage = "You need to specify the fax number of the supplier.";
+        } else {
+            dialogTitle = "Invalid email.";
+            dialogMessage = "You need to specify the email of the supplier.";
+        }
+
+        // Something went wrong: show the error dialog.
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
+
+        return null;
     }
 
     private void createSupplier(Supplier supplier) {
