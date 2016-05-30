@@ -80,30 +80,25 @@ public class SuppliersActivity extends RefreshableActivity {
         sendHTTPRequest(PhpAPI.getFournisseur, params, Method.GET,
                 new RequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         try {
-                            if (status == 1) {
-                                JSONArray suppliers = response.getJSONArray("fournisseur");
-                                List<Supplier> supplierList = Supplier.parseSuppliers(suppliers);
+                            JSONArray suppliers = response.getJSONArray("fournisseur");
+                            List<Supplier> supplierList = Supplier.parseSuppliers(suppliers);
 
-                                if (ListComparison.areEqual(mSuppliers, supplierList))
-                                    runOnUiThread(this::handleDataChange);
-                                else {
-                                    mSuppliers = supplierList;
-                                    runOnUiThread(() -> {
-                                        handleDataChange();
-                                        populateRecyclerView();
-                                    });
-                                }
-
+                            if (ListComparison.areEqual(mSuppliers, supplierList))
+                                runOnUiThread(this::handleDataChange);
+                            else {
+                                mSuppliers = supplierList;
                                 runOnUiThread(() -> {
+                                    handleDataChange();
                                     populateRecyclerView();
-                                    progressBar.setVisibility(View.INVISIBLE);
                                 });
+                            }
 
-                            } else
-                                runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                                        "No suppliers found.", Toast.LENGTH_LONG).show());
+                            runOnUiThread(() -> {
+                                populateRecyclerView();
+                                progressBar.setVisibility(View.INVISIBLE);
+                            });
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -111,7 +106,7 @@ public class SuppliersActivity extends RefreshableActivity {
                     }
 
                     @Override
-                    public void onRequestFailed() {
+                    public void onNetworkError() {
                         runOnUiThread(() -> handleRequestError());
                     }
 
@@ -222,22 +217,15 @@ public class SuppliersActivity extends RefreshableActivity {
     class DeleteSupplierListener extends SuccessRequestListener {
 
         @Override
-        public void onRequestSucceeded(JSONObject response, int status) {
-            if (status == 1) {
-                runOnUiThread(() -> {
-                    if (mSupplierDialog.isShowing())
-                        mSupplierDialog.dismiss();
+        public void onRequestSucceeded(JSONObject response) {
+            runOnUiThread(() -> {
+                if (mSupplierDialog.isShowing())
+                    mSupplierDialog.dismiss();
 
-                    Toast.makeText(SuppliersActivity.this, "Supplier removed.",
-                            Toast.LENGTH_LONG).show();
-                    refresh();
-                });
-
-            } else if (status == 0) {
-                runOnUiThread(() -> Toast.makeText(getApplicationContext(),
-                        "There was an error while processing your request.",
-                        Toast.LENGTH_LONG).show());
-            }
+                Toast.makeText(SuppliersActivity.this, "Supplier removed.",
+                        Toast.LENGTH_LONG).show();
+                refresh();
+            });
         }
     }
 }

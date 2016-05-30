@@ -5,7 +5,7 @@ package com.example.ismailamrani.comptable.utils.http;
  */
 public abstract class SuccessRequestListener implements RequestListener {
     @Override
-    public void onRequestFailed() {
+    public void onNetworkError() {
 
     }
 }

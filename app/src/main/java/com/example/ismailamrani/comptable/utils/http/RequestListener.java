@@ -6,6 +6,14 @@ import org.json.JSONObject;
  * Created by Mohammed Aouf ZOUAG on 06/05/2016.
  */
 public interface RequestListener {
-    void onRequestSucceeded(JSONObject response, int status);
-    void onRequestFailed();
+    /**
+     * This method is invoked when the success status code is equal to 1.
+     * @param response sent back by the server, parsed as a JSONObject.
+     */
+    void onRequestSucceeded(JSONObject response);
+
+    /**
+     * Invoked when there is no internet connection.
+     */
+    void onNetworkError();
 }

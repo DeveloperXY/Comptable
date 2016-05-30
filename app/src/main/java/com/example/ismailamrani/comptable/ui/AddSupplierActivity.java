@@ -86,20 +86,13 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
         sendHTTPRequest(supplier.getUrl(), params, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            finish();
-                            runOnUiThread(() -> {
-                                Toast.makeText(AddSupplierActivity.this,
-                                        "Supplier successfully created.", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
-                            });
-
-                        } else if (status == 0) {
-                            runOnUiThread(() -> Toast.makeText(AddSupplierActivity.this,
-                                    "There was an error while processing your request.",
-                                    Toast.LENGTH_LONG).show());
-                        }
+                    public void onRequestSucceeded(JSONObject response) {
+                        finish();
+                        runOnUiThread(() -> {
+                            Toast.makeText(AddSupplierActivity.this,
+                                    "Supplier successfully created.", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
+                        });
                     }
                 });
     }

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
@@ -68,35 +67,30 @@ public class LoginActivity extends ColoredStatusBarActivity {
                 sendHTTPRequest(PhpAPI.login, params, Method.POST,
                         new SuccessRequestListener() {
                             @Override
-                            public void onRequestSucceeded(JSONObject response, int status) {
-                                if (status == 1) {
-                                    try {
-                                        // Retrieve the logged in user's infos from
-                                        // the response
-                                        JSONObject loggedInUser = response.getJSONArray("user")
-                                                .getJSONObject(0);
-                                        JSONArray locales = response.getJSONArray("locals");
-                                        JSONObject local = locales.getJSONObject(0);
+                            public void onRequestSucceeded(JSONObject response) {
+                                try {
+                                    // Retrieve the logged in user's infos from
+                                    // the response
+                                    JSONObject loggedInUser = response.getJSONArray("user")
+                                            .getJSONObject(0);
+                                    JSONArray locales = response.getJSONArray("locals");
+                                    JSONObject local = locales.getJSONObject(0);
 
-                                        loggedInUser = JSONUtils.merge(loggedInUser, local);
-                                        // Save user to local disk
-                                        saveUserToInternalDatabase(loggedInUser);
-                                        saveLocalesToInternalDatabase(locales);
+                                    loggedInUser = JSONUtils.merge(loggedInUser, local);
+                                    // Save user to local disk
+                                    saveUserToInternalDatabase(loggedInUser);
+                                    saveLocalesToInternalDatabase(locales);
 
-                                        // Move to main menu
-                                        activityShouldFinish();
-                                        runOnUiThread(() ->
-                                                ActivityTransition.startActivityWithSharedElement(
-                                                        LoginActivity.this, HomeActivity.class,
-                                                        logoImage, "header"));
+                                    // Move to main menu
+                                    activityShouldFinish();
+                                    runOnUiThread(() ->
+                                            ActivityTransition.startActivityWithSharedElement(
+                                                    LoginActivity.this, HomeActivity.class,
+                                                    logoImage, "header"));
 
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                } else if (status == 0)
-                                    runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                                            "Unregistered user name.",
-                                            Toast.LENGTH_LONG).show());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
             }

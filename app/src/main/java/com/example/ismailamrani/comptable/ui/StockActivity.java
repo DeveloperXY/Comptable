@@ -167,7 +167,7 @@ public class StockActivity extends RefreshableActivity
         sendHTTPRequest(url, data, Method.GET,
                 new RequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         try {
                             List<Product> products = Product.parseProducts(
                                     response.getJSONArray("products"));
@@ -187,7 +187,7 @@ public class StockActivity extends RefreshableActivity
                     }
 
                     @Override
-                    public void onRequestFailed() {
+                    public void onNetworkError() {
                         runOnUiThread(() -> handleRequestError());
                     }
 

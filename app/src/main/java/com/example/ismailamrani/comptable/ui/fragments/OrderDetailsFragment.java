@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.OrderDetailsAdapter;
@@ -82,7 +81,7 @@ public class OrderDetailsFragment extends Fragment {
             if (listener != null)
                 listener.chargeOrder(new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         getActivity().runOnUiThread(() -> {
                             facturerButton.setVisibility(View.INVISIBLE);
                             listener.onOrderCharged();
@@ -101,26 +100,20 @@ public class OrderDetailsFragment extends Fragment {
 
     private class OrderDetailsListener extends SuccessRequestListener {
         @Override
-        public void onRequestSucceeded(JSONObject response, int status) {
-            if (status == 1) {
-                try {
-                    JSONArray jsonArray = response.getJSONArray("orderDetails");
-                    List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
+        public void onRequestSucceeded(JSONObject response) {
+            try {
+                JSONArray jsonArray = response.getJSONArray("orderDetails");
+                List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
 
-                    getActivity().runOnUiThread(() -> {
-                        adapter = new OrderDetailsAdapter(getActivity(), details);
-                        totalValueLabel.setText("" + adapter.getTotalPrice() + " DH");
-                        detailsListView.setAdapter(adapter);
-                    });
+                getActivity().runOnUiThread(() -> {
+                    adapter = new OrderDetailsAdapter(getActivity(), details);
+                    totalValueLabel.setText("" + adapter.getTotalPrice() + " DH");
+                    detailsListView.setAdapter(adapter);
+                });
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                getActivity().runOnUiThread(() ->
-                        Toast.makeText(getActivity(), "Unknown error",
-                                Toast.LENGTH_SHORT).show());
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }

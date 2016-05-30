@@ -83,7 +83,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, IOException e) {
-                        listener.onRequestFailed();
+                        listener.onNetworkError();
                         runOnUiThread(() -> Toast.makeText(HTTPActivity.this,
                                 "Network error.", Toast.LENGTH_LONG).show());
                     }
@@ -94,9 +94,15 @@ public abstract class HTTPActivity extends AppCompatActivity {
                         Log.i("RESPONSE", res);
                         try {
                             JSONObject obj = new JSONObject(res);
-                            int resp = obj.getInt(KEY_STATUS);
+                            int status = obj.getInt(KEY_STATUS);
 
-                            listener.onRequestSucceeded(obj, resp);
+                            if (status == 1)
+                                listener.onRequestSucceeded(obj);
+                            else
+                                runOnUiThread(() -> Toast.makeText(HTTPActivity.this,
+                                        String.format("Developer error:\n- Status code: %d\n- Response: %s",
+                                                status, res)
+                                        , Toast.LENGTH_LONG).show());
 
                         } catch (JSONException e) {
                             e.printStackTrace();

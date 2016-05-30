@@ -67,7 +67,7 @@ public class ProductsActivity extends AnimatedActivity {
         sendHTTPRequest(PhpAPI.getProduit, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         try {
                             JSONArray listproduits = response.getJSONArray("produit");
 

@@ -67,21 +67,19 @@ public class ClientsActivity extends AnimatedActivity {
         sendHTTPRequest(PhpAPI.getClient, data, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         try {
-                            if (status == 1) {
-                                JSONArray listproduits = response.getJSONArray("client");
+                            JSONArray listproduits = response.getJSONArray("client");
 
-                                for (int i = 0; i < listproduits.length(); i++) {
-                                    JSONObject usr = listproduits.getJSONObject(i);
-                                    ClientModel m = new ClientModel();
-                                    m.setId(usr.getString("idclient"));
-                                    m.setNomPrenom(usr.getString("nom"));
-                                    m.setTel(usr.getString("tel"));
-                                    m.setAdresse(usr.getString("adresse"));
-                                    m.setImage(PhpAPI.IpBackend + "clients/client.png");
-                                    List.add(m);
-                                }
+                            for (int i = 0; i < listproduits.length(); i++) {
+                                JSONObject usr = listproduits.getJSONObject(i);
+                                ClientModel m = new ClientModel();
+                                m.setId(usr.getString("idclient"));
+                                m.setNomPrenom(usr.getString("nom"));
+                                m.setTel(usr.getString("tel"));
+                                m.setAdresse(usr.getString("adresse"));
+                                m.setImage(PhpAPI.IpBackend + "clients/client.png");
+                                List.add(m);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

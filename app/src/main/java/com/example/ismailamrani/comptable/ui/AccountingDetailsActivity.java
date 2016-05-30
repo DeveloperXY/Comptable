@@ -107,29 +107,27 @@ public class AccountingDetailsActivity extends AnimatedActivity {
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
                 new RequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            try {
-                                JSONObject details = response.getJSONArray("comptabilite")
-                                        .getJSONObject(0);
+                    public void onRequestSucceeded(JSONObject response) {
+                        try {
+                            JSONObject details = response.getJSONArray("comptabilite")
+                                    .getJSONObject(0);
 
-                                runOnUiThread(() -> {
-                                    try {
-                                        showData(details);
-                                        mLoadingDialog.dismiss();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
+                            runOnUiThread(() -> {
+                                try {
+                                    showData(details);
+                                    mLoadingDialog.dismiss();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            });
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
-                    public void onRequestFailed() {
+                    public void onNetworkError() {
                         runOnUiThread(() -> mLoadingDialog.dismiss());
                     }
                 });

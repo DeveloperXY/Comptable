@@ -103,13 +103,8 @@ public class PurchasesActivity extends WithDrawerActivity {
         sendHTTPRequest(url, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 0) {
-                            runOnUiThread(() -> Toast.makeText(PurchasesActivity.this, "Error",
-                                    Toast.LENGTH_SHORT).show());
-                        } else {
-                            runOnUiThread(() -> prepareDialogData(response, spinnerID));
-                        }
+                    public void onRequestSucceeded(JSONObject response) {
+                        runOnUiThread(() -> prepareDialogData(response, spinnerID));
                     }
                 });
     }
@@ -233,16 +228,9 @@ public class PurchasesActivity extends WithDrawerActivity {
         sendHTTPRequest(url, orderInfos, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            setResult(ResultCodes.ORDER_CREATED);
-                            finish();
-                        } else {
-                            runOnUiThread(() -> Toast.makeText(PurchasesActivity.this,
-                                    "An error occured while registering your order. " +
-                                            "Please try again.", Toast.LENGTH_SHORT)
-                                    .show());
-                        }
+                    public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.ORDER_CREATED);
+                        finish();
                     }
                 });
     }

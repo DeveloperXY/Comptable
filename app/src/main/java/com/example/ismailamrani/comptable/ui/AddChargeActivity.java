@@ -6,7 +6,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
@@ -95,13 +94,9 @@ public class AddChargeActivity extends WithDrawerActivity {
         sendHTTPRequest(PhpAPI.addCharge, params, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            setResult(ResultCodes.CHARGE_CREATED);
-                            finish();
-                        } else
-                            runOnUiThread(() -> Toast.makeText(AddChargeActivity.this,
-                                    "Unknown error.", Toast.LENGTH_SHORT).show());
+                    public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.CHARGE_CREATED);
+                        finish();
                     }
                 });
     }

@@ -150,7 +150,7 @@ public class ChargesActivity extends RefreshableActivity {
         private List<Charge> charges;
 
         @Override
-        public void onRequestSucceeded(JSONObject response, int status) {
+        public void onRequestSucceeded(JSONObject response) {
             try {
                 JSONArray jsonArray = response.getJSONArray("charge");
                 charges = Charge.parseCharges(jsonArray);
@@ -165,13 +165,13 @@ public class ChargesActivity extends RefreshableActivity {
         }
 
         @Override
-        public void onRequestFailed() {
+        public void onNetworkError() {
             runOnUiThread(ChargesActivity.this::handleRequestError);
         }
 
         private class ServerTimeListener implements RequestListener {
             @Override
-            public void onRequestSucceeded(JSONObject response, int status) {
+            public void onRequestSucceeded(JSONObject response) {
                 try {
                     String serverNowTime = response.getString("date");
                     Log.i("DATE", "CURRENT SERVER DATE: " + serverNowTime);
@@ -230,7 +230,7 @@ public class ChargesActivity extends RefreshableActivity {
             }
 
             @Override
-            public void onRequestFailed() {
+            public void onNetworkError() {
                 runOnUiThread(ChargesActivity.this::handleRequestError);
             }
         }

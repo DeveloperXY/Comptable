@@ -155,20 +155,14 @@ public class AddProductActivity extends WithDrawerActivity
         sendHTTPRequest(url, data, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            setResult(ResultCodes.PRODUCT_ADDED);
-                            finish();
+                    public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.PRODUCT_ADDED);
+                        finish();
 
-                            runOnUiThread(() ->
-                                    Toast.makeText(getApplicationContext(),
-                                            "Product successfully added.",
-                                            Toast.LENGTH_LONG).show());
-                        } else if (status == 0) {
-                            runOnUiThread(() ->
-                                    Toast.makeText(getApplicationContext(),
-                                            "erreur  !!!!", Toast.LENGTH_LONG).show());
-                        }
+                        runOnUiThread(() ->
+                                Toast.makeText(getApplicationContext(),
+                                        "Product successfully added.",
+                                        Toast.LENGTH_LONG).show());
                     }
                 });
     }

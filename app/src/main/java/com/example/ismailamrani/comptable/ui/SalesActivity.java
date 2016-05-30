@@ -178,16 +178,9 @@ public class SalesActivity extends WithDrawerActivity {
         sendHTTPRequest(url, orderInfos, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            setResult(ResultCodes.ORDER_CREATED);
-                            finish();
-                        } else {
-                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                    "An error occured while registering your order. " +
-                                            "Please try again.", Toast.LENGTH_SHORT)
-                                    .show());
-                        }
+                    public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.ORDER_CREATED);
+                        finish();
                     }
                 });
     }
@@ -266,26 +259,20 @@ public class SalesActivity extends WithDrawerActivity {
         sendHTTPRequest(url, data, Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 0)
-                            runOnUiThread(() -> Toast.makeText(SalesActivity.this,
-                                    "Unregistered product.",
-                                    Toast.LENGTH_LONG).show());
-                        else {
-                            try {
-                                JSONArray productList = response.getJSONArray("produit");
-                                JSONObject product = productList.getJSONObject(0);
-                                mProduct = new Product(product);
+                    public void onRequestSucceeded(JSONObject response) {
+                        try {
+                            JSONArray productList = response.getJSONArray("produit");
+                            JSONObject product = productList.getJSONObject(0);
+                            mProduct = new Product(product);
 
-                                runOnUiThread(() -> {
-                                    quantityField.setText("1");
-                                    barCodeField.setText(mProduct.getCodeBarre());
-                                    priceField.setText(mProduct.getPrixTTC() + "");
-                                });
+                            runOnUiThread(() -> {
+                                quantityField.setText("1");
+                                barCodeField.setText(mProduct.getCodeBarre());
+                                priceField.setText(mProduct.getPrixTTC() + "");
+                            });
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

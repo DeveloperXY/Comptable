@@ -13,16 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Order;
 import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
+import com.example.ismailamrani.comptable.models.Order;
+import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.parsing.Orders;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
-import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -148,29 +147,24 @@ public class OrdersListFragment extends Fragment {
             listener.fetchOrders(url,
                     new RequestListener() {
                         @Override
-                        public void onRequestSucceeded(JSONObject response, int status) {
-                            if (status == 1) {
-                                try {
-                                    List<Order> orders = Order.parseOrders(
-                                            response.getJSONArray("orders"));
+                        public void onRequestSucceeded(JSONObject response) {
+                            try {
+                                List<Order> orders = Order.parseOrders(
+                                        response.getJSONArray("orders"));
 
-                                    if (ListComparison.areEqual(mOrders, orders))
-                                        getActivity().runOnUiThread(this::handleDataChange);
-                                    else {
-                                        mOrders = orders;
-                                        getActivity().runOnUiThread(this::onDataChanged);
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                if (ListComparison.areEqual(mOrders, orders))
+                                    getActivity().runOnUiThread(this::handleDataChange);
+                                else {
+                                    mOrders = orders;
+                                    getActivity().runOnUiThread(this::onDataChanged);
                                 }
-                            } else
-                                Toast.makeText(getActivity(),
-                                        "Error while retrieving orders",
-                                        Toast.LENGTH_LONG).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
 
                         @Override
-                        public void onRequestFailed() {
+                        public void onNetworkError() {
                             getActivity().runOnUiThread(() -> {
                                 errorLayout.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);

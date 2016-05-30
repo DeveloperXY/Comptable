@@ -68,23 +68,21 @@ public class AccountingHomeActivity extends AnimatedActivity {
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
-                        if (status == 1) {
-                            try {
-                                JSONObject details = response.getJSONArray("comptabilite")
-                                        .getJSONObject(0);
+                    public void onRequestSucceeded(JSONObject response) {
+                        try {
+                            JSONObject details = response.getJSONArray("comptabilite")
+                                    .getJSONObject(0);
 
-                                runOnUiThread(() -> {
-                                    try {
-                                        totalProfitLabel.setText(
-                                                details.getString("ProfitTotalSociete") + " DH");
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            runOnUiThread(() -> {
+                                try {
+                                    totalProfitLabel.setText(
+                                            details.getString("ProfitTotalSociete") + " DH");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
                 });

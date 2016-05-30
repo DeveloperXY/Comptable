@@ -10,7 +10,6 @@ import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
-import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -50,33 +49,33 @@ public class SplashActivity extends ColoredStatusBarActivity {
                 Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response, int status) {
+                    public void onRequestSucceeded(JSONObject response) {
                         runOnUiThread(() -> {
                             Class<?> target;
 
-                            if (status == 1) {
-                                try {
-                                    int activationStatus = response.getInt("activationStatus");
-                                    if (activationStatus == 1) {
-                                        // The application is activated, check for session
-                                        if (isUserLoggedIn())
-                                            target = HomeActivity.class;
-                                        else
-                                            target = LoginActivity.class;
-                                    } else {
-                                        target = ActivationActivity.class;
-                                        Toast.makeText(SplashActivity.this,
-                                                "Your activation code is not active. Please contact the administration.",
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-
-                                    finish();
-                                    startActivity(new Intent(SplashActivity.this, target));
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                            try {
+                                int activationStatus = response.getInt("activationStatus");
+                                if (activationStatus == 1) {
+                                    // The application is activated, check for session
+                                    if (isUserLoggedIn())
+                                        target = HomeActivity.class;
+                                    else
+                                        target = LoginActivity.class;
+                                } else {
+                                    target = ActivationActivity.class;
+                                    Toast.makeText(SplashActivity.this,
+                                            "Your activation code is not active. Please contact the administration.",
+                                            Toast.LENGTH_SHORT).show();
                                 }
-                            } else if (status == 0) {
+
+                                finish();
+                                startActivity(new Intent(SplashActivity.this, target));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            /*else if (status == 0) {
                                 DialogUtil.showDialog(SplashActivity.this, "Apologies",
                                         "It seems like we are missing your activation code. Please contact us as soon as possible.",
                                         "Dismiss", null,
@@ -84,7 +83,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                             finish();
                                             startActivity(new Intent(SplashActivity.this, ActivationActivity.class));
                                         });
-                            }
+                            }*/
                         });
                     }
                 }

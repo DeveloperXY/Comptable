@@ -64,27 +64,25 @@ public class ActivationActivity extends ColoredStatusBarActivity {
      */
     public class ActivationListener extends SuccessRequestListener {
         @Override
-        public void onRequestSucceeded(JSONObject response, int status) {
+        public void onRequestSucceeded(JSONObject response) {
             try {
                 String message = response.getString("message");
 
                 runOnUiThread(() -> {
                     Toast.makeText(ActivationActivity.this,
                             message, Toast.LENGTH_SHORT).show();
-                    if (status == 1) {
-                        try {
-                            Activation activation = new Activation(
-                                    response.getJSONArray("activation").getJSONObject(0));
-                            databaseAdapter.activateApplication(activation);
+                    try {
+                        Activation activation = new Activation(
+                                response.getJSONArray("activation").getJSONObject(0));
+                        databaseAdapter.activateApplication(activation);
 
-                            activityShouldFinish();
-                            ActivityTransition.startActivityWithSharedElement(
-                                    ActivationActivity.this, LoginActivity.class,
-                                    imageView, "header");
+                        activityShouldFinish();
+                        ActivityTransition.startActivityWithSharedElement(
+                                ActivationActivity.this, LoginActivity.class,
+                                imageView, "header");
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
             } catch (JSONException e) {
