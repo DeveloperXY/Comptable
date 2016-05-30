@@ -60,6 +60,7 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
             thumbnail.setOnClickListener(clickListener);
         }
 
+        @Override
         public void bind(Supplier supplier) {
             title.setText(supplier.getNom());
             address.setText(supplier.getAdresse());

@@ -52,6 +52,7 @@ public class SearchAdapter<T> extends BaseSearchAdapter<SearchAdapter.ViewHolder
             });
         }
 
+        @Override
         public void bind(T item) {
             mBinder.bind(this, item);
         }

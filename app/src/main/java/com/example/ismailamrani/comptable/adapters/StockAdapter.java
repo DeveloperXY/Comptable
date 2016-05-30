@@ -60,6 +60,7 @@ public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Pro
             });
         }
 
+        @Override
         public void bind(Product product) {
             quantityLabel.setTextColor(
                     mContext.getResources().getColor(product.getQte() == 0 ?

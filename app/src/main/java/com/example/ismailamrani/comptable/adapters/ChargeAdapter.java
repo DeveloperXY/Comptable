@@ -50,6 +50,7 @@ public class ChargeAdapter extends BaseSearchAdapter<ChargeAdapter.ViewHolder, C
             chargePriceLabel = (TextView) v.findViewById(R.id.chargePriceLabel);
         }
 
+        @Override
         public void bind(Charge charge) {
             descriptionLabel.setText(charge.getDescription());
             chargePriceLabel.setText(charge.getPrice() + " DH");

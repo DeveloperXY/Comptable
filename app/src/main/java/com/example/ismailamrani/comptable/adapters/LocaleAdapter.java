@@ -46,8 +46,7 @@ public class LocaleAdapter extends ArrayAdapter<Local> {
         }
 
         Local local = locales.get(position);
-        viewHolder.localeText
-                .setText(local.getAddress() + ", " + local.getCity());
+        viewHolder.localeText.setText(local.getFullAddress());
 
         convertView.setOnClickListener(v -> {
             if (listener != null)

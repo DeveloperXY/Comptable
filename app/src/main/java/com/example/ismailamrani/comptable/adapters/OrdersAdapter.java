@@ -58,6 +58,7 @@ public class OrdersAdapter extends BaseSearchAdapter<OrdersAdapter.OrdersViewHol
             });
         }
 
+        @Override
         public void bind(Order order) {
             orderIDLabel.setText(order.getFactureID());
             statusColorLayout.setBackgroundColor(

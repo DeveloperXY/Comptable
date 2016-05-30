@@ -143,6 +143,10 @@ public class Local {
         this.companyID = companyID;
     }
 
+    public String getFullAddress() {
+        return String.format("%s, %s", address, city);
+    }
+
     @Override
     public String toString() {
         return "Local{" +
