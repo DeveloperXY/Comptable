@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,34 +29,41 @@ import java.net.URLConnection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Redouane on 08/04/2016.
  */
-public class AddFournisseurActivity extends ColoredStatusBarActivity {
+public class AddSupplierActivity extends ColoredStatusBarActivity {
 
-    EditText nom, tel, fax, gsm, adresse, email;
+    @Bind(R.id.nomcomletclient)
+    EditText nom;
+    @Bind(R.id.numerofixFour)
+    EditText tel;
+    @Bind(R.id.numerofaxfour)
+    EditText fax;
+    @Bind(R.id.numtelfour)
+    EditText gsm;
+    @Bind(R.id.adressefour)
+    EditText adresse;
+    @Bind(R.id.emailfour)
+    EditText email;
+    @Bind(R.id.ImageProfil)
     ImageView ImageProfil;
+    @Bind(R.id.addFournisseur)
     LinearLayout addFournisseur;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fournisseur_add);
+        ButterKnife.bind(this);
 
-        context = this;
-        nom = (EditText) findViewById(R.id.nomcomletclient);
-        tel = (EditText) findViewById(R.id.numerofixFour);
-        fax = (EditText) findViewById(R.id.numerofaxfour);
-        gsm = (EditText) findViewById(R.id.numtelfour);
-        adresse = (EditText) findViewById(R.id.adressefour);
-        email = (EditText) findViewById(R.id.emailfour);
-        ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
-        addFournisseur = (LinearLayout) findViewById(R.id.addFournisseur);
-
-        Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
+        Picasso.with(this).load(R.drawable.flogo)
+                .transform(new CropCircleTransformation())
+                .into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
             Supplier f = new Supplier();
@@ -127,7 +133,7 @@ public class AddFournisseurActivity extends ColoredStatusBarActivity {
                     Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
                     toast.show();
                     finish();
-                    startActivity(new Intent(context, SuppliersActivity.class));
+                    startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
 
                 } else if (resp == 0) {
                     Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);

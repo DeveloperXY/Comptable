@@ -67,7 +67,7 @@
         <activity
             android:name=".ui.InformationFournisseurActivity"
             android:theme="@style/AppTheme.CustomTheme"/>
-        <activity android:name=".ui.AddFournisseurActivity"/>
+        <activity android:name=".ui.AddSupplierActivity"/>
         <activity android:name=".ui.EditFournisseurActivity"/>
         <activity
             android:name=".ui.SalesActivity"

@@ -65,7 +65,7 @@ public class SuppliersActivity extends RefreshableActivity {
     @Override
     public void onAddPressed() {
         finish();
-        startActivity(new Intent(this, AddFournisseurActivity.class));
+        startActivity(new Intent(this, AddSupplierActivity.class));
     }
 
     @Override

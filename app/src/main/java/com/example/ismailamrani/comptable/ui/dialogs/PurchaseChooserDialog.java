@@ -8,7 +8,7 @@ import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
-import com.example.ismailamrani.comptable.ui.AddFournisseurActivity;
+import com.example.ismailamrani.comptable.ui.AddSupplierActivity;
 import com.example.ismailamrani.comptable.ui.AddProductActivity;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class PurchaseChooserDialog extends ChooserDialog<String>
             Decide the destination activity to be launched based on the
             ID of the spinner who started the dialog */
             Class<?> targetActivity = sourceSpinnerID == R.id.productSpinner ?
-                    AddProductActivity.class : AddFournisseurActivity.class;
+                    AddProductActivity.class : AddSupplierActivity.class;
             context.startActivity(new Intent(context, targetActivity));
         }
 
