@@ -14,23 +14,24 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
+import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
 import com.example.ismailamrani.comptable.ui.AccountingHomeActivity;
 import com.example.ismailamrani.comptable.ui.ChargesActivity;
 import com.example.ismailamrani.comptable.ui.ClientsActivity;
-import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
-import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.OrdersActivity;
 import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
+import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.ChooserDialog;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
+import com.example.ismailamrani.comptable.utils.parsing.Orders;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.CalculateScreenSize;
-import com.example.ismailamrani.comptable.utils.parsing.Orders;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 
 import java.util.List;
 
@@ -167,11 +168,15 @@ public class HomeActivity extends ColoredStatusBarActivity {
     }
 
     public void onLogoutPressed(View view) {
-        mDatabaseAdapter.logout();
+        DialogUtil.showMutliDialog(this, "Are you sure to log out ?",
+                "Yes", (dialog, which) -> {
+                    mDatabaseAdapter.logout();
 
-        activityShouldFinish();
-        ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,
-                headerImageView, "header");
+                    activityShouldFinish();
+                    ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,
+                            headerImageView, "header");
+                },
+                "No", null);
     }
 
     public void onSettingsPressed(View view) {

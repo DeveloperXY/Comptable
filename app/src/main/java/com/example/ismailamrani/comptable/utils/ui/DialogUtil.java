@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.utils.ui;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.view.Window;
 
 import com.example.ismailamrani.comptable.R;
 
@@ -35,8 +36,8 @@ public class DialogUtil {
                 context, R.style.AppCompatAlertDialogStyle);
         builder.setTitle(title);
         builder.setMessage(message);
-        builder.setPositiveButton(actionText1, listener1);
-        builder.setNegativeButton(actionText2, listener2);
+        builder.setNegativeButton(actionText1, listener1);
+        builder.setPositiveButton(actionText2, listener2);
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(true);
@@ -73,8 +74,33 @@ public class DialogUtil {
                                        final DialogInterface.OnClickListener listener1,
                                        final String actionText2,
                                        final DialogInterface.OnClickListener listener2) {
+        showMutliDialog(context, title, message, actionText1,
+                listener1, actionText2, listener2, false);
+    }
+
+    public static void showMutliDialog(Context context,
+                                       final String message,
+                                       final String actionText1,
+                                       final DialogInterface.OnClickListener listener1,
+                                       final String actionText2,
+                                       final DialogInterface.OnClickListener listener2) {
+        showMutliDialog(context, "", message, actionText1,
+                listener1, actionText2, listener2, true);
+    }
+
+    public static void showMutliDialog(Context context, final String title,
+                                       final String message,
+                                       final String actionText1,
+                                       final DialogInterface.OnClickListener listener1,
+                                       final String actionText2,
+                                       final DialogInterface.OnClickListener listener2,
+                                       boolean noTitle) {
         AlertDialog alertDialog = buildDoubleChoiceDialog(
                 context, title, message, actionText1, listener1, actionText2, listener2);
+
+        if (noTitle)
+            alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         alertDialog.show();
     }
 }
