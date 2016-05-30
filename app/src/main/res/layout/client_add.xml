@@ -97,18 +97,14 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="140"
-                        >
+                        android:layout_weight="140">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/userclient"
-                            />
-
+                            android:src="@drawable/userclient"/>
 
                     </RelativeLayout>
-
 
                     <EditText
                         android:id="@+id/nomcomletclient"
@@ -116,10 +112,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:hint="Nom complet"
-                        android:textColorHint="#9ea1a3"
-
-                        />
-
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
                 <RelativeLayout

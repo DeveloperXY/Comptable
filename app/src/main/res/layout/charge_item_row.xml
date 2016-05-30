@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/order_detail_item_border"
@@ -26,8 +27,8 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="6dp"
-            android:text="8000 DH"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorWhite"
+            tools:text="8000 DH"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,11 +41,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="50"
-                android:gravity="left|center_vertical"
                 android:ellipsize="end"
+                android:gravity="left|center_vertical"
                 android:padding="8dp"
-                android:text="Samsung Galaxy S7"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                tools:text="Samsung Galaxy S7"/>
 
             <TextView
                 android:id="@+id/timeLabel"
@@ -53,8 +54,8 @@
                 android:layout_weight="50"
                 android:gravity="left|center_vertical"
                 android:padding="8dp"
-                android:text="2 min ago"
-                android:textColor="@color/colorPriceText"/>
+                android:textColor="@color/colorPriceText"
+                tools:text="2 min ago"/>
 
         </LinearLayout>
 

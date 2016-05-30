@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@drawable/order_detail_item_border"
-    android:padding="2dp">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/order_detail_item_border"
+                android:padding="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,20 +19,20 @@
             android:layout_height="match_parent"
             android:layout_weight="20"
             android:scaleType="centerCrop"
-            android:src="@drawable/iphone" />
+            tools:src="@drawable/iphone"/>
 
         <TextView
             android:id="@+id/productNameLabel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="35"
-            android:text="Samsung Galaxy S7"
-            android:textColor="#000000"
             android:gravity="left|center_vertical"
-            android:paddingTop="4dp"
-            android:paddingRight="4dp"
             android:paddingBottom="4dp"
-            android:paddingLeft="16dp" />
+            android:paddingLeft="16dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
+            android:textColor="#000000"
+            tools:text="Samsung Galaxy S7"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,7 +48,7 @@
                 android:gravity="center"
                 android:text="Quantité"
                 android:textColor="@color/colorPriceText"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/quantityLabel"
@@ -55,8 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="100"
-                android:textColor="@color/colorPriceText" />
+                android:textColor="@color/colorPriceText"
+                tools:text="100"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -76,8 +77,8 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:paddingTop="6dp"
-                android:text="8000 DH"
-                android:textColor="@color/colorWhite" />
+                android:textColor="@color/colorWhite"
+                tools:text="8000 DH"/>
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

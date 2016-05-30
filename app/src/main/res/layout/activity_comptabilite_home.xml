@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -28,12 +29,12 @@
                 android:layout_weight="5"/>
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/imageView3"
-                android:transitionName="header"
                 android:layout_weight="20"
-                android:src="@mipmap/ic_logo"/>
+                android:src="@mipmap/ic_logo"
+                android:transitionName="header"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -41,36 +42,36 @@
                 android:layout_weight="10"/>
 
             <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/localesLayout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="65"
-                android:id="@+id/localesLayout"
+                android:orientation="vertical"
                 android:padding="8dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:background="@drawable/order_detail_item_border"
-                    android:padding="1dp"
-                    android:layout_marginBottom="8dp">
+                    android:padding="1dp">
 
                     <TextView
+                        android:id="@+id/totalProfitLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="25000 DH"
-                        android:id="@+id/totalProfitLabel"
-                        android:textColor="@color/colorWhite"
-                        android:gravity="center"
-                        android:textSize="30sp"
                         android:background="@color/colorRed"
-                        android:padding="12dp"/>
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="30sp"
+                        tools:text="25000 DH"/>
                 </RelativeLayout>
 
                 <ListView
+                    android:id="@+id/localeListView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/localeListView"/>
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 

@@ -48,15 +48,10 @@
         <activity android:name=".ui.AddClientActivity"/>
         <activity android:name=".ui.EditClientActivity"/>
         <activity android:name=".ui.ProductDetailsActivity"/>
-        <activity android:name=".fournisseur.AddFournisseurAsync"/>
-        <activity android:name=".ui.AddLocalActivity"/>
         <activity
             android:name=".ui.InformationActivity"
             android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".ui.AddChargeActivity"/>
-        <activity
-            android:name=".ui.SpinnerChargeActivity"
-            android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".ui.SuppliersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -64,9 +59,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.InformationFournisseurActivity"
-            android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".ui.AddSupplierActivity"/>
         <activity android:name=".ui.EditFournisseurActivity"/>
         <activity

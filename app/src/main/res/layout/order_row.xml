@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="#ffffff">
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:background="#ffffff">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,24 +30,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="FA568124SA"
+            tools:text="FA568124SA"
             android:id="@+id/orderIDLabel"
             android:gravity="center"
             android:layout_toRightOf="@+id/numberLabel"
             android:textColor="@color/colorBlue"
             android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="+"
-            android:id="@+id/plusSignLabel"
-            android:gravity="center"
-            android:textColor="@color/colorBlue"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:layout_toLeftOf="@+id/arrowLabel"
-            android:padding="8dp" />
 
         <TextView
             android:layout_width="wrap_content"

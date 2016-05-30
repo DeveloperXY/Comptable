@@ -42,7 +42,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/totalTextLabel"
                 android:gravity="center"
-                android:text="14000 DH"
+                tools:text="14000 DH"
                 android:textColor="@color/colorBlue"
                 android:textSize="18sp" />
 

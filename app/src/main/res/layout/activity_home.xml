@@ -64,8 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorBlue"
-            tools:text="Hay Al Azhar, Fez"
-            />
+            tools:text="Hay Al Azhar, Fez"/>
     </RelativeLayout>
 
     <LinearLayout
