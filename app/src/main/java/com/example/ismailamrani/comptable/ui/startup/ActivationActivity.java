@@ -89,6 +89,17 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                 e.printStackTrace();
             }
         }
+
+        @Override
+        public void onRequestFailed(int status, JSONObject response) {
+            try {
+                String message = response.getString("message");
+                runOnUiThread(() -> Toast.makeText(
+                        ActivationActivity.this, message, Toast.LENGTH_SHORT).show());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

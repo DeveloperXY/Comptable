@@ -13,6 +13,12 @@ public interface RequestListener {
     void onRequestSucceeded(JSONObject response);
 
     /**
+     * @param status of the response (different than 1), sent back by the server.
+     * @param response
+     */
+    void onRequestFailed(int status, JSONObject response);
+
+    /**
      * Invoked when there is no internet connection.
      */
     void onNetworkError();

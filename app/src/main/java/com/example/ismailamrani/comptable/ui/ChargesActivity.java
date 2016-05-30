@@ -165,6 +165,11 @@ public class ChargesActivity extends RefreshableActivity {
         }
 
         @Override
+        public void onRequestFailed(int status, JSONObject response) {
+
+        }
+
+        @Override
         public void onNetworkError() {
             runOnUiThread(ChargesActivity.this::handleRequestError);
         }
@@ -203,6 +208,11 @@ public class ChargesActivity extends RefreshableActivity {
                 } catch (JSONException | ParseException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onRequestFailed(int status, JSONObject response) {
+
             }
 
             private void setChargesTiming() {

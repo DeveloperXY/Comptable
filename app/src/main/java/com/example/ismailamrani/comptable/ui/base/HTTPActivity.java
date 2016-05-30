@@ -98,11 +98,12 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
                             if (status == 1)
                                 listener.onRequestSucceeded(obj);
-                            else
-                                runOnUiThread(() -> Toast.makeText(HTTPActivity.this,
-                                        String.format("Developer error:\n- Status code: %d\n- Response: %s",
-                                                status, res)
-                                        , Toast.LENGTH_LONG).show());
+                            else {
+                                Log.i("RESPONSE", String.format(
+                                        "Possible developer error:\n- Status code: %d\n- Response: %s",
+                                        status, res));
+                                listener.onRequestFailed(status, obj);
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();

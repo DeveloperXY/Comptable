@@ -106,6 +106,11 @@ public class SuppliersActivity extends RefreshableActivity {
                     }
 
                     @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+
+                    }
+
+                    @Override
                     public void onNetworkError() {
                         runOnUiThread(() -> handleRequestError());
                     }

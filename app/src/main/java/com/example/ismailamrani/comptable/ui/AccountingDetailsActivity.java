@@ -127,6 +127,11 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                     }
 
                     @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+
+                    }
+
+                    @Override
                     public void onNetworkError() {
                         runOnUiThread(() -> mLoadingDialog.dismiss());
                     }

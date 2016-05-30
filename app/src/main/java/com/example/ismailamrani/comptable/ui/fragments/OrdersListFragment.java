@@ -164,6 +164,11 @@ public class OrdersListFragment extends Fragment {
                         }
 
                         @Override
+                        public void onRequestFailed(int status, JSONObject response) {
+
+                        }
+
+                        @Override
                         public void onNetworkError() {
                             getActivity().runOnUiThread(() -> {
                                 errorLayout.setVisibility(View.VISIBLE);

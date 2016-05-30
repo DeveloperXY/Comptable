@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
@@ -91,6 +92,13 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
+
+                            @Override
+                            public void onRequestFailed(int status, JSONObject response) {
+                                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
+                                        "Invalid username/password combination.", Toast.LENGTH_SHORT)
+                                        .show());
                             }
                         });
             }
