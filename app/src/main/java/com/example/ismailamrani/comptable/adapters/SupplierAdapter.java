@@ -88,7 +88,7 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
                 switch (menuItem.getItemId()) {
                     case R.id.action_edit_supplier:
                         if (listener != null)
-                            listener.onEditSupplier(supplier.getId());
+                            listener.onEditSupplier(supplier);
                         return true;
                     case R.id.action_delete_supplier:
                         if (listener != null)
@@ -107,7 +107,7 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
 
     public interface SupplierListener {
         void onSupplierSelected(Supplier supplier);
-        void onEditSupplier(String supplierID);
+        void onEditSupplier(Supplier supplier);
         void onDeleteSupplier(String supplierID);
     }
 }

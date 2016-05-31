@@ -10,4 +10,5 @@ public class ResultCodes {
     public static final int ORDER_CREATED = 101;
     public static final int CHARGE_CREATED = 102;
     public static final int SUPPLIER_CREATED = 103;
+    public static final int SUPPLIER_UPDATED = 104;
 }

@@ -1,5 +1,8 @@
 package com.example.ismailamrani.comptable.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +13,7 @@ import java.util.List;
 /**
  * Created by Redouane on 22/03/2016.
  */
-public class Supplier implements Item {
+public class Supplier implements Item, Parcelable {
     String id;
     String nom;
     String tel;
@@ -45,6 +48,49 @@ public class Supplier implements Item {
         this.fax = object.getString("fax");
         this.email = object.getString("email");
     }
+
+    private Supplier(Parcel in) {
+        id = in.readString();
+        nom = in.readString();
+        tel = in.readString();
+        adresse = in.readString();
+        fix = in.readString();
+        fax = in.readString();
+        email = in.readString();
+        image = in.readString();
+        url = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(nom);
+        dest.writeString(tel);
+        dest.writeString(adresse);
+        dest.writeString(fix);
+        dest.writeString(fax);
+        dest.writeString(email);
+        dest.writeString(image);
+        dest.writeString(url);
+    }
+
+    public static final Parcelable.Creator<Supplier> CREATOR = new Parcelable.Creator<Supplier>() {
+
+        @Override
+        public Supplier createFromParcel(Parcel source) {
+            return new Supplier(source);
+        }
+
+        @Override
+        public Supplier[] newArray(int size) {
+            return new Supplier[size];
+        }
+    };
 
     public String getImage() {
         return image;

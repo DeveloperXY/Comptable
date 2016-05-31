@@ -193,6 +193,9 @@ public abstract class HTTPActivity extends AppCompatActivity {
 
             while (iterator.hasNext()) {
                 Map.Entry<String, String> entry = iterator.next();
+                if (entry.getKey() == null || entry.getValue() == null)
+                    throw new IllegalArgumentException(
+                            "Query params' keys & values can't be null.");
                 builder.add(entry.getKey(), entry.getValue());
             }
             RequestBody requestBody = builder.build();

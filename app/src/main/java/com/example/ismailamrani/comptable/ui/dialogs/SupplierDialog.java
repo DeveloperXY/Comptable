@@ -70,7 +70,7 @@ public class SupplierDialog extends Dialog {
         editSupplierItem.setOnClickListener(v -> {
             dismiss();
             if (mDialogListener != null)
-                mDialogListener.onEdit(supplier.getId());
+                mDialogListener.onEdit(supplier);
         });
         deleteSupplierItem.setOnClickListener(v -> {
             if (mDialogListener != null)
@@ -87,6 +87,6 @@ public class SupplierDialog extends Dialog {
 
     public interface SupplierDialogListener {
         void onDelete(String supplierID);
-        void onEdit(String supplierID);
+        void onEdit(Supplier supplier);
     }
 }

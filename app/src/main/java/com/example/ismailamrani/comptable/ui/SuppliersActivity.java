@@ -40,6 +40,7 @@ import butterknife.ButterKnife;
 public class SuppliersActivity extends RefreshableActivity {
 
     private static final int REQUEST_ADD_SUPPLIER = 10;
+    private static final int REQUEST_UPDATE_SUPPLIER = 11;
 
     private List<Supplier> mSuppliers;
     private SupplierAdapter supplierAdapter;
@@ -68,7 +69,6 @@ public class SuppliersActivity extends RefreshableActivity {
 
     @Override
     public void onAddPressed() {
-        finish();
         startActivityForResult(new Intent(this, AddSupplierActivity.class),
                 REQUEST_ADD_SUPPLIER);
     }
@@ -77,8 +77,10 @@ public class SuppliersActivity extends RefreshableActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_ADD_SUPPLIER:
+            case REQUEST_UPDATE_SUPPLIER:
                 switch (resultCode) {
                     case ResultCodes.SUPPLIER_CREATED:
+                    case ResultCodes.SUPPLIER_UPDATED:
                         refresh();
                         break;
                 }
@@ -115,6 +117,7 @@ public class SuppliersActivity extends RefreshableActivity {
                             runOnUiThread(() -> {
                                 populateRecyclerView();
                                 progressBar.setVisibility(View.INVISIBLE);
+                                dataRecyclerView.requestLayout();
                             });
 
                         } catch (JSONException e) {
@@ -142,7 +145,6 @@ public class SuppliersActivity extends RefreshableActivity {
 
     @Override
     protected void setupRecyclerView() {
-        super.setupRecyclerView();
         mSuppliers = new ArrayList<>();
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
@@ -174,16 +176,16 @@ public class SuppliersActivity extends RefreshableActivity {
                                 }
 
                                 @Override
-                                public void onEdit(String supplierID) {
-                                    editSupplier(supplierID);
+                                public void onEdit(Supplier supplier) {
+                                    editSupplier(supplier);
                                 }
                             });
                     mSupplierDialog.show();
                 }
 
                 @Override
-                public void onEditSupplier(String supplierID) {
-                    editSupplier(supplierID);
+                public void onEditSupplier(Supplier supplier) {
+                    editSupplier(supplier);
                 }
 
                 @Override
@@ -196,10 +198,10 @@ public class SuppliersActivity extends RefreshableActivity {
             supplierAdapter.animateTo(mSuppliers);
     }
 
-    private void editSupplier(String supplierID) {
-        Intent i = new Intent(SuppliersActivity.this, EditFournisseurActivity.class);
-        i.putExtra("id", supplierID);
-        startActivity(i);
+    private void editSupplier(Supplier supplier) {
+        Intent i = new Intent(SuppliersActivity.this, EditSupplierActivity.class);
+        i.putExtra("supplier", supplier);
+        startActivityForResult(i, REQUEST_UPDATE_SUPPLIER);
     }
 
     private void deleteSupplier(String supplierID) {

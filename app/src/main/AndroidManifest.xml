@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.AddSupplierActivity"/>
-        <activity android:name=".ui.EditFournisseurActivity"/>
+        <activity android:name=".ui.EditSupplierActivity"/>
         <activity
             android:name=".ui.SalesActivity"
             android:configChanges="orientation"
