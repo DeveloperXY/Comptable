@@ -20,6 +20,13 @@ import com.example.ismailamrani.comptable.R;
 public abstract class AnimatedActivity extends WithDrawerActivity {
 
     /**
+     * This flag indicates whether the activity is concerned with performing the
+     * header shared element transition or not.
+     */
+    public static final String TURN_OFF_HEADER_ANIMATION = "turnOffHeaderAnimation";
+    public static final String HEADER_IMAGE_RES = "imageRes";
+
+    /**
      * Setup the action bar for the reveal animation.
      */
     @Override
@@ -27,8 +34,11 @@ public abstract class AnimatedActivity extends WithDrawerActivity {
         super.setupActionBar();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mActionBar.setVisibility(View.INVISIBLE);
-            actionbarImage.setImageResource(getIntent().getIntExtra("imageRes", -1));
+            // Check if the activity wants to turn off the header animation
+            if (!getIntent().getBooleanExtra(TURN_OFF_HEADER_ANIMATION, false)) {
+                mActionBar.setVisibility(View.INVISIBLE);
+                actionbarImage.setImageResource(getIntent().getIntExtra(HEADER_IMAGE_RES, -1));
+            }
         }
     }
 

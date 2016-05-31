@@ -22,6 +22,7 @@ import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -37,6 +38,8 @@ import butterknife.ButterKnife;
  * Created by Mohammed Aouf ZOUAG on 29/05/2016.
  */
 public class SuppliersActivity extends RefreshableActivity {
+
+    private static final int REQUEST_ADD_SUPPLIER = 10;
 
     private List<Supplier> mSuppliers;
     private SupplierAdapter supplierAdapter;
@@ -66,7 +69,21 @@ public class SuppliersActivity extends RefreshableActivity {
     @Override
     public void onAddPressed() {
         finish();
-        startActivity(new Intent(this, AddSupplierActivity.class));
+        startActivityForResult(new Intent(this, AddSupplierActivity.class),
+                REQUEST_ADD_SUPPLIER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADD_SUPPLIER:
+                switch (resultCode) {
+                    case ResultCodes.SUPPLIER_CREATED:
+                        refresh();
+                        break;
+                }
+                break;
+        }
     }
 
     @Override
@@ -138,8 +155,6 @@ public class SuppliersActivity extends RefreshableActivity {
 
     @Override
     protected void refresh() {
-        super.refresh();
-
         fetchSuppliers();
     }
 

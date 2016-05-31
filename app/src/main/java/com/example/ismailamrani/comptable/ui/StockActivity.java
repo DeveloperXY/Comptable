@@ -91,8 +91,6 @@ public class StockActivity extends RefreshableActivity
 
     @Override
     protected void refresh() {
-        super.refresh();
-
         fetchStockProducts(PhpAPI.getStock, JSONUtils.bundleLocaleIDToJSON(currentLocaleID));
     }
 

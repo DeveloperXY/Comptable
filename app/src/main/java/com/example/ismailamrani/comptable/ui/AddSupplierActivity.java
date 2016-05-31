@@ -1,6 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.widget.EditText;
@@ -14,6 +13,7 @@ import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -128,12 +128,10 @@ public class AddSupplierActivity extends ColoredStatusBarActivity {
                 new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.SUPPLIER_CREATED);
                         finish();
-                        runOnUiThread(() -> {
-                            Toast.makeText(AddSupplierActivity.this,
-                                    "Supplier successfully created.", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(AddSupplierActivity.this, SuppliersActivity.class));
-                        });
+                        runOnUiThread(() -> Toast.makeText(AddSupplierActivity.this,
+                                "Supplier successfully created.", Toast.LENGTH_LONG).show());
                     }
                 });
     }

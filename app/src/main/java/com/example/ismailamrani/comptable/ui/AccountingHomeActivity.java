@@ -55,6 +55,7 @@ public class AccountingHomeActivity extends AnimatedActivity {
         localeAdapter.setListener(localeID -> {
             Intent intent = new Intent(this, AccountingDetailsActivity.class);
             intent.putExtra("localeID", localeID);
+            intent.putExtra(AnimatedActivity.TURN_OFF_HEADER_ANIMATION, true);
             startActivity(intent);
         });
         localeListView.setAdapter(localeAdapter);

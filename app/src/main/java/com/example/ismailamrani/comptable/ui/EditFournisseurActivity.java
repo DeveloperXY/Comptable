@@ -31,6 +31,7 @@ import java.net.URLConnection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import butterknife.Bind;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
@@ -38,10 +39,22 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
  */
 public class EditFournisseurActivity extends ColoredStatusBarActivity {
 
-    EditText nom, tel, fax, gsm, adresse, email;
+    @Bind(R.id.nomcomletclient)
+    EditText nom;
+    @Bind(R.id.numerofixFour)
+    EditText fixField;
+    @Bind(R.id.numerofaxfour)
+    EditText fax;
+    @Bind(R.id.numtelfour)
+    EditText gsm;
+    @Bind(R.id.adressefour)
+    EditText adresse;
+    @Bind(R.id.emailfour)
+    EditText email;
+    @Bind(R.id.ImageProfil)
     ImageView ImageProfil;
+    @Bind(R.id.addFournisseur)
     LinearLayout addFournisseur;
-    Context context;
     String id;
 
     @Override
@@ -54,24 +67,16 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
         System.out.println(">>>>>>>>>>>> ID : " + id);
         new getFopurnisseurByID().execute(PhpAPI.getFournisseurByID);
 
-        context = this;
-        nom = (EditText) findViewById(R.id.nomcomletclient);
-        tel = (EditText) findViewById(R.id.numerofixFour);
-        fax = (EditText) findViewById(R.id.numerofaxfour);
-        gsm = (EditText) findViewById(R.id.numtelfour);
-        adresse = (EditText) findViewById(R.id.adressefour);
-        email = (EditText) findViewById(R.id.emailfour);
-        ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
-        addFournisseur = (LinearLayout) findViewById(R.id.addFournisseur);
-
-        Picasso.with(this).load(R.drawable.flogo).transform(new CropCircleTransformation()).into(ImageProfil);
+        Picasso.with(this).load(R.drawable.flogo)
+                .transform(new CropCircleTransformation())
+                .into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
             Supplier f = new Supplier();
             f.setNom(nom.getText().toString());
             f.setTel(gsm.getText().toString());
             f.setFax(fax.getText().toString());
-            f.setFix(tel.getText().toString());
+            f.setFix(fixField.getText().toString());
             f.setAdresse(adresse.getText().toString());
             f.setEmail(email.getText().toString());
             f.setUrl(PhpAPI.editFournisseur);
@@ -134,7 +139,7 @@ public class EditFournisseurActivity extends ColoredStatusBarActivity {
                             gsm.setText(usr.getString("tel"));
                             adresse.setText(usr.getString("adresse"));
                             fax.setText(usr.getString("fax"));
-                            tel.setText(usr.getString("fix"));
+                            fixField.setText(usr.getString("fix"));
                             email.setText(usr.getString("email"));
                         }
                     } catch (JSONException e) {

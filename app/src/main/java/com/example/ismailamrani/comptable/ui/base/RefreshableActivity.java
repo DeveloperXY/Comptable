@@ -51,10 +51,7 @@ public abstract class RefreshableActivity extends AnimatedActivity {
         );
     }
 
-    protected void refresh() {
-        if (!swipeRefreshLayout.isRefreshing())
-            swipeRefreshLayout.setRefreshing(true);
-    }
+    protected abstract void refresh();
 
     protected void stopSwipeRefresh() {
         if (swipeRefreshLayout.isRefreshing())
