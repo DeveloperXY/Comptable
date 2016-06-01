@@ -199,6 +199,7 @@ public class PurchasesActivity extends WithDrawerActivity {
      */
     public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
+        JSONArray qteSummary = productAdapter.getQuantitySummary();
 
         if (summary.length() == 0)
             Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();

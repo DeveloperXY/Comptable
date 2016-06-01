@@ -2,6 +2,8 @@ package com.example.ismailamrani.comptable.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 
@@ -16,7 +19,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
@@ -83,8 +88,7 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
                 }
 
                 lastPosition = position;
-            }
-            else {
+            } else {
                 viewHolder.deleteIcon.setVisibility(View.INVISIBLE);
                 lastPosition = -1;
             }
@@ -116,6 +120,44 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
 
             data.put(obj);
         }
+
+        return data;
+    }
+
+    public JSONArray getQuantitySummary() {
+        JSONArray data = new JSONArray();
+        // Map<product ID, <quantity, product label>>
+        Map<Integer, Pair<Integer, String>> map = new HashMap<>();
+
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            int id = product.getID();
+            int qte = product.getQte();
+            String label = product.getLibelle();
+
+            Log.i("Quantity summary", String.format("Iteration %d, ID: %d, Qte: %d, Label: %s",
+                    i, id, qte, label));
+
+            map.put(id, map.get(id) == null ? Pair.create(qte, label) :
+                    Pair.create(map.get(id).first + qte, label));
+        }
+
+        Stream.of(map.entrySet())
+                .forEach(entry -> {
+                    JSONObject obj = new JSONObject();
+
+                    try {
+                        obj.put("productID", entry.getKey());
+                        obj.put("quantity", entry.getValue().first);
+                        obj.put("label", entry.getValue().second);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    data.put(obj);
+                });
+
+        Log.i("Quantity summary", data.toString());
 
         return data;
     }
