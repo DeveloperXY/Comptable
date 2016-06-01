@@ -21,6 +21,7 @@ import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -148,24 +149,19 @@ public class SalesActivity extends WithDrawerActivity {
      */
     public void onConfirm(View view) {
         JSONArray summary = productAdapter.getSummary();
+        JSONArray qteSummary = productAdapter.getQuantitySummary();
 
         if (summary.length() == 0)
             Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
         else
-            postCreateSaleOrder(PhpAPI.createSaleOrder, summary);
-    }
-
-    /**
-     * Overloaded method.
-     *
-     * @param url
-     * @param orderInfos
-     */
-    void postCreateSaleOrder(String url, JSONArray orderInfos) {
-        postCreateSaleOrder(url, JSONUtils.merge(
-                JSONUtils.bundleWithTag(orderInfos, "data"),
-                JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID())
-        ));
+            postCreateSaleOrder(PhpAPI.createSaleOrder,
+                    JSONUtils.merge(
+                            JSONUtils.merge(
+                                    JSONUtils.bundleWithTag(summary, "data"),
+                                    JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID())
+                            ),
+                            JSONUtils.bundleWithTag(qteSummary, "qteData")
+                    ));
     }
 
     /**
@@ -182,15 +178,38 @@ public class SalesActivity extends WithDrawerActivity {
                         setResult(ResultCodes.ORDER_CREATED);
                         finish();
                     }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+                        StringBuilder sb = new StringBuilder();
+                        try {
+                            JSONArray messages = response.getJSONArray("message");
+                            for (int i = 0; i < messages.length(); i++) {
+                                JSONObject message = messages.getJSONObject(i);
+                                sb.append(message.getString("text"));
+                                sb.append("\n");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        runOnUiThread(() -> showQuantityErrorDialog(sb.toString()));
+                    }
                 });
+    }
+
+    private void showQuantityErrorDialog(String parsedMessages) {
+        DialogUtil.showDialog(this, "Error",
+                "Some of the requested product quantities are not available:\n"
+                        + parsedMessages, "OK", null);
     }
 
     /**
      * Adds a product to the list of the products to be sold.
      */
     private void addProductToList() {
-        if (!allProductInfosArePresent() &&
-                Integer.valueOf(quantityField.getText().toString()) > 0) {
+        if (!allProductInfosArePresent() ||
+                Integer.valueOf(quantityField.getText().toString()) <= 0) {
             return;
         }
 

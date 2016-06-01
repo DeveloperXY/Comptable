@@ -7,7 +7,7 @@ import org.json.JSONObject;
  */
 public abstract class SuccessRequestListener implements RequestListener {
     @Override
-    public void onNetworkError() {
+    public final void onNetworkError() {
 
     }
 

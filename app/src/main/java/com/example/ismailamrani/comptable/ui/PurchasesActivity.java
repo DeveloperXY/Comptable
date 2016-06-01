@@ -171,8 +171,8 @@ public class PurchasesActivity extends WithDrawerActivity {
      * Adds a product to the list of the products to be bought.
      */
     private void addProductToList() {
-        if (!allProductInfosArePresent() &&
-                Integer.valueOf(quantityField.getText().toString()) > 0) {
+        if (!allProductInfosArePresent() ||
+                Integer.valueOf(quantityField.getText().toString()) <= 0) {
             return;
         }
 
@@ -198,8 +198,8 @@ public class PurchasesActivity extends WithDrawerActivity {
      * @param view
      */
     public void onConfirm(View view) {
-        JSONArray summary = productAdapter.getSummary();
-        JSONArray qteSummary = productAdapter.getQuantitySummary();
+        JSONArray summary = productAdapter.getSummary()
+        ;
 
         if (summary.length() == 0)
             Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
