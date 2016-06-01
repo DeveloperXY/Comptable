@@ -189,7 +189,8 @@ public class SalesActivity extends WithDrawerActivity {
      * Adds a product to the list of the products to be sold.
      */
     private void addProductToList() {
-        if (!allProductInfosArePresent()) {
+        if (!allProductInfosArePresent() &&
+                Integer.valueOf(quantityField.getText().toString()) > 0) {
             return;
         }
 
