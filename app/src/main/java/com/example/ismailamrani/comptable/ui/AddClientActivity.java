@@ -1,8 +1,5 @@
 package com.example.ismailamrani.comptable.ui;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,125 +7,121 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.ClientModel;
+import com.example.ismailamrani.comptable.models.Client;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.example.ismailamrani.comptable.webservice.convertInputStreamToString;
-import com.example.ismailamrani.comptable.webservice.getQuery;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Redouane on 23/03/2016.
+ * Altered by Mohammed Aouf ZOUAG on 01/06/2016.
  */
 public class AddClientActivity extends ColoredStatusBarActivity {
-    EditText nomprenom, tel, adresse, email;
-    TextView ajouter;
 
+    @Bind(R.id.nomcomletclient)
+    EditText nomprenom;
+    @Bind(R.id.numtel)
+    EditText tel;
+    @Bind(R.id.adresse)
+    EditText adresse;
+    @Bind(R.id.email)
+    EditText email;
+    @Bind(R.id.enregistrerclient)
+    TextView ajouter;
+    @Bind(R.id.ImageProfil)
     ImageView ImageProfil;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_add);
-        context = this;
+        ButterKnife.bind(this);
 
-        ImageProfil = (ImageView) findViewById(R.id.ImageProfil);
-
-        Picasso.with(this).load(R.drawable.sergio).transform(new CropCircleTransformation()).into(ImageProfil);
-
-        nomprenom = (EditText) findViewById(R.id.nomcomletclient);
-        tel = (EditText) findViewById(R.id.numtel);
-        adresse = (EditText) findViewById(R.id.adresse);
-        email = (EditText) findViewById(R.id.email);
-        ajouter = (TextView) findViewById(R.id.enregistrerclient);
+        Picasso.with(this)
+                .load(R.drawable.sergio)
+                .transform(new CropCircleTransformation())
+                .into(ImageProfil);
 
         ajouter.setOnClickListener(v -> {
-            ClientModel clientItems = new ClientModel();
-            clientItems.setNomPrenom(nomprenom.getText().toString());
-            clientItems.setTel(tel.getText().toString());
-            clientItems.setAdresse(adresse.getText().toString());
-            clientItems.setEmail(email.getText().toString());
-            clientItems.setUrl(PhpAPI.addClient);
+            Client client = validateClientInfos(
+                    nomprenom.getText().toString(),
+                    tel.getText().toString(),
+                    adresse.getText().toString(),
+                    email.getText().toString());
 
-            new addclient().execute(clientItems);
+            if (client != null)
+                createClient(client);
         });
     }
 
-    private class addclient extends AsyncTask<ClientModel, Void, String> {
+    public Client validateClientInfos(String name, String gsm, String address, String email) {
+        String dialogTitle;
+        String dialogMessage;
 
-        @Override
-        protected String doInBackground(ClientModel... params) {
+        boolean nameStatus = name.length() != 0;
+        boolean gsmStatus = gsm.length() != 0;
+        boolean addressStatus = address.length() != 0;
+        boolean emailStatus = email.length() != 0;
 
-            try {
-                URL url = new URL(params[0].getUrl());
-                URLConnection conn = url.openConnection();
-                HttpURLConnection httpConn = (HttpURLConnection) conn;
-                httpConn.setAllowUserInteraction(false);
-                httpConn.setInstanceFollowRedirects(true);
-                httpConn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                Map<String, Object> Params = new LinkedHashMap<>();
-                // Params.put("ID", id);
-                Params.put("NomPrenom", params[0].getNomPrenom());
-                Params.put("Tel", params[0].getTel());
-                Params.put("Adresse", params[0].getAdresse());
-                Params.put("Email", params[0].getEmail());
+        if (nameStatus && gsmStatus && addressStatus && emailStatus)
+            return new Client("", name, gsm, address, PhpAPI.addClient, "", email);
 
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(new getQuery().getQuery(Params));
-                writer.flush();
-                writer.close();
-                os.close();
-                httpConn.connect();
-                InputStream is = httpConn.getInputStream();
-
-                return new convertInputStreamToString().convertInputStreamToString(is);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+        if (!nameStatus) {
+            dialogTitle = "Invalid supplier name.";
+            dialogMessage = "You need to specify the name of the client.";
+        } else if (!gsmStatus) {
+            dialogTitle = "Invalid phone number.";
+            dialogMessage = "You need to specify a valid phone number.";
+        } else if (!addressStatus) {
+            dialogTitle = "Invalid address.";
+            dialogMessage = "You need to specify the address of the client.";
+        } else {
+            dialogTitle = "Invalid email.";
+            dialogMessage = "You need to specify the email of the client.";
         }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            System.out.println(s);
+        // Something went wrong: show the error dialog.
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
 
-            try {
-                JSONObject j = new JSONObject(s);
-                int resp = j.getInt("success");
-                if (resp == 1) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Bien Ajouter", Toast.LENGTH_LONG);
-                    toast.show();
-                    finish();
-                    startActivity(new Intent(context, ClientsActivity.class));
+        return null;
+    }
 
-                } else if (resp == 0) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "erreur  !!!!", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+    private void createClient(Client client) {
+        Map<String, String> map = new HashMap<>();
+        map.put("companyID", mDatabaseAdapter.getUserCompanyID() + "");
+        map.put("NomPrenom", client.getNomPrenom());
+        map.put("Tel", client.getTel());
+        map.put("Adresse", client.getAdresse());
+        map.put("Email", client.getEmail());
+
+        sendHTTPRequest(client.getUrl(), map, Method.POST,
+                new SuccessRequestListener() {
+                    @Override
+                    public void onRequestSucceeded(JSONObject response) {
+                        setResult(ResultCodes.CLIENT_CREATED);
+                        finish();
+                        runOnUiThread(() -> Toast.makeText(AddClientActivity.this,
+                                "Client successfully created.", Toast.LENGTH_LONG).show());
+                    }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+                        runOnUiThread(() -> Toast.makeText(AddClientActivity.this,
+                                "Unknown error.", Toast.LENGTH_LONG).show());
+                    }
+                });
     }
 }

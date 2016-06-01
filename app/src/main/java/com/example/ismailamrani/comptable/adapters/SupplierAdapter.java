@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Redouane on 08/04/2016.
+ * Created by Mohammed Aouf ZOUAG on 28/05/2016.
  */
 public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolder, Supplier> {
 
@@ -31,7 +31,7 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.supplier_grid_item, viewGroup, false);
+                .inflate(R.layout.supplier_client_grid_item, viewGroup, false);
 
         return new ViewHolder(v);
     }
@@ -64,12 +64,12 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
         public void bind(Supplier supplier) {
             title.setText(supplier.getNom());
             address.setText(supplier.getAdresse());
-            thumbnail.setImageResource(R.drawable.flogo);
+            thumbnail.setImageResource(R.mipmap.ic_fournisseur);
         }
 
         private void showPopupMenu(View view) {
             PopupMenu popup = new PopupMenu(mContext, view);
-            popup.inflate(R.menu.menu_supplier_item);
+            popup.inflate(R.menu.grid_popup_menu);
             popup.setOnMenuItemClickListener(
                     new MyMenuItemClickListener(mItems.get(getAdapterPosition())));
             popup.show();

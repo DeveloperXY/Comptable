@@ -166,20 +166,7 @@ public class SuppliersActivity extends RefreshableActivity {
             supplierAdapter.setSupplierListener(new SupplierAdapter.SupplierListener() {
                 @Override
                 public void onSupplierSelected(Supplier supplier) {
-                    mSupplierDialog = new SupplierDialog(
-                            SuppliersActivity.this,
-                            supplier,
-                            new SupplierDialog.SupplierDialogListener() {
-                                @Override
-                                public void onDelete(String supplierID) {
-                                    deleteSupplier(supplierID);
-                                }
-
-                                @Override
-                                public void onEdit(Supplier supplier) {
-                                    editSupplier(supplier);
-                                }
-                            });
+                    mSupplierDialog = new SupplierDialog(SuppliersActivity.this, supplier);
                     mSupplierDialog.show();
                 }
 

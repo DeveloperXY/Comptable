@@ -48,9 +48,6 @@
         <activity android:name=".ui.AddClientActivity"/>
         <activity android:name=".ui.EditClientActivity"/>
         <activity android:name=".ui.ProductDetailsActivity"/>
-        <activity
-            android:name=".ui.InformationActivity"
-            android:theme="@style/AppTheme.CustomTheme"/>
         <activity android:name=".ui.AddChargeActivity"/>
         <activity android:name=".ui.SuppliersActivity">
             <intent-filter>

@@ -9,42 +9,42 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.models.Supplier;
+import com.example.ismailamrani.comptable.models.Client;
 import com.example.ismailamrani.comptable.utils.ui.CalculateScreenSize;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Mohammed Aouf ZOUAG on 30/05/2016.
+ * Created by Mohammed Aouf ZOUAG on 01/06/2016.
  */
-public class SupplierDialog extends Dialog {
+public class ClientDialog extends Dialog {
 
     @Bind(R.id.supplierTitleLabel)
-    TextView supplierTitleLabel;
+    TextView clientTitle;
     @Bind(R.id.supplierEmailLabel)
-    TextView supplierEmailLabel;
+    TextView clientEmail;
     @Bind(R.id.bottomAddressLabel)
-    TextView bottomAddressLabel;
+    TextView clientAddress;
     @Bind(R.id.supplierPhoneLabel)
-    TextView supplierPhoneLabel;
+    TextView clientPhone;
     @Bind(R.id.supplierLogo)
     ImageView supplierLogo;
 
     private Context mContext;
-    private Supplier supplier;
+    private Client client;
 
-    public SupplierDialog(Context context, Supplier supplier) {
+    public ClientDialog(Context context, Client client) {
         super(context);
         mContext = context;
-        this.supplier = supplier;
+        this.client = client;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.supplier_dialog);
+        setContentView(R.layout.client_dialog);
         ButterKnife.bind(this);
 
         setupWindow();
@@ -58,10 +58,10 @@ public class SupplierDialog extends Dialog {
     }
 
     private void initializeUI() {
-        supplierTitleLabel.setText(supplier.getNom());
-        supplierEmailLabel.setText(supplier.getEmail());
-        bottomAddressLabel.setText(supplier.getAdresse());
-        supplierPhoneLabel.setText(supplier.getTel());
-        supplierLogo.setImageResource(R.mipmap.ic_fournisseur);
+        clientTitle.setText(client.getNomPrenom());
+        clientEmail.setText(client.getEmail());
+        clientAddress.setText(client.getAdresse());
+        clientPhone.setText(client.getTel());
+        supplierLogo.setImageResource(R.mipmap.ic_client);
     }
 }
