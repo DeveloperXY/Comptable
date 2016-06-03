@@ -1,6 +1,7 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
+import com.example.ismailamrani.comptable.utils.ui.WindowUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;
@@ -113,5 +115,10 @@ public class AddClientActivity extends ColoredStatusBarActivity {
                                 "Unknown error.", Toast.LENGTH_LONG).show());
                     }
                 });
+    }
+
+    public void onBackArrowPressed(View view) {
+        WindowUtils.hideKeyboard(this);
+        onBackPressed();
     }
 }

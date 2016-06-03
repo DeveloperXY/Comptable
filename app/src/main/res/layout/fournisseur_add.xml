@@ -399,8 +399,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1120"
-                    android:text="Enregistrer"
                     android:background="@drawable/save_btn"
+                    android:text="Enregistrer"
                     android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
@@ -408,5 +408,14 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_back_arrow"
+        android:onClick="onBackArrowPressed"/>
 
 </RelativeLayout>

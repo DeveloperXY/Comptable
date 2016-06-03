@@ -64,7 +64,7 @@ public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Pro
         public void bind(Product product) {
             quantityLabel.setTextColor(
                     mContext.getResources().getColor(product.getQte() == 0 ?
-                            R.color.colorAccent : R.color.colorWhite));
+                            R.color.colorLightRed : R.color.colorWhite));
 
             productLabel.setText(product.getLibelle());
             quantityLabel.setText(String.valueOf(product.getQte()));
