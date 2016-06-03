@@ -72,7 +72,7 @@ public class SuppliersActivity extends RefreshableActivity {
     @Override
     public void onAddPressed() {
         ActivityTransition.startActivityForResultWithSharedElement(
-                this, new Intent(this, AddSupplierActivity.class), actionbarImage,
+                this, new Intent(this, AlterSupplierActivity.class), actionbarImage,
                 "menuAnim", REQUEST_ADD_SUPPLIER);
     }
 
@@ -175,8 +175,9 @@ public class SuppliersActivity extends RefreshableActivity {
 
                 @Override
                 public void onEditSupplier(Supplier supplier, ImageView itemImage) {
-                    Intent i = new Intent(SuppliersActivity.this, EditSupplierActivity.class);
+                    Intent i = new Intent(SuppliersActivity.this, AlterSupplierActivity.class);
                     i.putExtra("supplier", supplier);
+                    i.putExtra("isUpdating", true);
                     ActivityTransition.startActivityForResultWithSharedElement(
                             SuppliersActivity.this, i, itemImage, "menuAnim",
                             REQUEST_UPDATE_SUPPLIER);

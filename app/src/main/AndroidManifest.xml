@@ -61,11 +61,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.AddClientActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.EditClientActivity"
+            android:name=".ui.AlterClientActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
@@ -87,11 +83,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AddSupplierActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.EditSupplierActivity"
+            android:name=".ui.AlterSupplierActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity

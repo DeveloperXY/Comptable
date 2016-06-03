@@ -72,7 +72,7 @@ public class ClientsActivity extends RefreshableActivity {
     @Override
     public void onAddPressed() {
         ActivityTransition.startActivityForResultWithSharedElement(
-                this, new Intent(this, AddClientActivity.class), actionbarImage,
+                this, new Intent(this, AlterClientActivity.class), actionbarImage,
                 "menuAnim", REQUEST_ADD_CLIENT);
     }
 
@@ -193,8 +193,9 @@ public class ClientsActivity extends RefreshableActivity {
 
                 @Override
                 public void onEditClient(Client client, ImageView itemImage) {
-                    Intent i = new Intent(ClientsActivity.this, EditClientActivity.class);
+                    Intent i = new Intent(ClientsActivity.this, AlterClientActivity.class);
                     i.putExtra("client", client);
+                    i.putExtra("isUpdating", true);
                     ActivityTransition.startActivityForResultWithSharedElement(
                             ClientsActivity.this, i, itemImage, "menuAnim",
                             REQUEST_UPDATE_CLIENT);
