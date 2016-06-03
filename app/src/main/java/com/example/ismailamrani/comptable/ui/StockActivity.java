@@ -2,23 +2,27 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
+import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
+import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
+import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
-import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.parsing.Products;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -27,6 +31,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -136,7 +141,8 @@ public class StockActivity extends RefreshableActivity
     @Override
     public boolean onQueryTextChange(String newText) {
         final List<Product> filteredProducts = Products.filter(mProducts, newText);
-        stockAdapter.animateTo(filteredProducts);
+        if (stockAdapter != null)
+            stockAdapter.animateTo(filteredProducts);
         return true;
     }
 
@@ -154,6 +160,34 @@ public class StockActivity extends RefreshableActivity
                     refresh();
                 }
                 break;
+            default:
+                IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+                if (scanningResult != null) {
+                    String scannedBarcode = scanningResult.getContents();
+                    Intent intent = new Intent(this, ProductDetailsActivity.class);
+                    Product requestedProduct;
+
+                    try {
+                        requestedProduct = Stream.of(mProducts)
+                                .filter(product -> product.getCodeBarre().equals(scannedBarcode))
+                                .findFirst()
+                                .get();
+                    }
+                    catch (NoSuchElementException e) {
+                        requestedProduct = null;
+                    }
+
+                    if (requestedProduct == null) {
+                        Snackbar.make(getWindow().getDecorView(),
+                                "No product was found matching your query.",
+                                Snackbar.LENGTH_LONG).show();
+                    }
+                    else {
+                        intent.putExtra("product", requestedProduct);
+                        startActivity(intent);
+                    }
+                }
         }
     }
 
@@ -234,5 +268,10 @@ public class StockActivity extends RefreshableActivity
         emptyLayout.setVisibility(mProducts.size() == 0 ? View.VISIBLE : View.INVISIBLE);
         dataRecyclerView.setVisibility(mProducts.size() == 0 ? View.INVISIBLE : View.VISIBLE);
         errorLayout.setVisibility(View.INVISIBLE);
+    }
+
+    public void onScanFABClicked(View view) {
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
     }
 }
