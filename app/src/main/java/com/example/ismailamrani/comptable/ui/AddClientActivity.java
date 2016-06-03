@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Client;
-import com.example.ismailamrani.comptable.ui.base.WithBackArrowActivity;
+import com.example.ismailamrani.comptable.ui.base.AnimatedWithBackArrowActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by Redouane on 23/03/2016.
  * Altered by Mohammed Aouf ZOUAG on 01/06/2016.
  */
-public class AddClientActivity extends WithBackArrowActivity {
+public class AddClientActivity extends AnimatedWithBackArrowActivity {
 
     @Bind(R.id.nomcomletclient)
     EditText nomprenom;
@@ -44,6 +44,8 @@ public class AddClientActivity extends WithBackArrowActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_add);
         ButterKnife.bind(this);
+
+        setupRevealTransition();
 
         ajouter.setOnClickListener(v -> {
             Client client = validateClientInfos(

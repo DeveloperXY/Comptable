@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.base.WithBackArrowActivity;
+import com.example.ismailamrani.comptable.ui.base.AnimatedWithBackArrowActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * Created by Redouane on 08/04/2016.
  * Altered by Mohammed Aouf ZOUAG on 30/05/2016.
  */
-public class AddSupplierActivity extends WithBackArrowActivity {
+public class AddSupplierActivity extends AnimatedWithBackArrowActivity {
 
     @Bind(R.id.nomcomletclient)
     EditText nom;
@@ -49,6 +49,8 @@ public class AddSupplierActivity extends WithBackArrowActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fournisseur_add);
         ButterKnife.bind(this);
+
+        setupRevealTransition();
 
         addFournisseur.setOnClickListener(v -> {
             Supplier supplier = validateSupplierInfos(

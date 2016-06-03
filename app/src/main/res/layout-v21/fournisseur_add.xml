@@ -3,64 +3,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/ic_bg_add"
         android:orientation="vertical"
         android:weightSum="2260">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="740"
+            android:layout_weight="590"
             android:scaleType="centerCrop"
-            android:src="@drawable/back_client_horizontal"
+            android:src="@drawable/back_supplier_horizontal"
             android:transitionName="menuAnim"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="2260">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="800"></RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="90"/>
 
         <LinearLayout
             android:id="@+id/mainRootView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1365"
+            android:layout_weight="1670"
             android:orientation="vertical"
             android:weightSum="1182">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="192"
+                android:layout_weight="140"
                 android:orientation="horizontal"
-                android:weightSum="1440">
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="120"/>
+                    android:layout_weight="160"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1196"
+                    android:layout_weight="1100"
                     android:background="@drawable/client_add_style"
                     android:orientation="horizontal"
                     android:weightSum="956">
@@ -68,13 +55,12 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="20"
-                        ></RelativeLayout>
+                        android:layout_weight="55"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="140">
+                        android:layout_weight="120">
 
                         <ImageView
                             android:layout_width="match_parent"
@@ -91,252 +77,325 @@
                         android:background="@android:color/transparent"
                         android:hint="Nom complet"
                         android:inputType="textCapWords"
-                        android:textColorHint="#9ea1a3"
-                        android:textSize="20sp"/>
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="30">
-            </RelativeLayout>
+                android:layout_weight="10"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="192"
+                android:layout_weight="140"
                 android:orientation="horizontal"
-                android:weightSum="1440">
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="120"
-                    ></RelativeLayout>
+                    android:layout_weight="160"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1196"
+                    android:layout_weight="1100"
                     android:background="@drawable/client_add_style"
-
                     android:orientation="horizontal"
-                    android:weightSum="956"
-                    >
+                    android:weightSum="956">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="20"
-                        ></RelativeLayout>
+                        android:layout_weight="55"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="140"
-                        >
+                        android:layout_weight="120">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/tel2cl"
-                            />
-
+                            android:src="@drawable/fix"/>
 
                     </RelativeLayout>
 
 
                     <EditText
-                        android:id="@+id/numtel"
+                        android:id="@+id/numerofixFour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="780"
+                        android:background="@android:color/transparent"
+                        android:hint="N° de Fix"
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="140"
+                android:orientation="horizontal"
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="160"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1100"
+                    android:background="@drawable/client_add_style"
+                    android:orientation="horizontal"
+                    android:weightSum="956">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="55"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="120">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/fax"/>
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/numerofaxfour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="780"
+                        android:background="@android:color/transparent"
+                        android:hint="N° de Fax"
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="140"
+                android:orientation="horizontal"
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="160"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1100"
+                    android:background="@drawable/client_add_style"
+                    android:orientation="horizontal"
+                    android:weightSum="956">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="55"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="120">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/tel2cl"/>
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/numtelfour"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
                         android:hint="N° télephone"
-
                         android:inputType="phone"
-                        android:textColorHint="#9ea1a3"
-                        android:textSize="20sp"/>
-
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="30">
-            </RelativeLayout>
+                android:layout_weight="10"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="192"
+                android:layout_weight="140"
                 android:orientation="horizontal"
-                android:weightSum="1440">
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="120"
-                    ></RelativeLayout>
+                    android:layout_weight="160"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1196"
+                    android:layout_weight="1100"
                     android:background="@drawable/client_add_style"
-
                     android:orientation="horizontal"
-                    android:weightSum="956"
-                    >
+                    android:weightSum="956">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="20"
-                        ></RelativeLayout>
+                        android:layout_weight="55"/>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="140"
-                        >
+                        android:layout_weight="120">
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/adresseclient"
-                            />
-
+                            android:src="@drawable/adresseclient"/>
 
                     </RelativeLayout>
 
-
                     <EditText
-                        android:id="@+id/adresse"
+                        android:id="@+id/adressefour"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
                         android:hint="Adresse"
-
                         android:inputType="textPostalAddress"
-                        android:textColorHint="#9ea1a3"
-                        android:textSize="20sp"/>
-
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="30">
-            </RelativeLayout>
+                android:layout_weight="10"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="192"
+                android:layout_weight="140"
+                android:orientation="horizontal"
+                android:scaleX="0.01"
+                android:scaleY="0.01"
+                android:weightSum="1420">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="160"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1100"
+                    android:background="@drawable/client_add_style"
+                    android:orientation="horizontal"
+                    android:weightSum="956">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="55"/>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="120">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/emailclient"/>
+
+                    </RelativeLayout>
+
+                    <EditText
+                        android:id="@+id/emailfour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="780"
+                        android:background="@android:color/transparent"
+                        android:hint="E-mail"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#9ea1a3"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="90"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="140"
                 android:orientation="horizontal"
                 android:weightSum="1440">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="120"
-                    ></RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1196"
-                    android:background="@drawable/client_add_style"
-
-                    android:orientation="horizontal"
-                    android:weightSum="956"
-                    >
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="20"
-                        ></RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="140"
-                        >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/emailclient"
-                            />
-
-
-                    </RelativeLayout>
-
-
-                    <EditText
-                        android:id="@+id/email"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="780"
-                        android:background="@android:color/transparent"
-                        android:hint="E-mail"
-
-                        android:inputType="textEmailAddress"
-                        android:textColorHint="#9ea1a3"
-                        android:textSize="20sp"/>
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="30">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="80"
-                ></RelativeLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="180"
-                android:orientation="horizontal"
-                android:weightSum="1440"
-                >
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="120"/>
+                    android:layout_weight="160"/>
 
                 <Button
-                    android:id="@+id/addClient"
+                    android:id="@+id/addFournisseur"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1196"
+                    android:layout_weight="1120"
                     android:background="@drawable/save_btn"
                     android:text="Enregistrer"
                     android:textColor="@color/colorWhite"/>

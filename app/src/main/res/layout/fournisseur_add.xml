@@ -15,8 +15,8 @@
             android:layout_height="0dp"
             android:layout_weight="550"
             android:scaleType="centerCrop"
-            android:transitionName="menuAnim"
-            android:src="@drawable/back_supplier_horizontal"/>
+            android:src="@drawable/back_supplier_horizontal"
+            android:transitionName="menuAnim"/>
 
     </LinearLayout>
 
@@ -39,7 +39,7 @@
             android:layout_weight="20"/>
 
         <LinearLayout
-            android:id="@+id/supplierFormLayout"
+            android:id="@+id/mainRootView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1550"
@@ -416,7 +416,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_back_arrow"
-        android:onClick="onBackArrowPressed"/>
+        android:onClick="onBackArrowPressed"
+        android:src="@drawable/ic_back_arrow"/>
 
 </RelativeLayout>
