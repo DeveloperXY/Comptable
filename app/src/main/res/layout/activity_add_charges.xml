@@ -111,7 +111,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="692"
+                android:layout_weight="542"
                 android:orientation="horizontal"
                 android:weightSum="1440">
 
@@ -138,10 +138,34 @@
 
                 </RelativeLayout>
 
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="100"
+                android:orientation="horizontal"
+                android:weightSum="1440">
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="115"/>
+                    android:layout_weight="125"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="50 characters left"
+                    android:id="@+id/charCounterLabel"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="1196"
+                    android:gravity="top|right"/>
+
             </LinearLayout>
 
             <RelativeLayout
@@ -174,10 +198,6 @@
 
                 </Button>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="115"/>
             </LinearLayout>
 
         </LinearLayout>

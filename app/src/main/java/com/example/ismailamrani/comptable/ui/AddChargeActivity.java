@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
@@ -25,10 +26,17 @@ import butterknife.ButterKnife;
  */
 public class AddChargeActivity extends WithDrawerActivity {
 
+    /**
+     * The maximum allowed number of characters for a given description.
+     */
+    private static final int MAX_DESC_CHAR_COUNT = 50;
+
     @Bind(R.id.priceField)
     EditText priceField;
     @Bind(R.id.descriptionField)
     EditText descriptionField;
+    @Bind(R.id.charCounterLabel)
+    TextView charCounterLabel;
     @Bind(R.id.saveButton)
     Button saveButton;
 
@@ -39,7 +47,7 @@ public class AddChargeActivity extends WithDrawerActivity {
         ButterKnife.bind(this);
 
         setupActionBar();
-        setupTextWatcher();
+        setupTextWatchers();
     }
 
     @Override
@@ -53,26 +61,9 @@ public class AddChargeActivity extends WithDrawerActivity {
     /**
      * Sets a TextWatcher on the price & description text fields.
      */
-    private void setupTextWatcher() {
-        TextWatcher textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                checkFields();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-
-        priceField.addTextChangedListener(textWatcher);
-        descriptionField.addTextChangedListener(textWatcher);
+    private void setupTextWatchers() {
+        priceField.addTextChangedListener(new PriceWatcher());
+        descriptionField.addTextChangedListener(new DescriptionWatcher());
     }
 
     /**
@@ -80,9 +71,10 @@ public class AddChargeActivity extends WithDrawerActivity {
      * of the contents of the activity's fields.
      */
     private void checkFields() {
+        int descriptionLength = descriptionField.getText().toString().length();
         saveButton.setEnabled(
                 priceField.getText().toString().length() != 0 &&
-                        descriptionField.getText().toString().length() != 0);
+                        descriptionLength > 0 && descriptionLength <= MAX_DESC_CHAR_COUNT);
     }
 
     public void onSave(View view) {
@@ -99,5 +91,49 @@ public class AddChargeActivity extends WithDrawerActivity {
                         finish();
                     }
                 });
+    }
+
+    /**
+     * A TextWatcher on the price text field.
+     */
+    class PriceWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            checkFields();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    }
+
+    /**
+     * A TextWatcher on the description text field.
+     */
+    class DescriptionWatcher extends PriceWatcher {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            super.onTextChanged(s, start, before, count);
+
+            String text = s.toString();
+            String message;
+            int textLength = text.length();
+
+            if (textLength == 49)
+                message = "1 character left";
+            else if (textLength < 51)
+                message = String.format("%d characters left", MAX_DESC_CHAR_COUNT - textLength);
+            else
+                message = "Maximum description length exceeded";
+
+            charCounterLabel.setText(message);
+        }
     }
 }
