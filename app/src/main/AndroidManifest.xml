@@ -18,16 +18,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.startup.LoginActivity"/>
-        <activity android:name=".ui.startup.HomeActivity"/>
-        <activity android:name=".ui.ProductsActivity">
+        <activity
+            android:name=".ui.startup.LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.startup.HomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.ProductsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.Produis"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ClientsActivity">
+        <activity
+            android:name=".ui.ClientsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -44,20 +56,44 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ModifierProduitActivity"/>
-        <activity android:name=".ui.AddClientActivity"/>
-        <activity android:name=".ui.EditClientActivity"/>
-        <activity android:name=".ui.ProductDetailsActivity"/>
-        <activity android:name=".ui.AddChargeActivity"/>
-        <activity android:name=".ui.SuppliersActivity">
+        <activity
+            android:name=".ui.ModifierProduitActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.AddClientActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.EditClientActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.ProductDetailsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.AddChargeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.SuppliersActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.AddSupplierActivity"/>
-        <activity android:name=".ui.EditSupplierActivity"/>
+        <activity
+            android:name=".ui.AddSupplierActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.EditSupplierActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.SalesActivity"
             android:configChanges="orientation"
@@ -70,6 +106,8 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.startup.SplashActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -77,13 +115,26 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.startup.ActivationActivity"/>
-        <activity android:name=".ui.OrdersActivity"/>
-        <activity android:name=".ui.ChargesActivity"/>
-        <activity android:name=".ui.AccountingDetailsActivity">
-        </activity>
-        <activity android:name=".ui.AccountingHomeActivity">
-        </activity>
+        <activity
+            android:name=".ui.startup.ActivationActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.OrdersActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.ChargesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.AccountingDetailsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.AccountingHomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
