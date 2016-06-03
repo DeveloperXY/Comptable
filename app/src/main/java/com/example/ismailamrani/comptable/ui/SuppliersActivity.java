@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.SupplierDialog;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.decorations.GridSpacingItemDecoration;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
@@ -69,8 +70,9 @@ public class SuppliersActivity extends RefreshableActivity {
 
     @Override
     public void onAddPressed() {
-        startActivityForResult(new Intent(this, AddSupplierActivity.class),
-                REQUEST_ADD_SUPPLIER);
+        ActivityTransition.startActivityForResultWithSharedElement(
+                this, new Intent(this, AddSupplierActivity.class), actionbarImage,
+                "menuAnim", REQUEST_ADD_SUPPLIER);
     }
 
     @Override

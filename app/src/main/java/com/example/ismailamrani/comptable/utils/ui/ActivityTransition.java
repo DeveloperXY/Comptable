@@ -48,6 +48,22 @@ public class ActivityTransition {
         }
     }
 
+    public static void startActivityForResultWithSharedElement(Context context,
+                                                      Intent intent,
+                                                      View sharedView,
+                                                      String transitionName,
+                                                      int requestCode) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        else {
+            ActivityOptions transitionActivityOptions =
+                    ActivityOptions.makeSceneTransitionAnimation(
+                            (Activity) context, sharedView, transitionName);
+            ((Activity) context).startActivityForResult(
+                    intent, requestCode, transitionActivityOptions.toBundle());
+        }
+    }
+
     public static void startActivityWithMultipleSharedElements(
             Context context, Intent intent, Pair<View, String>... sharedElements) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)

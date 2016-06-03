@@ -3,11 +3,15 @@ package com.example.ismailamrani.comptable.ui.base;
 import android.animation.Animator;
 import android.annotation.TargetApi;
 import android.os.Build;
+import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 
 import com.example.ismailamrani.comptable.R;
 
@@ -25,6 +29,20 @@ public abstract class AnimatedActivity extends WithDrawerActivity {
      */
     public static final String TURN_OFF_HEADER_ANIMATION = "turnOffHeaderAnimation";
     public static final String HEADER_IMAGE_RES = "imageRes";
+
+    private Interpolator interpolator;
+    private ViewGroup rootView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            interpolator = AnimationUtils.loadInterpolator(
+                    this, android.R.interpolator.linear_out_slow_in);
+            rootView = getMainRootView();
+        }
+    }
 
     /**
      * Setup the action bar for the reveal animation.
@@ -45,7 +63,8 @@ public abstract class AnimatedActivity extends WithDrawerActivity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setupRevealTransition() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.changebounds_with_arcmotion);
+            Transition transition = TransitionInflater.from(this)
+                    .inflateTransition(R.transition.changebounds_with_arcmotion);
             getWindow().setSharedElementEnterTransition(transition);
             transition.addListener(new Transition.TransitionListener() {
                 @Override
@@ -89,5 +108,21 @@ public abstract class AnimatedActivity extends WithDrawerActivity {
             anim.setInterpolator(new AccelerateInterpolator());
             anim.start();
         }
+    }
+
+    private void animateViewsIn() {
+        for (int i = 0; i < rootView.getChildCount(); i++) {
+            View child = rootView.getChildAt(i);
+            child.animate()
+                    .setStartDelay(100 + i * 100)
+                    .setInterpolator(interpolator)
+                    .alpha(1)
+                    .scaleX(1)
+                    .scaleY(1);
+        }
+    }
+
+    protected ViewGroup getMainRootView() {
+        return null;
     }
 }

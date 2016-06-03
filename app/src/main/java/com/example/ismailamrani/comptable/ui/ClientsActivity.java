@@ -21,6 +21,7 @@ import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -69,8 +70,9 @@ public class ClientsActivity extends RefreshableActivity {
 
     @Override
     public void onAddPressed() {
-        startActivityForResult(new Intent(this, AddClientActivity.class),
-                REQUEST_ADD_CLIENT);
+        ActivityTransition.startActivityForResultWithSharedElement(
+                this, new Intent(this, AddClientActivity.class), actionbarImage,
+                "menuAnim", REQUEST_ADD_CLIENT);
     }
 
     @Override

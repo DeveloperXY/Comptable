@@ -16,7 +16,8 @@
             android:layout_height="0dp"
             android:layout_weight="740"
             android:scaleType="centerCrop"
-            android:src="@drawable/back_client_horizontal"/>
+            android:src="@drawable/back_client_horizontal"
+            android:transitionName="menuAnim"/>
 
     </LinearLayout>
 
@@ -342,8 +343,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1196"
-                    android:text="Enregistrer"
                     android:background="@drawable/save_btn"
+                    android:text="Enregistrer"
                     android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
@@ -358,7 +359,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_back_arrow"
-        android:onClick="onBackArrowPressed"/>
+        android:onClick="onBackArrowPressed"
+        android:src="@drawable/ic_back_arrow"/>
 
 </RelativeLayout>
