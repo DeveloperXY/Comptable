@@ -1,18 +1,16 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Supplier;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithBackArrowActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.utils.ui.WindowUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;
@@ -27,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by Redouane on 08/04/2016.
  * Altered by Mohammed Aouf ZOUAG on 31/05/2016.
  */
-public class EditSupplierActivity extends ColoredStatusBarActivity {
+public class EditSupplierActivity extends WithBackArrowActivity {
 
     @Bind(R.id.nomcomletclient)
     EditText nom;
@@ -99,10 +97,5 @@ public class EditSupplierActivity extends ColoredStatusBarActivity {
                                 "Supplier altered.", Toast.LENGTH_SHORT).show());
                     }
                 });
-    }
-
-    public void onBackArrowPressed(View view) {
-        WindowUtils.hideKeyboard(this);
-        onBackPressed();
     }
 }

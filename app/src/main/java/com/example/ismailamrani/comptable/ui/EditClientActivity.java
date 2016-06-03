@@ -1,18 +1,16 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Client;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithBackArrowActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.utils.ui.WindowUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONObject;
@@ -27,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by Redouane on 23/03/2016.
  * Altered by Mohammed Aouf ZOUAG on 01/06/2016.
  */
-public class EditClientActivity extends ColoredStatusBarActivity {
+public class EditClientActivity extends WithBackArrowActivity {
 
     @Bind(R.id.nomcomletclient)
     EditText nomprenom;
@@ -89,10 +87,5 @@ public class EditClientActivity extends ColoredStatusBarActivity {
                                 "Client altered.", Toast.LENGTH_SHORT).show());
                     }
                 });
-    }
-
-    public void onBackArrowPressed(View view) {
-        WindowUtils.hideKeyboard(this);
-        onBackPressed();
     }
 }
