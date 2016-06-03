@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -173,8 +174,12 @@ public class SuppliersActivity extends RefreshableActivity {
                 }
 
                 @Override
-                public void onEditSupplier(Supplier supplier) {
-                    editSupplier(supplier);
+                public void onEditSupplier(Supplier supplier, ImageView itemImage) {
+                    Intent i = new Intent(SuppliersActivity.this, EditSupplierActivity.class);
+                    i.putExtra("supplier", supplier);
+                    ActivityTransition.startActivityForResultWithSharedElement(
+                            SuppliersActivity.this, i, itemImage, "menuAnim",
+                            REQUEST_UPDATE_SUPPLIER);
                 }
 
                 @Override
@@ -185,12 +190,6 @@ public class SuppliersActivity extends RefreshableActivity {
             dataRecyclerView.setAdapter(supplierAdapter);
         } else
             supplierAdapter.animateTo(mSuppliers);
-    }
-
-    private void editSupplier(Supplier supplier) {
-        Intent i = new Intent(SuppliersActivity.this, EditSupplierActivity.class);
-        i.putExtra("supplier", supplier);
-        startActivityForResult(i, REQUEST_UPDATE_SUPPLIER);
     }
 
     private void deleteSupplier(String supplierID) {

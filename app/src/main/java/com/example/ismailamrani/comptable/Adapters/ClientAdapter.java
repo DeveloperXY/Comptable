@@ -88,7 +88,7 @@ public class ClientAdapter extends BaseSearchAdapter<ClientAdapter.ViewHolder, C
                 switch (menuItem.getItemId()) {
                     case R.id.action_edit_supplier:
                         if (listener != null)
-                            listener.onEditClient(client);
+                            listener.onEditClient(client, thumbnail);
                         return true;
                     case R.id.action_delete_supplier:
                         if (listener != null)
@@ -107,7 +107,7 @@ public class ClientAdapter extends BaseSearchAdapter<ClientAdapter.ViewHolder, C
 
     public interface ClientListener {
         void onClientSelected(Client client);
-        void onEditClient(Client client);
+        void onEditClient(Client client, ImageView itemImage);
         void onDeleteClient(String clientID);
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -191,8 +192,12 @@ public class ClientsActivity extends RefreshableActivity {
                 }
 
                 @Override
-                public void onEditClient(Client client) {
-                    editClient(client);
+                public void onEditClient(Client client, ImageView itemImage) {
+                    Intent i = new Intent(ClientsActivity.this, EditClientActivity.class);
+                    i.putExtra("client", client);
+                    ActivityTransition.startActivityForResultWithSharedElement(
+                            ClientsActivity.this, i, itemImage, "menuAnim",
+                            REQUEST_UPDATE_CLIENT);
                 }
 
                 @Override
@@ -203,12 +208,6 @@ public class ClientsActivity extends RefreshableActivity {
             dataRecyclerView.setAdapter(mClientAdapter);
         } else
             mClientAdapter.animateTo(mClients);
-    }
-
-    private void editClient(Client client) {
-        Intent i = new Intent(ClientsActivity.this, EditClientActivity.class);
-        i.putExtra("client", client);
-        startActivityForResult(i, REQUEST_UPDATE_CLIENT);
     }
 
     private void deleteClient(String clientID) {
