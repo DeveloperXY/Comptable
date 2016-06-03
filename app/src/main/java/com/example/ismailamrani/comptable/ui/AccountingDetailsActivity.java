@@ -90,11 +90,6 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        finish();
-    }
-
-    @Override
     public ActivityOrder getActivity() {
         return ActivityOrder.COMPTABILITE;
     }
