@@ -171,6 +171,8 @@ public class SalesActivity extends WithDrawerActivity {
      * @param orderInfos
      */
     void postCreateSaleOrder(String url, JSONObject orderInfos) {
+        mLoadingDialog.show();
+
         sendHTTPRequest(url, orderInfos, Method.POST,
                 new SuccessRequestListener() {
                     @Override

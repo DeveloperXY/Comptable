@@ -44,6 +44,7 @@ public class ActivationActivity extends ColoredStatusBarActivity {
     public void onActivate(View view) {
         String serial = activationField.getText().toString();
         if (!TextUtils.isEmpty(serial)) {
+            mLoadingDialog.show();
             sendHTTPRequest(
                     PhpAPI.activateApp,
                     JSONUtils.bundleSerialToJSON(serial),

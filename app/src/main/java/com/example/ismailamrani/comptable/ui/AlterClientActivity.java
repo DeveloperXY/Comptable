@@ -144,6 +144,7 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
         map.put("Adresse", client.getAdresse());
         map.put("Email", client.getEmail());
 
+        mLoadingDialog.show();
         sendHTTPRequest(client.getUrl(), map, Method.POST,
                 new SuccessRequestListener() {
                     @Override
@@ -170,6 +171,7 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
         data.put("Adresse", selectedClient.getAdresse());
         data.put("Email", selectedClient.getEmail());
 
+        mLoadingDialog.show();
         sendHTTPRequest(selectedClient.getUrl(), data, Method.POST,
                 new SuccessRequestListener() {
                     @Override

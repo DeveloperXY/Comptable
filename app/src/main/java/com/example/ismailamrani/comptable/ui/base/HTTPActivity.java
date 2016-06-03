@@ -1,11 +1,14 @@
 package com.example.ismailamrani.comptable.ui.base;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.app.OGApplication;
+import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
 
@@ -38,6 +41,17 @@ public abstract class HTTPActivity extends AppCompatActivity {
     private static final String KEY_STATUS = "success";
 
     private OkHttpClient client;
+    /**
+     * A loading... dialog to be shown while fetching data over the internet.
+     */
+    protected LoadingDialog mLoadingDialog;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mLoadingDialog = new LoadingDialog(this);
+    }
 
     protected void sendHTTPRequest(String url,
                                    List<Pair<String, String>> params,
@@ -84,8 +98,11 @@ public abstract class HTTPActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(final Call call, IOException e) {
                         listener.onNetworkError();
-                        runOnUiThread(() -> Toast.makeText(HTTPActivity.this,
-                                "Network error.", Toast.LENGTH_LONG).show());
+                        runOnUiThread(() -> {
+                            Toast.makeText(HTTPActivity.this,
+                                    "Network error.", Toast.LENGTH_LONG).show();
+                            mLoadingDialog.dismiss();
+                        });
                     }
 
                     @Override
@@ -108,6 +125,8 @@ public abstract class HTTPActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        runOnUiThread(() -> mLoadingDialog.dismiss());
                     }
                 });
     }

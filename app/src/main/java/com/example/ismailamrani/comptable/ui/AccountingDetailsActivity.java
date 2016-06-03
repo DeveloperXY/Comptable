@@ -61,7 +61,6 @@ public class AccountingDetailsActivity extends AnimatedActivity {
         setContentView(R.layout.activity_comptabilite_details);
         ButterKnife.bind(this);
 
-        mLoadingDialog = new LoadingDialog(this);
         mLoadingDialog.show();
 
         if (currentUserType.startsWith("e"))

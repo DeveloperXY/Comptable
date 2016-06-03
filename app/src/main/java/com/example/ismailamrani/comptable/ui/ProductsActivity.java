@@ -64,6 +64,8 @@ public class ProductsActivity extends AnimatedActivity {
         int localeID = mDatabaseAdapter.getCurrentLocaleID();
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);
 
+        mLoadingDialog.show();
+
         sendHTTPRequest(PhpAPI.getProduit, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override

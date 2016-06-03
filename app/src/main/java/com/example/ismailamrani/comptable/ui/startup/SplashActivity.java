@@ -10,6 +10,7 @@ import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
+import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONException;
@@ -32,8 +33,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
         if (activation == null || !activation.isActivated()) {
             finish();
             startActivity(new Intent(this, ActivationActivity.class));
-        }
-        else
+        } else
             checkRemoteActivation(activation.getCode());
     }
 
@@ -43,6 +43,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
      * @param serial to be checked.
      */
     private void checkRemoteActivation(String serial) {
+        mLoadingDialog.show();
 
         sendHTTPRequest(PhpAPI.getActivationStatus,
                 JSONUtils.bundleSerialToJSON(serial),
@@ -74,17 +75,18 @@ public class SplashActivity extends ColoredStatusBarActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-                            /*else if (status == 0) {
-                                DialogUtil.showDialog(SplashActivity.this, "Apologies",
-                                        "It seems like we are missing your activation code. Please contact us as soon as possible.",
-                                        "Dismiss", null,
-                                        dialog -> {
-                                            finish();
-                                            startActivity(new Intent(SplashActivity.this, ActivationActivity.class));
-                                        });
-                            }*/
                         });
+                    }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+                        DialogUtil.showDialog(SplashActivity.this, "Apologies",
+                                "It seems like we are missing your activation code. Please contact us as soon as possible.",
+                                "Dismiss", null,
+                                dialog -> {
+                                    finish();
+                                    startActivity(new Intent(SplashActivity.this, ActivationActivity.class));
+                                });
                     }
                 }
         );

@@ -11,6 +11,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar;
 import com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBarInterface;
+import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
 
 import butterknife.Bind;

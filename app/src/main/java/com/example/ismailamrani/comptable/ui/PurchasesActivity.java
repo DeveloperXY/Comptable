@@ -227,6 +227,8 @@ public class PurchasesActivity extends WithDrawerActivity {
      * @param orderInfos
      */
     void postCreatePurchaseOrder(String url, JSONObject orderInfos) {
+        mLoadingDialog.show();
+
         sendHTTPRequest(url, orderInfos, Method.POST,
                 new SuccessRequestListener() {
                     @Override

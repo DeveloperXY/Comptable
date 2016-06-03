@@ -170,6 +170,7 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
         params.add(Pair.create("Email", supplier.getEmail()));
         params.add(Pair.create("companyID", mDatabaseAdapter.getUserCompanyID() + ""));
 
+        mLoadingDialog.show();
         sendHTTPRequest(supplier.getUrl(), params, Method.POST,
                 new SuccessRequestListener() {
                     @Override
@@ -192,6 +193,7 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
         data.put("Fax", selectedSupplier.getFax());
         data.put("Email", selectedSupplier.getEmail());
 
+        mLoadingDialog.show();
         sendHTTPRequest(selectedSupplier.getUrl(), data, Method.POST,
                 new SuccessRequestListener() {
                     @Override

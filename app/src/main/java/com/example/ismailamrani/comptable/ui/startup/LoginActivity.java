@@ -64,6 +64,8 @@ public class LoginActivity extends ColoredStatusBarActivity {
                     Log.i("ERROR", "Unable to retrieve company ID.");
                 }
 
+                mLoadingDialog.show();
+
                 // Send the login POST request.
                 sendHTTPRequest(PhpAPI.login, params, Method.POST,
                         new SuccessRequestListener() {

@@ -93,7 +93,6 @@ public class AddProductActivity extends WithDrawerActivity
                 if (newProduct != null) {
                     postAddProduct(PhpAPI.addProduit, newProduct.toJSON());
                 }
-
                 break;
         }
     }
@@ -152,6 +151,8 @@ public class AddProductActivity extends WithDrawerActivity
     }
 
     void postAddProduct(String url, JSONObject data) {
+        mLoadingDialog.show();
+
         sendHTTPRequest(url, data, Method.POST,
                 new SuccessRequestListener() {
                     @Override
@@ -204,7 +205,6 @@ public class AddProductActivity extends WithDrawerActivity
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
 
     public String BitmapToString(Bitmap Image) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

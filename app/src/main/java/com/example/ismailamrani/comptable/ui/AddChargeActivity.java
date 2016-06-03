@@ -83,6 +83,7 @@ public class AddChargeActivity extends WithDrawerActivity {
         JSONObject params = JSONUtils.bundleChargeDataToJSON(
                 mDatabaseAdapter.getCurrentLocaleID(), price, description);
 
+        mLoadingDialog.show();
         sendHTTPRequest(PhpAPI.addCharge, params, Method.POST,
                 new SuccessRequestListener() {
                     @Override
