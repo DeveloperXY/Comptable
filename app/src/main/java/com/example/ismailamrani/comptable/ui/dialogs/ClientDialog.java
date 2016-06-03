@@ -62,6 +62,5 @@ public class ClientDialog extends Dialog {
         clientEmail.setText(client.getEmail());
         clientAddress.setText(client.getAdresse());
         clientPhone.setText(client.getTel());
-        supplierLogo.setImageResource(R.mipmap.ic_client);
     }
 }

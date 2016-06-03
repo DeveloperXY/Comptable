@@ -1,9 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -13,7 +12,6 @@ import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -37,10 +35,8 @@ public class EditClientActivity extends ColoredStatusBarActivity {
     EditText adresse;
     @Bind(R.id.email)
     EditText email;
-    @Bind(R.id.enregistrerclient)
-    TextView ajouter;
-    @Bind(R.id.ImageProfil)
-    ImageView ImageProfil;
+    @Bind(R.id.addClient)
+    Button ajouter;
 
     private Client selectedClient;
 
@@ -66,10 +62,6 @@ public class EditClientActivity extends ColoredStatusBarActivity {
     private void populateFieldsWithSelectedClientData() {
         selectedClient = getIntent().getParcelableExtra("client");
         if (selectedClient != null) {
-            Picasso.with(getApplicationContext())
-                    .load(PhpAPI.IpBackend + "clients/client.png")
-                    .into(ImageProfil);
-
             nomprenom.setText(selectedClient.getNomPrenom());
             tel.setText(selectedClient.getTel());
             adresse.setText(selectedClient.getAdresse());

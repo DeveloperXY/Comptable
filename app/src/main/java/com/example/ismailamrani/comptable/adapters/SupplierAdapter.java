@@ -64,7 +64,7 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
         public void bind(Supplier supplier) {
             title.setText(supplier.getNom());
             address.setText(supplier.getAdresse());
-            thumbnail.setImageResource(R.mipmap.ic_fournisseur);
+            thumbnail.setImageResource(R.drawable.back_supplier_vertical);
         }
 
         private void showPopupMenu(View view) {

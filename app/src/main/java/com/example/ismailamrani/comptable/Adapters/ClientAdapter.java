@@ -64,7 +64,7 @@ public class ClientAdapter extends BaseSearchAdapter<ClientAdapter.ViewHolder, C
         public void bind(Client client) {
             title.setText(client.getNomPrenom());
             address.setText(client.getAdresse());
-            thumbnail.setImageResource(R.mipmap.ic_client);
+            thumbnail.setImageResource(R.drawable.back_client_vertical);
         }
 
         private void showPopupMenu(View view) {

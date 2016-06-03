@@ -62,6 +62,5 @@ public class SupplierDialog extends Dialog {
         supplierEmailLabel.setText(supplier.getEmail());
         bottomAddressLabel.setText(supplier.getAdresse());
         supplierPhoneLabel.setText(supplier.getTel());
-        supplierLogo.setImageResource(R.mipmap.ic_fournisseur);
     }
 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="2260"
         android:background="@mipmap/ic_bg_add"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="2260">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="740"
-            android:background="@drawable/back11"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/back_client_horizontal"/>
 
     </LinearLayout>
 
@@ -29,43 +29,19 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="497"> </RelativeLayout>
+            android:layout_weight="800"></RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="486"
-
-            >
-
-            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                custom:size="52"
-                android:layout_centerInParent="true">
-
-                <ImageView
-                    android:id="@+id/ImageProfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-
-
-            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="90" />
+            android:layout_weight="90"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1182"
-            android:weightSum="1182"
-            android:orientation="vertical">
+            android:layout_weight="1365"
+            android:orientation="vertical"
+            android:weightSum="1182">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,26 +50,29 @@
                 android:orientation="horizontal"
                 android:weightSum="1440"
                 >
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="240"
+                    android:layout_weight="120"
                     ></RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="956"
-                    android:weightSum="956"
+                    android:layout_weight="1196"
+                    android:background="@drawable/client_add_style"
 
                     android:orientation="horizontal"
-                    android:background="@drawable/client_add_style"
+                    android:weightSum="956"
                     >
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="55"
+                        android:layout_weight="20"
                         ></RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -111,25 +90,23 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
+                        android:background="@android:color/transparent"
                         android:hint="Nom complet"
-                        android:textColorHint="#9ea1a3"/>
+                        android:inputType="textCapWords"
+                        android:textColorHint="#9ea1a3"
+                        android:textSize="20sp"/>
 
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-
-
 
 
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="30">
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -137,26 +114,29 @@
                 android:orientation="horizontal"
                 android:weightSum="1440"
                 >
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="240"
+                    android:layout_weight="120"
                     ></RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="956"
-                    android:weightSum="956"
+                    android:layout_weight="1196"
+                    android:background="@drawable/client_add_style"
 
                     android:orientation="horizontal"
-                    android:background="@drawable/client_add_style"
+                    android:weightSum="956"
                     >
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="55"
+                        android:layout_weight="20"
                         ></RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -178,28 +158,25 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
+                        android:background="@android:color/transparent"
                         android:hint="N° télephone"
-                        android:textColorHint="#9ea1a3"
 
-                        />
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"
+                        android:textSize="20sp"/>
 
 
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-
-
 
 
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="30">
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -207,26 +184,29 @@
                 android:orientation="horizontal"
                 android:weightSum="1440"
                 >
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="240"
+                    android:layout_weight="120"
                     ></RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="956"
-                    android:weightSum="956"
+                    android:layout_weight="1196"
+                    android:background="@drawable/client_add_style"
 
                     android:orientation="horizontal"
-                    android:background="@drawable/client_add_style"
+                    android:weightSum="956"
                     >
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="55"
+                        android:layout_weight="20"
                         ></RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -248,28 +228,25 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
+                        android:background="@android:color/transparent"
                         android:hint="Adresse"
-                        android:textColorHint="#9ea1a3"
 
-                        />
+                        android:inputType="textPostalAddress"
+                        android:textColorHint="#9ea1a3"
+                        android:textSize="20sp"/>
 
 
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-
-
 
 
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="30">
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -277,26 +254,29 @@
                 android:orientation="horizontal"
                 android:weightSum="1440"
                 >
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="240"
+                    android:layout_weight="120"
                     ></RelativeLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="956"
-                    android:weightSum="956"
+                    android:layout_weight="1196"
+                    android:background="@drawable/client_add_style"
 
                     android:orientation="horizontal"
-                    android:background="@drawable/client_add_style"
+                    android:weightSum="956"
                     >
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="55"
+                        android:layout_weight="20"
                         ></RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -318,23 +298,19 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
+                        android:background="@android:color/transparent"
                         android:hint="E-mail"
-                        android:textColorHint="#9ea1a3"
 
-                        />
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#9ea1a3"
+                        android:textSize="20sp"/>
 
 
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-
-
 
 
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -344,65 +320,36 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="120"
+                android:layout_weight="80"
                 ></RelativeLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="140"
+                android:layout_weight="180"
                 android:orientation="horizontal"
                 android:weightSum="1440"
                 >
+
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-                <LinearLayout
+                    android:layout_weight="120"/>
+
+                <Button
+                    android:id="@+id/addClient"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="956"
-                    android:weightSum="956"
-                    android:orientation="horizontal"
-                    android:background="@drawable/enregistrer_clint_btn"
-                    >
-                    <TextView
-                        android:id="@+id/enregistrerclient"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Enregistrer"
-                        android:textColor="#ffffff"
-                        android:gravity="center"
-                        android:textSize="20dp"
-
-                        />
-
-
-
-                </LinearLayout>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="240"
-                    ></RelativeLayout>
-
-
-
+                    android:layout_weight="1196"
+                    android:text="Enregistrer"
+                    android:background="@drawable/save_btn"
+                    android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
 
-
-
         </LinearLayout>
 
-
-
-
-
     </LinearLayout>
-
-
 
 </RelativeLayout>

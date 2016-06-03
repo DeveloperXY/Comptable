@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:custom="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -11,11 +10,12 @@
         android:orientation="vertical"
         android:weightSum="2260">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="550"
-            android:background="@drawable/back11"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/back_supplier_horizontal"/>
 
     </LinearLayout>
 
@@ -28,25 +28,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="350"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="350">
-
-            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                custom:size="52">
-
-                <ImageView
-                    android:id="@+id/ImageProfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+            android:layout_weight="650">
 
         </RelativeLayout>
 
@@ -56,16 +38,17 @@
             android:layout_weight="20"/>
 
         <LinearLayout
+            android:id="@+id/supplierFormLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1400"
+            android:layout_weight="1550"
             android:orientation="vertical"
             android:weightSum="1182">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -104,10 +87,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="Nom complet"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="textCapWords"/>
+                        android:hint="Nom complet"
+                        android:inputType="textCapWords"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -121,7 +104,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -161,10 +144,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="N° de Fix"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="phone"/>
+                        android:hint="N° de Fix"
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -178,7 +161,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -217,10 +200,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="N° de Fax"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="phone"/>
+                        android:hint="N° de Fax"
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -234,7 +217,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -273,10 +256,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="N° télephone"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="phone"/>
+                        android:hint="N° télephone"
+                        android:inputType="phone"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -290,7 +273,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -329,10 +312,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="Adresse"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="textPostalAddress"/>
+                        android:hint="Adresse"
+                        android:inputType="textPostalAddress"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -346,7 +329,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="160"
+                android:layout_weight="150"
                 android:orientation="horizontal"
                 android:weightSum="1420">
 
@@ -385,10 +368,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="780"
-                        android:hint="E-mail"
-                        android:textColorHint="#9ea1a3"
                         android:background="@android:color/transparent"
-                        android:inputType="textEmailAddress"/>
+                        android:hint="E-mail"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#9ea1a3"/>
 
                 </LinearLayout>
 
@@ -397,7 +380,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="30"/>
+                android:layout_weight="90"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -411,25 +394,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="160"/>
 
-                <LinearLayout
+                <Button
                     android:id="@+id/addFournisseur"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1120"
-                    android:background="@drawable/enregistrer_clint_btn"
-                    android:orientation="horizontal"
-                    android:weightSum="956">
-
-                    <TextView
-                        android:id="@+id/enregistrerclient"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="Enregistrer"
-                        android:textColor="#ffffff"
-                        android:textSize="20dp"/>
-
-                </LinearLayout>
+                    android:text="Enregistrer"
+                    android:background="@drawable/save_btn"
+                    android:textColor="@color/colorWhite"/>
 
             </LinearLayout>
 

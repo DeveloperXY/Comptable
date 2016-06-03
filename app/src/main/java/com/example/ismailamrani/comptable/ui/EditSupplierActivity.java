@@ -1,9 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -13,7 +12,6 @@ import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -22,7 +20,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Redouane on 08/04/2016.
@@ -42,10 +39,8 @@ public class EditSupplierActivity extends ColoredStatusBarActivity {
     EditText adresse;
     @Bind(R.id.emailfour)
     EditText email;
-    @Bind(R.id.ImageProfil)
-    ImageView ImageProfil;
     @Bind(R.id.addFournisseur)
-    LinearLayout addFournisseur;
+    Button addFournisseur;
 
     private Supplier selectedSupplier;
 
@@ -56,10 +51,6 @@ public class EditSupplierActivity extends ColoredStatusBarActivity {
         ButterKnife.bind(this);
 
         populateFieldsWithSelectedSupplierData();
-
-        Picasso.with(this).load(R.drawable.flogo)
-                .transform(new CropCircleTransformation())
-                .into(ImageProfil);
 
         addFournisseur.setOnClickListener(v -> {
             selectedSupplier.setNom(nom.getText().toString());

@@ -1,9 +1,8 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -14,7 +13,6 @@ import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -23,7 +21,6 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 /**
  * Created by Redouane on 23/03/2016.
@@ -39,21 +36,14 @@ public class AddClientActivity extends ColoredStatusBarActivity {
     EditText adresse;
     @Bind(R.id.email)
     EditText email;
-    @Bind(R.id.enregistrerclient)
-    TextView ajouter;
-    @Bind(R.id.ImageProfil)
-    ImageView ImageProfil;
+    @Bind(R.id.addClient)
+    Button ajouter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.client_add);
         ButterKnife.bind(this);
-
-        Picasso.with(this)
-                .load(R.drawable.sergio)
-                .transform(new CropCircleTransformation())
-                .into(ImageProfil);
 
         ajouter.setOnClickListener(v -> {
             Client client = validateClientInfos(
