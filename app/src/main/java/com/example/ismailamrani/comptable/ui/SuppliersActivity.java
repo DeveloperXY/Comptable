@@ -230,9 +230,6 @@ public class SuppliersActivity extends RefreshableActivity {
         @Override
         public void onRequestSucceeded(JSONObject response) {
             runOnUiThread(() -> {
-                if (mSupplierDialog.isShowing())
-                    mSupplierDialog.dismiss();
-
                 Toast.makeText(SuppliersActivity.this, "Supplier removed.",
                         Toast.LENGTH_LONG).show();
                 refresh();

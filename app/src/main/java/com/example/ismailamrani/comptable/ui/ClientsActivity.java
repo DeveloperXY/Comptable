@@ -230,9 +230,6 @@ public class ClientsActivity extends RefreshableActivity {
         @Override
         public void onRequestSucceeded(JSONObject response) {
             runOnUiThread(() -> {
-                if (mClientDialog.isShowing())
-                    mClientDialog.dismiss();
-
                 Toast.makeText(ClientsActivity.this, "Client removed.",
                         Toast.LENGTH_LONG).show();
                 refresh();

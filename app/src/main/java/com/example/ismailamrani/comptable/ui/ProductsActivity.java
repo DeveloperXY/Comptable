@@ -145,8 +145,8 @@ public class ProductsActivity extends RefreshableActivity {
         @Override
         public void onRequestSucceeded(JSONObject response) {
             runOnUiThread(() -> {
-                Toast.makeText(ProductsActivity.this, "Product deleted.", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(ProductsActivity.this, ProductsActivity.class));
+                Toast.makeText(ProductsActivity.this, "Product removed.", Toast.LENGTH_LONG).show();
+                refresh();
             });
         }
 
