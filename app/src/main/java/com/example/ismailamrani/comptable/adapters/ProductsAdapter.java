@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.base.BaseSearchAdapter;
+import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
 import com.example.ismailamrani.comptable.customitems.CustomTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ModifierProduitActivity;
@@ -23,87 +24,92 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-/**
- * Created by Ismail Amrani on 23/03/2016.
- * Altered by Mohammed Aouf ZOUAG on 04/06/2016.
- */
-public class ProductsAdapter extends BaseAdapter {
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
-    private List<Product> mProducts;
-    private Context context;
+/**
+ * Created by Mohammed Aouf ZOUAG on 04/06/2016.
+ */
+public class ProductsAdapter extends BaseSearchAdapter<ProductsAdapter.ViewHolder, Product> {
+
     private ProductListener listener;
 
-    public ProductsAdapter(Context context, List<Product> List) {
-        this.context = context;
-        this.mProducts = List;
+    public ProductsAdapter(Context context, List<Product> products) {
+        super(context, products);
     }
 
     @Override
-    public int getCount() {
-        return mProducts.size();
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.produit_item, viewGroup, false);
+
+        return new ViewHolder(v);
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+        super.onBindViewHolder(viewHolder, position);
     }
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+    public class ViewHolder extends BinderViewHolder<Product> {
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View Layout = inflater.inflate(R.layout.produit_item, null);
+        @Bind(R.id.Info)
+        RelativeLayout infos;
+        @Bind(R.id.Actions)
+        RelativeLayout actions;
 
-        final RelativeLayout Info, Actions;
-        Info = (RelativeLayout) Layout.findViewById(R.id.Info);
-        Actions = (RelativeLayout) Layout.findViewById(R.id.Actions);
+        @Bind(R.id.Image)
+        ImageView image;
+        @Bind(R.id.Libelle)
+        CustomTextView label;
+        @Bind(R.id.Qte)
+        CustomTextView quantity;
+        @Bind(R.id.Prix)
+        CustomTextView price;
+        @Bind(R.id.supprimer)
+        CustomTextView delete;
+        @Bind(R.id.modifier)
+        CustomTextView update;
+        @Bind(R.id.afficher)
+        CustomTextView show;
 
-        Actions.setVisibility(View.GONE);
-        Info.setOnClickListener(v -> Actions.setVisibility(View.VISIBLE));
+        ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
 
-        ImageView Image;
-        CustomTextView Libelle, Qte, Prix, supprimer, modifier, afficher;
+            actions.setVisibility(View.GONE);
+            infos.setOnClickListener(v -> actions.setVisibility(View.VISIBLE));
 
-        Image = (ImageView) Layout.findViewById(R.id.Image);
-        Picasso.with(context).load(mProducts.get(position).getPhoto()).into(Image);
+            delete.setOnClickListener(v -> {
+                String id = mItems.get(getLayoutPosition()).getID() + "";
+                if (listener != null) {
+                    listener.onDeleteProduct(PhpAPI.removeProduit,
+                            JSONUtils.bundleIDToJSON(id), Method.POST);
+                }
+            });
+            update.setOnClickListener(v -> {
+                Intent i = new Intent(mContext, ModifierProduitActivity.class);
+                i.putExtra("id", mItems.get(getLayoutPosition()).getID());
+                mContext.startActivity(i);
+            });
 
-        Libelle = (CustomTextView) Layout.findViewById(R.id.Libelle);
-        Libelle.SetText(mProducts.get(position).getLibelle());
+            show.setOnClickListener(v -> {
+                Intent i = new Intent(mContext, ProductDetailsActivity.class);
+                i.putExtra("product", mItems.get(getLayoutPosition()));
+                mContext.startActivity(i);
+            });
+        }
 
-        Qte = (CustomTextView) Layout.findViewById(R.id.Qte);
-        Qte.SetText("" + mProducts.get(position).getQte());
+        @Override
+        public void bind(Product product) {
+            Picasso.with(mContext)
+                    .load(product.getPhoto())
+                    .into(image);
 
-        Prix = (CustomTextView) Layout.findViewById(R.id.Prix);
-        Prix.SetText("" + mProducts.get(position).getPrixTTC() + " DH");
-
-        supprimer = (CustomTextView) Layout.findViewById(R.id.supprimer);
-        supprimer.setOnClickListener(v -> {
-            String id = mProducts.get(position).getID() + "";
-            if (listener != null) {
-                listener.onDeleteProduct(PhpAPI.removeProduit,
-                        JSONUtils.bundleIDToJSON(id), Method.POST);
-            }
-        });
-        modifier = (CustomTextView) Layout.findViewById(R.id.modifier);
-        modifier.setOnClickListener(v -> {
-
-            Intent i = new Intent(context, ModifierProduitActivity.class);
-            i.putExtra("id", mProducts.get(position).getID());
-            context.startActivity(i);
-        });
-        afficher = (CustomTextView) Layout.findViewById(R.id.afficher);
-
-        afficher.setOnClickListener(v -> {
-            Intent i = new Intent(context, ProductDetailsActivity.class);
-            i.putExtra("product", mProducts.get(position));
-            context.startActivity(i);
-        });
-
-        return Layout;
+            label.SetText(product.getLibelle());
+            quantity.SetText("" + product.getQte());
+            price.SetText(product.getPrixTTC() + " DH");
+        }
     }
 
     public void setProductListener(ProductListener listener) {

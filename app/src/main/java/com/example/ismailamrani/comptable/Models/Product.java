@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class Product implements Item, Parcelable {
                 object.getDouble("prixHT"),
                 object.getDouble("prixTTC"),
                 object.getString("codeBar"),
-                object.getString("photo"),
+                PhpAPI.IpBackend_IMAGES + object.getString("photo"),
                 object.getInt("qte"),
                 object.getInt("local"),
                 "",
