@@ -41,7 +41,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:background="#9048627b"
-                        android:transitionName="productLabelAnim"
                         costum:size="20">
 
                         <com.example.ismailamrani.comptable.customitems.CustomTextView
@@ -56,6 +55,7 @@
                             android:shadowDy="2"
                             android:shadowRadius="2"
                             android:textColor="#ffffff"
+                            android:transitionName="productLabelAnim"
                             costum:Arabic=""
                             costum:Font="cgrb.ttf"
                             costum:Frensh=""
