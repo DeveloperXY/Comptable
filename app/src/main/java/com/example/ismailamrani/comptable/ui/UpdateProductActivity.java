@@ -18,7 +18,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.models.Product;
-import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
+import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * Created by Redouane on 24/03/2016.
  */
-public class UpdateProductActivity extends ColoredStatusBarActivity {
+public class UpdateProductActivity extends WithDrawerActivity {
     ImageView produitImage;
     EditText nomProduit, PrixHt, PrixTtc;
     TextView enregistrer, CodeBarre;
@@ -51,6 +51,8 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modifier_produit);
+
+        setupActionBar();
 
         produitImage = (ImageView) findViewById(R.id.ImageModifier);
         nomProduit = (EditText) findViewById(R.id.nom_produit_modifier);
@@ -99,6 +101,7 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
         super.setupActionBar();
 
         mActionBar.setTitle("Modifier produit");
+        mActionBar.disableAddButton();
     }
 
     private void populateFieldsWithSelectedProductData() {
