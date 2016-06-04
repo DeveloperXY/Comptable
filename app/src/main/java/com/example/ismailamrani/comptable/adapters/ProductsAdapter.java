@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.base.BaseSearchAdapter;
@@ -14,6 +15,7 @@ import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
 import com.example.ismailamrani.comptable.customitems.CustomTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
+import com.example.ismailamrani.comptable.ui.UpdateProductActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
@@ -97,8 +99,10 @@ public class ProductsAdapter extends BaseSearchAdapter<ProductsAdapter.ViewHolde
             update.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent i = new Intent(mContext, UpdateProductActivity.class);
+                    i.putExtra("product", mItems.get(getLayoutPosition()));
                     if (listener != null)
-                        listener.onEditProduct(mItems.get(getLayoutPosition()));
+                        listener.onEditProduct(i, image, label);
                 }
             });
 
@@ -107,7 +111,8 @@ public class ProductsAdapter extends BaseSearchAdapter<ProductsAdapter.ViewHolde
                 public void onClick(View v) {
                     Intent i = new Intent(mContext, ProductDetailsActivity.class);
                     i.putExtra("product", mItems.get(getLayoutPosition()));
-                    mContext.startActivity(i);
+                    if (listener != null)
+                        listener.onViewProduct(i, image, label);
                 }
             });
         }
@@ -131,6 +136,8 @@ public class ProductsAdapter extends BaseSearchAdapter<ProductsAdapter.ViewHolde
     public interface ProductListener {
         void onDeleteProduct(String url, JSONObject params, Method method);
 
-        void onEditProduct(Product product);
+        void onEditProduct(Intent intent, ImageView productImage, TextView productLabel);
+
+        void onViewProduct(Intent intent, ImageView productImage, TextView productLabel);
     }
 }

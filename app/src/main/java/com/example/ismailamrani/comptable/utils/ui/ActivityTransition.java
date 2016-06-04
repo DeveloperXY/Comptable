@@ -10,15 +10,15 @@ import android.view.View;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 23/05/2016.
- *
+ * <p>
  * This class contains static methods that help with performing shared element
  * transitions between activities.
  */
 public class ActivityTransition {
     /**
-     * @param context the source activity
+     * @param context        the source activity
      * @param targetActivity the activity to be transitioned to
-     * @param sharedView between the two activities
+     * @param sharedView     between the two activities
      * @param transitionName name of the shared element transition
      */
     public static void startActivityWithSharedElement(Context context,
@@ -52,10 +52,10 @@ public class ActivityTransition {
     }
 
     public static void startActivityForResultWithSharedElement(Context context,
-                                                      Intent intent,
-                                                      View sharedView,
-                                                      String transitionName,
-                                                      int requestCode) {
+                                                               Intent intent,
+                                                               View sharedView,
+                                                               String transitionName,
+                                                               int requestCode) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
             ((Activity) context).startActivityForResult(intent, requestCode);
         else {
@@ -67,14 +67,25 @@ public class ActivityTransition {
         }
     }
 
+    public static void startActivityForResultWithMultipleSharedElements(
+            Context context, Intent intent, int requestCode, Pair<View, String>... sharedElements) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        else {
+            ActivityOptions transitionActivityOptions =
+                    ActivityOptions.makeSceneTransitionAnimation((Activity) context, sharedElements);
+            ((Activity) context).startActivityForResult(
+                    intent, requestCode, transitionActivityOptions.toBundle());
+        }
+    }
+
     public static void startActivityWithMultipleSharedElements(
             Context context, Intent intent, Pair<View, String>... sharedElements) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
             context.startActivity(intent);
         else {
             ActivityOptions transitionActivityOptions =
-                    ActivityOptions.makeSceneTransitionAnimation(
-                            (Activity) context, sharedElements);
+                    ActivityOptions.makeSceneTransitionAnimation((Activity) context, sharedElements);
             context.startActivity(intent, transitionActivityOptions.toBundle());
         }
     }

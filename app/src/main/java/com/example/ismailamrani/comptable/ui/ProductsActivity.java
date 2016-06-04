@@ -3,7 +3,10 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Pair;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -16,6 +19,7 @@ import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -101,10 +105,21 @@ public class ProductsActivity extends RefreshableActivity {
                 }
 
                 @Override
-                public void onEditProduct(Product product) {
-                    Intent i = new Intent(ProductsActivity.this, UpdateProductActivity.class);
-                    i.putExtra("product", product);
-                    startActivityForResult(i, REQUEST_UPDATE_PRODUCT);
+                public void onEditProduct(Intent intent, ImageView productImage, TextView productLabel) {
+                    ActivityTransition.startActivityForResultWithMultipleSharedElements(
+                            ProductsActivity.this, intent, REQUEST_UPDATE_PRODUCT,
+                            Pair.create((View) productLabel, "productLabelAnim"),
+                            Pair.create((View) productImage, "productImageAnim")
+                    );
+                }
+
+                @Override
+                public void onViewProduct(Intent intent, ImageView productImage, TextView productLabel) {
+                    ActivityTransition.startActivityWithMultipleSharedElements(
+                            ProductsActivity.this, intent,
+                            Pair.create((View) productLabel, "productLabelAnim"),
+                            Pair.create((View) productImage, "productImageAnim")
+                    );
                 }
             });
             dataRecyclerView.setAdapter(mProductsAdapter);

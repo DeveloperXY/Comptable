@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:costum="http://schemas.android.com/apk/res-auto">
+                xmlns:costum="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,22 +54,23 @@
                             <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                costum:size="25"
                                 android:layout_centerInParent="true"
-                                android:background="#3d5469">
+                                android:background="#3d5469"
+                                costum:size="25">
 
                                 <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    costum:size="24"
-                                    android:layout_centerInParent="true">
+                                    android:layout_centerInParent="true"
+                                    costum:size="24">
 
                                     <ImageView
                                         android:id="@+id/Image"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:scaleType="fitXY"
-                                        android:src="@drawable/iphone"/>
+                                        android:src="@drawable/iphone"
+                                        android:transitionName="productImageAnim"/>
 
                                 </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
 
@@ -86,12 +87,13 @@
                                 android:id="@+id/Libelle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                costum:Size="15"
-                                costum:Font="cgr.ttf"
-                                costum:Arabic=""
-                                costum:Frensh=""
+                                android:layout_centerInParent="true"
                                 android:textColor="#444444"
-                                android:layout_centerInParent="true"/>
+                                android:transitionName="productLabelAnim"
+                                costum:Arabic=""
+                                costum:Font="cgr.ttf"
+                                costum:Frensh=""
+                                costum:Size="15"/>
 
                         </RelativeLayout>
 
@@ -109,23 +111,23 @@
                                 <com.example.ismailamrani.comptable.customitems.CustomTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    costum:Size="15"
-                                    costum:Font="cgrb.ttf"
-                                    costum:Arabic="Stock"
-                                    costum:Frensh="Stock"
+                                    android:gravity="center_horizontal"
                                     android:textColor="#444444"
-                                    android:gravity="center_horizontal"/>
+                                    costum:Arabic="Stock"
+                                    costum:Font="cgrb.ttf"
+                                    costum:Frensh="Stock"
+                                    costum:Size="15"/>
 
                                 <com.example.ismailamrani.comptable.customitems.CustomTextView
                                     android:id="@+id/Qte"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    costum:Size="14"
-                                    costum:Font="cgr.ttf"
-                                    costum:Arabic=""
-                                    costum:Frensh=""
+                                    android:gravity="center"
                                     android:textColor="#444444"
-                                    android:gravity="center"/>
+                                    costum:Arabic=""
+                                    costum:Font="cgr.ttf"
+                                    costum:Frensh=""
+                                    costum:Size="14"/>
 
                             </LinearLayout>
 
@@ -140,14 +142,14 @@
                                 android:id="@+id/Prix"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/prix_bg"
-                                costum:Size="10"
-                                costum:Font="cgrb.ttf"
-                                costum:Arabic=""
-                                costum:Frensh=""
-                                android:textColor="#ffffff"
                                 android:layout_centerInParent="true"
-                                android:padding="3dp"/>
+                                android:background="@drawable/prix_bg"
+                                android:padding="3dp"
+                                android:textColor="#ffffff"
+                                costum:Arabic=""
+                                costum:Font="cgrb.ttf"
+                                costum:Frensh=""
+                                costum:Size="10"/>
 
                         </RelativeLayout>
 
@@ -158,7 +160,7 @@
             </LinearLayout>
 
         </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
-        
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"></RelativeLayout>
@@ -188,15 +190,15 @@
                     android:clickable="true">
 
                     <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        android:id="@+id/afficher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        costum:Size="12"
-                        costum:Font="cgr.ttf"
-                        costum:Arabic="Afficher"
-                        costum:Frensh="Afficher"
-                        android:textColor="#ffffff"
                         android:layout_centerInParent="true"
-                        android:id="@+id/afficher"
+                        android:textColor="#ffffff"
+                        costum:Arabic="Afficher"
+                        costum:Font="cgr.ttf"
+                        costum:Frensh="Afficher"
+                        costum:Size="12"
                         />
 
                 </RelativeLayout>
@@ -214,15 +216,15 @@
                     android:clickable="true">
 
                     <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        android:id="@+id/modifier"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        costum:Size="12"
-                        costum:Font="cgr.ttf"
-                        costum:Arabic="Modifier"
-                        costum:Frensh="Modifier"
-                        android:textColor="#ffffff"
                         android:layout_centerInParent="true"
-                        android:id="@+id/modifier"
+                        android:textColor="#ffffff"
+                        costum:Arabic="Modifier"
+                        costum:Font="cgr.ttf"
+                        costum:Frensh="Modifier"
+                        costum:Size="12"
                         />
 
                 </RelativeLayout>
@@ -240,15 +242,15 @@
                     android:clickable="true">
 
                     <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        android:id="@+id/supprimer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        costum:Size="12"
-                        costum:Font="cgr.ttf"
-                        costum:Arabic="Supprimer"
-                        costum:Frensh="Supprimer"
-                        android:textColor="#ffffff"
                         android:layout_centerInParent="true"
-                        android:id="@+id/supprimer"
+                        android:textColor="#ffffff"
+                        costum:Arabic="Supprimer"
+                        costum:Font="cgr.ttf"
+                        costum:Frensh="Supprimer"
+                        costum:Size="12"
                         />
 
                 </RelativeLayout>
