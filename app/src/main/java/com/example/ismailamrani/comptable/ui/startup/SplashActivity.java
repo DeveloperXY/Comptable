@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -21,14 +20,11 @@ import org.json.JSONObject;
  */
 public class SplashActivity extends ColoredStatusBarActivity {
 
-    private DatabaseAdapter databaseAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        databaseAdapter = DatabaseAdapter.getInstance(this);
-        Activation activation = databaseAdapter.getCurrentActivation();
+        Activation activation = mDatabaseAdapter.getCurrentActivation();
 
         if (activation == null || !activation.isActivated()) {
             finish();
@@ -67,6 +63,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                     Toast.makeText(SplashActivity.this,
                                             "Your activation code is not active. Please contact the administration.",
                                             Toast.LENGTH_SHORT).show();
+                                    mDatabaseAdapter.removeCurrentActivation();
                                 }
 
                                 finish();
@@ -80,6 +77,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
 
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
+                        mDatabaseAdapter.removeCurrentActivation();
                         DialogUtil.showDialog(SplashActivity.this, "Apologies",
                                 "It seems like we are missing your activation code. Please contact us as soon as possible.",
                                 "Dismiss", null,
@@ -96,6 +94,6 @@ public class SplashActivity extends ColoredStatusBarActivity {
      * @return true if a user is already logged in, false otherwise.
      */
     private boolean isUserLoggedIn() {
-        return databaseAdapter.getLoggedUser() != null;
+        return mDatabaseAdapter.getLoggedUser() != null;
     }
 }

@@ -151,6 +151,10 @@ public class DatabaseAdapter {
         db.delete(LOCAL_TABLE, null, null) ;
     }
 
+    public void removeCurrentActivation() {
+        db.delete(ACTIVATION_TABLE, null, null) ;
+    }
+
     private User extractUserFromCursor(Cursor cursor) {
         User user = cursor.moveToFirst() ?
                 new User.Builder()
