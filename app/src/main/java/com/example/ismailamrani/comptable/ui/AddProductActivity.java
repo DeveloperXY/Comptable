@@ -160,10 +160,14 @@ public class AddProductActivity extends WithDrawerActivity
                         setResult(ResultCodes.PRODUCT_ADDED);
                         finish();
 
-                        runOnUiThread(() ->
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
                                 Toast.makeText(getApplicationContext(),
                                         "Product successfully added.",
-                                        Toast.LENGTH_LONG).show());
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
     }

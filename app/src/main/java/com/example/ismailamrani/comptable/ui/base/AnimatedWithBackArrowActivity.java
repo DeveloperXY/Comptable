@@ -38,21 +38,24 @@ public abstract class AnimatedWithBackArrowActivity extends WithBackArrowActivit
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     protected void setupRevealTransition() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mainRootView.post(() -> {
-                int cx = (mainRootView.getLeft() + mainRootView.getRight()) / 2;
-                int cy = (mainRootView.getTop() + mainRootView.getBottom()) / 2;
-                int finalRadius = Math.max(mainRootView.getWidth(), mainRootView.getHeight());
+            mainRootView.post(new Runnable() {
+                @Override
+                public void run() {
+                    int cx = (mainRootView.getLeft() + mainRootView.getRight()) / 2;
+                    int cy = (mainRootView.getTop() + mainRootView.getBottom()) / 2;
+                    int finalRadius = Math.max(mainRootView.getWidth(), mainRootView.getHeight());
 
-                Animator anim = ViewAnimationUtils.createCircularReveal(
-                        mainRootView, cx, cy, 0, finalRadius);
-                mainRootView.setBackground(getResources().getDrawable(R.mipmap.ic_bg_add));
-                anim.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        animateViewsIn();
-                    }
-                });
-                anim.start();
+                    Animator anim = ViewAnimationUtils.createCircularReveal(
+                            mainRootView, cx, cy, 0, finalRadius);
+                    mainRootView.setBackground(getResources().getDrawable(R.mipmap.ic_bg_add));
+                    anim.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            animateViewsIn();
+                        }
+                    });
+                    anim.start();
+                }
             });
         }
     }

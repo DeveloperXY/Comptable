@@ -15,7 +15,6 @@ import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -50,15 +49,18 @@ public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Pro
             colorFilterLayout = (TextView) v.findViewById(R.id.colorFilterLayout);
             productImage = (ImageView) v.findViewById(R.id.productImage);
 
-            v.setOnClickListener(view -> {
-                Intent intent = new Intent(mContext, ProductDetailsActivity.class);
-                intent.putExtra("product", mItems.get(getLayoutPosition()));
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ProductDetailsActivity.class);
+                    intent.putExtra("product", mItems.get(getLayoutPosition()));
 
-                ActivityTransition.startActivityWithMultipleSharedElements(
-                        mContext, intent,
-                        Pair.create(productLabel, "productLabelAnim"),
-                        Pair.create(productImage, "productImageAnim")
-                );
+                    ActivityTransition.startActivityWithMultipleSharedElements(
+                            mContext, intent,
+                            Pair.create((View) productLabel, "productLabelAnim"),
+                            Pair.create((View) productImage, "productImageAnim")
+                    );
+                }
             });
         }
 
@@ -71,7 +73,7 @@ public class StockAdapter extends BaseSearchAdapter<StockAdapter.ViewHolder, Pro
             productLabel.setText(product.getLibelle());
             quantityLabel.setText(String.valueOf(product.getQte()));
             Picasso.with(itemView.getContext())
-                    .load(PhpAPI.IpBackend_IMAGES + product.getPhoto())
+                    .load(product.getPhoto())
                     .into(productImage);
         }
     }

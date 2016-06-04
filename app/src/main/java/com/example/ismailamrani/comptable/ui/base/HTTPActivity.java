@@ -97,10 +97,14 @@ public abstract class HTTPActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, IOException e) {
-                        runOnUiThread(() -> {
-                            Toast.makeText(HTTPActivity.this,
-                                    "Network error.", Toast.LENGTH_LONG).show();
-                            mLoadingDialog.dismiss();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                Toast.makeText(HTTPActivity.this,
+                                        "Network error.", Toast.LENGTH_LONG).show();
+                                mLoadingDialog.dismiss();
+                            }
                         });
                         listener.onNetworkError();
                     }
@@ -126,7 +130,12 @@ public abstract class HTTPActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        runOnUiThread(() -> mLoadingDialog.dismiss());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mLoadingDialog.dismiss();
+                            }
+                        });
                     }
                 });
     }

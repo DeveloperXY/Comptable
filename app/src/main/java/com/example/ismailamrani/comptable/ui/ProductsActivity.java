@@ -70,9 +70,12 @@ public class ProductsActivity extends RefreshableActivity {
     private void populateRecyclerView() {
         if (mProductsAdapter == null) {
             mProductsAdapter = new ProductsAdapter(this, mProducts);
-            mProductsAdapter.setProductListener((url, params, method) -> {
-                mLoadingDialog.show();
-                sendHTTPRequest(url, params, method, new DeleteRequestListener());
+            mProductsAdapter.setProductListener(new ProductsAdapter.ProductListener() {
+                @Override
+                public void onDeleteProduct(String url, JSONObject params, Method method) {
+                    mLoadingDialog.show();
+                    sendHTTPRequest(url, params, method, new DeleteRequestListener());
+                }
             });
             dataRecyclerView.setAdapter(mProductsAdapter);
         } else
@@ -100,18 +103,21 @@ public class ProductsActivity extends RefreshableActivity {
                     public void onRequestSucceeded(JSONObject response) {
                         try {
                             JSONArray productsArray = response.getJSONArray("produit");
-                            List<Product> products = Product.parseProducts(productsArray);
+                            final List<Product> products = Product.parseProducts(productsArray);
 
-                            runOnUiThread(() -> {
-                                if (!ListComparison.areEqual(mProducts, products)) {
-                                    mProducts = products;
-                                    dataRecyclerView.scrollToPosition(0);
-                                    populateRecyclerView();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!ListComparison.areEqual(mProducts, products)) {
+                                        mProducts = products;
+                                        dataRecyclerView.scrollToPosition(0);
+                                        populateRecyclerView();
+                                    }
+
+                                    stopSwipeRefresh();
+                                    toggleRecyclerviewState();
+                                    progressBar.setVisibility(View.INVISIBLE);
                                 }
-
-                                stopSwipeRefresh();
-                                toggleRecyclerviewState();
-                                progressBar.setVisibility(View.INVISIBLE);
                             });
 
                         } catch (JSONException e) {
@@ -126,7 +132,12 @@ public class ProductsActivity extends RefreshableActivity {
 
                     @Override
                     public void onNetworkError() {
-                        runOnUiThread(ProductsActivity.this::handleRequestError);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                handleRequestError();
+                            }
+                        });
                     }
                 });
     }
@@ -144,16 +155,25 @@ public class ProductsActivity extends RefreshableActivity {
     class DeleteRequestListener extends SuccessRequestListener {
         @Override
         public void onRequestSucceeded(JSONObject response) {
-            runOnUiThread(() -> {
-                Toast.makeText(ProductsActivity.this, "Product removed.", Toast.LENGTH_LONG).show();
-                refresh();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ProductsActivity.this, "Product removed.",
+                            Toast.LENGTH_LONG).show();
+                    refresh();
+                }
             });
         }
 
         @Override
         public void onRequestFailed(int status, JSONObject response) {
-            runOnUiThread(() -> Toast.makeText(ProductsActivity.this, "Unknown error.",
-                    Toast.LENGTH_LONG).show());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ProductsActivity.this, "Unknown error.",
+                            Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }

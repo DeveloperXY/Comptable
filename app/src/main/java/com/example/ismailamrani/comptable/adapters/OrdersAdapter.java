@@ -52,9 +52,12 @@ public class OrdersAdapter extends BaseSearchAdapter<OrdersAdapter.OrdersViewHol
             orderIDLabel = (TextView) v.findViewById(R.id.orderIDLabel);
             statusColorLayout = (RelativeLayout) v.findViewById(R.id.statusColorLayout);
 
-            v.setOnClickListener(view -> {
-                if (listener != null)
-                    listener.onOrderSelected(mItems.get(getLayoutPosition()));
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null)
+                        listener.onOrderSelected(mItems.get(getLayoutPosition()));
+                }
             });
         }
 

@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.design.widget.Snackbar;
 import android.transition.Fade;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -164,29 +166,35 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
     public void onLogoutPressed(View view) {
         DialogUtil.showMutliDialog(this, "Are you sure to log out ?",
-                "Yes", (dialog, which) -> {
-                    mDatabaseAdapter.logout();
+                "Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDatabaseAdapter.logout();
 
-                    activityShouldFinish();
-                    ActivityTransition.startActivityWithSharedElement(this, LoginActivity.class,
-                            headerImageView, "header");
+                        activityShouldFinish();
+                        ActivityTransition.startActivityWithSharedElement(
+                                HomeActivity.this, LoginActivity.class, headerImageView, "header");
+                    }
                 },
                 "No", null);
     }
 
-    public void onSettingsPressed(View view) {
+    public void onSettingsPressed(final View view) {
         PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.action_change_locale:
-                    showLocaleChooserDialog();
-                    break;
-                case R.id.action_logout:
-                    onLogoutPressed(view);
-                    break;
-            }
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_change_locale:
+                        showLocaleChooserDialog();
+                        break;
+                    case R.id.action_logout:
+                        onLogoutPressed(view);
+                        break;
+                }
 
-            return true;
+                return true;
+            }
         });
         popupMenu.inflate(R.menu.options_menu);
         popupMenu.show();
@@ -202,7 +210,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
                     @Override
                     public void onItemSelected(Local selectedLocal) {
                         if (mDatabaseAdapter.getCurrentLocaleID() != selectedLocal.getId()) {
-                            User user = mDatabaseAdapter.getLoggedUser();
+                            final User user = mDatabaseAdapter.getLoggedUser();
                             User copy = new User(user);
                             copy.setLocaleID(selectedLocal.getId());
                             copy.setAddress(selectedLocal.getAddress());
@@ -214,9 +222,12 @@ public class HomeActivity extends ColoredStatusBarActivity {
                             updateCurrentLocaleLabel();
                             Snackbar.make(getWindow().getDecorView(),
                                     "Locale changed.", Snackbar.LENGTH_LONG)
-                                    .setAction("UNDO", v -> {
-                                        mDatabaseAdapter.updateUser(user);
-                                        updateCurrentLocaleLabel();
+                                    .setAction("UNDO", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            mDatabaseAdapter.updateUser(user);
+                                            updateCurrentLocaleLabel();
+                                        }
                                     })
                                     .show();
                         }

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
@@ -101,9 +102,12 @@ public class StockActivity extends RefreshableActivity
         searchView.setOnQueryTextListener(this);
 
         ImageView closeButton = (ImageView) searchView.findViewById(R.id.search_close_btn);
-        closeButton.setOnClickListener(v -> {
-            toggleSearchViewVisibility(View.GONE); // Hide search view
-            stockAdapter.animateTo(mProducts);
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleSearchViewVisibility(View.GONE); // Hide search view
+                stockAdapter.animateTo(mProducts);
+            }
         });
     }
 
@@ -161,13 +165,18 @@ public class StockActivity extends RefreshableActivity
                 IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
                 if (scanningResult != null) {
-                    String scannedBarcode = scanningResult.getContents();
+                    final String scannedBarcode = scanningResult.getContents();
                     Intent intent = new Intent(this, ProductDetailsActivity.class);
                     Product requestedProduct;
 
                     try {
                         requestedProduct = Stream.of(mProducts)
-                                .filter(product -> product.getCodeBarre().equals(scannedBarcode))
+                                .filter(new Predicate<Product>() {
+                                    @Override
+                                    public boolean test(Product product) {
+                                        return product.getCodeBarre().equals(scannedBarcode);
+                                    }
+                                })
                                 .findFirst()
                                 .get();
                     }
@@ -202,12 +211,20 @@ public class StockActivity extends RefreshableActivity
                                     response.getJSONArray("products"));
 
                             if (ListComparison.areEqual(mProducts, products))
-                                runOnUiThread(this::handleDataChange);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                    }
+                                });
                             else {
                                 mProducts = products;
-                                runOnUiThread(() -> {
-                                    handleDataChange();
-                                    populateRecyclerView();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                        populateRecyclerView();
+                                    }
                                 });
                             }
                         } catch (JSONException e) {
@@ -222,7 +239,12 @@ public class StockActivity extends RefreshableActivity
 
                     @Override
                     public void onNetworkError() {
-                        runOnUiThread(() -> handleRequestError());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                handleRequestError();
+                            }
+                        });
                     }
 
                     private void handleDataChange() {

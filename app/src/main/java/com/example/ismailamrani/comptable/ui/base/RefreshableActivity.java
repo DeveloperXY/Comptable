@@ -18,7 +18,7 @@ import butterknife.Bind;
  * 3- A progress bar to be shown while fetching the RecyclerView's data
  * 4- An empty view to be displayed if there were no items to show.
  * 5- An error layout to be displayed in case there was no internet connection.
- *
+ * <p/>
  * & a few methods for the initial setup of the UI.
  */
 public abstract class RefreshableActivity extends AnimatedActivity {
@@ -42,7 +42,12 @@ public abstract class RefreshableActivity extends AnimatedActivity {
     protected SwipeRefreshLayout swipeRefreshLayout;
 
     protected void setupSwipeRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.swipeRefresh1,
                 R.color.swipeRefresh2,

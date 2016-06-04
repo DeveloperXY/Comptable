@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.customitems.OGActionBar;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,19 +38,28 @@ public class OGActionBar extends RelativeLayout {
         title = (CustomTextView) layout.findViewById(R.id.Title);
         mainActionLayout = (LinearLayout) layout.findViewById(R.id.mainActionLayout);
 
-        menu.setOnClickListener(v -> {
-            if (listener != null)
-                getActionBarListener().onMenuPressed();
+        menu.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    getActionBarListener().onMenuPressed();
+            }
         });
 
-        add.setOnClickListener(v -> {
-            if (listener != null)
-                getActionBarListener().onAddPressed();
+        add.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    getActionBarListener().onAddPressed();
+            }
         });
 
-        search.setOnClickListener(v -> {
-            if (searchListener != null)
-                searchListener.onSearchPressed();
+        search.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (searchListener != null)
+                    searchListener.onSearchPressed();
+            }
         });
 
         addView(layout);

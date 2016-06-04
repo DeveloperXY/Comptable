@@ -78,25 +78,39 @@ public class ProductsAdapter extends BaseSearchAdapter<ProductsAdapter.ViewHolde
             ButterKnife.bind(this, view);
 
             actions.setVisibility(View.GONE);
-            infos.setOnClickListener(v -> actions.setVisibility(View.VISIBLE));
-
-            delete.setOnClickListener(v -> {
-                String id = mItems.get(getLayoutPosition()).getID() + "";
-                if (listener != null) {
-                    listener.onDeleteProduct(PhpAPI.removeProduit,
-                            JSONUtils.bundleIDToJSON(id), Method.POST);
+            infos.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    actions.setVisibility(View.VISIBLE);
                 }
             });
-            update.setOnClickListener(v -> {
-                Intent i = new Intent(mContext, ModifierProduitActivity.class);
-                i.putExtra("id", mItems.get(getLayoutPosition()).getID());
-                mContext.startActivity(i);
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String id = mItems.get(getLayoutPosition()).getID() + "";
+                    if (listener != null) {
+                        listener.onDeleteProduct(PhpAPI.removeProduit,
+                                JSONUtils.bundleIDToJSON(id), Method.POST);
+                    }
+                }
+            });
+            update.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, ModifierProduitActivity.class);
+                    i.putExtra("id", mItems.get(getLayoutPosition()).getID());
+                    mContext.startActivity(i);
+                }
             });
 
-            show.setOnClickListener(v -> {
-                Intent i = new Intent(mContext, ProductDetailsActivity.class);
-                i.putExtra("product", mItems.get(getLayoutPosition()));
-                mContext.startActivity(i);
+            show.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, ProductDetailsActivity.class);
+                    i.putExtra("product", mItems.get(getLayoutPosition()));
+                    mContext.startActivity(i);
+                }
             });
         }
 

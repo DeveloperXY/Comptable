@@ -62,32 +62,38 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
     }
 
     private void setupClickListeners() {
-        View.OnClickListener createListener = v -> {
-            Client client = validateClientInfos(
-                    nomprenom.getText().toString(),
-                    tel.getText().toString(),
-                    adresse.getText().toString(),
-                    email.getText().toString());
+        View.OnClickListener createListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Client client = validateClientInfos(
+                        nomprenom.getText().toString(),
+                        tel.getText().toString(),
+                        adresse.getText().toString(),
+                        email.getText().toString());
 
-            if (client != null)
-                createClient(client);
+                if (client != null)
+                    createClient(client);
+            }
         };
 
-        View.OnClickListener updateListener = v -> {
-            Client client = validateClientInfos(
-                    nomprenom.getText().toString(),
-                    tel.getText().toString(),
-                    adresse.getText().toString(),
-                    email.getText().toString());
+        View.OnClickListener updateListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Client client = validateClientInfos(
+                        nomprenom.getText().toString(),
+                        tel.getText().toString(),
+                        adresse.getText().toString(),
+                        email.getText().toString());
 
-            if (client != null) {
-                selectedClient.setNomPrenom(client.getNomPrenom());
-                selectedClient.setTel(client.getTel());
-                selectedClient.setAdresse(client.getAdresse());
-                selectedClient.setEmail(client.getEmail());
-                selectedClient.setUrl(PhpAPI.editClient);
+                if (client != null) {
+                    selectedClient.setNomPrenom(client.getNomPrenom());
+                    selectedClient.setTel(client.getTel());
+                    selectedClient.setAdresse(client.getAdresse());
+                    selectedClient.setEmail(client.getEmail());
+                    selectedClient.setUrl(PhpAPI.editClient);
 
-                updateClient();
+                    updateClient();
+                }
             }
         };
 
@@ -151,14 +157,24 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
                     public void onRequestSucceeded(JSONObject response) {
                         setResult(ResultCodes.CLIENT_CREATED);
                         finish();
-                        runOnUiThread(() -> Toast.makeText(AlterClientActivity.this,
-                                "Client successfully created.", Toast.LENGTH_LONG).show());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AlterClientActivity.this,
+                                        "Client successfully created.", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
 
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
-                        runOnUiThread(() -> Toast.makeText(AlterClientActivity.this,
-                                "Unknown error.", Toast.LENGTH_LONG).show());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AlterClientActivity.this,
+                                        "Unknown error.", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
     }
@@ -178,8 +194,13 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
                     public void onRequestSucceeded(JSONObject response) {
                         setResult(ResultCodes.CLIENT_UPDATED);
                         finish();
-                        runOnUiThread(() -> Toast.makeText(AlterClientActivity.this,
-                                "Client altered.", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AlterClientActivity.this,
+                                        "Client altered.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
     }

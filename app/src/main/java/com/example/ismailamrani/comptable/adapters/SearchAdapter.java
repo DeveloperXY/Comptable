@@ -43,14 +43,17 @@ public class SearchAdapter<T> extends BaseSearchAdapter<SearchAdapter.ViewHolder
         TextView textLabel;
 
         public ViewHolder(View v, ViewHolderBinder<T> binder,
-                          OnItemClickListener<T> listener, List<T> items) {
+                          final OnItemClickListener<T> listener, final List<T> items) {
             super(v);
             mBinder = binder;
             textLabel = (TextView) v.findViewById(R.id.textLabel);
 
-            v.setOnClickListener(view -> {
-                if (listener != null)
-                    listener.onItemClicked(items.get(getLayoutPosition()));
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null)
+                        listener.onItemClicked(items.get(getLayoutPosition()));
+                }
             });
         }
 

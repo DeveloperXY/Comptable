@@ -52,12 +52,20 @@ public class SupplierAdapter extends BaseSearchAdapter<SupplierAdapter.ViewHolde
             super(v);
             ButterKnife.bind(this, v);
 
-            View.OnClickListener clickListener = view -> {
-                if (listener != null)
-                    listener.onSupplierSelected(mItems.get(getAdapterPosition()));
+            View.OnClickListener clickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null)
+                        listener.onSupplierSelected(mItems.get(getAdapterPosition()));
+                }
             };
 
-            overflow.setOnClickListener(this::showPopupMenu);
+            overflow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopupMenu(v);
+                }
+            });
             v.setOnClickListener(clickListener);
             thumbnail.setOnClickListener(clickListener);
         }

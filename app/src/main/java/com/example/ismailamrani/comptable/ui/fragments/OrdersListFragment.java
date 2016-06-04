@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.OrdersAdapter;
 import com.example.ismailamrani.comptable.models.Order;
@@ -124,7 +125,12 @@ public class OrdersListFragment extends Fragment {
     }
 
     private void setupSwipeRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(this::refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.swipeRefresh1,
                 R.color.swipeRefresh2,
@@ -138,7 +144,12 @@ public class OrdersListFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(true);
 
         Stream.of(emptyView, errorLayout)
-                .forEach(v -> v.setVisibility(View.GONE));
+                .forEach(new Consumer<RelativeLayout>() {
+                    @Override
+                    public void accept(RelativeLayout v) {
+                        v.setVisibility(View.GONE);
+                    }
+                });
 
         if (listener != null) {
             String url = Orders.SALE.equals(currentOrderType) ?
@@ -153,10 +164,20 @@ public class OrdersListFragment extends Fragment {
                                         response.getJSONArray("orders"));
 
                                 if (ListComparison.areEqual(mOrders, orders))
-                                    getActivity().runOnUiThread(this::handleDataChange);
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            handleDataChange();
+                                        }
+                                    });
                                 else {
                                     mOrders = orders;
-                                    getActivity().runOnUiThread(this::onDataChanged);
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            onDataChanged();
+                                        }
+                                    });
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -170,11 +191,14 @@ public class OrdersListFragment extends Fragment {
 
                         @Override
                         public void onNetworkError() {
-                            getActivity().runOnUiThread(() -> {
-                                errorLayout.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                                recyclerView.setVisibility(View.GONE);
-                                stopSwipeRefresh();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    errorLayout.setVisibility(View.VISIBLE);
+                                    progressBar.setVisibility(View.GONE);
+                                    recyclerView.setVisibility(View.GONE);
+                                    stopSwipeRefresh();
+                                }
                             });
                         }
 
@@ -204,9 +228,12 @@ public class OrdersListFragment extends Fragment {
     private void populateRecyclerView() {
         if (ordersAdapter == null) {
             ordersAdapter = new OrdersAdapter(getActivity(), mOrders);
-            ordersAdapter.setOrdersListener(order -> {
-                if (listener != null)
-                    listener.onOrderItemPressed(order);
+            ordersAdapter.setOrdersListener(new OrdersAdapter.OrdersListener() {
+                @Override
+                public void onOrderSelected(Order order) {
+                    if (listener != null)
+                        listener.onOrderItemPressed(order);
+                }
             });
             recyclerView.setAdapter(ordersAdapter);
         } else

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 
@@ -48,8 +49,8 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+    public View getView(final int position, View convertView, final ViewGroup parent) {
+        final ViewHolder viewHolder;
 
         if (convertView == null) {
             // inflate the layout
@@ -66,31 +67,37 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
         }
 
         viewHolder.deleteIcon
-                .setOnClickListener(v -> {
-                    lastPosition = -1;
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        lastPosition = -1;
 
-                    products.remove(position);
-                    notifyDataSetChanged();
-                    listener.onProductRemoved();
+                        products.remove(position);
+                        notifyDataSetChanged();
+                        listener.onProductRemoved();
+                    }
                 });
 
         Product product = products.get(position);
         viewHolder.productText
                 .setText(String.format("%s x %d", product.getLibelle(), product.getQte()));
 
-        convertView.setOnClickListener(v -> {
-            if (viewHolder.deleteIcon.getVisibility() == View.INVISIBLE) {
-                viewHolder.deleteIcon.setVisibility(View.VISIBLE);
-                if (lastPosition != -1) {
-                    ((ViewHolder) parent.getChildAt(lastPosition)
-                            .getTag())
-                            .deleteIcon.setVisibility(View.INVISIBLE);
-                }
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.deleteIcon.getVisibility() == View.INVISIBLE) {
+                    viewHolder.deleteIcon.setVisibility(View.VISIBLE);
+                    if (lastPosition != -1) {
+                        ((ViewHolder) parent.getChildAt(lastPosition)
+                                .getTag())
+                                .deleteIcon.setVisibility(View.INVISIBLE);
+                    }
 
-                lastPosition = position;
-            } else {
-                viewHolder.deleteIcon.setVisibility(View.INVISIBLE);
-                lastPosition = -1;
+                    lastPosition = position;
+                } else {
+                    viewHolder.deleteIcon.setVisibility(View.INVISIBLE);
+                    lastPosition = -1;
+                }
             }
         });
 
@@ -125,7 +132,7 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
     }
 
     public JSONArray getQuantitySummary() {
-        JSONArray data = new JSONArray();
+        final JSONArray data = new JSONArray();
         // Map<product ID, <quantity, product label>>
         Map<Integer, Pair<Integer, String>> map = new HashMap<>();
 
@@ -140,18 +147,21 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
         }
 
         Stream.of(map.entrySet())
-                .forEach(entry -> {
-                    JSONObject obj = new JSONObject();
+                .forEach(new Consumer<Map.Entry<Integer, Pair<Integer, String>>>() {
+                    @Override
+                    public void accept(Map.Entry<Integer, Pair<Integer, String>> entry) {
+                        JSONObject obj = new JSONObject();
 
-                    try {
-                        obj.put("productID", entry.getKey());
-                        obj.put("quantity", entry.getValue().first);
-                        obj.put("label", entry.getValue().second);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        try {
+                            obj.put("productID", entry.getKey());
+                            obj.put("quantity", entry.getValue().first);
+                            obj.put("label", entry.getValue().second);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        data.put(obj);
                     }
-
-                    data.put(obj);
                 });
 
         Log.i("Quantity summary", data.toString());

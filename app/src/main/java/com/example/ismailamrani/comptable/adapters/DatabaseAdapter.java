@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
@@ -233,7 +234,13 @@ public class DatabaseAdapter {
 
     public void saveLocales(List<Local> locals) {
         Log.i("Locales", "Saving locales: " + locals.toString());
-        Stream.of(locals).forEach(this::insertLocal);
+        Stream.of(locals)
+                .forEach(new Consumer<Local>() {
+                    @Override
+                    public void accept(Local value) {
+                        insertLocal(value);
+                    }
+                });
     }
 
     public void insertLocal(Local local) {

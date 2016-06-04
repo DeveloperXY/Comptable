@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.startup;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,60 +46,72 @@ public class LoginActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        Valider.setOnClickListener(v -> {
-            String username = nom.getText().toString();
-            String password = motdepass.getText().toString();
-            User user = validateUserCredentials(username, password);
-            int currentCompanyID = mDatabaseAdapter.getUserCompanyID();
+        Valider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = nom.getText().toString();
+                String password = motdepass.getText().toString();
+                User user = validateUserCredentials(username, password);
+                int currentCompanyID = mDatabaseAdapter.getUserCompanyID();
 
-            if (user != null) {
-                JSONObject params = user.toJSON();
-                try {
-                    params.put("companyID", currentCompanyID);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.i("ERROR", "Unable to retrieve company ID.");
-                }
+                if (user != null) {
+                    JSONObject params = user.toJSON();
+                    try {
+                        params.put("companyID", currentCompanyID);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.i("ERROR", "Unable to retrieve company ID.");
+                    }
 
-                mLoadingDialog.show();
+                    mLoadingDialog.show();
 
-                // Send the login POST request.
-                sendHTTPRequest(PhpAPI.login, params, Method.POST,
-                        new SuccessRequestListener() {
-                            @Override
-                            public void onRequestSucceeded(JSONObject response) {
-                                try {
-                                    // Retrieve the logged in user's infos from
-                                    // the response
-                                    JSONObject loggedInUser = response.getJSONArray("user")
-                                            .getJSONObject(0);
-                                    JSONArray locales = response.getJSONArray("locals");
-                                    JSONObject local = locales.getJSONObject(0);
+                    // Send the login POST request.
+                    sendHTTPRequest(PhpAPI.login, params, Method.POST,
+                            new SuccessRequestListener() {
+                                @Override
+                                public void onRequestSucceeded(JSONObject response) {
+                                    try {
+                                        // Retrieve the logged in user's infos from
+                                        // the response
+                                        JSONObject loggedInUser = response.getJSONArray("user")
+                                                .getJSONObject(0);
+                                        JSONArray locales = response.getJSONArray("locals");
+                                        JSONObject local = locales.getJSONObject(0);
 
-                                    loggedInUser = JSONUtils.merge(loggedInUser, local);
-                                    // Save user to local disk
-                                    saveUserToInternalDatabase(loggedInUser);
-                                    saveLocalesToInternalDatabase(locales);
+                                        loggedInUser = JSONUtils.merge(loggedInUser, local);
+                                        // Save user to local disk
+                                        saveUserToInternalDatabase(loggedInUser);
+                                        saveLocalesToInternalDatabase(locales);
 
-                                    // Move to main menu
-                                    activityShouldFinish();
-                                    runOnUiThread(() ->
-                                            ActivityTransition.startActivityWithSharedElement(
-                                                    LoginActivity.this, HomeActivity.class,
-                                                    logoImage, "header"));
+                                        // Move to main menu
+                                        activityShouldFinish();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                ActivityTransition.startActivityWithSharedElement(
+                                                        LoginActivity.this, HomeActivity.class,
+                                                        logoImage, "header");
+                                            }
+                                        });
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onRequestFailed(int status, JSONObject response) {
-                                runOnUiThread(() -> Toast.makeText(LoginActivity.this,
-                                        "Invalid username/password combination.", Toast.LENGTH_SHORT)
-                                        .show());
-                            }
-                        });
+                                @Override
+                                public void onRequestFailed(int status, JSONObject response) {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(LoginActivity.this,
+                                                    "Invalid username/password combination.", Toast.LENGTH_SHORT)
+                                                    .show();
+                                        }
+                                    });
+                                }
+                            });
+                }
             }
         });
     }

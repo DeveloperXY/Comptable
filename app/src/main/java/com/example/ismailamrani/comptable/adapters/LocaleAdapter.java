@@ -45,12 +45,15 @@ public class LocaleAdapter extends ArrayAdapter<Local> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Local local = locales.get(position);
+        final Local local = locales.get(position);
         viewHolder.localeText.setText(local.getFullAddress());
 
-        convertView.setOnClickListener(v -> {
-            if (listener != null)
-                listener.onLocaleSelected(local.getId());
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.onLocaleSelected(local.getId());
+            }
         });
 
         return convertView;

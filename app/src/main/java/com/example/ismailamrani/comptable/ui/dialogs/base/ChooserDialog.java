@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui.dialogs.base;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,8 +59,18 @@ public abstract class ChooserDialog<T> extends Dialog implements SearchView.OnQu
         setContentView(R.layout.purchase_dialog);
         ButterKnife.bind(this);
 
-        actionButton.setOnClickListener(v -> onActionButtonClicked());
-        setOnDismissListener(dialog -> WindowUtils.hideKeyboard((Activity) context));
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onActionButtonClicked();
+            }
+        });
+        setOnDismissListener(new OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                WindowUtils.hideKeyboard((Activity) context);
+            }
+        });
 
         if (!TextUtils.isEmpty(hint))
             setSearchHint(hint);
@@ -104,10 +115,13 @@ public abstract class ChooserDialog<T> extends Dialog implements SearchView.OnQu
         dialogRecyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         searchAdapter = new SearchAdapter<>(context, mItems, binder);
-        searchAdapter.setListener(item -> {
-            if (itemSelectionListener != null) {
-                itemSelectionListener.onItemSelected(item);
-                dismiss();
+        searchAdapter.setListener(new SearchAdapter.OnItemClickListener<T>() {
+            @Override
+            public void onItemClicked(T item) {
+                if (itemSelectionListener != null) {
+                    itemSelectionListener.onItemSelected(item);
+                    dismiss();
+                }
             }
         });
         dialogRecyclerView.setAdapter(searchAdapter);

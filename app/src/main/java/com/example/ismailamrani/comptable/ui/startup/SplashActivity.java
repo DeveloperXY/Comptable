@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -46,31 +47,35 @@ public class SplashActivity extends ColoredStatusBarActivity {
                 Method.POST,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response) {
-                        runOnUiThread(() -> {
-                            Class<?> target;
+                    public void onRequestSucceeded(final JSONObject response) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            try {
-                                int activationStatus = response.getInt("activationStatus");
-                                if (activationStatus == 1) {
-                                    // The application is activated, check for session
-                                    if (isUserLoggedIn())
-                                        target = HomeActivity.class;
-                                    else
-                                        target = LoginActivity.class;
-                                } else {
-                                    target = ActivationActivity.class;
-                                    Toast.makeText(SplashActivity.this,
-                                            "Your activation code is not active. Please contact the administration.",
-                                            Toast.LENGTH_SHORT).show();
-                                    mDatabaseAdapter.removeCurrentActivation();
+                                Class<?> target;
+
+                                try {
+                                    int activationStatus = response.getInt("activationStatus");
+                                    if (activationStatus == 1) {
+                                        // The application is activated, check for session
+                                        if (isUserLoggedIn())
+                                            target = HomeActivity.class;
+                                        else
+                                            target = LoginActivity.class;
+                                    } else {
+                                        target = ActivationActivity.class;
+                                        Toast.makeText(SplashActivity.this,
+                                                "Your activation code is not active. Please contact the administration.",
+                                                Toast.LENGTH_SHORT).show();
+                                        mDatabaseAdapter.removeCurrentActivation();
+                                    }
+
+                                    finish();
+                                    startActivity(new Intent(SplashActivity.this, target));
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
-
-                                finish();
-                                startActivity(new Intent(SplashActivity.this, target));
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
                         });
                     }
@@ -81,9 +86,13 @@ public class SplashActivity extends ColoredStatusBarActivity {
                         DialogUtil.showDialog(SplashActivity.this, "Apologies",
                                 "It seems like we are missing your activation code. Please contact us as soon as possible.",
                                 "Dismiss", null,
-                                dialog -> {
-                                    finish();
-                                    startActivity(new Intent(SplashActivity.this, ActivationActivity.class));
+                                new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        finish();
+                                        startActivity(new Intent(SplashActivity.this,
+                                                ActivationActivity.class));
+                                    }
                                 });
                     }
                 }

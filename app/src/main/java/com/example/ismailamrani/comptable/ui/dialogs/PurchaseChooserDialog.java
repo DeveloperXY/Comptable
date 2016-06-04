@@ -6,10 +6,11 @@ import android.support.v7.widget.SearchView;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
-import com.example.ismailamrani.comptable.ui.AlterSupplierActivity;
 import com.example.ismailamrani.comptable.ui.AddProductActivity;
+import com.example.ismailamrani.comptable.ui.AlterSupplierActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
 
 import java.util.List;
@@ -55,10 +56,15 @@ public class PurchaseChooserDialog extends ChooserDialog<String>
         return true;
     }
 
-    public List<String> filter(List<String> items, String query) {
+    public List<String> filter(List<String> items, final String query) {
         return Stream.of(items)
-                .filter(item -> item.toLowerCase()
-                        .contains(query.toLowerCase()))
-                .collect(Collectors.toList());
+                .filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String item) {
+                        return item.toLowerCase()
+                                .contains(query.toLowerCase());
+                    }
+                })
+                .collect(Collectors.<String>toList());
     }
 }

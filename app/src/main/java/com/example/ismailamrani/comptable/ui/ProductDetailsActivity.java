@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -42,7 +41,7 @@ public class ProductDetailsActivity extends WithDrawerActivity {
         Product product = getIntent().getParcelableExtra("product");
 
         Picasso.with(getApplicationContext())
-                .load(PhpAPI.IpBackend_IMAGES + product.getPhoto())
+                .load(product.getPhoto())
                 .into(Image);
         Libelle.setText(product.getLibelle());
         PrixHT.setText(product.getPrixHT() + "");

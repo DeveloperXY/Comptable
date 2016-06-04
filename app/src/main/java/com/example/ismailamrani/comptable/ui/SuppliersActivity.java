@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -108,19 +109,30 @@ public class SuppliersActivity extends RefreshableActivity {
                             List<Supplier> supplierList = Supplier.parseSuppliers(suppliers);
 
                             if (ListComparison.areEqual(mSuppliers, supplierList))
-                                runOnUiThread(this::handleDataChange);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                    }
+                                });
                             else {
                                 mSuppliers = supplierList;
-                                runOnUiThread(() -> {
-                                    handleDataChange();
-                                    populateRecyclerView();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                        populateRecyclerView();
+                                    }
                                 });
                             }
 
-                            runOnUiThread(() -> {
-                                populateRecyclerView();
-                                progressBar.setVisibility(View.INVISIBLE);
-                                dataRecyclerView.requestLayout();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    populateRecyclerView();
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    dataRecyclerView.requestLayout();
+                                }
                             });
 
                         } catch (JSONException e) {
@@ -135,7 +147,12 @@ public class SuppliersActivity extends RefreshableActivity {
 
                     @Override
                     public void onNetworkError() {
-                        runOnUiThread(() -> handleRequestError());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                handleRequestError();
+                            }
+                        });
                     }
 
                     private void handleDataChange() {
@@ -193,17 +210,22 @@ public class SuppliersActivity extends RefreshableActivity {
             supplierAdapter.animateTo(mSuppliers);
     }
 
-    private void deleteSupplier(String supplierID) {
+    private void deleteSupplier(final String supplierID) {
         DialogUtil.showMutliDialog(
                 SuppliersActivity.this,
                 "Remove supplier",
                 "Are you sure that you want to remove this supplier from your suppliers' list ?",
                 "Yes",
-                (dialog, which) -> sendHTTPRequest(
-                        PhpAPI.removeFournisseur,
-                        JSONUtils.bundleIDToJSON(supplierID),
-                        Method.POST,
-                        new DeleteSupplierListener()),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendHTTPRequest(
+                                PhpAPI.removeFournisseur,
+                                JSONUtils.bundleIDToJSON(supplierID),
+                                Method.POST,
+                                new DeleteSupplierListener());
+                    }
+                },
                 "No", null);
     }
 
@@ -229,10 +251,13 @@ public class SuppliersActivity extends RefreshableActivity {
 
         @Override
         public void onRequestSucceeded(JSONObject response) {
-            runOnUiThread(() -> {
-                Toast.makeText(SuppliersActivity.this, "Supplier removed.",
-                        Toast.LENGTH_LONG).show();
-                refresh();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(SuppliersActivity.this, "Supplier removed.",
+                            Toast.LENGTH_LONG).show();
+                    refresh();
+                }
             });
         }
     }

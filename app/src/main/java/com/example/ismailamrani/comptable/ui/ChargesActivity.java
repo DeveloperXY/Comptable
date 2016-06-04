@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
 import com.example.ismailamrani.comptable.models.Charge;
@@ -170,7 +171,12 @@ public class ChargesActivity extends RefreshableActivity {
 
         @Override
         public void onNetworkError() {
-            runOnUiThread(ChargesActivity.this::handleRequestError);
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    handleRequestError();
+                }
+            });
         }
 
         private class ServerTimeListener implements RequestListener {
@@ -184,24 +190,27 @@ public class ChargesActivity extends RefreshableActivity {
 
                     setChargesTiming();
 
-                    runOnUiThread(() -> {
-                        // To avoid the refresh flicker caused by the call to
-                        // populateRecyclerView(), check if the newly parsed
-                        // list of Charge objects is exactly the same as the
-                        // old one
-                        if (!ListComparison.areEqual(mCharges, charges)) {
-                            mCharges = charges;
-                            dataRecyclerView.scrollToPosition(0);
-                            populateRecyclerView();
-                            calculateTotalPrice();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // To avoid the refresh flicker caused by the call to
+                            // populateRecyclerView(), check if the newly parsed
+                            // list of Charge objects is exactly the same as the
+                            // old one
+                            if (!ListComparison.areEqual(mCharges, charges)) {
+                                mCharges = charges;
+                                dataRecyclerView.scrollToPosition(0);
+                                populateRecyclerView();
+                                calculateTotalPrice();
+                            }
+
+                            if (mCharges == null)
+                                mCharges = new ArrayList<>();
+
+                            stopSwipeRefresh();
+                            toggleRecyclerviewState();
+                            progressBar.setVisibility(View.INVISIBLE);
                         }
-
-                        if (mCharges == null)
-                            mCharges = new ArrayList<>();
-
-                        stopSwipeRefresh();
-                        toggleRecyclerviewState();
-                        progressBar.setVisibility(View.INVISIBLE);
                     });
 
                 } catch (JSONException | ParseException e) {
@@ -215,32 +224,40 @@ public class ChargesActivity extends RefreshableActivity {
             }
 
             private void setChargesTiming() {
-                DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                final DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Stream.of(charges)
-                        .forEach(charge -> {
-                            // Calculate the relative time span for each element
-                            try {
-                                long dateInMillis = format.parse(charge.getDate()).getTime();
-                                long secondsDifference = (currentServerTime - dateInMillis) / 1000;
+                        .forEach(new Consumer<Charge>() {
+                            @Override
+                            public void accept(Charge charge) {
+                                // Calculate the relative time span for each element
+                                try {
+                                    long dateInMillis = format.parse(charge.getDate()).getTime();
+                                    long secondsDifference = (currentServerTime - dateInMillis) / 1000;
 
-                                if (secondsDifference < 60) {
-                                    charge.setDateFrom("A few seconds ago");
-                                } else {
-                                    charge.setDateFrom(
-                                            DateUtils.getRelativeTimeSpanString(
-                                                    dateInMillis, currentServerTime,
-                                                    DateUtils.MINUTE_IN_MILLIS).toString());
+                                    if (secondsDifference < 60) {
+                                        charge.setDateFrom("A few seconds ago");
+                                    } else {
+                                        charge.setDateFrom(
+                                                DateUtils.getRelativeTimeSpanString(
+                                                        dateInMillis, currentServerTime,
+                                                        DateUtils.MINUTE_IN_MILLIS).toString());
+                                    }
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
                                 }
-
-                            } catch (ParseException e) {
-                                e.printStackTrace();
                             }
                         });
             }
 
             @Override
             public void onNetworkError() {
-                runOnUiThread(ChargesActivity.this::handleRequestError);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        handleRequestError();
+                    }
+                });
             }
         }
     }

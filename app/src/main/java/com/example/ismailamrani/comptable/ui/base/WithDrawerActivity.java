@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DrawerRecyclerAdapter;
@@ -88,26 +89,29 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         icons.recycle();
 
         mDrawerRecyclerAdapter = new DrawerRecyclerAdapter(drawerItems);
-        mDrawerRecyclerAdapter.setDrawerClickListener((drawerItem, clickedImage) -> {
-            Intent intent = drawerItem.getIntent();
-            if (intent != null) {
-                // TODO: hack; this code will break if you move the HomeActivity class into another package
-                if (intent.getComponent().getShortClassName().equals(".ui.startup.HomeActivity")) {
-                    ActivityCompat.finishAffinity(this);
-                    startActivity(intent);
+        mDrawerRecyclerAdapter.setDrawerClickListener(new DrawerRecyclerAdapter.DrawerClickListener() {
+            @Override
+            public void onItemClicked(DrawerItem drawerItem, View clickedImage) {
+                Intent intent = drawerItem.getIntent();
+                if (intent != null) {
+                    // TODO: hack; this code will break if you move the HomeActivity class into another package
+                    if (intent.getComponent().getShortClassName().equals(".ui.startup.HomeActivity")) {
+                        ActivityCompat.finishAffinity(WithDrawerActivity.this);
+                        startActivity(intent);
+                    }
+                    else {
+                        activityShouldFinish();
+
+                        intent.putExtra("imageRes", drawerItem.getIcon());
+                        ActivityTransition.startActivityWithSharedElement(
+                                WithDrawerActivity.this, intent, clickedImage, "menuAnim");
+                    }
+
+                    drawerLayout.closeDrawer(drawerRecyclerView);
                 }
                 else {
-                    activityShouldFinish();
-
-                    intent.putExtra("imageRes", drawerItem.getIcon());
-                    ActivityTransition.startActivityWithSharedElement(
-                            this, intent, clickedImage, "menuAnim");
+                    logout();
                 }
-
-                drawerLayout.closeDrawer(drawerRecyclerView);
-            }
-            else {
-                logout();
             }
         });
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));

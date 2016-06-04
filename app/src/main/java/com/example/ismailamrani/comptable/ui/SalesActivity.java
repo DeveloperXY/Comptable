@@ -6,12 +6,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
+import com.annimon.stream.function.Function;
+import com.annimon.stream.function.Predicate;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
@@ -70,15 +74,24 @@ public class SalesActivity extends WithDrawerActivity {
 
         toBeSoldProducts = new ArrayList<>();
         productAdapter = new ProductOrderAdapter(this, toBeSoldProducts);
-        productAdapter.setListener(this::calculateTotalPrice);
+        productAdapter.setListener(new ProductOrderAdapter.SaleProductListener() {
+            @Override
+            public void onProductRemoved() {
+                calculateTotalPrice();
+            }
+        });
         productsListview.setAdapter(productAdapter);
     }
 
     private void initializeUI() {
         setupActionBar();
 
-        allowEditCheckbox.setOnCheckedChangeListener(
-                (buttonView, isChecked) -> priceField.setEnabled(isChecked));
+        allowEditCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                priceField.setEnabled(isChecked);
+            }
+        });
     }
 
     @Override
@@ -183,7 +196,7 @@ public class SalesActivity extends WithDrawerActivity {
 
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
-                        StringBuilder sb = new StringBuilder();
+                        final StringBuilder sb = new StringBuilder();
                         try {
                             JSONArray messages = response.getJSONArray("message");
                             for (int i = 0; i < messages.length(); i++) {
@@ -195,7 +208,12 @@ public class SalesActivity extends WithDrawerActivity {
                             e.printStackTrace();
                         }
 
-                        runOnUiThread(() -> showQuantityErrorDialog(sb.toString()));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showQuantityErrorDialog(sb.toString());
+                            }
+                        });
                     }
                 });
     }
@@ -245,14 +263,28 @@ public class SalesActivity extends WithDrawerActivity {
      */
     private boolean allProductInfosArePresent() {
         return Stream.of(barCodeField, quantityField, priceField)
-                .map(EditText::getText)
-                .map(Editable::toString)
-                .noneMatch(String::isEmpty);
+                .map(new Function<EditText, String>() {
+                    @Override
+                    public String apply(EditText field) {
+                        return field.getText().toString();
+                    }
+                })
+                .noneMatch(new Predicate<String>() {
+                    @Override
+                    public boolean test(String value) {
+                        return value.isEmpty();
+                    }
+                });
     }
 
     private void resetTextFields() {
         Stream.of(barCodeField, quantityField, priceField)
-                .forEach(field -> field.setText(""));
+                .forEach(new Consumer<EditText>() {
+                    @Override
+                    public void accept(EditText field) {
+                        field.setText("");
+                    }
+                });
     }
 
     @Override
@@ -287,10 +319,13 @@ public class SalesActivity extends WithDrawerActivity {
                             JSONObject product = productList.getJSONObject(0);
                             mProduct = new Product(product);
 
-                            runOnUiThread(() -> {
-                                quantityField.setText("1");
-                                barCodeField.setText(mProduct.getCodeBarre());
-                                priceField.setText(mProduct.getPrixTTC() + "");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    quantityField.setText("1");
+                                    barCodeField.setText(mProduct.getCodeBarre());
+                                    priceField.setText(mProduct.getPrixTTC() + "");
+                                }
                             });
 
                         } catch (JSONException e) {

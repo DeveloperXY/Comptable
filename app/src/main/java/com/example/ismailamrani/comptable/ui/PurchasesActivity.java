@@ -1,7 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -10,12 +9,16 @@ import android.widget.Toast;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Consumer;
+import com.annimon.stream.function.Function;
+import com.annimon.stream.function.Predicate;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ProductOrderAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.models.Supplier;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.ui.dialogs.PurchaseChooserDialog;
+import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
@@ -72,7 +75,12 @@ public class PurchasesActivity extends WithDrawerActivity {
         suppliers = new ArrayList<>();
 
         productAdapter = new ProductOrderAdapter(this, toBeBoughtProducts);
-        productAdapter.setListener(this::calculateTotalPrice);
+        productAdapter.setListener(new ProductOrderAdapter.SaleProductListener() {
+            @Override
+            public void onProductRemoved() {
+                calculateTotalPrice();
+            }
+        });
         productsListview.setAdapter(productAdapter);
     }
 
@@ -99,12 +107,17 @@ public class PurchasesActivity extends WithDrawerActivity {
                 , spinnerID);
     }
 
-    void fetchDialogItems(String url, JSONObject data, int spinnerID) {
+    void fetchDialogItems(String url, JSONObject data, final int spinnerID) {
         sendHTTPRequest(url, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override
-                    public void onRequestSucceeded(JSONObject response) {
-                        runOnUiThread(() -> prepareDialogData(response, spinnerID));
+                    public void onRequestSucceeded(final JSONObject response) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                prepareDialogData(response, spinnerID);
+                            }
+                        });
                     }
                 });
     }
@@ -118,8 +131,13 @@ public class PurchasesActivity extends WithDrawerActivity {
             try {
                 products = Product.parseProducts(response.getJSONArray("produit"));
                 items = Stream.of(products)
-                        .map(Product::getLibelle)
-                        .collect(Collectors.toList());
+                        .map(new Function<Product, String>() {
+                            @Override
+                            public String apply(Product value) {
+                                return value.getLibelle();
+                            }
+                        })
+                        .collect(Collectors.<String>toList());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -128,8 +146,13 @@ public class PurchasesActivity extends WithDrawerActivity {
             try {
                 suppliers = Supplier.parseSuppliers(response.getJSONArray("fournisseur"));
                 items = Stream.of(suppliers)
-                        .map(Supplier::getNom)
-                        .collect(Collectors.toList());
+                        .map(new Function<Supplier, String>() {
+                            @Override
+                            public String apply(Supplier value) {
+                                return value.getNom();
+                            }
+                        })
+                        .collect(Collectors.<String>toList());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -138,25 +161,38 @@ public class PurchasesActivity extends WithDrawerActivity {
         showChooserDialog(hint, items, spinnerID);
     }
 
-    private void showChooserDialog(String searchHint, List<String> items, int spinnerID) {
+    private void showChooserDialog(String searchHint, List<String> items, final int spinnerID) {
         new PurchaseChooserDialog(this, spinnerID)
                 .whoseItemsAre(items)
                 .whoseSearchHintIs(searchHint)
-                .runWhenItemSelected(item -> {
-                    if (spinnerID == R.id.productSpinner) {
-                        // A product has been selected
-                        selectedProduct = Stream.of(products)
-                                .filter(p -> p.getLibelle().equals(item))
-                                .findFirst()
-                                .get();
-                        productField.setText(selectedProduct.getLibelle());
-                    } else {
-                        // A supplier has been selected
-                        selectedSupplier = Stream.of(suppliers)
-                                .filter(s -> s.getNom().equals(item))
-                                .findFirst()
-                                .get();
-                        supplierField.setText(selectedSupplier.getNom());
+                .runWhenItemSelected(new ChooserDialog.OnItemSelectionListener<String>() {
+                    @Override
+                    public void onItemSelected(final String item) {
+                        if (spinnerID == R.id.productSpinner) {
+                            // A product has been selected
+                            selectedProduct = Stream.of(products)
+                                    .filter(new Predicate<Product>() {
+                                        @Override
+                                        public boolean test(Product p) {
+                                            return p.getLibelle().equals(item);
+                                        }
+                                    })
+                                    .findFirst()
+                                    .get();
+                            productField.setText(selectedProduct.getLibelle());
+                        } else {
+                            // A supplier has been selected
+                            selectedSupplier = Stream.of(suppliers)
+                                    .filter(new Predicate<Supplier>() {
+                                        @Override
+                                        public boolean test(Supplier s) {
+                                            return s.getNom().equals(item);
+                                        }
+                                    })
+                                    .findFirst()
+                                    .get();
+                            supplierField.setText(selectedSupplier.getNom());
+                        }
                     }
                 })
                 .show();
@@ -198,8 +234,7 @@ public class PurchasesActivity extends WithDrawerActivity {
      * @param view
      */
     public void onConfirm(View view) {
-        JSONArray summary = productAdapter.getSummary()
-        ;
+        JSONArray summary = productAdapter.getSummary();
 
         if (summary.length() == 0)
             Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
@@ -258,13 +293,27 @@ public class PurchasesActivity extends WithDrawerActivity {
      */
     private boolean allProductInfosArePresent() {
         return Stream.of(supplierField, productField, quantityField, priceField)
-                .map(EditText::getText)
-                .map(Editable::toString)
-                .noneMatch(String::isEmpty);
+                .map(new Function<EditText, String>() {
+                    @Override
+                    public String apply(EditText field) {
+                        return field.getText().toString();
+                    }
+                })
+                .noneMatch(new Predicate<String>() {
+                    @Override
+                    public boolean test(String value) {
+                        return value.isEmpty();
+                    }
+                });
     }
 
     private void resetTextFields() {
         Stream.of(supplierField, productField, quantityField, priceField)
-                .forEach(field -> field.setText(""));
+                .forEach(new Consumer<EditText>() {
+                    @Override
+                    public void accept(EditText field) {
+                        field.setText("");
+                    }
+                });
     }
 }

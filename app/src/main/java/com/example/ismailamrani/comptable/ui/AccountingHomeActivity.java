@@ -52,11 +52,15 @@ public class AccountingHomeActivity extends AnimatedActivity {
     private void setupLocalesListView() {
         List<Local> locales = mDatabaseAdapter.retrieveCurrentLocales();
         LocaleAdapter localeAdapter = new LocaleAdapter(this, locales);
-        localeAdapter.setListener(localeID -> {
-            Intent intent = new Intent(this, AccountingDetailsActivity.class);
-            intent.putExtra("localeID", localeID);
-            intent.putExtra(AnimatedActivity.TURN_OFF_HEADER_ANIMATION, true);
-            startActivity(intent);
+        localeAdapter.setListener(new LocaleAdapter.LocaleClickListener() {
+            @Override
+            public void onLocaleSelected(int localeID) {
+                Intent intent = new Intent(AccountingHomeActivity.this,
+                        AccountingDetailsActivity.class);
+                intent.putExtra("localeID", localeID);
+                intent.putExtra(AnimatedActivity.TURN_OFF_HEADER_ANIMATION, true);
+                startActivity(intent);
+            }
         });
         localeListView.setAdapter(localeAdapter);
     }
@@ -73,15 +77,18 @@ public class AccountingHomeActivity extends AnimatedActivity {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
                         try {
-                            JSONObject details = response.getJSONArray("comptabilite")
+                            final JSONObject details = response.getJSONArray("comptabilite")
                                     .getJSONObject(0);
 
-                            runOnUiThread(() -> {
-                                try {
-                                    totalProfitLabel.setText(
-                                            details.getString("ProfitTotalSociete") + " DH");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        totalProfitLabel.setText(
+                                                details.getString("ProfitTotalSociete") + " DH");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
                         } catch (JSONException e) {

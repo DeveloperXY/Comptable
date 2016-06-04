@@ -100,14 +100,17 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
                         try {
-                            JSONObject details = response.getJSONArray("comptabilite")
+                            final JSONObject details = response.getJSONArray("comptabilite")
                                     .getJSONObject(0);
 
-                            runOnUiThread(() -> {
-                                try {
-                                    showData(details);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        showData(details);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             });
 

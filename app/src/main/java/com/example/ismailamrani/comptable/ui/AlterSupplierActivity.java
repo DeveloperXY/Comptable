@@ -69,38 +69,44 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
     }
 
     private void setupClickListeners() {
-        View.OnClickListener createListener = v -> {
-            Supplier supplier = validateSupplierInfos(
-                    nom.getText().toString(),
-                    gsm.getText().toString(),
-                    adresse.getText().toString(),
-                    fixField.getText().toString(),
-                    fax.getText().toString(),
-                    email.getText().toString());
+        View.OnClickListener createListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Supplier supplier = validateSupplierInfos(
+                        nom.getText().toString(),
+                        gsm.getText().toString(),
+                        adresse.getText().toString(),
+                        fixField.getText().toString(),
+                        fax.getText().toString(),
+                        email.getText().toString());
 
-            if (supplier != null)
-                createSupplier(supplier);
+                if (supplier != null)
+                    createSupplier(supplier);
+            }
         };
 
-        View.OnClickListener updateListener = v -> {
-            Supplier supplier = validateSupplierInfos(
-                    nom.getText().toString(),
-                    gsm.getText().toString(),
-                    adresse.getText().toString(),
-                    fixField.getText().toString(),
-                    fax.getText().toString(),
-                    email.getText().toString());
+        View.OnClickListener updateListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Supplier supplier = validateSupplierInfos(
+                        nom.getText().toString(),
+                        gsm.getText().toString(),
+                        adresse.getText().toString(),
+                        fixField.getText().toString(),
+                        fax.getText().toString(),
+                        email.getText().toString());
 
-            if (supplier != null) {
-                selectedSupplier.setNom(nom.getText().toString());
-                selectedSupplier.setTel(gsm.getText().toString());
-                selectedSupplier.setFax(fax.getText().toString());
-                selectedSupplier.setFix(fixField.getText().toString());
-                selectedSupplier.setAdresse(adresse.getText().toString());
-                selectedSupplier.setEmail(email.getText().toString());
-                selectedSupplier.setUrl(PhpAPI.editFournisseur);
+                if (supplier != null) {
+                    selectedSupplier.setNom(nom.getText().toString());
+                    selectedSupplier.setTel(gsm.getText().toString());
+                    selectedSupplier.setFax(fax.getText().toString());
+                    selectedSupplier.setFix(fixField.getText().toString());
+                    selectedSupplier.setAdresse(adresse.getText().toString());
+                    selectedSupplier.setEmail(email.getText().toString());
+                    selectedSupplier.setUrl(PhpAPI.editFournisseur);
 
-                updateSupplier();
+                    updateSupplier();
+                }
             }
         };
 
@@ -177,8 +183,13 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
                     public void onRequestSucceeded(JSONObject response) {
                         setResult(ResultCodes.SUPPLIER_CREATED);
                         finish();
-                        runOnUiThread(() -> Toast.makeText(AlterSupplierActivity.this,
-                                "Supplier successfully created.", Toast.LENGTH_LONG).show());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AlterSupplierActivity.this,
+                                        "Supplier successfully created.", Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
     }
@@ -200,8 +211,13 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
                     public void onRequestSucceeded(JSONObject response) {
                         setResult(ResultCodes.SUPPLIER_UPDATED);
                         finish();
-                        runOnUiThread(() -> Toast.makeText(AlterSupplierActivity.this,
-                                "Supplier altered.", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(AlterSupplierActivity.this,
+                                        "Supplier altered.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
     }

@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -77,30 +78,46 @@ public class ModifierProduitActivity extends ColoredStatusBarActivity {
         id = intent.getExtras().getInt("id");
         new getproduitbyid().execute(PhpAPI.getProduitById);
 
-        produitImage.setOnClickListener(v -> {
-            Intent intent1 = new Intent();
-            intent1.setType("image/*");
-            intent1.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent1, "Select Picture"), RESULT_LOAD_IMAGE);
+        produitImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent();
+                intent1.setType("image/*");
+                intent1.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent1, "Select Picture"), RESULT_LOAD_IMAGE);
+            }
         });
 
-        enregistrer.setOnClickListener(v -> {
-            Product product = new Product();
-            product.setLibelle(nomProduit.getText().toString());
-            product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
-            product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
-            product.setPhoto(codeimage);
-            product.setCodeBarre(CodeBarre.getText().toString());
-            product.setUrl(PhpAPI.editproduit);
-            product.setLocale_ID(1);
-            product.setQte(0);
-            new editproduit().execute(product);
+        enregistrer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Product product = new Product();
+                product.setLibelle(nomProduit.getText().toString());
+                product.setPrixHT(Double.parseDouble(PrixHt.getText().toString()));
+                product.setPrixTTC(Double.parseDouble(PrixTtc.getText().toString()));
+                product.setPhoto(codeimage);
+                product.setCodeBarre(CodeBarre.getText().toString());
+                product.setUrl(PhpAPI.editproduit);
+                product.setLocale_ID(1);
+                product.setQte(0);
+                new editproduit().execute(product);
+            }
         });
 
-        AddCodeBarre.setOnClickListener(v -> {
-            IntentIntegrator scanIntegrator = new IntentIntegrator((Activity) context);
-            scanIntegrator.initiateScan();
+        AddCodeBarre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator scanIntegrator = new IntentIntegrator((Activity) context);
+                scanIntegrator.initiateScan();
+            }
         });
+    }
+
+    @Override
+    protected void setupActionBar() {
+        super.setupActionBar();
+
+        mActionBar.setTitle("Modifier produit");
     }
 
     private class getproduitbyid extends AsyncTask<String, Void, String> {

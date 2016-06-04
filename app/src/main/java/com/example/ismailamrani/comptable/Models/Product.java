@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -251,12 +252,17 @@ public class Product implements Item, Parcelable {
      * @param query    based upon the products will be filtered
      * @return the filtered list of products
      */
-    public static List<Product> filter(List<Product> products, String query) {
+    public static List<Product> filter(List<Product> products, final String query) {
         return Stream.of(products)
-                .filter(product -> product.getLabel()
-                        .toLowerCase()
-                        .contains(query.toLowerCase()))
-                .collect(Collectors.toList());
+                .filter(new Predicate<Product>() {
+                    @Override
+                    public boolean test(Product value) {
+                        return value.getLabel()
+                                .toLowerCase()
+                                .contains(query.toLowerCase());
+                    }
+                })
+                .collect(Collectors.<Product>toList());
     }
 
     @Override

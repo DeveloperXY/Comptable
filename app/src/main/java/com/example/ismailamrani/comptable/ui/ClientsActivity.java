@@ -1,5 +1,6 @@
 package com.example.ismailamrani.comptable.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -108,19 +109,30 @@ public class ClientsActivity extends RefreshableActivity {
                             List<Client> clients = Client.parseClients(productList);
 
                             if (ListComparison.areEqual(mClients, clients))
-                                runOnUiThread(this::handleDataChange);
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                    }
+                                });
                             else {
                                 mClients = clients;
-                                runOnUiThread(() -> {
-                                    handleDataChange();
-                                    populateRecyclerView();
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        handleDataChange();
+                                        populateRecyclerView();
+                                    }
                                 });
                             }
 
-                            runOnUiThread(() -> {
-                                populateRecyclerView();
-                                progressBar.setVisibility(View.INVISIBLE);
-                                dataRecyclerView.requestLayout();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    populateRecyclerView();
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    dataRecyclerView.requestLayout();
+                                }
                             });
 
                         } catch (JSONException e) {
@@ -141,7 +153,12 @@ public class ClientsActivity extends RefreshableActivity {
 
                     @Override
                     public void onNetworkError() {
-                        runOnUiThread(() -> handleRequestError());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                handleRequestError();
+                            }
+                        });
                     }
                 });
     }
@@ -211,17 +228,22 @@ public class ClientsActivity extends RefreshableActivity {
             mClientAdapter.animateTo(mClients);
     }
 
-    private void deleteClient(String clientID) {
+    private void deleteClient(final String clientID) {
         DialogUtil.showMutliDialog(
                 ClientsActivity.this,
                 "Remove client",
                 "Are you sure that you want to remove this client from your clients' list ?",
                 "Yes",
-                (dialog, which) -> sendHTTPRequest(
-                        PhpAPI.removeClient,
-                        JSONUtils.bundleIDToJSON(clientID),
-                        Method.POST,
-                        new DeleteClientListener()),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendHTTPRequest(
+                                PhpAPI.removeClient,
+                                JSONUtils.bundleIDToJSON(clientID),
+                                Method.POST,
+                                new DeleteClientListener());
+                    }
+                },
                 "No", null);
     }
 
@@ -229,10 +251,13 @@ public class ClientsActivity extends RefreshableActivity {
 
         @Override
         public void onRequestSucceeded(JSONObject response) {
-            runOnUiThread(() -> {
-                Toast.makeText(ClientsActivity.this, "Client removed.",
-                        Toast.LENGTH_LONG).show();
-                refresh();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ClientsActivity.this, "Client removed.",
+                            Toast.LENGTH_LONG).show();
+                    refresh();
+                }
             });
         }
     }

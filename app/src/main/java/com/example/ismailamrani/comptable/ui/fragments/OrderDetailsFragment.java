@@ -77,17 +77,23 @@ public class OrderDetailsFragment extends Fragment {
 
     private void setupFacturerButton() {
         facturerButton.setVisibility(currentOrderStatus == 1 ? View.INVISIBLE : View.VISIBLE);
-        facturerButton.setOnClickListener(view -> {
-            if (listener != null)
-                listener.chargeOrder(new SuccessRequestListener() {
-                    @Override
-                    public void onRequestSucceeded(JSONObject response) {
-                        getActivity().runOnUiThread(() -> {
-                            facturerButton.setVisibility(View.INVISIBLE);
-                            listener.onOrderCharged();
-                        });
-                    }
-                });
+        facturerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null)
+                    listener.chargeOrder(new SuccessRequestListener() {
+                        @Override
+                        public void onRequestSucceeded(JSONObject response) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    facturerButton.setVisibility(View.INVISIBLE);
+                                    listener.onOrderCharged();
+                                }
+                            });
+                        }
+                    });
+            }
         });
     }
 
@@ -103,12 +109,15 @@ public class OrderDetailsFragment extends Fragment {
         public void onRequestSucceeded(JSONObject response) {
             try {
                 JSONArray jsonArray = response.getJSONArray("orderDetails");
-                List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
+                final List<OrderDetail> details = OrderDetail.parseSuppliers(jsonArray);
 
-                getActivity().runOnUiThread(() -> {
-                    adapter = new OrderDetailsAdapter(getActivity(), details);
-                    totalValueLabel.setText("" + adapter.getTotalPrice() + " DH");
-                    detailsListView.setAdapter(adapter);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter = new OrderDetailsAdapter(getActivity(), details);
+                        totalValueLabel.setText("" + adapter.getTotalPrice() + " DH");
+                        detailsListView.setAdapter(adapter);
+                    }
                 });
 
 

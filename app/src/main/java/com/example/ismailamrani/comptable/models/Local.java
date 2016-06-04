@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.models;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.annimon.stream.function.Predicate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -163,10 +164,15 @@ public class Local {
                 '}';
     }
 
-    public static List<Local> filter(List<Local> items, String query) {
+    public static List<Local> filter(List<Local> items, final String query) {
         return Stream.of(items)
-                .filter(item -> item.getAddress().toLowerCase()
-                        .contains(query.toLowerCase()))
-                .collect(Collectors.toList());
+                .filter(new Predicate<Local>() {
+                    @Override
+                    public boolean test(Local value) {
+                        return value.getAddress().toLowerCase()
+                                .contains(query.toLowerCase());
+                    }
+                })
+                .collect(Collectors.<Local>toList());
     }
 }
