@@ -5,6 +5,7 @@ import android.support.v7.widget.SearchView;
 
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
 import com.example.ismailamrani.comptable.models.Local;
+import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
 
 import java.util.List;
 

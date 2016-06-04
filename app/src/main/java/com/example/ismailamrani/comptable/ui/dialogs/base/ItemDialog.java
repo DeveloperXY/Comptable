@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.dialogs;
+package com.example.ismailamrani.comptable.ui.dialogs.base;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -30,6 +30,9 @@ public abstract class ItemDialog<T> extends Dialog {
     protected TextView phoneLabel;
 
     protected Context mContext;
+    /**
+     * The item that is currently being viewed.
+     */
     protected T item;
 
     public ItemDialog(Context context, T item) {
@@ -59,5 +62,8 @@ public abstract class ItemDialog<T> extends Dialog {
         bind(item);
     }
 
+    /**
+     * @param item whose info are to be displayed.
+     */
     protected abstract void bind(T item);
 }

@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 import android.content.Context;
 
 import com.example.ismailamrani.comptable.models.Client;
+import com.example.ismailamrani.comptable.ui.dialogs.base.ItemDialog;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 01/06/2016.

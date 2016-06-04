@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.adapters;
+package com.example.ismailamrani.comptable.adapters.base;
 
 import android.content.Context;
 

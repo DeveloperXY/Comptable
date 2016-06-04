@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.ui.dialogs;
+package com.example.ismailamrani.comptable.ui.dialogs.base;
 
 import android.app.Activity;
 import android.app.Dialog;

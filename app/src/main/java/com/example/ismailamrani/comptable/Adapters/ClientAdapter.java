@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.base.BaseSearchAdapter;
+import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
 import com.example.ismailamrani.comptable.models.Client;
 
 import java.util.List;

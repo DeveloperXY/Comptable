@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
+import com.example.ismailamrani.comptable.adapters.base.BaseSearchAdapter;
+import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
 import com.example.ismailamrani.comptable.models.Charge;
 
 import java.util.List;

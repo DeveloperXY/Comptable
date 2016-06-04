@@ -25,7 +25,7 @@ import com.example.ismailamrani.comptable.ui.ProductsActivity;
 import com.example.ismailamrani.comptable.ui.StockActivity;
 import com.example.ismailamrani.comptable.ui.SuppliersActivity;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
-import com.example.ismailamrani.comptable.ui.dialogs.ChooserDialog;
+import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
 import com.example.ismailamrani.comptable.ui.dialogs.LocalChooserDialog;
 import com.example.ismailamrani.comptable.utils.parsing.Orders;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;

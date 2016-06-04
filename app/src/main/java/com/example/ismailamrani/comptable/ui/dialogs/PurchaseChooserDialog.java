@@ -10,6 +10,7 @@ import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
 import com.example.ismailamrani.comptable.ui.AlterSupplierActivity;
 import com.example.ismailamrani.comptable.ui.AddProductActivity;
+import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
 
 import java.util.List;
 
