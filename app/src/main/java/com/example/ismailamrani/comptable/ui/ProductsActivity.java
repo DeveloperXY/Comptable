@@ -67,6 +67,10 @@ public class ProductsActivity extends RefreshableActivity {
         emptyMessageLabel.setText("There is no data to show.\nClick to refresh.");
     }
 
+    public void onErrorViewPressed(View view) {
+        refresh();
+    }
+
     private void populateRecyclerView() {
         if (mProductsAdapter == null) {
             mProductsAdapter = new ProductsAdapter(this, mProducts);

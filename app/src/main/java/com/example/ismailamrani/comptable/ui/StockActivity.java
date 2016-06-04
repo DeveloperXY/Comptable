@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -52,6 +53,9 @@ public class StockActivity extends RefreshableActivity
 
     @Bind(R.id.actionBarContainer)
     RelativeLayout actionBarContainer;
+
+    @Bind(R.id.scanFAB)
+    Button scanFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +183,7 @@ public class StockActivity extends RefreshableActivity
                                 })
                                 .findFirst()
                                 .get();
-                    }
-                    catch (NoSuchElementException e) {
+                    } catch (NoSuchElementException e) {
                         requestedProduct = null;
                     }
 
@@ -188,8 +191,7 @@ public class StockActivity extends RefreshableActivity
                         Snackbar.make(getWindow().getDecorView(),
                                 "No product was found matching your query.",
                                 Snackbar.LENGTH_LONG).show();
-                    }
-                    else {
+                    } else {
                         intent.putExtra("product", requestedProduct);
                         startActivity(intent);
                     }
@@ -206,6 +208,7 @@ public class StockActivity extends RefreshableActivity
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
+                        scanFAB.setVisibility(View.VISIBLE);
                         try {
                             List<Product> products = Product.parseProducts(
                                     response.getJSONArray("products"));
@@ -234,7 +237,7 @@ public class StockActivity extends RefreshableActivity
 
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
-
+                        scanFAB.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -243,6 +246,7 @@ public class StockActivity extends RefreshableActivity
                             @Override
                             public void run() {
                                 handleRequestError();
+                                scanFAB.setVisibility(View.INVISIBLE);
                             }
                         });
                     }

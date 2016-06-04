@@ -57,7 +57,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ModifierProduitActivity"
+            android:name=".ui.UpdateProductActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
         <activity
