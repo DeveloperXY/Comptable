@@ -21,6 +21,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 import com.squareup.picasso.Picasso;
 
@@ -133,6 +134,7 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
                                         Toast.LENGTH_LONG).show();
                             }
                         });
+                        setResult(ResultCodes.PRODUCT_UPDATED);
                         finish();
                     }
 

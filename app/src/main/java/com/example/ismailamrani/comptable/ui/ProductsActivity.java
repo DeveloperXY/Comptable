@@ -16,6 +16,7 @@ import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
+import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
 import org.json.JSONArray;
@@ -32,6 +33,9 @@ import butterknife.ButterKnife;
  * Altered by Mohammed Aouf ZOUAG on 04/06/2016.
  */
 public class ProductsActivity extends RefreshableActivity {
+
+    private static final int REQUEST_ADD_PRODUCT = 1;
+    private static final int REQUEST_UPDATE_PRODUCT = 2;
 
     private List<Product> mProducts;
     private ProductsAdapter mProductsAdapter;
@@ -67,6 +71,21 @@ public class ProductsActivity extends RefreshableActivity {
         emptyMessageLabel.setText("There is no data to show.\nClick to refresh.");
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_ADD_PRODUCT:
+            case REQUEST_UPDATE_PRODUCT:
+                switch (resultCode) {
+                    case ResultCodes.PRODUCT_ADDED:
+                    case ResultCodes.PRODUCT_UPDATED:
+                        refresh();
+                        break;
+                }
+                break;
+        }
+    }
+
     public void onErrorViewPressed(View view) {
         refresh();
     }
@@ -79,6 +98,13 @@ public class ProductsActivity extends RefreshableActivity {
                 public void onDeleteProduct(String url, JSONObject params, Method method) {
                     mLoadingDialog.show();
                     sendHTTPRequest(url, params, method, new DeleteRequestListener());
+                }
+
+                @Override
+                public void onEditProduct(Product product) {
+                    Intent i = new Intent(ProductsActivity.this, UpdateProductActivity.class);
+                    i.putExtra("product", product);
+                    startActivityForResult(i, REQUEST_UPDATE_PRODUCT);
                 }
             });
             dataRecyclerView.setAdapter(mProductsAdapter);
@@ -148,7 +174,7 @@ public class ProductsActivity extends RefreshableActivity {
 
     @Override
     public void onAddPressed() {
-        startActivity(new Intent(this, AddProductActivity.class));
+        startActivityForResult(new Intent(this, AddProductActivity.class), REQUEST_ADD_PRODUCT);
     }
 
     @Override
