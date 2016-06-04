@@ -14,27 +14,17 @@
 
         <include layout="@layout/custom_actionbar_include"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"></RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="220"
+            android:layout_weight="226"
             android:orientation="horizontal"
             android:weightSum="144">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"></RelativeLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="140"
+                android:layout_weight="144"
                 android:background="@mipmap/ic_bg_add"
                 android:orientation="vertical"
                 android:weightSum="220">
@@ -116,14 +106,14 @@
                         costum:Font="cgr.ttf"
                         costum:Frensh=""
                         costum:Size="12"
-                        />
+                        android:inputType="textCapWords"/>
 
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2"></RelativeLayout>
+                    android:layout_weight="2"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -161,7 +151,7 @@
                             costum:Font="cgr.ttf"
                             costum:Frensh=""
                             costum:Size="12"
-                            />
+                            android:inputType="numberDecimal"/>
 
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -213,7 +203,7 @@
                             costum:Font="cgr.ttf"
                             costum:Frensh=""
                             costum:Size="12"
-                            />
+                            android:inputType="numberDecimal"/>
 
                         <RelativeLayout
                             android:layout_width="0dp"
@@ -241,7 +231,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3"></RelativeLayout>
+                    android:layout_weight="3"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

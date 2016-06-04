@@ -2,11 +2,11 @@ package com.example.ismailamrani.comptable.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -55,7 +55,7 @@ public class StockActivity extends RefreshableActivity
     RelativeLayout actionBarContainer;
 
     @Bind(R.id.scanFAB)
-    Button scanFAB;
+    FloatingActionButton scanFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,7 +208,12 @@ public class StockActivity extends RefreshableActivity
                 new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
-                        scanFAB.setVisibility(View.VISIBLE);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                scanFAB.setVisibility(View.VISIBLE);
+                            }
+                        });
                         try {
                             List<Product> products = Product.parseProducts(
                                     response.getJSONArray("products"));

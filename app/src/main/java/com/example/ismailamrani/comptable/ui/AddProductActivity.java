@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
@@ -168,6 +169,20 @@ public class AddProductActivity extends WithDrawerActivity
                                         Toast.LENGTH_LONG).show();
                             }
                         });
+                    }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+                        if (status == -1) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Snackbar.make(getWindow().getDecorView(),
+                                            "A product with the same bar code already exists.",
+                                            Snackbar.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                     }
                 });
     }
