@@ -3,9 +3,10 @@ package com.example.ismailamrani.comptable.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
+import com.example.ismailamrani.comptable.adapters.ProductsAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -84,7 +85,13 @@ public class ProductsActivity extends AnimatedActivity {
                             e.printStackTrace();
                         }
 
-                        ProduitAdapter adapter = new ProduitAdapter(ProductsActivity.this, productsList);
+                        ProductsAdapter adapter = new ProductsAdapter(ProductsActivity.this, productsList);
+                        adapter.setProductListener(new ProductsAdapter.ProductListener() {
+                            @Override
+                            public void onDeleteProduct(String url, JSONObject params, Method method) {
+                                sendHTTPRequest(url, params, method, new DeleteRequestListener());
+                            }
+                        });
                         runOnUiThread(() -> productsListView.setAdapter(adapter));
                     }
                 });
@@ -93,5 +100,21 @@ public class ProductsActivity extends AnimatedActivity {
     @Override
     public void onAddPressed() {
         startActivity(new Intent(this, AddProductActivity.class));
+    }
+
+    class DeleteRequestListener extends SuccessRequestListener {
+        @Override
+        public void onRequestSucceeded(JSONObject response) {
+            runOnUiThread(() -> {
+                Toast.makeText(ProductsActivity.this, "Product deleted.", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(ProductsActivity.this, ProductsActivity.class));
+            });
+        }
+
+        @Override
+        public void onRequestFailed(int status, JSONObject response) {
+            runOnUiThread(() -> Toast.makeText(ProductsActivity.this, "Unknown error.",
+                    Toast.LENGTH_LONG).show());
+        }
     }
 }

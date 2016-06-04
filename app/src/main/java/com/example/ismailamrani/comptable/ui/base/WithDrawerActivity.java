@@ -217,4 +217,9 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         ActivityCompat.finishAffinity(this);
         startActivity(new Intent(this, LoginActivity.class));
     }
+
+    @Override
+    public ActivityOrder getActivity() {
+        return ActivityOrder.NONE;
+    }
 }

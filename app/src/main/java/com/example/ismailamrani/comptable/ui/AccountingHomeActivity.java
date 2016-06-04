@@ -66,6 +66,8 @@ public class AccountingHomeActivity extends AnimatedActivity {
                 JSONUtils.bundleCompanyIDToJSON(mDatabaseAdapter.getUserCompanyID()),
                 JSONUtils.bundleLocaleIDToJSON(mDatabaseAdapter.getCurrentLocaleID()));
 
+        mLoadingDialog.show();
+
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
                 new SuccessRequestListener() {
                     @Override

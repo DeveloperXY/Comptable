@@ -8,9 +8,8 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
-import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.http.RequestListener;
+import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -44,8 +43,6 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     TextView totalPriceLabel;
     @Bind(R.id.plusButton)
     Button plusButton;
-
-    private LoadingDialog mLoadingDialog;
 
     /**
      * This variable holds the ID of the locale whose details will be fetched & displayed.
@@ -99,7 +96,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                 JSONUtils.bundleLocaleIDToJSON(currentLocaleID));
 
         sendHTTPRequest(PhpAPI.getComptabilite, data, Method.GET,
-                new RequestListener() {
+                new SuccessRequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
                         try {
@@ -109,7 +106,6 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                             runOnUiThread(() -> {
                                 try {
                                     showData(details);
-                                    mLoadingDialog.dismiss();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -118,16 +114,6 @@ public class AccountingDetailsActivity extends AnimatedActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                    }
-
-                    @Override
-                    public void onRequestFailed(int status, JSONObject response) {
-
-                    }
-
-                    @Override
-                    public void onNetworkError() {
-                        runOnUiThread(() -> mLoadingDialog.dismiss());
                     }
                 });
     }
