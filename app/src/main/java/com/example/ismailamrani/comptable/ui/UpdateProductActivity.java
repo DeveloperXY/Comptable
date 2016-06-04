@@ -44,6 +44,7 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
     private String selectedImagePath;
 
     private Product selectedProduct;
+    private String imageCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +108,7 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
         PrixHt.setText(selectedProduct.getPrixHT() + "");
         PrixTtc.setText(selectedProduct.getPrixTTC() + "");
         CodeBarre.setText(selectedProduct.getCodeBarre());
+        imageCode = "";
     }
 
     private void updateProduct() {
@@ -117,7 +119,7 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
         data.put("PrixTTC", selectedProduct.getPrixTTC() + "");
         data.put("CodeBar", selectedProduct.getCodeBarre());
         data.put("Qte", selectedProduct.getQte() + "");
-        data.put("Photo", selectedProduct.getPhoto());
+        data.put("Photo", imageCode);
         data.put("Local", selectedProduct.getLocale_ID() + "");
 
         sendHTTPRequest(selectedProduct.getUrl(), data, Method.POST,
@@ -156,7 +158,6 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
             CodeBarre.setText(scanContent);
         }
 
-        // image bitmap
         if (resultCode == RESULT_OK) {
             if (requestCode == RESULT_LOAD_IMAGE) {
                 Uri selectedImageUri = data.getData();
@@ -166,14 +167,13 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
                     produitImage.setImageBitmap(bitmap);
-                    selectedProduct.setPhoto(BitmapToString(bitmap));
+                    imageCode = BitmapToString(bitmap);
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-
     }
 
     public String getPath(Uri uri) {
@@ -188,7 +188,6 @@ public class UpdateProductActivity extends ColoredStatusBarActivity {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         Image.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
-        String imageCode = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        return imageCode;
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }
