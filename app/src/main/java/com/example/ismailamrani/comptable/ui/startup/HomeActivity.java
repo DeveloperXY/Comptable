@@ -14,7 +14,6 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.ui.AccountingDetailsActivity;
@@ -53,16 +52,12 @@ public class HomeActivity extends ColoredStatusBarActivity {
     @Bind(R.id.settingsImage)
     ImageView settingsImage;
 
-    private DatabaseAdapter mDatabaseAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new CalculateScreenSize().CalculateScreenSize(this);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-
-        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
 
         setupWindowAnimations();
         setupLocale();

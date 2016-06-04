@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -25,8 +24,6 @@ import butterknife.ButterKnife;
 
 public class ActivationActivity extends ColoredStatusBarActivity {
 
-    private DatabaseAdapter databaseAdapter;
-
     @Bind(R.id.activationField)
     EditText activationField;
     @Bind(R.id.imageView)
@@ -37,8 +34,6 @@ public class ActivationActivity extends ColoredStatusBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activation);
         ButterKnife.bind(this);
-
-        databaseAdapter = DatabaseAdapter.getInstance(this);
     }
 
     public void onActivate(View view) {
@@ -70,7 +65,7 @@ public class ActivationActivity extends ColoredStatusBarActivity {
                     try {
                         Activation activation = new Activation(
                                 response.getJSONArray("activation").getJSONObject(0));
-                        databaseAdapter.activateApplication(activation);
+                        mDatabaseAdapter.activateApplication(activation);
 
                         activityShouldFinish();
                         ActivityTransition.startActivityWithSharedElement(

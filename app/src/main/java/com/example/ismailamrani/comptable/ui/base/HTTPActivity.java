@@ -97,12 +97,12 @@ public abstract class HTTPActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(final Call call, IOException e) {
-                        listener.onNetworkError();
                         runOnUiThread(() -> {
                             Toast.makeText(HTTPActivity.this,
                                     "Network error.", Toast.LENGTH_LONG).show();
                             mLoadingDialog.dismiss();
                         });
+                        listener.onNetworkError();
                     }
 
                     @Override

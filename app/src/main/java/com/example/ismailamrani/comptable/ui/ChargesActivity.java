@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.ChargeAdapter;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Charge;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
@@ -111,7 +110,7 @@ public class ChargesActivity extends RefreshableActivity {
 
     private void fetchChargeItems() {
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(
-                DatabaseAdapter.getInstance(this).getCurrentLocaleID());
+                mDatabaseAdapter.getCurrentLocaleID());
         sendHTTPRequest(PhpAPI.getChargeByLocaleID, data, Method.POST,
                 new FetchChargesListener());
     }

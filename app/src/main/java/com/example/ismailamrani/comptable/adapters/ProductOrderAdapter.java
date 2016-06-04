@@ -135,9 +135,6 @@ public class ProductOrderAdapter extends ArrayAdapter<Product> {
             int qte = product.getQte();
             String label = product.getLibelle();
 
-            Log.i("Quantity summary", String.format("Iteration %d, ID: %d, Qte: %d, Label: %s",
-                    i, id, qte, label));
-
             map.put(id, map.get(id) == null ? Pair.create(qte, label) :
                     Pair.create(map.get(id).first + qte, label));
         }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -28,8 +27,6 @@ public class ClientDialog extends Dialog {
     TextView clientAddress;
     @Bind(R.id.supplierPhoneLabel)
     TextView clientPhone;
-    @Bind(R.id.supplierLogo)
-    ImageView supplierLogo;
 
     private Context mContext;
     private Client client;

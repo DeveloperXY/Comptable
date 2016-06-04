@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 
 import com.annimon.stream.Stream;
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
@@ -22,7 +21,6 @@ import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
-import com.example.ismailamrani.comptable.utils.parsing.Products;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
 import com.example.ismailamrani.comptable.webservice.PhpAPI;
 
@@ -66,8 +64,7 @@ public class StockActivity extends RefreshableActivity
         setupSearchView();
         setupSwipeRefresh();
 
-        currentLocaleID = DatabaseAdapter.getInstance(this)
-                .getCurrentLocaleID();
+        currentLocaleID = mDatabaseAdapter.getCurrentLocaleID();
         refresh(); // Must be called last
     }
 
@@ -140,7 +137,7 @@ public class StockActivity extends RefreshableActivity
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final List<Product> filteredProducts = Products.filter(mProducts, newText);
+        final List<Product> filteredProducts = Product.filter(mProducts, newText);
         if (stockAdapter != null)
             stockAdapter.animateTo(filteredProducts);
         return true;

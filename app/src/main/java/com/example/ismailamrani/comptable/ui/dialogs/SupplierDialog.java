@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -28,8 +27,6 @@ public class SupplierDialog extends Dialog {
     TextView bottomAddressLabel;
     @Bind(R.id.supplierPhoneLabel)
     TextView supplierPhoneLabel;
-    @Bind(R.id.supplierLogo)
-    ImageView supplierLogo;
 
     private Context mContext;
     private Supplier supplier;
@@ -44,7 +41,7 @@ public class SupplierDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.supplier_dialog);
+        setContentView(R.layout.item_dialog);
         ButterKnife.bind(this);
 
         setupWindow();

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.adapters.ProduitAdapter;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.AnimatedActivity;
@@ -33,15 +32,12 @@ public class ProductsActivity extends AnimatedActivity {
     ListView productsListView;
 
     private List<Product> productsList = new ArrayList<>();
-    private DatabaseAdapter mDatabaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produits);
         ButterKnife.bind(this);
-
-        mDatabaseAdapter = DatabaseAdapter.getInstance(this);
 
         setupActionBar();
         setupRevealTransition();

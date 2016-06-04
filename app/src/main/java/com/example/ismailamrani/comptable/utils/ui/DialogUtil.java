@@ -9,6 +9,8 @@ import com.example.ismailamrani.comptable.R;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 27/04/2016.
+ *
+ * This class contains helper methods to create & show material dialogs.
  */
 public class DialogUtil {
 

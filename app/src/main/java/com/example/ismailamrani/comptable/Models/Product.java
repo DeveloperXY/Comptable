@@ -3,6 +3,9 @@ package com.example.ismailamrani.comptable.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -240,6 +243,19 @@ public class Product implements Item, Parcelable {
     @Override
     public String getLabel() {
         return Libelle;
+    }
+
+    /**
+     * @param products to be filtered
+     * @param query    based upon the products will be filtered
+     * @return the filtered list of products
+     */
+    public static List<Product> filter(List<Product> products, String query) {
+        return Stream.of(products)
+                .filter(product -> product.getLabel()
+                        .toLowerCase()
+                        .contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override

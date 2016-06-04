@@ -10,6 +10,9 @@ import android.view.View;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 23/05/2016.
+ *
+ * This class contains static methods that help with performing shared element
+ * transitions between activities.
  */
 public class ActivityTransition {
     /**

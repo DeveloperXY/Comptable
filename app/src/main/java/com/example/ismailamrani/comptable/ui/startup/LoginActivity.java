@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
-import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.models.User;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
@@ -30,7 +29,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class LoginActivity extends ColoredStatusBarActivity {
-    private DatabaseAdapter databaseAdapter;
 
     @Bind(R.id.Valider)
     LinearLayout Valider;
@@ -47,13 +45,11 @@ public class LoginActivity extends ColoredStatusBarActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        databaseAdapter = DatabaseAdapter.getInstance(this);
-
         Valider.setOnClickListener(v -> {
             String username = nom.getText().toString();
             String password = motdepass.getText().toString();
             User user = validateUserCredentials(username, password);
-            int currentCompanyID = databaseAdapter.getUserCompanyID();
+            int currentCompanyID = mDatabaseAdapter.getUserCompanyID();
 
             if (user != null) {
                 JSONObject params = user.toJSON();
@@ -117,7 +113,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
             }
         }
 
-        databaseAdapter.saveLocales(localList);
+        mDatabaseAdapter.saveLocales(localList);
     }
 
     /**
@@ -160,6 +156,6 @@ public class LoginActivity extends ColoredStatusBarActivity {
      * @param jsonUser to be saved.
      */
     private void saveUserToInternalDatabase(JSONObject jsonUser) {
-        databaseAdapter.saveLoggedInUser(new User(jsonUser));
+        mDatabaseAdapter.saveLoggedInUser(new User(jsonUser));
     }
 }
