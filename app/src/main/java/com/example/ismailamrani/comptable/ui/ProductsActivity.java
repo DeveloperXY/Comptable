@@ -12,6 +12,7 @@ import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.RefreshableActivity;
 import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration;
 import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
@@ -94,7 +95,7 @@ public class ProductsActivity extends RefreshableActivity {
         JSONObject data = JSONUtils.bundleLocaleIDToJSON(localeID);
 
         sendHTTPRequest(PhpAPI.getProduit, data, Method.GET,
-                new SuccessRequestListener() {
+                new RequestListener() {
                     @Override
                     public void onRequestSucceeded(JSONObject response) {
                         try {
@@ -116,6 +117,16 @@ public class ProductsActivity extends RefreshableActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+
+                    }
+
+                    @Override
+                    public void onNetworkError() {
+                        runOnUiThread(ProductsActivity.this::handleRequestError);
                     }
                 });
     }
