@@ -32,8 +32,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Redouane on 24/03/2016.
+ * Altered by Mohammed Aouf ZOUAG on 04/06/2016.
  */
 public class UpdateProductActivity extends WithDrawerActivity {
     ImageView produitImage;
@@ -51,6 +54,7 @@ public class UpdateProductActivity extends WithDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.modifier_produit);
+        ButterKnife.bind(this);
 
         setupActionBar();
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.localdata.ScreenSize;
 import com.example.ismailamrani.comptable.models.ScreenSizeModel;
+import com.example.ismailamrani.comptable.utils.TypeFaces;
 
 /**
  * Created by Ismail Amrani on 25/11/2015.
@@ -40,7 +41,7 @@ public class CustomTextView extends TextView {
         ScreenSizeModel HW = Size.GetSize(1);
         height = HW.getHEIGHT();
 
-        Typeface typeFace = Typeface.createFromAsset(context.getAssets(), "fonts/" + Font);
+        Typeface typeFace = TypeFaces.getTypeFace(context, "fonts/" + Font);
         setTypeface(typeFace);
 
         setTextSize(TypedValue.COMPLEX_UNIT_PX, (size * height) / 492);
