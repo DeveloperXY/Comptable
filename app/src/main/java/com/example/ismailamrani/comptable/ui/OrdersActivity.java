@@ -27,10 +27,7 @@ public class OrdersActivity extends AnimatedActivity
         implements OrdersListFragment.OrderListFragListener,
         OrderDetailsFragment.OrderDetailsFragListener {
 
-    public static final String PURCHASE_ORDERS = "Commandes achats";
-    public static final String SALE_ORDERS = "Commandes ventes";
-
-    public static final int REQUEST_CREATE_ORDER = 1;
+    private static final int REQUEST_CREATE_ORDER = 1;
 
     private String currentOrderType;
     private Order currentOrder;
@@ -84,7 +81,7 @@ public class OrdersActivity extends AnimatedActivity
                 fragment = OrdersListFragment.newInstance(currentOrderType);
                 ft.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_out_right);
                 mActionBar.setTitle(currentOrderType.equals(Orders.PURCHASE) ?
-                        PURCHASE_ORDERS : SALE_ORDERS);
+                        getString(R.string.purchase_orders) : getString(R.string.sale_orders));
                 mActionBar.setBackground(R.mipmap.ic_bg_ab);
                 break;
             case 1:
@@ -138,7 +135,7 @@ public class OrdersActivity extends AnimatedActivity
                             displayFragment(0);
 
                         Snackbar.make(getWindow().getDecorView(),
-                                "Commande créée avec succès.", Snackbar.LENGTH_LONG).show();
+                                R.string.order_created, Snackbar.LENGTH_LONG).show();
                         break;
                 }
                 break;
@@ -193,6 +190,6 @@ public class OrdersActivity extends AnimatedActivity
     public void onOrderCharged() {
         mActionBar.setBackgroundColor(getResources().getColor(R.color.colorGreen));
         Snackbar.make(getWindow().getDecorView(),
-                "Commande facturée avec succès.", Snackbar.LENGTH_LONG).show();
+                R.string.order_billed, Snackbar.LENGTH_LONG).show();
     }
 }

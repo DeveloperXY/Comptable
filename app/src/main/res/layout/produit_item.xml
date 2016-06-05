@@ -197,7 +197,7 @@
                         android:textColor="#ffffff"
                         costum:Arabic="Afficher"
                         costum:Font="cgr.ttf"
-                        costum:Frensh="Afficher"
+                        costum:Frensh="@string/show"
                         costum:Size="12"
                         />
 
@@ -223,7 +223,7 @@
                         android:textColor="#ffffff"
                         costum:Arabic="Modifier"
                         costum:Font="cgr.ttf"
-                        costum:Frensh="Modifier"
+                        costum:Frensh="@string/update"
                         costum:Size="12"
                         />
 
@@ -249,7 +249,7 @@
                         android:textColor="#ffffff"
                         costum:Arabic="Supprimer"
                         costum:Font="cgr.ttf"
-                        costum:Frensh="Supprimer"
+                        costum:Frensh="@string/remove"
                         costum:Size="12"
                         />
 

@@ -1,19 +1,163 @@
 <resources>
     <string name="app_name">Comptable</string>
-    <string name="title_activity_vente">Vente</string>
     <string name="cannot_connect_message"><![CDATA[We were unable to establish a connection to the server. Please make sure that you have a working internet connection & click to refresh.]]></string>
+    <string name="question_install_barcode_scanner">Install Barcode Scanner?</string>
+    <string name="app_requires_barcode_scanner">This application requires Barcode Scanner. Would you like to install it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="network_error">Network error.</string>
+    <string name="close">Close</string>
+    <string name="add_new_product">Add a new product</string>
+    <string name="add_new_supplier">Add a new supplier</string>
+    <string name="no_orders_to_show">There are no orders to show.\nClick to refresh.</string>
+    <string name="purchase">purchase</string>
+    <string name="sale">sale</string>
+    <string name="activation_code_required">Activation code required.</string>
+    <string name="code_already_used">This serial key is already in use.</string>
+    <string name="invalid_activation_code">Your activation code is invalid.</string>
+    <string name="application_activated">The application has been successfully activated.</string>
+    <string name="question_log_out">Are you sure to log out ?</string>
+    <string name="search_locales">Search for locales...</string>
+    <string name="locale_changed">Locale changed.</string>
+    <string name="undo">UNDO</string>
+    <string name="invalid_credentials">Invalid username/password combination.</string>
+    <string name="inactive_activation_code">Your activation code is not active. Please contact the administration.</string>
+    <string name="missing_activation_code">It seems like we are missing your activation code. Please contact us as soon as possible.</string>
+    <string name="apologies">Apologies</string>
+    <string name="dismiss">Dismiss</string>
+
+    <string name="home">Home</string>
+    <string name="products">Products</string>
+    <string name="sales">Sales</string>
+    <string name="purchases">Purchases</string>
+    <string name="clients">Clients</string>
+    <string name="stock">Stock</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="expenses">Expenses</string>
+    <string name="accounting">Accounting</string>
+    <string name="log_out">Log out</string>
+
+    <string name="total_profit">Total Profit</string>
+    <string name="add_expense">Add expense</string>
+    <string name="one_character_left">1 character left</string>
+    <string name="d_characters_left">%d characters left</string>
+    <string name="max_length_exceeded">Maximum description length exceeded</string>
+    <string name="select_picture">Select picture</string>
+    <string name="missing_image">Missing image.</string>
+    <string name="product_image_required">You need to provide an image for your product.</string>
+    <string name="missing_product_name">Missing product name.</string>
+    <string name="product_name_required">You need to provide a name for your product.</string>
+    <string name="missing_ht">Missing HT price.</string>
+    <string name="product_ht_required">You need to specify an HT price for your product.</string>
+    <string name="missing_ttc">Missing TTC price.</string>
+    <string name="product_ttc_required">You need to specify an TTC price for your product.</string>
+    <string name="missing_bar_code">Missing bar code.</string>
+    <string name="bar_code_required">You need to specify your product\'s bar code.</string>
+    <string name="ok">OK</string>
+    <string name="product_added">Product successfully added.</string>
+    <string name="product_already_exists">A product with the same bar code already exists.</string>
+
+    <string name="invalid_client_name">Invalid client name.</string>
+    <string name="client_name_required">You need to specify the name of the client.</string>
+    <string name="invalid_phone_number">Invalid phone number.</string>
+    <string name="valid_phone_required">You need to specify a valid phone number.</string>
+    <string name="invalid_address">Invalid address.</string>
+    <string name="client_address_required">You need to specify the address of the client.</string>
+    <string name="invalid_email">Invalid email.</string>
+    <string name="client_email_required">You need to specify the email of the client.</string>
+    <string name="client_created">Client successfully created.</string>
+    <string name="unknown_error">Unknown error.</string>
+    <string name="client_altered">Client altered.</string>
+    <string name="invalid_supplier_name">Invalid supplier name.</string>
+    <string name="supplier_name_required">You need to specify the name of the supplier.</string>
+    <string name="supplier_address_required">You need to specify the address of the supplier.</string>
+    <string name="invalid_fix_number">Invalid work phone number.</string>
+    <string name="supplier_fix_required">You need to specify the work phone number of the supplier.</string>
+    <string name="invalid_fax">Invalid fax number.</string>
+    <string name="supplier_fax_required">You need to specify the fax number of the supplier.</string>
+    <string name="supplier_email_required">You need to specify the email of the supplier.</string>
+    <string name="supplier_created">Supplier successfully created.</string>
+    <string name="supplier_altered">Supplier altered.</string>
+
+    <string name="no_data_to_show">There is no data to show.\nClick to refresh.</string>
+    <string name="few_seconds_ago">A few seconds ago</string>
+    <string name="no_clients_to_show">There are no clients to show.\nClick to refresh.</string>
+    <string name="remove_client">Remove client</string>
+    <string name="question_remove_this_client">Are you sure that you want to remove this client from your clients\' list ?</string>
+    <string name="client_removed">Client removed.</string>
+    <string name="purchase_orders">Purchase orders</string>
+    <string name="sale_orders">Sale orders</string>
+    <string name="order_created">Order successfully created.</string>
+    <string name="order_billed">Order successfully billed.</string>
+    <string name="product_removed">Product removed.</string>
+    <string name="search_products">Search for products...</string>
+    <string name="search_suppliers">Search for suppliers...</string>
+    <string name="empty_order_list">Your order list is empty.</string>
+    <string name="error">Error</string>
+    <string name="unavailable_quantities">Some of the requested product quantities are not available:\n</string>
+    <string name="no_products_to_show">There are no products to show.\nClick to refresh.</string>
+    <string name="no_product_found">No product was found matching your query.</string>
+    <string name="no_suppliers_to_show">There are no suppliers to show.\nClick to refresh.</string>
+    <string name="remove_supplier">Remove supplier</string>
+    <string name="question_remove_this_supplier">Are you sure that you want to remove this supplier from your suppliers\' list ?</string>
+    <string name="supplier_removed">Supplier removed.</string>
+    <string name="update_product">Alter product</string>
+    <string name="product_updated">Product updated.</string>
+
+    <string name="enter_serial_code">Please enter the serial key that you received :</string>
+    <string name="activation_code">Activation code</string>
+    <string name="activate">Activate</string>
+    <string name="activate_app">Activate the application</string>
+    <string name="price">Price</string>
+    <string name="save">Save</string>
+    <string name="products_number">Number of products:</string>
+    <string name="articles_number">Number of articles/products:</string>
+    <string name="suppliers_number">Number of suppliers:</string>
+    <string name="clients_number">Number of clients:</string>
+    <string name="purchases_number">Number of purchases:</string>
+    <string name="sales_number">Number of sales:</string>
+    <string name="sales_total">Sales\' total:</string>
+    <string name="purchases_total">Purchases\' total:</string>
+    <string name="expenses_total">Expenses\' total:</string>
+    <string name="username">User name</string>
+    <string name="password">Password</string>
+    <string name="validate">Validate</string>
+    <string name="product_name">Product name</string>
+    <string name="ht_price">HT price</string>
+    <string name="ttc_price">TTC price</string>
+    <string name="bar_code">Bar code</string>
+    <string name="fullname">Full name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="address">Address</string>
+    <string name="email">E-mail</string>
+    <string name="fix_number">Work number</string>
+    <string name="fax_number">Fax number</string>
+    <string name="bill">Bill</string>
+    <string name="next">Next</string>
+    <string name="quantity">Quantity</string>
+    <string name="show">Show</string>
+    <string name="update">Modify</string>
+    <string name="remove">Remove</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_data">There is no data to show.</string>
+    <string name="supplier">Supplier</string>
+    <string name="product">Product</string>
+    <string name="per_unit_price">Per-unit price</string>
+    <string name="total_payment">Total to pay:</string>
+    <string name="change_local">Changer local</string>
+    <string name="add_photo">Attach a photo</string>
 
     <string-array name="navDrawerItems">
-        <item>Accueil</item>
-        <item>Produits</item>
-        <item>Ventes</item>
-        <item>Achats</item>
-        <item>Clients</item>
-        <item>Stock</item>
-        <item>Fournisseurs</item>
-        <item>Charges</item>
-        <item>Comptabilité</item>
-        <item>Déconnexion</item>
+        <item>@string/home</item>
+        <item>@string/products</item>
+        <item>@string/sales</item>
+        <item>@string/purchases</item>
+        <item>@string/clients</item>
+        <item>@string/stock</item>
+        <item>@string/suppliers</item>
+        <item>@string/expenses</item>
+        <item>@string/accounting</item>
+        <item>@string/log_out</item>
     </string-array>
 
     <string-array name="navDrawerIcons">

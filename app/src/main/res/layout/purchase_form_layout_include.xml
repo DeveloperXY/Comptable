@@ -42,7 +42,7 @@
                 android:layout_weight="1000"
                 android:background="@android:color/transparent"
                 android:enabled="false"
-                android:hint="Fournisseur"
+                android:hint="@string/supplier"
                 android:paddingLeft="20dp" />
 
             <RelativeLayout
@@ -78,7 +78,7 @@
                 android:layout_weight="1000"
                 android:background="@android:color/transparent"
                 android:enabled="false"
-                android:hint="Produit"
+                android:hint="@string/product"
                 android:paddingLeft="20dp" />
 
             <RelativeLayout
@@ -117,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
-                    android:hint="Quantité"
+                    android:hint="@string/quantity"
                     android:inputType="number"
                     android:paddingLeft="20dp" />
             </RelativeLayout>
@@ -140,7 +140,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1026"
                 android:background="@android:color/transparent"
-                android:hint="Prix unitaire"
+                android:hint="@string/per_unit_price"
                 android:inputType="numberDecimal"
                 android:paddingLeft="20dp" />
 

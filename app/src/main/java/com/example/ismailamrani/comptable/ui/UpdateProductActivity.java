@@ -75,7 +75,8 @@ public class UpdateProductActivity extends WithDrawerActivity {
                 Intent intent1 = new Intent();
                 intent1.setType("image/*");
                 intent1.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent1, "Select Picture"), RESULT_LOAD_IMAGE);
+                startActivityForResult(Intent.createChooser(
+                        intent1, getString(R.string.select_picture)), RESULT_LOAD_IMAGE);
             }
         });
 
@@ -104,7 +105,7 @@ public class UpdateProductActivity extends WithDrawerActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Modifier produit");
+        mActionBar.setTitle(getString(R.string.update_product));
         mActionBar.disableAddButton();
     }
 
@@ -137,7 +138,7 @@ public class UpdateProductActivity extends WithDrawerActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(UpdateProductActivity.this, "Product updated.",
+                                Toast.makeText(UpdateProductActivity.this, R.string.product_updated,
                                         Toast.LENGTH_LONG).show();
                             }
                         });
@@ -150,7 +151,7 @@ public class UpdateProductActivity extends WithDrawerActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(UpdateProductActivity.this, "Unknown error.",
+                                Toast.makeText(UpdateProductActivity.this, R.string.unknown_error,
                                         Toast.LENGTH_LONG).show();
                             }
                         });

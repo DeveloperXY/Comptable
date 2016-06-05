@@ -77,7 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="171"
             android:background="#ffffff"
-            android:hint="Utilisateur"
+            android:hint="@string/username"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -137,7 +137,7 @@
             android:layout_height="match_parent"
             android:layout_weight="171"
             android:background="#ffffff"
-            android:hint="Mot de passe"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -207,11 +207,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Valider"
+                        android:text="@string/validate"
                         android:textColor="#ffffff"
-                        android:textSize="20dp"
-
-                        />
+                        android:textSize="20dp"/>
 
                 </RelativeLayout>
 

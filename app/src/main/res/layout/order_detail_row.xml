@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Quantité"
+                android:text="@string/quantity"
                 android:textColor="@color/colorPriceText"
                 android:textStyle="bold"/>
 

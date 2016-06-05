@@ -133,7 +133,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="منتوج"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Produit"
+                            costum:Frensh="@string/products"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -201,7 +201,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="المخزون"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Stock"
+                            costum:Frensh="@string/stock"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -283,7 +283,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="منتوج"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Ventes"
+                            costum:Frensh="@string/sales"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -351,7 +351,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="المخزون"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Achats"
+                            costum:Frensh="@string/purchases"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -433,7 +433,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="منتوج"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Comptabilité"
+                            costum:Frensh="@string/accounting"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -501,7 +501,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="المخزون"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Charges"
+                            costum:Frensh="@string/expenses"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -583,7 +583,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="منتوج"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Clients"
+                            costum:Frensh="@string/clients"
                             costum:Size="15"/>
 
                     </RelativeLayout>
@@ -651,7 +651,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="المخزون"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Fournisseurs"
+                            costum:Frensh="@string/suppliers"
                             costum:Size="15"/>
 
                     </RelativeLayout>

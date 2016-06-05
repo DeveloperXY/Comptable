@@ -98,7 +98,7 @@ public class SalesActivity extends WithDrawerActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Ventes");
+        mActionBar.setTitle(getString(R.string.sales));
     }
 
     /**
@@ -165,7 +165,7 @@ public class SalesActivity extends WithDrawerActivity {
         JSONArray qteSummary = productAdapter.getQuantitySummary();
 
         if (summary.length() == 0)
-            Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_order_list, Toast.LENGTH_SHORT).show();
         else
             postCreateSaleOrder(PhpAPI.createSaleOrder,
                     JSONUtils.merge(
@@ -219,9 +219,9 @@ public class SalesActivity extends WithDrawerActivity {
     }
 
     private void showQuantityErrorDialog(String parsedMessages) {
-        DialogUtil.showDialog(this, "Error",
-                "Some of the requested product quantities are not available:\n"
-                        + parsedMessages, "OK", null);
+        DialogUtil.showDialog(this, getString(R.string.error),
+                getString(R.string.unavailable_quantities)
+                        + parsedMessages, getString(R.string.ok), null);
     }
 
     /**

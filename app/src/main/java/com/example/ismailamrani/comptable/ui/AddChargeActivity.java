@@ -54,7 +54,7 @@ public class AddChargeActivity extends WithDrawerActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Ajouter Une Charge");
+        mActionBar.setTitle(getString(R.string.add_expense));
         mActionBar.disableAddButton();
     }
 
@@ -128,11 +128,11 @@ public class AddChargeActivity extends WithDrawerActivity {
             int textLength = text.length();
 
             if (textLength == 49)
-                message = "1 character left";
+                message = getString(R.string.one_character_left);
             else if (textLength < 51)
-                message = String.format("%d characters left", MAX_DESC_CHAR_COUNT - textLength);
+                message = String.format(getString(R.string.d_characters_left), MAX_DESC_CHAR_COUNT - textLength);
             else
-                message = "Maximum description length exceeded";
+                message = getString(R.string.max_length_exceeded);
 
             charCounterLabel.setText(message);
         }

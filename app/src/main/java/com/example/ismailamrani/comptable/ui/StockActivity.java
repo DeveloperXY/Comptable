@@ -78,7 +78,7 @@ public class StockActivity extends RefreshableActivity
         super.setupActionBar();
 
         mActionBar.setSearchListener(this);
-        mActionBar.setTitle("Stock");
+        mActionBar.setTitle(getString(R.string.stock));
         mActionBar.isSearchable(true);
     }
 
@@ -93,7 +93,7 @@ public class StockActivity extends RefreshableActivity
         dataRecyclerView.setLayoutManager(
                 new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         );
-        emptyMessageLabel.setText("There are no products to show.\nClick to refresh.");
+        emptyMessageLabel.setText(R.string.no_products_to_show);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class StockActivity extends RefreshableActivity
 
                     if (requestedProduct == null) {
                         Snackbar.make(getWindow().getDecorView(),
-                                "No product was found matching your query.",
+                                R.string.no_product_found,
                                 Snackbar.LENGTH_LONG).show();
                     } else {
                         intent.putExtra("product", requestedProduct);

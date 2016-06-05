@@ -1,0 +1,162 @@
+<resources>
+    <string name="app_name">Comptable</string>
+    <string name="cannot_connect_message">Impossible d\'établir une connection internet. Appuyez n\'importe ou sur l\'écran pour rafraîchir.</string>
+    <string name="question_install_barcode_scanner">Installer Barcode Scanner?</string>
+    <string name="app_requires_barcode_scanner">L\'application exige un scanner de codes barres. Voulez-vous l\'installer ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="network_error">Erreur réseau.</string>
+    <string name="close">Fermer</string>
+    <string name="add_new_product">Ajouter un nouveau produit</string>
+    <string name="add_new_supplier">Ajouter un nouveau fournisseur</string>
+    <string name="no_orders_to_show">Il n\'y a pas de commandes à afficher. Appuyez pour rafraîchir.</string>
+    <string name="purchase">achat</string>
+    <string name="sale">vente</string>
+    <string name="activation_code_required">Un code d\'activation est nécessaire.</string>
+    <string name="code_already_used">Ce code est indisponible pour l\'usage.</string>
+    <string name="invalid_activation_code">Votre code d\'activation est invalide.</string>
+    <string name="application_activated">L\'application a été activée avec succès.</string>
+    <string name="question_log_out">Etes-vous sûr de bien vouloir se déconnecter ?</string>
+    <string name="search_locales">Chercher locaux...</string>
+    <string name="locale_changed">Local actuel changé</string>
+    <string name="undo">Annuler</string>
+    <string name="invalid_credentials">Nom d\'utilisateur/mot de passe invalides.</string>
+    <string name="inactive_activation_code">Votre code d\'activation n\'est pas actif. Veuillez contacter l\'administration.</string>
+    <string name="missing_activation_code">Il semble que nous pouvons pas reconnaître votre code d\'activation. Veuillez nous contacter le plus proche possible.</string>
+    <string name="apologies">Désolés</string>
+    <string name="dismiss">Fermer</string>
+
+    <string name="home">Accueil</string>
+    <string name="products">Produits</string>
+    <string name="sales">Ventes</string>
+    <string name="purchases">Achats</string>
+    <string name="clients">Clients</string>
+    <string name="stock">Stock</string>
+    <string name="suppliers">Fournisseurs</string>
+    <string name="expenses">Charges</string>
+    <string name="accounting">Comptabilité</string>
+    <string name="log_out">Déconnexion</string>
+
+    <string name="total_profit">Profit total</string>
+    <string name="add_expense">Ajouter Une Charge</string>
+    <string name="one_character_left">1 caractère restant</string>
+    <string name="d_characters_left">%d caractères restants</string>
+    <string name="max_length_exceeded">Longueur de description maximale dépassée</string>
+    <string name="select_picture">Choisir image</string>
+    <string name="missing_image">Image manquante.</string>
+    <string name="product_image_required">Vous devez spécifier une image pour votre produit.</string>
+    <string name="missing_product_name">Nom de produit manquant.</string>
+    <string name="product_name_required">Vous devez spécifier le nom de votre produit.</string>
+    <string name="missing_ht">Prix HT manquant.</string>
+    <string name="product_ht_required">Vous devez spécifier le prix HT de votre produit.</string>
+    <string name="missing_ttc">Prix TTC manquant.</string>
+    <string name="product_ttc_required">Vous devez spécifier le prix TTC de votre produit.</string>
+    <string name="missing_bar_code">Code barre manquant.</string>
+    <string name="bar_code_required">Vous devez spécifier le code barre de votre produit.</string>
+    <string name="ok">OK</string>
+    <string name="product_added">Produit ajouté avec succès.</string>
+    <string name="product_already_exists">Un produit avec le même code barre existe déjà.</string>
+
+    <string name="invalid_client_name">Nom de client invalide.</string>
+    <string name="client_name_required">Vous devez spécifier le nom du client.</string>
+    <string name="invalid_phone_number">Numéro de téléphone invalide.</string>
+    <string name="valid_phone_required">Vous devez spécifier un numéro de téléphone valide.</string>
+    <string name="invalid_address">Addresse invalide.</string>
+    <string name="client_address_required">Vous devez spécifier l\'adresse du client.</string>
+    <string name="invalid_email">Email invalide.</string>
+    <string name="client_email_required">Vous devez spécifier l\'email du client.</string>
+    <string name="client_created">Client créé avec succès.</string>
+    <string name="unknown_error">Erreur inconnue.</string>
+    <string name="client_altered">Client modifié.</string>
+    <string name="invalid_supplier_name">Nom de fournisseur invalide.</string>
+    <string name="supplier_name_required">Vous devez spécifier le nom du fournisseur.</string>
+    <string name="supplier_address_required">Vous devez spécifier l\'adresse du fournisseur.</string>
+    <string name="invalid_fix_number">Numéro de fix invalide.</string>
+    <string name="supplier_fix_required">Vous devez spécifier le numéro du téléphone fix du fournisseur.</string>
+    <string name="invalid_fax">Numéro de fax invalide.</string>
+    <string name="supplier_fax_required">Vous devez spécifier le numéro de fax du fournisseur.</string>
+    <string name="supplier_email_required">Vous devez spécifier l\'email du fournisseur.</string>
+    <string name="supplier_created">Fournisseur créé avec succès.</string>
+    <string name="supplier_altered">Fournisseur modifié.</string>
+
+    <string name="no_data_to_show">Pas de données à afficher.\nAppuyez pour rafraîchir.</string>
+    <string name="few_seconds_ago">Il y a quelques instants</string>
+    <string name="no_clients_to_show">Pas de clients à afficher.\nAppuyez pour rafraîchir.</string>
+    <string name="remove_client">Supprimer client</string>
+    <string name="question_remove_this_client">Etes-vous sûr de bien vouloir supprimer ce client de votre liste ?</string>
+    <string name="client_removed">Client supprimé.</string>
+    <string name="purchase_orders">Commandes achats</string>
+    <string name="sale_orders">Commandes ventes</string>
+    <string name="order_created">Commande créée avec succès.</string>
+    <string name="order_billed">Commande facturée avec succès.</string>
+    <string name="product_removed">Produit supprimé.</string>
+    <string name="search_products">Chercher produits...</string>
+    <string name="search_suppliers">Chercher fournisseurs...</string>
+    <string name="empty_order_list">Votre liste des produits à commander est vide.</string>
+    <string name="error">Erreur</string>
+    <string name="unavailable_quantities">Quleques unes des quantités demandées de certains produits sont indisponibles:\n</string>
+    <string name="no_products_to_show">Pas de produits à afficher.\nAppuyez pour rafraîchir.</string>
+    <string name="no_product_found">Aucun produit ne correspond à votre requête.</string>
+    <string name="no_suppliers_to_show">Pas de fournisseurs à afficher.\nAppuyez pour rafraîchir.</string>
+    <string name="remove_supplier">Supprimer fournisseur</string>
+    <string name="question_remove_this_supplier">Etes-vous sûr de bien vouloir supprimer ce fournisseur ?</string>
+    <string name="supplier_removed">Fournisseur supprimé.</string>
+    <string name="update_product">Modifier produit</string>
+    <string name="product_updated">Produit modifié.</string>
+
+    <string name="enter_serial_code">Entrez le code d\'activation que vous avez reçu:</string>
+    <string name="activation_code">Code d\'activation</string>
+    <string name="activate">Activer</string>
+    <string name="activate_app">Activer l\'application</string>
+    <string name="price">Prix</string>
+    <string name="save">Enregistrer</string>
+    <string name="products_number">Nombre de produits :</string>
+    <string name="articles_number">Nombre d\'articles / produits :</string>
+    <string name="suppliers_number">Nombre de fournisseurs :</string>
+    <string name="clients_number">Nombre de clients :</string>
+    <string name="purchases_number">Nombre d\'opérations d\'achats :</string>
+    <string name="sales_number">Nombre d\'opérations de ventes :</string>
+    <string name="sales_total">Total de ventes :</string>
+    <string name="purchases_total">Total d\'achats :</string>
+    <string name="expenses_total">Total de charges :</string>
+    <string name="username">Utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="validate">Valider</string>
+    <string name="product_name">Nom du produit</string>
+    <string name="ht_price">Prix HT</string>
+    <string name="ttc_price">Prix TTC</string>
+    <string name="bar_code">Code Barre</string>
+    <string name="fullname">Nom complet</string>
+    <string name="phone_number">N° télephone</string>
+    <string name="address">Adresse</string>
+    <string name="email">E-mail</string>
+    <string name="fix_number">N° de Fix</string>
+    <string name="fax_number">N° de Fax</string>
+    <string name="bill">Facturer</string>
+    <string name="next">Suivant</string>
+    <string name="quantity">Quantité</string>
+    <string name="show">Afficher</string>
+    <string name="update">Modifier</string>
+    <string name="remove">Supprimer</string>
+    <string name="cancel">Annuler</string>
+    <string name="no_data">Rien à afficher.</string>
+    <string name="supplier">Fournisseur</string>
+    <string name="product">Produit</string>
+    <string name="per_unit_price">Prix unitaire</string>
+    <string name="total_payment">Total à payer:</string>
+    <string name="change_local">Change local</string>
+    <string name="add_photo">Attacher Une photo</string>
+
+    <string-array name="navDrawerIcons">
+        <item>@android:drawable/ic_menu_sort_by_size</item>
+        <item>@mipmap/ic_produit</item>
+        <item>@mipmap/ic_sell</item>
+        <item>@mipmap/ic_buy</item>
+        <item>@mipmap/ic_client</item>
+        <item>@mipmap/ic_stock</item>
+        <item>@mipmap/ic_fournisseur</item>
+        <item>@mipmap/ic_charge</item>
+        <item>@mipmap/ic_comp</item>
+        <item>@drawable/ic_logout</item>
+    </string-array>
+</resources>

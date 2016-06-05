@@ -69,7 +69,7 @@ public class AddProductActivity extends WithDrawerActivity
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Ajouter Un Produit");
+        mActionBar.setTitle(getString(R.string.add_new_product));
         mActionBar.disableAddButton();
     }
 
@@ -81,7 +81,7 @@ public class AddProductActivity extends WithDrawerActivity
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.select_picture)), RESULT_LOAD_IMAGE);
                 break;
             case R.id.scanBarcode:
                 // Scan product bar code
@@ -125,28 +125,28 @@ public class AddProductActivity extends WithDrawerActivity
                     0, mDatabaseAdapter.getCurrentLocaleID(), PhpAPI.addProduit);
         } else if (!imageStatus) {
             // No image was selected for the product.
-            dialogTitle = "Missing image.";
-            dialogMessage = "You need to provide an image for your product.";
+            dialogTitle = getString(R.string.missing_image);
+            dialogMessage = getString(R.string.product_image_required);
         } else if (!nameStatus) {
             // No name was specified for the product.
-            dialogTitle = "Missing product name.";
-            dialogMessage = "You need to provide a name for your product.";
+            dialogTitle = getString(R.string.missing_product_name);
+            dialogMessage = getString(R.string.product_name_required);
         } else if (!htStatus) {
             // No HT price was specified for the product.
-            dialogTitle = "Missing HT price.";
-            dialogMessage = "You need to specify an HT price for your product.";
+            dialogTitle = getString(R.string.missing_ht);
+            dialogMessage = getString(R.string.product_ht_required);
         } else if (!ttcStatus) {
             // No TTC price was specified for the product.
-            dialogTitle = "Missing TTC price.";
-            dialogMessage = "You need to specify an TTC price for your product.";
+            dialogTitle = getString(R.string.missing_ttc);
+            dialogMessage = getString(R.string.product_ttc_required);
         } else {
             // No bar code was specified for the product.
-            dialogTitle = "Missing bar code.";
-            dialogMessage = "You need to specify your product's bar code.";
+            dialogTitle = getString(R.string.missing_bar_code);
+            dialogMessage = getString(R.string.bar_code_required);
         }
 
         // Something went wrong: show the error dialog.
-        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, getString(R.string.ok), null);
 
         return null;
     }
@@ -165,7 +165,7 @@ public class AddProductActivity extends WithDrawerActivity
                             @Override
                             public void run() {
                                 Toast.makeText(getApplicationContext(),
-                                        "Product successfully added.",
+                                        R.string.product_added,
                                         Toast.LENGTH_LONG).show();
                             }
                         });
@@ -178,7 +178,7 @@ public class AddProductActivity extends WithDrawerActivity
                                 @Override
                                 public void run() {
                                     Snackbar.make(getWindow().getDecorView(),
-                                            "A product with the same bar code already exists.",
+                                            R.string.product_already_exists,
                                             Snackbar.LENGTH_LONG).show();
                                 }
                             });

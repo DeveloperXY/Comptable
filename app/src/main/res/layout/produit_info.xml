@@ -85,10 +85,11 @@
                             <com.example.ismailamrani.comptable.customitems.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
                                 android:textColor="#48627b"
                                 costum:Arabic="منتوج"
                                 costum:Font="cgrb.ttf"
-                                costum:Frensh="Prix HT : "
+                                costum:Frensh="@string/ht_price"
                                 costum:Size="13"/>
 
                             <com.example.ismailamrani.comptable.customitems.CustomTextView
@@ -111,10 +112,11 @@
                             <com.example.ismailamrani.comptable.customitems.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
                                 android:textColor="#48627b"
                                 costum:Arabic="منتوج"
                                 costum:Font="cgrb.ttf"
-                                costum:Frensh="Prix TTC : "
+                                costum:Frensh="@string/ttc_price"
                                 costum:Size="13"/>
 
                             <com.example.ismailamrani.comptable.customitems.CustomTextView
@@ -137,10 +139,11 @@
                             <com.example.ismailamrani.comptable.customitems.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
                                 android:textColor="#48627b"
                                 costum:Arabic="منتوج"
                                 costum:Font="cgrb.ttf"
-                                costum:Frensh="Quantité : "
+                                costum:Frensh="@string/quantity"
                                 costum:Size="13"/>
 
                             <com.example.ismailamrani.comptable.customitems.CustomTextView

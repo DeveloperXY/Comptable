@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Activation;
 import com.example.ismailamrani.comptable.ui.base.ColoredStatusBarActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -65,7 +66,7 @@ public class SplashActivity extends ColoredStatusBarActivity {
                                     } else {
                                         target = ActivationActivity.class;
                                         Toast.makeText(SplashActivity.this,
-                                                "Your activation code is not active. Please contact the administration.",
+                                                R.string.inactive_activation_code,
                                                 Toast.LENGTH_SHORT).show();
                                         mDatabaseAdapter.removeCurrentActivation();
                                     }
@@ -83,9 +84,9 @@ public class SplashActivity extends ColoredStatusBarActivity {
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
                         mDatabaseAdapter.removeCurrentActivation();
-                        DialogUtil.showDialog(SplashActivity.this, "Apologies",
-                                "It seems like we are missing your activation code. Please contact us as soon as possible.",
-                                "Dismiss", null,
+                        DialogUtil.showDialog(SplashActivity.this, getString(R.string.apologies),
+                                getString(R.string.missing_activation_code),
+                                getString(R.string.dismiss), null,
                                 new DialogInterface.OnDismissListener() {
                                     @Override
                                     public void onDismiss(DialogInterface dialog) {

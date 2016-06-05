@@ -62,7 +62,7 @@ public class ProductsActivity extends RefreshableActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Produits");
+        mActionBar.setTitle(getString(R.string.products));
     }
 
     @Override
@@ -72,7 +72,7 @@ public class ProductsActivity extends RefreshableActivity {
         mProducts = new ArrayList<>();
         dataRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         dataRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
-        emptyMessageLabel.setText("There is no data to show.\nClick to refresh.");
+        emptyMessageLabel.setText(R.string.no_data_to_show);
     }
 
     @Override
@@ -203,7 +203,7 @@ public class ProductsActivity extends RefreshableActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ProductsActivity.this, "Product removed.",
+                    Toast.makeText(ProductsActivity.this, R.string.product_removed,
                             Toast.LENGTH_LONG).show();
                     refresh();
                 }
@@ -215,7 +215,7 @@ public class ProductsActivity extends RefreshableActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ProductsActivity.this, "Unknown error.",
+                    Toast.makeText(ProductsActivity.this, R.string.unknown_error,
                             Toast.LENGTH_LONG).show();
                 }
             });

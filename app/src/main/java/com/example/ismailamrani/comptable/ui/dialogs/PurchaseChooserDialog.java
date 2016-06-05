@@ -46,7 +46,8 @@ public class PurchaseChooserDialog extends ChooserDialog<String>
     protected void whenNoItemsArePresent() {
         super.whenNoItemsArePresent();
         actionButton.setText(sourceSpinnerID == R.id.productSpinner ?
-                "Add a new product" : "Add a new supplier");
+                context.getString(R.string.add_new_product) :
+                context.getString(R.string.add_new_supplier));
     }
 
     @Override

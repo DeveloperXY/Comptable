@@ -81,10 +81,6 @@ public class DrawerRecyclerAdapter extends RecyclerView.Adapter<DrawerRecyclerAd
         else return 1;
     }
 
-    public ImageView getDrawerHeaderImage() {
-        return drawerHeaderImage;
-    }
-
     public void setSelectedIndex(int index) {
         selectedIndex = index;
     }

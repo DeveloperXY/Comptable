@@ -75,7 +75,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="Nom complet"
+                        android:hint="@string/fullname"
                         android:inputType="textCapWords"
                         android:textColorHint="#9ea1a3"/>
 
@@ -134,7 +134,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="N° de Fix"
+                        android:hint="@string/fix_number"
                         android:inputType="phone"
                         android:textColorHint="#9ea1a3"/>
 
@@ -192,7 +192,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="N° de Fax"
+                        android:hint="@string/fax_number"
                         android:inputType="phone"
                         android:textColorHint="#9ea1a3"/>
 
@@ -250,7 +250,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="N° télephone"
+                        android:hint="@string/phone_number"
                         android:inputType="phone"
                         android:textColorHint="#9ea1a3"/>
 
@@ -308,7 +308,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="Adresse"
+                        android:hint="@string/address"
                         android:inputType="textPostalAddress"
                         android:textColorHint="#9ea1a3"/>
 
@@ -366,7 +366,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="780"
                         android:background="@android:color/transparent"
-                        android:hint="E-mail"
+                        android:hint="@string/email"
                         android:inputType="textEmailAddress"
                         android:textColorHint="#9ea1a3"/>
 
@@ -397,7 +397,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1120"
                     android:background="@drawable/save_btn"
-                    android:text="Enregistrer"
+                    android:text="@string/save"
                     android:textColor="@color/colorWhite"/>
 
             </LinearLayout>

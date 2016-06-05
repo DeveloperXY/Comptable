@@ -3,6 +3,7 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 import android.content.Context;
 import android.support.v7.widget.SearchView;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.SearchAdapter;
 import com.example.ismailamrani.comptable.models.Local;
 import com.example.ismailamrani.comptable.ui.dialogs.base.ChooserDialog;
@@ -22,7 +23,7 @@ public class LocalChooserDialog extends ChooserDialog<Local>
     @Override
     protected void whenNoItemsArePresent() {
         super.whenNoItemsArePresent();
-        actionButton.setText("Close");
+        actionButton.setText(R.string.close);
     }
 
     @Override

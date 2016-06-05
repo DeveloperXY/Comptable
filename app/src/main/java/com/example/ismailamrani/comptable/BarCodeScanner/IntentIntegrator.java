@@ -15,6 +15,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.ismailamrani.comptable.R;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,13 +25,17 @@ import java.util.List;
 import java.util.Map;
 
 public class IntentIntegrator {
+
+    private final Activity activity;
+    private String title;
+    private String message;
+    private String buttonYes;
+    private String buttonNo;
+    private List<String> targetApplications;
+    private final Map<String, Object> moreExtras;
+
     public static final int REQUEST_CODE = 0x0000c0de; // Only use bottom 16 bits
     private static final String TAG = IntentIntegrator.class.getSimpleName();
-    public static final String DEFAULT_TITLE = "Install Barcode Scanner?";
-    public static final String DEFAULT_MESSAGE =
-            "This application requires Barcode Scanner. Would you like to install it?";
-    public static final String DEFAULT_YES = "Yes";
-    public static final String DEFAULT_NO = "No";
     private static final String BS_PACKAGE = "com.google.zxing.client.android";
     private static final String BSPLUS_PACKAGE = "com.srowen.bs.android";
     // supported barcode formats
@@ -44,25 +50,16 @@ public class IntentIntegrator {
     public static final List<String> TARGET_ALL_KNOWN = list(
             BS_PACKAGE, // Barcode Scanner
             BSPLUS_PACKAGE, // Barcode Scanner+
-            BSPLUS_PACKAGE + ".simple" // Barcode Scanner+ Simple
-// What else supports this intent?
-    );
-    private final Activity activity;
-    private String title;
-    private String message;
-    private String buttonYes;
-    private String buttonNo;
-    private List<String> targetApplications;
-    private final Map<String, Object> moreExtras;
+            BSPLUS_PACKAGE + ".simple");
 
     public IntentIntegrator(Activity activity) {
         this.activity = activity;
-        title = DEFAULT_TITLE;
-        message = DEFAULT_MESSAGE;
-        buttonYes = DEFAULT_YES;
-        buttonNo = DEFAULT_NO;
+        title = activity.getResources().getString(R.string.question_install_barcode_scanner);
+        message = activity.getResources().getString(R.string.app_requires_barcode_scanner);
+        buttonYes = activity.getResources().getString(R.string.yes);
+        buttonNo = activity.getResources().getString(R.string.no);
         targetApplications = TARGET_ALL_KNOWN;
-        moreExtras = new HashMap<String, Object>(3);
+        moreExtras = new HashMap<>(3);
     }
 
 

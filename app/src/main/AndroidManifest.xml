@@ -89,7 +89,6 @@
         <activity
             android:name=".ui.SalesActivity"
             android:configChanges="orientation"
-            android:label="@string/title_activity_vente"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.StockActivity"/>
         <activity

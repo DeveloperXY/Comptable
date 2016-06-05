@@ -16,7 +16,7 @@
         android:layout_gravity="right"
         android:layout_weight="200"
         android:background="@drawable/add_btn"
-        android:text="Suivant >>"
+        android:text="@string/next"
         android:textColor="#ffffffff" />
 
     <Space

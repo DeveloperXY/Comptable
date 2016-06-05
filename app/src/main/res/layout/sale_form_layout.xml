@@ -57,7 +57,7 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:editable="false"
-                        android:hint="Code Barre"
+                        android:hint="@string/bar_code"
                         android:inputType="none"
                         android:paddingLeft="20dp" />
                 </RelativeLayout>
@@ -113,7 +113,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
-                        android:hint="Quantité"
+                        android:hint="@string/quantity"
                         android:inputType="number"
                         android:paddingLeft="20dp" />
                 </RelativeLayout>
@@ -153,7 +153,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1026"
                     android:background="@android:color/transparent"
-                    android:hint="Prix"
+                    android:hint="@string/price"
                     android:inputType="numberDecimal"
                     android:paddingLeft="20dp" />
 

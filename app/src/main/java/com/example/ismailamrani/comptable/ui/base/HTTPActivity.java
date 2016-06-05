@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.widget.Toast;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.app.OGApplication;
 import com.example.ismailamrani.comptable.ui.dialogs.LoadingDialog;
 import com.example.ismailamrani.comptable.utils.http.Method;
@@ -102,7 +103,7 @@ public abstract class HTTPActivity extends AppCompatActivity {
                             public void run() {
 
                                 Toast.makeText(HTTPActivity.this,
-                                        "Network error.", Toast.LENGTH_LONG).show();
+                                        R.string.network_error, Toast.LENGTH_LONG).show();
                                 mLoadingDialog.dismiss();
                             }
                         });

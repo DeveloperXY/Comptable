@@ -78,7 +78,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="988"
                         android:background="@android:color/transparent"
-                        android:hint="Prix"
+                        android:hint="@string/price"
                         android:inputType="numberDecimal"
                         android:paddingLeft="16dp"
                         android:textColorHint="#a8abae"
@@ -193,7 +193,7 @@
                     android:background="@drawable/supprimer_client_bn"
                     android:enabled="false"
                     android:onClick="onSave"
-                    android:text="Enregistrer"
+                    android:text="@string/save"
                     android:textColor="#ffffff">
 
                 </Button>

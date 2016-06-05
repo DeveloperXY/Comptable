@@ -67,7 +67,7 @@ public class SuppliersActivity extends RefreshableActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Fournisseurs");
+        mActionBar.setTitle(getString(R.string.suppliers));
     }
 
     @Override
@@ -172,7 +172,7 @@ public class SuppliersActivity extends RefreshableActivity {
         dataRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         dataRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        emptyMessageLabel.setText("There are no suppliers to show.\nClick to refresh.");
+        emptyMessageLabel.setText(R.string.no_suppliers_to_show);
     }
 
     @Override
@@ -213,9 +213,9 @@ public class SuppliersActivity extends RefreshableActivity {
     private void deleteSupplier(final String supplierID) {
         DialogUtil.showMutliDialog(
                 SuppliersActivity.this,
-                "Remove supplier",
-                "Are you sure that you want to remove this supplier from your suppliers' list ?",
-                "Yes",
+                getString(R.string.remove_supplier),
+                getString(R.string.question_remove_this_supplier),
+                getString(R.string.yes),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -226,7 +226,7 @@ public class SuppliersActivity extends RefreshableActivity {
                                 new DeleteSupplierListener());
                     }
                 },
-                "No", null);
+                getString(R.string.no), null);
     }
 
     /**
@@ -254,7 +254,7 @@ public class SuppliersActivity extends RefreshableActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(SuppliersActivity.this, "Supplier removed.",
+                    Toast.makeText(SuppliersActivity.this, R.string.supplier_removed,
                             Toast.LENGTH_LONG).show();
                     refresh();
                 }

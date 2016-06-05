@@ -123,17 +123,17 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
             return new Client("", name, gsm, address, PhpAPI.addClient, "", email);
 
         if (!nameStatus) {
-            dialogTitle = "Invalid supplier name.";
-            dialogMessage = "You need to specify the name of the client.";
+            dialogTitle = getString(R.string.invalid_client_name);
+            dialogMessage = getString(R.string.client_name_required);
         } else if (!gsmStatus) {
-            dialogTitle = "Invalid phone number.";
-            dialogMessage = "You need to specify a valid phone number.";
+            dialogTitle = getString(R.string.invalid_phone_number);
+            dialogMessage = getString(R.string.valid_phone_required);
         } else if (!addressStatus) {
-            dialogTitle = "Invalid address.";
-            dialogMessage = "You need to specify the address of the client.";
+            dialogTitle = getString(R.string.invalid_address);
+            dialogMessage = getString(R.string.client_address_required);
         } else {
-            dialogTitle = "Invalid email.";
-            dialogMessage = "You need to specify the email of the client.";
+            dialogTitle = getString(R.string.invalid_email);
+            dialogMessage = getString(R.string.client_email_required);
         }
 
         // Something went wrong: show the error dialog.
@@ -161,7 +161,7 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(AlterClientActivity.this,
-                                        "Client successfully created.", Toast.LENGTH_LONG).show();
+                                        R.string.client_created, Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -172,7 +172,7 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(AlterClientActivity.this,
-                                        "Unknown error.", Toast.LENGTH_LONG).show();
+                                        R.string.unknown_error, Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -198,7 +198,7 @@ public class AlterClientActivity extends AnimatedWithBackArrowActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(AlterClientActivity.this,
-                                        "Client altered.", Toast.LENGTH_SHORT).show();
+                                        R.string.client_altered, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

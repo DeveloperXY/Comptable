@@ -98,7 +98,7 @@
                         android:layout_weight="130"
                         android:background="@drawable/add_edittext"
                         android:gravity="center_vertical"
-                        android:hint="Nom du produit"
+                        android:hint="@string/product_name"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="#464646"
@@ -144,7 +144,7 @@
                             android:layout_weight="48"
                             android:background="#00ffffff"
                             android:gravity="center_vertical"
-                            android:hint="Prix HT"
+                            android:hint="@string/ht_price"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:textColor="#464646"
@@ -196,7 +196,7 @@
                             android:layout_weight="48"
                             android:background="#00ffffff"
                             android:gravity="center_vertical"
-                            android:hint="Prix TTC"
+                            android:hint="@string/ttc_price"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
                             android:textColor="#464646"
@@ -259,7 +259,7 @@
                         android:textColor="#464646"
                         costum:Arabic="منتوج"
                         costum:Font="cgr.ttf"
-                        costum:Frensh="Code Barre"
+                        costum:Frensh="@string/bar_code"
                         costum:Size="12"/>
 
                     <RelativeLayout
@@ -303,7 +303,7 @@
                             android:textColor="#ffffff"
                             costum:Arabic="منتوج"
                             costum:Font="cgr.ttf"
-                            costum:Frensh="Enregistrer"
+                            costum:Frensh="@string/save"
                             costum:Size="16"
                             />
 

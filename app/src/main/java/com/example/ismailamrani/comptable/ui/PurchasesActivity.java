@@ -127,7 +127,7 @@ public class PurchasesActivity extends WithDrawerActivity {
         List<String> items = new ArrayList<>();
 
         if (spinnerID == R.id.productSpinner) {
-            hint = "Search for products...";
+            hint = getString(R.string.search_products);
             try {
                 products = Product.parseProducts(response.getJSONArray("produit"));
                 items = Stream.of(products)
@@ -142,7 +142,7 @@ public class PurchasesActivity extends WithDrawerActivity {
                 e.printStackTrace();
             }
         } else {
-            hint = "Search for suppliers...";
+            hint = getString(R.string.search_suppliers);
             try {
                 suppliers = Supplier.parseSuppliers(response.getJSONArray("fournisseur"));
                 items = Stream.of(suppliers)
@@ -237,7 +237,7 @@ public class PurchasesActivity extends WithDrawerActivity {
         JSONArray summary = productAdapter.getSummary();
 
         if (summary.length() == 0)
-            Toast.makeText(this, "Your order list is empty.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.empty_order_list, Toast.LENGTH_SHORT).show();
         else
             postCreatePurchaseOrder(PhpAPI.createPurchaseOrder, summary);
     }

@@ -77,7 +77,7 @@ public class AccountingDetailsActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Comptabilité");
+        mActionBar.setTitle(getString(R.string.accounting));
         mActionBar.disableAddButton();
     }
 

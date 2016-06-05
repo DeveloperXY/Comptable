@@ -86,7 +86,7 @@ public class ChargesActivity extends RefreshableActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Charges");
+        mActionBar.setTitle(getString(R.string.expenses));
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ChargesActivity extends RefreshableActivity {
         mCharges = new ArrayList<>();
         dataRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         dataRecyclerView.addItemDecoration(new SpacesItemDecoration(4));
-        emptyMessageLabel.setText("There is no data to show.\nClick to refresh.");
+        emptyMessageLabel.setText(R.string.no_data_to_show);
     }
 
     @Override
@@ -235,7 +235,7 @@ public class ChargesActivity extends RefreshableActivity {
                                     long secondsDifference = (currentServerTime - dateInMillis) / 1000;
 
                                     if (secondsDifference < 60) {
-                                        charge.setDateFrom("A few seconds ago");
+                                        charge.setDateFrom(getString(R.string.few_seconds_ago));
                                     } else {
                                         charge.setDateFrom(
                                                 DateUtils.getRelativeTimeSpanString(

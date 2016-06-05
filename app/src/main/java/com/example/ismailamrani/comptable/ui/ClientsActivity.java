@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Redouane on 31/03/2016.
+ * Altered by Mohammed Aouf ZOUAG on 01/06/2016.
  */
 public class ClientsActivity extends RefreshableActivity {
 
@@ -67,7 +68,7 @@ public class ClientsActivity extends RefreshableActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Client");
+        mActionBar.setTitle(getString(R.string.clients));
     }
 
     @Override
@@ -172,7 +173,7 @@ public class ClientsActivity extends RefreshableActivity {
         dataRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         dataRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        emptyMessageLabel.setText("There are no clients to show.\nClick to refresh.");
+        emptyMessageLabel.setText(R.string.no_clients_to_show);
     }
 
     @Override
@@ -231,9 +232,9 @@ public class ClientsActivity extends RefreshableActivity {
     private void deleteClient(final String clientID) {
         DialogUtil.showMutliDialog(
                 ClientsActivity.this,
-                "Remove client",
-                "Are you sure that you want to remove this client from your clients' list ?",
-                "Yes",
+                getString(R.string.remove_client),
+                getString(R.string.question_remove_this_client),
+                getString(R.string.yes),
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +245,7 @@ public class ClientsActivity extends RefreshableActivity {
                                 new DeleteClientListener());
                     }
                 },
-                "No", null);
+                getString(R.string.no), null);
     }
 
     class DeleteClientListener extends SuccessRequestListener {
@@ -254,7 +255,7 @@ public class ClientsActivity extends RefreshableActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(ClientsActivity.this, "Client removed.",
+                    Toast.makeText(ClientsActivity.this, R.string.client_removed,
                             Toast.LENGTH_LONG).show();
                     refresh();
                 }

@@ -45,7 +45,7 @@ public class AccountingHomeActivity extends AnimatedActivity {
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle("Total Profit");
+        mActionBar.setTitle(getString(R.string.total_profit));
         mActionBar.disableAddButton();
     }
 

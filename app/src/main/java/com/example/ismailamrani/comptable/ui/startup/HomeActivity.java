@@ -42,6 +42,7 @@ import butterknife.OnClick;
 
 /**
  * Created by Ismail Amrani on 17/03/2016.
+ * Altered by Mohammed Aouf ZOUAG on 01/05/2016.
  */
 public class HomeActivity extends ColoredStatusBarActivity {
 
@@ -165,8 +166,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
     }
 
     public void onLogoutPressed(View view) {
-        DialogUtil.showMutliDialog(this, "Are you sure to log out ?",
-                "Yes", new DialogInterface.OnClickListener() {
+        DialogUtil.showMutliDialog(this, getString(R.string.question_log_out),
+                getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mDatabaseAdapter.logout();
@@ -176,7 +177,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
                                 HomeActivity.this, LoginActivity.class, headerImageView, "header");
                     }
                 },
-                "No", null);
+                getString(R.string.no), null);
     }
 
     public void onSettingsPressed(final View view) {
@@ -205,7 +206,7 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
         new LocalChooserDialog(this)
                 .whoseItemsAre(locales)
-                .whoseSearchHintIs("Search for locales...")
+                .whoseSearchHintIs(getString(R.string.search_locales))
                 .runWhenItemSelected(new ChooserDialog.OnItemSelectionListener<Local>() {
                     @Override
                     public void onItemSelected(Local selectedLocal) {
@@ -221,8 +222,8 @@ public class HomeActivity extends ColoredStatusBarActivity {
 
                             updateCurrentLocaleLabel();
                             Snackbar.make(getWindow().getDecorView(),
-                                    "Locale changed.", Snackbar.LENGTH_LONG)
-                                    .setAction("UNDO", new View.OnClickListener() {
+                                    R.string.locale_changed, Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.undo, new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             mDatabaseAdapter.updateUser(user);

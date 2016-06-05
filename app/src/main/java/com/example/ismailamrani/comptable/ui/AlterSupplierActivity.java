@@ -141,27 +141,27 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
             return new Supplier("", name, gsm, address, fix, fax, email, "", PhpAPI.addFournisseur);
 
         if (!nameStatus) {
-            dialogTitle = "Invalid supplier name.";
-            dialogMessage = "You need to specify the name of the supplier.";
+            dialogTitle = getString(R.string.invalid_supplier_name);
+            dialogMessage = getString(R.string.supplier_name_required);
         } else if (!gsmStatus) {
-            dialogTitle = "Invalid phone number.";
-            dialogMessage = "You need to specify a valid phone number.";
+            dialogTitle = getString(R.string.invalid_phone_number);
+            dialogMessage = getString(R.string.valid_phone_required);
         } else if (!addressStatus) {
-            dialogTitle = "Invalid address.";
-            dialogMessage = "You need to specify the address of the supplier.";
+            dialogTitle = getString(R.string.invalid_address);
+            dialogMessage = getString(R.string.supplier_address_required);
         } else if (!fixStatus) {
-            dialogTitle = "Invalid work phone number.";
-            dialogMessage = "You need to specify the work phone number of the supplier.";
+            dialogTitle = getString(R.string.invalid_fix_number);
+            dialogMessage = getString(R.string.supplier_fix_required);
         } else if (!faxStatus) {
-            dialogTitle = "Invalid fax number.";
-            dialogMessage = "You need to specify the fax number of the supplier.";
+            dialogTitle = getString(R.string.invalid_fax);
+            dialogMessage = getString(R.string.supplier_fax_required);
         } else {
-            dialogTitle = "Invalid email.";
-            dialogMessage = "You need to specify the email of the supplier.";
+            dialogTitle = getString(R.string.invalid_email);
+            dialogMessage = getString(R.string.supplier_email_required);
         }
 
         // Something went wrong: show the error dialog.
-        DialogUtil.showDialog(this, dialogTitle, dialogMessage, "OK", null);
+        DialogUtil.showDialog(this, dialogTitle, dialogMessage, getString(R.string.ok), null);
 
         return null;
     }
@@ -187,7 +187,7 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(AlterSupplierActivity.this,
-                                        "Supplier successfully created.", Toast.LENGTH_LONG).show();
+                                        R.string.supplier_created, Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -215,7 +215,7 @@ public class AlterSupplierActivity extends AnimatedWithBackArrowActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(AlterSupplierActivity.this,
-                                        "Supplier altered.", Toast.LENGTH_SHORT).show();
+                                        R.string.supplier_altered, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

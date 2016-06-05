@@ -105,7 +105,7 @@ public class LoginActivity extends ColoredStatusBarActivity {
                                         @Override
                                         public void run() {
                                             Toast.makeText(LoginActivity.this,
-                                                    "Invalid username/password combination.", Toast.LENGTH_SHORT)
+                                                    R.string.invalid_credentials, Toast.LENGTH_SHORT)
                                                     .show();
                                         }
                                     });
