@@ -26,7 +26,7 @@ import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.ui.ActivityTransition;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;

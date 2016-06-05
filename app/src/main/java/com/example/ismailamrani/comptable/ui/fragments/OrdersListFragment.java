@@ -23,7 +23,7 @@ import com.example.ismailamrani.comptable.utils.decorations.SpacesItemDecoration
 import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.parsing.Orders;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONException;
 import org.json.JSONObject;

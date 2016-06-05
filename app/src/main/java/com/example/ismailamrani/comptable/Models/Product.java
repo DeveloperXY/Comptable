@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Predicate;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -14,7 +14,7 @@ import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONObject;
 

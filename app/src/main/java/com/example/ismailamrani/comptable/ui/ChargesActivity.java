@@ -21,7 +21,7 @@ import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;

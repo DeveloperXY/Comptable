@@ -3,7 +3,7 @@ package com.example.ismailamrani.comptable.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -18,7 +18,7 @@ import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
 import com.example.ismailamrani.comptable.ui.UpdateProductActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;

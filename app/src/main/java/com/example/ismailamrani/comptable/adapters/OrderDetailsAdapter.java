@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.OrderDetail;
-import com.example.ismailamrani.comptable.webservice.PhpAPI;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

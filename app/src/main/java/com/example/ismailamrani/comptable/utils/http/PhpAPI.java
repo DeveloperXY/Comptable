@@ -1,4 +1,4 @@
-package com.example.ismailamrani.comptable.webservice;
+package com.example.ismailamrani.comptable.utils.http;
 
 /**
  * Created by Redouane on 24/03/2016.
