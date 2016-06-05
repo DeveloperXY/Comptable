@@ -40,10 +40,10 @@
                 android:id="@+id/descriptionLabel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="65"
                 android:ellipsize="end"
                 android:gravity="left|center_vertical"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:textColor="#000000"
                 tools:text="Samsung Galaxy S7"/>
 
@@ -51,11 +51,12 @@
                 android:id="@+id/timeLabel"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="50"
+                android:layout_weight="35"
                 android:gravity="left|center_vertical"
-                android:padding="8dp"
+                android:padding="4dp"
                 android:textColor="@color/colorPriceText"
-                tools:text="2 min ago"/>
+                tools:text="2 min ago"
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
