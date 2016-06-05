@@ -144,8 +144,9 @@
     <string name="product">Product</string>
     <string name="per_unit_price">Per-unit price</string>
     <string name="total_payment">Total to pay:</string>
-    <string name="change_local">Changer local</string>
+    <string name="change_local">Change local</string>
     <string name="add_photo">Attach a photo</string>
+    <string name="fifty_chars_left">50 characters left</string>
 
     <string-array name="navDrawerItems">
         <item>@string/home</item>
