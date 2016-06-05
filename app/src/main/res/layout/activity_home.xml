@@ -77,12 +77,12 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="50"></RelativeLayout>
+            android:layout_weight="45"></RelativeLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="188"
+            android:layout_weight="198"
             android:orientation="vertical"
             android:weightSum="286">
 

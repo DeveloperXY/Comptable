@@ -6,7 +6,7 @@
                 android:background="@drawable/order_detail_item_border"
                 android:padding="2dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorOrderDetailBackground"
@@ -14,51 +14,51 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/chargePriceLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_weight="25"
-            android:background="@drawable/price_tag_background"
-            android:gravity="center"
-            android:paddingBottom="6dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="6dp"
-            android:textColor="@color/colorWhite"
-            tools:text="8000 DH"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/descriptionLabel"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/chargePriceLabel"
-            android:orientation="horizontal">
+            android:layout_weight="45"
+            android:gravity="left|center_vertical"
+            android:padding="4dp"
+            android:textColor="#000000"
+            tools:text="Samsung Galaxy S7"/>
+
+        <TextView
+            android:id="@+id/timeLabel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:gravity="left|center_vertical"
+            android:padding="4dp"
+            android:textColor="@color/colorPriceText"
+            tools:text="2 min ago"
+            android:textSize="12sp"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:gravity="center_vertical|right">
 
             <TextView
-                android:id="@+id/descriptionLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="65"
-                android:ellipsize="end"
-                android:gravity="left|center_vertical"
-                android:padding="4dp"
-                android:textColor="#000000"
-                tools:text="Samsung Galaxy S7"/>
+                android:id="@+id/chargePriceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="30"
+                android:background="@drawable/price_tag_background"
+                android:gravity="center"
+                android:paddingBottom="6dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="6dp"
+                android:textColor="@color/colorWhite"
+                tools:text="8000 DH"
+                android:textSize="14sp"
+                android:layout_gravity="center_vertical"/>
+        </RelativeLayout>
 
-            <TextView
-                android:id="@+id/timeLabel"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="35"
-                android:gravity="left|center_vertical"
-                android:padding="4dp"
-                android:textColor="@color/colorPriceText"
-                tools:text="2 min ago"
-                android:textSize="12sp"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
