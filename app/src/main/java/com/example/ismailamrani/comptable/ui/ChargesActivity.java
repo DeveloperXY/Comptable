@@ -36,6 +36,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 17/05/2016.
+ */
 public class ChargesActivity extends RefreshableActivity {
 
     private static final int REQUEST_ADD_CHARGE = 3;

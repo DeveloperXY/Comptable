@@ -23,6 +23,9 @@ import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 10/05/2016.
+ */
 public class OrdersActivity extends AnimatedActivity
         implements OrdersListFragment.OrderListFragListener,
         OrderDetailsFragment.OrderDetailsFragListener {

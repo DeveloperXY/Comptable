@@ -36,6 +36,9 @@ import java.util.NoSuchElementException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 30/04/2016.
+ */
 public class StockActivity extends RefreshableActivity
         implements SearchListener, SearchView.OnQueryTextListener {
 

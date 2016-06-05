@@ -19,6 +19,9 @@ import org.json.JSONObject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 27/05/2016.
+ */
 public class AccountingDetailsActivity extends AnimatedActivity {
 
     @Bind(R.id.productNumberValue)

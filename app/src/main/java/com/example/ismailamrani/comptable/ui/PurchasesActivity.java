@@ -36,6 +36,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 03/05/2016.
+ */
 public class PurchasesActivity extends WithDrawerActivity {
 
     private Product selectedProduct;

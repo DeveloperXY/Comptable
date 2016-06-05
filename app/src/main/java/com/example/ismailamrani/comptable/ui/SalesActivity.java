@@ -41,7 +41,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
+/**
+ * Created by Mohammed Aouf ZOUAG on 27/04/2016.
+ */
 public class SalesActivity extends WithDrawerActivity {
 
     @Bind(R.id.productsListview)

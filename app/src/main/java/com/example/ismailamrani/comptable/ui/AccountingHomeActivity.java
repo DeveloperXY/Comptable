@@ -22,6 +22,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Mohammed Aouf ZOUAG on 28/05/2016.
+ */
 public class AccountingHomeActivity extends AnimatedActivity {
 
     @Bind(R.id.localeListView)
