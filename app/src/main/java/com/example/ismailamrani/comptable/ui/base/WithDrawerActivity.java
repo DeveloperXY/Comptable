@@ -125,7 +125,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
         int selectedIndex = 2;
 
         switch (getActivity()) {
-            case PRODUCTS:
+            case STOCK:
                 break;
             case SALES:
                 selectedIndex += 1;
@@ -133,10 +133,10 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
             case PURCHASES:
                 selectedIndex += 2;
                 break;
-            case CLIENTS:
+            case PRODUCTS:
                 selectedIndex += 3;
                 break;
-            case STOCK:
+            case CLIENTS:
                 selectedIndex += 4;
                 break;
             case SUPPLIERS:
