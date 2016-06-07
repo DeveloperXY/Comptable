@@ -1,10 +1,16 @@
 package com.example.ismailamrani.comptable.ui.startup;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ismailamrani.comptable.R;
@@ -48,6 +54,15 @@ public class ActivationActivity extends ColoredStatusBarActivity {
             );
         } else
             Toast.makeText(this, R.string.activation_code_required, Toast.LENGTH_LONG).show();
+    }
+
+    public void onCallUs(View view) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + ((TextView) view).getText()));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        startActivity(intent);
     }
 
     /**

@@ -101,7 +101,6 @@ public abstract class HTTPActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
                                 Toast.makeText(HTTPActivity.this,
                                         R.string.network_error, Toast.LENGTH_LONG).show();
                                 mLoadingDialog.dismiss();

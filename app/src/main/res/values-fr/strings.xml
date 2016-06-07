@@ -104,7 +104,7 @@
     <string name="update_product">Modifier produit</string>
     <string name="product_updated">Produit modifié.</string>
 
-    <string name="enter_serial_code">Entrez le code d\'activation que vous avez reçu:</string>
+    <string name="enter_serial_code">Entrez votre code d\'activation:</string>
     <string name="activation_code">Code d\'activation</string>
     <string name="activate">Activer</string>
     <string name="activate_app">Activer l\'application</string>

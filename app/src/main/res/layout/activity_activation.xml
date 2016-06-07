@@ -1,89 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.ismailamrani.comptable.ui.startup.ActivationActivity"
-    android:background="@mipmap/ic_bg">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/ic_bg"
+                tools:context="com.example.ismailamrani.comptable.ui.startup.ActivationActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:weightSum="100">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"></RelativeLayout>
+            android:layout_weight="10"/>
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/imageView"
-            android:transitionName="header"
             android:layout_weight="20"
-            android:src="@mipmap/ic_logo" />
+            android:src="@mipmap/ic_logo"
+            android:transitionName="header"/>
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@string/activate_app"
-            android:id="@+id/textView2"
             android:layout_weight="10"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="@string/activate_app"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20"></RelativeLayout>
+            android:layout_weight="10"/>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="30"
+            android:orientation="vertical"
             android:weightSum="100">
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="@string/enter_serial_code"
-                android:id="@+id/textView3"
+                android:layout_weight="40"
                 android:gravity="left|center_vertical"
-                android:textColor="#ffffff"
                 android:padding="16dp"
-                android:layout_weight="40" />
+                android:text="@string/enter_serial_code"
+                android:textColor="#ffffff"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="50"
-                android:padding="16dp"
-                android:background="@drawable/activation_field_background">
+                android:background="@drawable/activation_field_background"
+                android:padding="16dp">
 
                 <EditText
+                    android:id="@+id/activationField"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/activationField"
                     android:background="@android:color/transparent"
                     android:hint="@string/activation_code"
                     android:textColor="#ffffff"
                     android:textColorHint="#9e9e9e"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"/>
             </RelativeLayout>
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/activate"
-            android:id="@+id/activateButton"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/activate_btn_background"
-            android:textColor="#ffffff"
-            android:onClick="onActivate" />
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="20"
+           android:gravity="center_horizontal">
+
+           <Button
+               android:id="@+id/activateButton"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center_horizontal"
+               android:background="@drawable/activate_btn_background"
+               android:onClick="onActivate"
+               android:text="@string/activate"
+               android:textColor="#ffffff"
+               android:layout_centerHorizontal="true"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="12dp"
+               android:gravity="center"
+               android:text="Vous n'avez pas un code ? Contactez-nous :"
+               android:textColor="#ffffff"
+               android:textSize="10sp"
+               android:id="@+id/callUsLabel"
+               android:layout_below="@+id/activateButton"/>
+
+           <TextView
+               android:id="@+id/callLabel"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center"
+               android:text="0535643130"
+               android:textColor="#ffffff"
+               android:textSize="20sp"
+               android:layout_below="@+id/callUsLabel"
+               android:onClick="onCallUs"/>
+
+       </RelativeLayout>
 
     </LinearLayout>
 </RelativeLayout>
