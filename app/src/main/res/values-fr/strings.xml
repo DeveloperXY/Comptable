@@ -147,6 +147,7 @@
     <string name="change_local">Changer local</string>
     <string name="add_photo">Attacher Une photo</string>
     <string name="fifty_chars_left">50 caractères restants</string>
+    <string name="new_product">Nouveau produit</string>
 
     <string-array name="navDrawerIcons">
         <item>@android:drawable/ic_menu_sort_by_size</item>

@@ -69,7 +69,7 @@ public class AddProductActivity extends WithDrawerActivity
     protected void setupActionBar() {
         super.setupActionBar();
 
-        mActionBar.setTitle(getString(R.string.add_new_product));
+        mActionBar.setTitle(getString(R.string.new_product));
         mActionBar.disableAddButton();
     }
 
