@@ -1,9 +1,14 @@
 package com.example.ismailamrani.comptable.ui.dialogs.base;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -12,6 +17,7 @@ import com.example.ismailamrani.comptable.utils.ui.CalculateScreenSize;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Mohammed Aouf ZOUAG on 04/06/2016.
@@ -62,8 +68,31 @@ public abstract class ItemDialog<T> extends Dialog {
         bind(item);
     }
 
+    @OnClick(R.id.callButton)
+    protected final void onClick() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + getItemPhoneNumber()));
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mContext.startActivity(intent);
+        dismiss();
+    }
+
     /**
      * @param item whose info are to be displayed.
      */
     protected abstract void bind(T item);
+
+    /**
+     * @return the phone number of the currently viewed item.
+     */
+    protected abstract String getItemPhoneNumber();
 }

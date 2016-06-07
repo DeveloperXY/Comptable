@@ -98,8 +98,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                     if (intent.getComponent().getShortClassName().equals(".ui.startup.HomeActivity")) {
                         ActivityCompat.finishAffinity(WithDrawerActivity.this);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         activityShouldFinish();
 
                         intent.putExtra("imageRes", drawerItem.getIcon());
@@ -108,8 +107,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                     }
 
                     drawerLayout.closeDrawer(drawerRecyclerView);
-                }
-                else {
+                } else {
                     logout();
                 }
             }

@@ -21,4 +21,9 @@ public class SupplierDialog extends ItemDialog<Supplier> {
         addressLabel.setText(item.getAdresse());
         phoneLabel.setText(item.getTel());
     }
+
+    @Override
+    protected String getItemPhoneNumber() {
+        return item.getTel();
+    }
 }

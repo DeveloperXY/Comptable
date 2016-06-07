@@ -36,14 +36,14 @@
                     android:id="@+id/imageView4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="20"
+                    android:layout_weight="15"
                     android:src="@drawable/adresseclient"/>
 
                 <TextView
                     android:id="@+id/bottomAddressLabel"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="80"
+                    android:layout_weight="85"
                     android:ellipsize="end"
                     android:gravity="left|center_vertical"
                     android:maxLines="1"
@@ -62,18 +62,33 @@
                     android:id="@+id/imageView5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="20"
+                    android:layout_weight="15"
                     android:src="@drawable/fix"/>
 
-                <TextView
-                    android:id="@+id/supplierPhoneLabel"
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="80"
-                    android:ellipsize="end"
-                    android:gravity="left|center_vertical"
-                    android:textSize="18sp"
-                    tools:text="+212 694363053"/>
+                    android:layout_weight="85">
+
+                    <TextView
+                        android:id="@+id/supplierPhoneLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:ellipsize="end"
+                        android:gravity="left|center_vertical"
+                        android:textSize="18sp"
+                        tools:text="+212 694363053"/>
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/callButton"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="12dp"
+                        android:src="@android:drawable/sym_action_call"/>
+                </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>
