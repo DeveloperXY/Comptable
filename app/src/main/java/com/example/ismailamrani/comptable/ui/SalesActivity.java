@@ -334,6 +334,12 @@ public class SalesActivity extends WithDrawerActivity {
                             e.printStackTrace();
                         }
                     }
+
+                    @Override
+                    public void onRequestFailed(int status, JSONObject response) {
+                        Toast.makeText(SalesActivity.this,
+                                R.string.product_not_found, Toast.LENGTH_LONG).show();
+                    }
                 });
     }
 }

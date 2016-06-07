@@ -148,6 +148,7 @@
     <string name="add_photo">Attach a photo</string>
     <string name="fifty_chars_left">50 characters left</string>
     <string name="new_product">New product</string>
+    <string name="product_not_found">Product not found.</string>
 
     <string-array name="navDrawerItems">
         <item>@string/home</item>
