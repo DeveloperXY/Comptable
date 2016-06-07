@@ -337,8 +337,13 @@ public class SalesActivity extends WithDrawerActivity {
 
                     @Override
                     public void onRequestFailed(int status, JSONObject response) {
-                        Toast.makeText(SalesActivity.this,
-                                R.string.product_not_found, Toast.LENGTH_LONG).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SalesActivity.this,
+                                        R.string.product_not_found, Toast.LENGTH_LONG).show();
+                            }
+                        });
                     }
                 });
     }
