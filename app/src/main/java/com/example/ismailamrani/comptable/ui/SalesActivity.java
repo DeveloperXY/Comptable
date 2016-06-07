@@ -299,6 +299,7 @@ public class SalesActivity extends WithDrawerActivity {
             try {
                 JSONObject params = new JSONObject();
                 params.put("barcode", scannedBarcode);
+                params.put("idLocale", mDatabaseAdapter.getCurrentLocaleID());
 
                 postGetProduct(PhpAPI.getProduitByBarcode, params);
 

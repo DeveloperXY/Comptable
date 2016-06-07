@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -173,10 +174,13 @@ public class StockActivity extends RefreshableActivity
 
                 if (scanningResult != null) {
                     final String scannedBarcode = scanningResult.getContents();
+                    Log.i("PRODUCT", "Code bar: " + scannedBarcode);
                     Intent intent = new Intent(this, ProductDetailsActivity.class);
                     Product requestedProduct;
 
                     try {
+                        Log.i("PRODUCT", "mProducts IS null:" + (mProducts == null));
+                        Log.i("PRODUCT", "mProducts IS:" + mProducts);
                         requestedProduct = Stream.of(mProducts)
                                 .filter(new Predicate<Product>() {
                                     @Override
