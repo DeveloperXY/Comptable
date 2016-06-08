@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="800"
-    android:orientation="horizontal"
-    android:weightSum="1390"
-    tools:showIn="@layout/sales_layout">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="800"
+              android:orientation="horizontal"
+              android:weightSum="1390"
+              tools:showIn="@layout/sales_layout">
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="70" />
+        android:layout_weight="70"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,7 +24,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="60" />
+            android:layout_weight="60"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="37" />
+                android:layout_weight="37"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -59,7 +59,7 @@
                         android:editable="false"
                         android:hint="@string/bar_code"
                         android:inputType="none"
-                        android:paddingLeft="20dp" />
+                        android:paddingLeft="20dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -72,8 +72,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/codebaarre"
-                        android:scaleType="fitXY" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/codebaarre"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -81,7 +81,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40" />
+            android:layout_weight="40"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,7 +93,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="37" />
+                android:layout_weight="37"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -115,7 +115,7 @@
                         android:background="@android:color/transparent"
                         android:hint="@string/quantity"
                         android:inputType="number"
-                        android:paddingLeft="20dp" />
+                        android:paddingLeft="20dp"/>
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
@@ -123,7 +123,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40" />
+            android:layout_weight="40"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,7 +137,7 @@
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="37" />
+                android:layout_weight="37"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -153,48 +153,49 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1026"
                     android:background="@android:color/transparent"
+                    android:enabled="false"
                     android:hint="@string/price"
                     android:inputType="numberDecimal"
-                    android:paddingLeft="20dp" />
+                    android:paddingLeft="20dp"/>
 
-                <include layout="@layout/dh_layout_include" />
+                <include layout="@layout/dh_layout_include"/>
             </LinearLayout>
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="20px"
-                android:layout_weight="20" />
+                android:layout_weight="20"/>
 
             <CheckBox
                 android:id="@+id/allowEditCheckbox"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="113" />
+                android:layout_weight="113"/>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="37" />
+                android:layout_weight="37"/>
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40" />
+            android:layout_weight="40"/>
 
-        <include layout="@layout/next_button_layout_include" />
+        <include layout="@layout/next_button_layout_include"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40" />
+            android:layout_weight="40"/>
 
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="70" />
+        android:layout_weight="70"/>
 </LinearLayout>

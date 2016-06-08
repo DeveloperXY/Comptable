@@ -149,6 +149,8 @@
     <string name="fifty_chars_left">50 caractères restants</string>
     <string name="new_product">Nouveau produit</string>
     <string name="product_not_found">Produit introuvable.</string>
+    <string name="actual_quantity">Quantité actuelle</string>
+    <string name="requested_quantity">Quantité demandée</string>
 
     <string-array name="navDrawerIcons">
         <item>@android:drawable/ic_menu_sort_by_size</item>

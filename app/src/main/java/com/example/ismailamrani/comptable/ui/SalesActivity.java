@@ -23,11 +23,11 @@ import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.base.WithDrawerActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
+import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
-import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -203,8 +203,19 @@ public class SalesActivity extends WithDrawerActivity {
                             JSONArray messages = response.getJSONArray("message");
                             for (int i = 0; i < messages.length(); i++) {
                                 JSONObject message = messages.getJSONObject(i);
-                                sb.append(message.getString("text"));
-                                sb.append("\n");
+                                sb.append("* ")
+                                        .append(getString(R.string.product))
+                                        .append(": ")
+                                        .append(message.getString("product"))
+                                        .append(" - ")
+                                        .append(getString(R.string.actual_quantity))
+                                        .append(": ")
+                                        .append(message.getString("actual"))
+                                        .append(" - ")
+                                        .append(getString(R.string.requested_quantity))
+                                        .append(": ")
+                                        .append(message.getString("requested"))
+                                        .append("\n");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -236,7 +247,7 @@ public class SalesActivity extends WithDrawerActivity {
         }
 
         int quantity = Integer.valueOf(quantityField.getText().toString());
-        mProduct.setPrixTTC(mProduct.getPrixTTC() * quantity);
+        mProduct.setPrixTTC(Double.valueOf(priceField.getText().toString()));
         mProduct.setQte(quantity);
         toBeSoldProducts.add(mProduct);
         productAdapter.notifyDataSetChanged();

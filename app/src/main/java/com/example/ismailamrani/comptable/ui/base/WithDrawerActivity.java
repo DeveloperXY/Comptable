@@ -168,7 +168,7 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 targetActivity = HomeActivity.class;
                 break;
             case 1:
-                targetActivity = ProductsActivity.class;
+                targetActivity = StockActivity.class;
                 break;
             case 2:
                 targetActivity = OrdersActivity.class;
@@ -179,10 +179,10 @@ public abstract class WithDrawerActivity extends ColoredStatusBarActivity
                 orderType = Orders.PURCHASE;
                 break;
             case 4:
-                targetActivity = ClientsActivity.class;
+                targetActivity = ProductsActivity.class;
                 break;
             case 5:
-                targetActivity = StockActivity.class;
+                targetActivity = ClientsActivity.class;
                 break;
             case 6:
                 targetActivity = SuppliersActivity.class;

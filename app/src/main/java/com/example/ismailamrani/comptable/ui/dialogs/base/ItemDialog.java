@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ismailamrani.comptable.R;
@@ -34,6 +35,8 @@ public abstract class ItemDialog<T> extends Dialog {
     protected TextView addressLabel;
     @Bind(R.id.supplierPhoneLabel)
     protected TextView phoneLabel;
+    @Bind(R.id.supplierLogo)
+    protected ImageView supplierLogo;
 
     protected Context mContext;
     /**

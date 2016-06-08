@@ -149,14 +149,16 @@
     <string name="fifty_chars_left">50 characters left</string>
     <string name="new_product">New product</string>
     <string name="product_not_found">Product not found.</string>
+    <string name="actual_quantity">Actual quantity</string>
+    <string name="requested_quantity">Requested quantity</string>
 
     <string-array name="navDrawerItems">
         <item>@string/home</item>
-        <item>@string/products</item>
+        <item>@string/stock</item>
         <item>@string/sales</item>
         <item>@string/purchases</item>
+        <item>@string/products</item>
         <item>@string/clients</item>
-        <item>@string/stock</item>
         <item>@string/suppliers</item>
         <item>@string/expenses</item>
         <item>@string/accounting</item>
@@ -165,11 +167,11 @@
 
     <string-array name="navDrawerIcons">
         <item>@android:drawable/ic_menu_sort_by_size</item>
-        <item>@mipmap/ic_produit</item>
+        <item>@mipmap/ic_stock</item>
         <item>@mipmap/ic_sell</item>
         <item>@mipmap/ic_buy</item>
+        <item>@mipmap/ic_produit</item>
         <item>@mipmap/ic_client</item>
-        <item>@mipmap/ic_stock</item>
         <item>@mipmap/ic_fournisseur</item>
         <item>@mipmap/ic_charge</item>
         <item>@mipmap/ic_comp</item>

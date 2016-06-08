@@ -2,6 +2,7 @@ package com.example.ismailamrani.comptable.ui.dialogs;
 
 import android.content.Context;
 
+import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.models.Client;
 import com.example.ismailamrani.comptable.ui.dialogs.base.ItemDialog;
 
@@ -20,6 +21,7 @@ public class ClientDialog extends ItemDialog<Client> {
         emailLabel.setText(item.getEmail());
         addressLabel.setText(item.getAdresse());
         phoneLabel.setText(item.getTel());
+        supplierLogo.setImageResource(R.drawable.back_client_vertical);
     }
 
     @Override
