@@ -19,17 +19,24 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url 'https://dl.bintray.com/developerxy/maven/'
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:cardview-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:design:23.3.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp3:okhttp:3.0.1'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'com.annimon:stream:1.0.8'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.comptable.comptableviews:customviews:1.0.1'
 }

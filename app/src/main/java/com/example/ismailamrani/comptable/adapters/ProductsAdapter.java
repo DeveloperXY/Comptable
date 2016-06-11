@@ -9,16 +9,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.comptable.customviews.CustomTextView;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.base.BaseSearchAdapter;
 import com.example.ismailamrani.comptable.adapters.base.BinderViewHolder;
-import com.example.ismailamrani.comptable.customitems.CustomTextView;
 import com.example.ismailamrani.comptable.models.Product;
 import com.example.ismailamrani.comptable.ui.ProductDetailsActivity;
 import com.example.ismailamrani.comptable.ui.UpdateProductActivity;
 import com.example.ismailamrani.comptable.utils.http.Method;
-import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.http.PhpAPI;
+import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;

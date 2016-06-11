@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
 
-import com.example.ismailamrani.comptable.localdata.ScreenSize;
+import com.comptable.customviews.ScreenSize;
 
 
 /**
