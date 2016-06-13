@@ -13,7 +13,6 @@ import android.widget.RelativeLayout;
 
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Predicate;
-import com.comptable.customviews.OGActionBar.SearchListener;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.StockAdapter;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
@@ -26,6 +25,7 @@ import com.example.ismailamrani.comptable.utils.http.RequestListener;
 import com.example.ismailamrani.comptable.utils.parsing.JSONUtils;
 import com.example.ismailamrani.comptable.utils.parsing.ListComparison;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
+import com.octagen.customviews.SearchListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;

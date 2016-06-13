@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.example.ismailamrani.comptable.customitems.CustomHeightLayout
+        <com.octagen.customviews.CustomHeightLayout
             android:id="@+id/Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,14 +51,14 @@
                             android:layout_height="match_parent"
                             android:layout_weight="75">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                            <com.octagen.customviews.CustomCarreLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:background="#3d5469"
                                 costum:size="25">
 
-                                <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                                <com.octagen.customviews.CustomCarreLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerInParent="true"
@@ -72,9 +72,9 @@
                                         android:src="@drawable/iphone"
                                         android:transitionName="productImageAnim"/>
 
-                                </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+                                </com.octagen.customviews.CustomCarreLayout>
 
-                            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+                            </com.octagen.customviews.CustomCarreLayout>
 
                         </RelativeLayout>
 
@@ -83,7 +83,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="122">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/Libelle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                                 android:layout_centerInParent="true"
                                 android:orientation="vertical">
 
-                                <com.example.ismailamrani.comptable.customitems.CustomTextView
+                                <com.octagen.customviews.CustomTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal"
@@ -118,7 +118,7 @@
                                     costum:Frensh="Stock"
                                     costum:Size="15"/>
 
-                                <com.example.ismailamrani.comptable.customitems.CustomTextView
+                                <com.octagen.customviews.CustomTextView
                                     android:id="@+id/Qte"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="73">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/Prix"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -159,13 +159,13 @@
 
             </LinearLayout>
 
-        </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
+        </com.octagen.customviews.CustomHeightLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"></RelativeLayout>
 
-        <com.example.ismailamrani.comptable.customitems.CustomHeightLayout
+        <com.octagen.customviews.CustomHeightLayout
             android:id="@+id/Actions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -189,7 +189,7 @@
                     android:background="@drawable/action_show"
                     android:clickable="true">
 
-                    <com.example.ismailamrani.comptable.customitems.CustomTextView
+                    <com.octagen.customviews.CustomTextView
                         android:id="@+id/afficher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                     android:background="@drawable/action_update"
                     android:clickable="true">
 
-                    <com.example.ismailamrani.comptable.customitems.CustomTextView
+                    <com.octagen.customviews.CustomTextView
                         android:id="@+id/modifier"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -241,7 +241,7 @@
                     android:background="@drawable/action_delete"
                     android:clickable="true">
 
-                    <com.example.ismailamrani.comptable.customitems.CustomTextView
+                    <com.octagen.customviews.CustomTextView
                         android:id="@+id/supprimer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
 
             </LinearLayout>
 
-        </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
+        </com.octagen.customviews.CustomHeightLayout>
 
     </LinearLayout>
 

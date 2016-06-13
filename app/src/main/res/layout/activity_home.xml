@@ -126,7 +126,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -194,7 +194,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -276,7 +276,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -344,7 +344,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -426,7 +426,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -494,7 +494,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -576,7 +576,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -644,7 +644,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="26">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"

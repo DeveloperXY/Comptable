@@ -41,14 +41,14 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                        <com.octagen.customviews.CustomCarreLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:background="@drawable/add_photo"
                             costum:size="31">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                            <com.octagen.customviews.CustomCarreLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -61,11 +61,11 @@
                                     android:scaleType="fitXY"
                                     android:src="@mipmap/ic_add_photo"/>
 
-                            </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+                            </com.octagen.customviews.CustomCarreLayout>
 
-                        </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+                        </com.octagen.customviews.CustomCarreLayout>
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#464646"
@@ -90,7 +90,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"></RelativeLayout>
 
-                    <com.example.ismailamrani.comptable.customitems.CustumEditText
+                    <com.octagen.customviews.CustumEditText
                         android:id="@+id/productName"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -135,7 +135,7 @@
                         android:orientation="horizontal"
                         android:weightSum="64">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumEditText
+                        <com.octagen.customviews.CustumEditText
                             android:id="@+id/priceHT"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -161,7 +161,7 @@
                             android:layout_weight="0.5"
                             android:background="#48627b"></RelativeLayout>
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="15.5"
@@ -187,7 +187,7 @@
                         android:orientation="horizontal"
                         android:weightSum="64">
 
-                        <com.example.ismailamrani.comptable.customitems.CustumEditText
+                        <com.octagen.customviews.CustumEditText
                             android:id="@+id/priceTTC"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -213,7 +213,7 @@
                             android:layout_weight="0.5"
                             android:background="#48627b"></RelativeLayout>
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="15.5"
@@ -245,7 +245,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"></RelativeLayout>
 
-                    <com.example.ismailamrani.comptable.customitems.CustomTextView
+                    <com.octagen.customviews.CustomTextView
                         android:id="@+id/barCodeLabel"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -292,7 +292,7 @@
                         android:background="@drawable/add_btn"
                         android:clickable="true">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:id="@+id/addProductBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

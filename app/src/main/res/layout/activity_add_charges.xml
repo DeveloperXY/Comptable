@@ -32,7 +32,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="560">
 
-                <com.example.ismailamrani.comptable.customitems.CustomCarreLayout
+                <com.octagen.customviews.CustomCarreLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -43,7 +43,7 @@
                         android:layout_height="match_parent"
                         android:src="@mipmap/ic_charge"/>
 
-                </com.example.ismailamrani.comptable.customitems.CustomCarreLayout>
+                </com.octagen.customviews.CustomCarreLayout>
             </RelativeLayout>
 
             <RelativeLayout

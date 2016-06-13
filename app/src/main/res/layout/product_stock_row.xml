@@ -25,7 +25,7 @@
         android:textColor="#ffffff"
         android:textSize="12sp"/>
 
-    <com.example.ismailamrani.comptable.customitems.CustomTextView
+    <com.octagen.customviews.CustomTextView
         android:id="@+id/productLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

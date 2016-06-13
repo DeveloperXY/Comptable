@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.comptable.customviews.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.barcodescanner.IntentIntegrator;
 import com.example.ismailamrani.comptable.barcodescanner.IntentResult;
@@ -25,6 +24,7 @@ import com.example.ismailamrani.comptable.utils.http.PhpAPI;
 import com.example.ismailamrani.comptable.utils.http.SuccessRequestListener;
 import com.example.ismailamrani.comptable.utils.ui.DialogUtil;
 import com.example.ismailamrani.comptable.utils.ui.ResultCodes;
+import com.octagen.customviews.OGActionBarInterface;
 
 import org.json.JSONObject;
 

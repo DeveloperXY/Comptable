@@ -38,5 +38,5 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
     compile 'com.annimon:stream:1.0.8'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.comptable.comptableviews:customviews:1.0.1'
+    compile 'com.octagen.customviews:customviews:1.0'
 }

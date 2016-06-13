@@ -15,7 +15,7 @@
         android:transitionName="menuAnim"
         android:layout_margin="16dp"/>
 
-    <com.example.ismailamrani.comptable.customitems.OGActionBar.OGActionBar
+    <com.octagen.customviews.OGActionBar
         android:id="@+id/MyActionBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

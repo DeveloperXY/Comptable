@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.example.ismailamrani.comptable.customitems.CustomCarreWidthLayout
+                <com.octagen.customviews.CustomCarreWidthLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     costum:size="144">
@@ -36,14 +36,14 @@
                         android:scaleType="fitXY"
                         android:transitionName="productImageAnim"/>
 
-                    <com.example.ismailamrani.comptable.customitems.CustomHeightLayout
+                    <com.octagen.customviews.CustomHeightLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:background="#9048627b"
                         costum:size="20">
 
-                        <com.example.ismailamrani.comptable.customitems.CustomTextView
+                        <com.octagen.customviews.CustomTextView
                             android:id="@+id/Libelleaff"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -61,9 +61,9 @@
                             costum:Frensh=""
                             costum:Size="14"/>
 
-                    </com.example.ismailamrani.comptable.customitems.CustomHeightLayout>
+                    </com.octagen.customviews.CustomHeightLayout>
 
-                </com.example.ismailamrani.comptable.customitems.CustomCarreWidthLayout>
+                </com.octagen.customviews.CustomCarreWidthLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
@@ -92,7 +92,7 @@
                                 costum:Frensh="@string/ht_price"
                                 costum:Size="13"/>
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/PrixHTaff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
@@ -119,7 +119,7 @@
                                 costum:Frensh="@string/ttc_price"
                                 costum:Size="13"/>
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/PrixTTCaff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="8dp"
@@ -146,7 +146,7 @@
                                 costum:Frensh="@string/quantity"
                                 costum:Size="13"/>
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/Stockaff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                                 android:paddingRight="10dp"
                                 android:src="@drawable/ic_codebar"/>
 
-                            <com.example.ismailamrani.comptable.customitems.CustomTextView
+                            <com.octagen.customviews.CustomTextView
                                 android:id="@+id/Codeaff"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

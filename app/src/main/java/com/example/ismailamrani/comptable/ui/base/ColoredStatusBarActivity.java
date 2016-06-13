@@ -7,11 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.comptable.customviews.OGActionBar.OGActionBar;
-import com.comptable.customviews.OGActionBar.OGActionBarInterface;
 import com.example.ismailamrani.comptable.R;
 import com.example.ismailamrani.comptable.adapters.DatabaseAdapter;
 import com.example.ismailamrani.comptable.ui.startup.HomeActivity;
+import com.octagen.customviews.OGActionBar;
+import com.octagen.customviews.OGActionBarInterface;
 
 import butterknife.Bind;
 
