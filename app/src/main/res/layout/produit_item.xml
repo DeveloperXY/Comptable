@@ -91,9 +91,10 @@
                                 android:textColor="#444444"
                                 android:transitionName="productLabelAnim"
                                 costum:Arabic=""
+                                android:gravity="center"
                                 costum:Font="cgr.ttf"
                                 costum:Frensh=""
-                                costum:Size="15"/>
+                                costum:Size="12"/>
 
                         </RelativeLayout>
 
